@@ -35,6 +35,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
+/** @var Illuminate\Foundation\Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 /*
@@ -49,9 +50,11 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 
+/** @var App\Http\Kernel $kernel */
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
+    /** @var Illuminate\Http\Request $request */
     $request = Illuminate\Http\Request::capture()
 );
 
