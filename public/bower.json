@@ -1,0 +1,24 @@
+{
+  "name": "Gatku",
+  "version": "2.0.0",
+  "authors": [
+    "Austen Payan <austenpayan@gmail.com>"
+  ],
+  "description": "Website for Gatku Polespears",
+  "license": "Private",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.*",
+    "fitvids": "~1.1.0",
+    "skippr": "austenpayan/skippr#~1.1.0",
+    "ng-file-upload": "~3.2.4",
+    "nanobar": "~0.2.0"
+  }
+}
