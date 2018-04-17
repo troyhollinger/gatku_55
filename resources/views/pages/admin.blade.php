@@ -1,23 +1,24 @@
 @extends('layouts.master')
 
 @section('title')
-Admin
+	Admin
 @stop
 
 @section('content')
-	
-	
+
+
 
 	<div class="admin-container" ng-controller="AdminController">
 
 		<h1>Admin</h1>
-		
+
 		<div class="admin-navigation-container">
 			<div class="admin-navigation-tab" ng-click="show('orders')" ng-class="{'selected' : showOrders}">Orders</div>
 			<div class="admin-navigation-tab" ng-click="show('products')" ng-class="{'selected' : showProducts}">Products</div>
 			<div class="admin-navigation-tab" ng-click="show('you')" ng-class="{'selected' : showYou}">You</div>
 			<div class="admin-navigation-tab" ng-click="show('videos')" ng-class="{'selected' : showVideos}">Videos</div>
 			<div class="admin-navigation-tab" ng-click="show('home-setting')" ng-class="{'selected' : showHomeSetting}">Home</div>
+			<div class="admin-navigation-tab" ng-click="show('discount-manager')" ng-class="{'selected' : showDiscountManager}">Discounts</div>
 			<div class="clear"></div>
 		</div>
 
@@ -42,8 +43,8 @@ Admin
 					<div class="button danger-bg" ng-click="data.resetDateFilter()">Reset range</div>
 				</div>
 			</div>
-			
-    <table class="admin-orders-table">
+
+			<table class="admin-orders-table">
 
 				<tr>
 					<th>Info</th>
@@ -54,7 +55,7 @@ Admin
 				</tr>
 
 				<tr dir-paginate="order in orders|itemsPerPage:15" total-items="data.total_count">
-				
+
 					<td><span class="brand">@{{ order.number }}</span><br>
 						<span class="bold">@{{ order.customer.fullName }}</span><br>
 						@{{ order.address }}<br>
@@ -73,9 +74,9 @@ Admin
 						</ul>
 					</td>
 					<td>{{-- <div class="button info-bg">Print Label</div> --}}
-					<shipping-request order="order" shipping="order.shipping"></shipping-request>
+						<shipping-request order="order" shipping="order.shipping"></shipping-request>
 						<div ng-if="!order.tracking" style="margin-right: 5px;float:left;">
-							<shipping-track order="order" tracking=""></shipping-track>	
+							<shipping-track order="order" tracking=""></shipping-track>
 						</div>
 						<div ng-if="order.tracking" style="margin-right: 5px;float:left;">
 
@@ -85,27 +86,27 @@ Admin
 							<a ng-if="order.tracking.carrier == 'ups'" href="https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=@{{ order.tracking.track_id }}" target="_blank"><div class="button success-bg">Track# @{{ order.tracking.track_id }}</div></a>
 						</div>
 						<div ng-if="order.tracking" style="margin-right: 5px;float:right;">
-							<shipping-track order="order" tracking="order.tracking"></shipping-track>	
+							<shipping-track order="order" tracking="order.tracking"></shipping-track>
 						</div>
 					</td>
 					<td>
-					<span ng-if="order.orderAmount">$@{{ order.orderAmount }}</span>
-					
+						<span ng-if="order.orderAmount">$@{{ order.orderAmount }}</span>
+
 					</td>
 					<td>@{{ order.createdAtHuman }}</td>
 				</tr>
 			</table> <dir-pagination-controls
-                   max-size="8"
-                   direction-links="true"
-                   boundary-links="true"
-                   on-page-change="data.getData(newPageNumber)" >
-                </dir-pagination-controls>
-           
+					max-size="8"
+					direction-links="true"
+					boundary-links="true"
+					on-page-change="data.getData(newPageNumber)" >
+			</dir-pagination-controls>
+
 		</div>
 
 
 		<div class="admin-section" ng-show="showProducts" ng-cloak>
-			
+
 			<div class="admin-sub-section">
 
 				<div class="button success-bg" ng-hide="editState" ng-click="createProduct()">Create Product</div>
@@ -149,26 +150,26 @@ Admin
 					<label>Addons</label>
 					<table class="table table-striped table-bordered table-sm">
 						<thead class="thead-dark">
-							<tr>
-								<th style="text-align: center"><b>Addon</b></th>
-								<th style="text-align: center"><b>Included in package</b></th>
-								<th style="text-align: center"><b>Price zero if included in package</b></th>
-							</tr>
+						<tr>
+							<th style="text-align: center"><b>Addon</b></th>
+							<th style="text-align: center"><b>Included in package</b></th>
+							<th style="text-align: center"><b>Price zero if included in package</b></th>
+						</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="addon in newProduct.addonSelection" ng-if="editState">
-								<td>
-									<div class="new-product-checkbox-container">
-										<input type="checkbox" ng-model="addon.isAddon">&nbsp;<span class="uppercase">@{{ addon.name }}</span>
-									</div>
-								</td>
-								<td style="text-align: center">
-									<input type="checkbox" ng-model="addon.include_in_package">
-								</td>
-								<td style="text-align: center">
-									<input type="checkbox" ng-model="addon.price_zero">
-								</td>
-							</tr>
+						<tr ng-repeat="addon in newProduct.addonSelection" ng-if="editState">
+							<td>
+								<div class="new-product-checkbox-container">
+									<input type="checkbox" ng-model="addon.isAddon">&nbsp;<span class="uppercase">@{{ addon.name }}</span>
+								</div>
+							</td>
+							<td style="text-align: center">
+								<input type="checkbox" ng-model="addon.include_in_package">
+							</td>
+							<td style="text-align: center">
+								<input type="checkbox" ng-model="addon.price_zero">
+							</td>
+						</tr>
 						</tbody>
 					</table>
 
@@ -178,7 +179,7 @@ Admin
 						<input type="text" ng-model="newProduct.attachedImage" class="image-path-storage-input">
 						<input type="file" ng-file-drop ng-file-select="upload($files, 'attachedImage')">
 					</div>
-					
+
 					<label>Detached Image</label>
 					<div class="upload-field" ng-style="{'background-image':'url(' + newProduct.detachedImage + ')'}">
 						<i class="fa fa-image" ng-hide="newProduct.detachedImage"></i>
@@ -213,7 +214,7 @@ Admin
 					<input type="text" ng-model="newProduct.stealth">
 					<label>Product order</label>
 					<input type="text" ng-model="newProduct.order"
-           min="0" max="500">  
+						   min="0" max="500">
 				</form>
 
 				<div class="button success-bg" ng-show="editState && editingNew" ng-click="saveProduct();">Save</div>
@@ -289,11 +290,11 @@ Admin
 					<div class="you-image-checkbox-container" ng-repeat="product in products">
 
 						<input type="checkbox" checklist-model="newYouImage.products" checklist-value="product.id">&nbsp;<span class="uppercase">@{{ product.name }}</span>
-					</div> 
+					</div>
 					<!-- <label>Select corresponding product (optional)</label>
 					<p><select ng-options="product.id as product.name for product in products" ng-model="newYouImage.productId"></select></p> -->
 
-					<div class="button success-bg" ng-click="saveYouImage()">Save</div> 
+					<div class="button success-bg" ng-click="saveYouImage()">Save</div>
 					<div class="button error-bg" ng-click="reset()">Cancel</div>
 				</div>
 
@@ -306,12 +307,12 @@ Admin
 					{{-- <div class="grid-square square" ng-repeat="youImage in youImages" ng-style="{'background-image':'url(' + youImage.image + ')'}"></div> --}}
 					<div class="grid-square square" ng-repeat="youImage in youImages" back-img="@{{ youImage.image }}"></div>
 
-					
+
 					<div class="clear"></div>
 
 				</div>
 			</div>
-			
+
 
 
 		</div>
@@ -324,45 +325,100 @@ Admin
 			<h2>Home</h2>
 
 			<div class="admin-sub-section">
-			<form name="home-setting" class="home-setting-form">
-				<!-- <div class="grid-square square"  back-img="@{{ HomeSettings.image }}"></div> -->
-				
-				<!-- upload mobile image -->
-				<label>Logo</label>
+				<form name="home-setting" class="home-setting-form">
+					<!-- <div class="grid-square square"  back-img="@{{ HomeSettings.image }}"></div> -->
+
+					<!-- upload mobile image -->
+					<label>Logo</label>
 					<div style=" height: auto;"class="upload-field" ng-style="{'background-image':'url(' + homeSetting.logo + ')'}">
 						<i class="fa fa-image" ng-hide="homeSetting.logo"></i>
 						<input type="text" ng-model="homeSetting.logo" class="image-path-storage-input">
 						<input type="file" ng-file-drop ng-file-select="uploadHomeImage($files, 'logo')">
 					</div>
-				<label>Button Color</label>
+					<label>Button Color</label>
 					<input style="width: 150px;" placeholder="#000000" type="text" ng-model="homeSetting.button_color">
-				<label>Home Image</label>
+					<label>Home Image</label>
 					<div class="upload-field" ng-style="{'background-image':'url(' + homeSetting.image + ')'}">
 						<i class="fa fa-image" ng-hide="homeSetting.mobile_image"></i>
 						<input type="text" ng-model="homeSetting.image" class="image-path-storage-input">
 						<input type="file" ng-file-drop ng-file-select="uploadHomeImage($files, 'image')">
 					</div>
 
-				<label>Mobile Image</label>
+					<label>Mobile Image</label>
 					<div class="upload-field" ng-style="{'background-image':'url(' + homeSetting.mobile_image + ')'}">
 						<i class="fa fa-image" ng-hide="homeSetting.mobile_image"></i>
 						<input type="text" ng-model="homeSetting.mobile_image" class="image-path-storage-input">
 						<input type="file" ng-file-drop ng-file-select="uploadHomeImage($files, 'mobile_image')">
 					</div>
-					
-				
-				<label>On Site Live Til</label>
-					<input type="text" ng-model="homeSetting.image_info"> 
 
-				<label>Image Credit</label>
-				<input type="text" ng-model="homeSetting.image_credit">
+
+					<label>On Site Live Til</label>
+					<input type="text" ng-model="homeSetting.image_info">
+
+					<label>Image Credit</label>
+					<input type="text" ng-model="homeSetting.image_credit">
 				</form>
-				<div class="button success-bg" ng-click="saveHomeSetting()">Save</div> 
+				<div class="button success-bg" ng-click="saveHomeSetting()">Save</div>
 			</div>
-			
+
 		</div>
+
+		<!-- Discount manager -->
+		<div class="admin-section" ng-show="showDiscountManager" ng-cloak>
+			<div class="order-search">
+				<h2>Discount Manager</h2>
+
+				<br>
+
+				<div>
+					<button type="button"
+							class="btn btn-success"
+							ng-click="addDiscount()">Add Discount</button>
+				</div>
+
+				<br>
+
+				<table class="admin-products-table">
+					<thead>
+					<tr>
+						<th>Discount code</th>
+						<th>Discount [%]</th>
+						<th>Actions</th>
+					</tr>
+					</thead>
+
+					<tbody>
+					<tr ng-repeat="discount in discounts track by $index">
+						<td>
+							<input type="text"
+								   ng-change="discountRowChanged($index)"
+								   ng-model="discount.code"
+								   ng-disabled="discount.code && discount.created_at">
+						</td>
+						<td>
+							<input type="text"
+								   ng-change="discountRowChanged($index)"
+								   ng-model="discount.discount">
+						</td>
+						<td>
+							<button type="button"
+									class="btn btn-success"
+									ng-disabled="!discount.changed"
+									ng-click="discountUpdate($index)">@{{getSaveUpdateButtonCaption(discount)}}
+							</button>
+							&nbsp;
+							<button type="button"
+									class="btn btn-danger"
+									ng-click="discountRemove($index)">Remove
+							</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- Discount manager - end -->
 
 	</div>
 
-</style>
 @stop

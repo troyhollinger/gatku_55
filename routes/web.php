@@ -104,3 +104,5 @@ Route::post('quote', ['as' => 'quote.post', 'uses' => 'QuoteController@sendEmail
 //Route::resource('shipping-track', 'ShippingTrackController', ['except' => ['index', 'create', 'edit', 'update']]);
 
 
+//Discount route
+Route::resource('discount', 'DiscountController');

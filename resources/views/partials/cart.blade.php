@@ -22,7 +22,7 @@
 
 		</div>
 
-		<ul>	
+		<ul>
 			<li ng-repeat="item in items" class="cart-item" ng-class="{ 'apparel-cart-item' : item.type.slug === 'apparel' }">
 
 				<div class="cart-item-column">
@@ -34,7 +34,7 @@
 				<div class="cart-quantity-column">
 					<span>@{{ item.quantity }} <i class="fa fa-angle-left" ng-click="decreaseItemQuantity($index)"><span ng-if="item.quantity == 1">Remove</span></i> <i class="fa fa-angle-right" ng-click="increaseItemQuantity($index)"></i></span>
 				</div>
-				
+
 				<div class="cart-price-column">
 					<p>$@{{ item.price * item.quantity | money }}</p>
 				</div>
@@ -83,7 +83,7 @@
 
 			</li>
 
-		</ul>	
+		</ul>
 
 		<div class="cart-details">
 
@@ -93,6 +93,28 @@
 
 				<div class="clear"></div>
 
+			</div>
+
+			<div class="cart-details-row checkout-form" ng-show="!discount">
+				<span class="cart-item-column">Enter Discount Code:</span>
+				<input type="text" ng-model="enteredDiscountCode">
+				<div class="button success-bg right"
+					 ng-click="applyDiscountCode()">Apply Code
+				</div>
+				<div class="clear"></div>
+			</div>
+
+			<div class="cart-details-row" ng-show="discount">
+				<span class="cart-item-column">
+					Applied Discount: <b>@{{  discount.discount }}%</b>
+					&nbsp;&nbsp;
+					<a href="#"
+					   style="font-size: 12px;"
+					   ng-click="removeDiscount()">[Remove]
+					</a>
+				</span>
+				<span class="cart-price-column shipping-column" ng-bind="'$' + (discountSum | money)"></span>
+				<div class="clear"></div>
 			</div>
 
 			<div class="cart-details-row">
@@ -195,12 +217,12 @@
 				<input type="text" class="native" name="card-expiry-month" size="3" id="expire-month" ng-model="card.expiryMonth" placeholder="MM" cc-exp-month>
 				<input type="text" class="native" name="card-expiry-year" size="5" id="expire-year" ng-model="card.expiryYear" placeholder="YYYY" cc-exp-year full-year>
 			</span>
-			
+
 			<span class="left" style="margin-left:15px">
 				<label for="card-security-code">CVC</label>
 				<input type="text" class="native" size="5" name="card-security-code" id="card-secutiry-code" ng-model="card.securityCode" placeholder="000" cc-cvc>
 			</span>
-			
+
 			<div class="clear"></div>
 
 		</div>
@@ -228,7 +250,7 @@
 			<label for="country">Country <span class="faded bold"></span></label>
 			<input type="text" name="billing_country" id="country" ng-model="form.billing_country">
 			</span>
-			
+
 			<div class="clear"></div>
 
 		</div>
@@ -247,7 +269,7 @@
 
 		<h2>Confirmation</h2>
 
-		<ul>	
+		<ul>
 			<li ng-repeat="item in items" class="cart-item">
 
 				<div class="cart-item-column">
@@ -259,7 +281,7 @@
 				<div class="cart-quantity-column">
 					<span>@{{ item.quantity }}</span>
 				</div>
-				
+
 				<div class="cart-price-column">
 					<p>$@{{ item.price * item.quantity | money }}</p>
 				</div>
@@ -297,7 +319,7 @@
 				</div>
 
 			</li>
-		</ul>	
+		</ul>
 
 		<div class="cart-details">
 
@@ -329,7 +351,7 @@
 
 				<h3 class="bold">Ship To :</h3>
 				<div ng-if="form.useBillingForShipping">
-					
+
 					<p>@{{ form.firstName }} @{{ form.lastName }}</p>
 					<p>@{{ form.address }}</p>
 					<p>@{{ form.city }}, @{{ form.state }} @{{ form.zip }}</p>
@@ -337,7 +359,7 @@
 
 				</div>
 
-			</div>	
+			</div>
 
 		</div>
 
@@ -351,7 +373,7 @@
 		</div>
 
 	</div>
-	
+
 
 </div>
 
