@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Austen\Repositories\ImageRepository;
+use Gatku\YouImage;
 
 class YouImageController extends BaseController {
 
@@ -21,19 +22,13 @@ class YouImageController extends BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		
 		try {
 			$images = YouImage::groupBy('image')->get();
-			//$images = YouImage::all();	
-
 		} catch (Exception $e) {
-			
-			return Response::json(['message' => 'Sorry, images could not be retrieved.'], 404);
-
+			return \Response::json(['message' => 'Sorry, images could not be retrieved.'], 404);
 		}
 
-		return Response::json(['data' => $images], 200);
-
+		return \Response::json(['data' => $images], 200);
 	}
 
 
@@ -44,8 +39,6 @@ class YouImageController extends BaseController {
 	 * @return Response
 	 */
 	public function store() {
-		
-		
 		try {
 			$productIds = Input::get('products');
 			foreach ($productIds as $productId) {
@@ -54,24 +47,12 @@ class YouImageController extends BaseController {
 				$image->productId = $productId;
 				$image->save();	
 			}
-			
-			/*if (Input::has('productId')) {
-
-				$image->productId = Input::get('productId');
-
-			}*/
-
 		} catch (Exception $e) {
-			
 			Log::error($e);
-
-			return Response::json(['message' => 'Sorry, there was a problem saving the image'], 404);
-
+			return \Response::json(['message' => 'Sorry, there was a problem saving the image'], 404);
 		}
 
-		return Response::json(['message' => 'Image saved!'], 200);
-
-
+		return \Response::json(['message' => 'Image saved!'], 200);
 	}
 
 	
@@ -99,21 +80,13 @@ class YouImageController extends BaseController {
 		//
 	}
 
-
 	public function upload() {
-
 		$file = Input::file('file');
-
 		$upload = $this->image->upload($file, 'img/you-images/');
-
 		if ($upload === false) {
-
-			return Response::json(['message' => 'Sorry, something went wrong during the upload'], 404);
-
+			return \Response::json(['message' => 'Sorry, something went wrong during the upload'], 404);
 		}
 
-		return Response::json(['data' => $upload['imagePath']], 200);
-
+		return \Response::json(['data' => $upload['imagePath']], 200);
 	}
-
 }

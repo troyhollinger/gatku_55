@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Gatku\Order;
 use Austen\Repositories\OrderRepository;
 use Austen\Repositories\MailchimpRepository;
 
@@ -26,10 +27,10 @@ class OrderController extends BaseController {
 		$orders = $this->order->all();
 
 		if (!$orders) {
-			return Response::json(['message' => 'Sorry, there was an error'], 404);
+			return \Response::json(['message' => 'Sorry, there was an error'], 404);
 		}
-		$totalCount = DB::table('orders')->count();
-		return Response::json(['data' => $orders, 'total_count' => $totalCount], 200);
+		$totalCount = \DB::table('orders')->count();
+		return \Response::json(['data' => $orders, 'total_count' => $totalCount], 200);
 	}
 
 
@@ -38,15 +39,15 @@ class OrderController extends BaseController {
 			if(empty($endDate)){
 				$endDate = date('y-m-d');
 			}
-			$totalCount = DB::table('orders')->whereBetween('created_at', array($startDate, $endDate))->count();
+			$totalCount = \DB::table('orders')->whereBetween('created_at', array($startDate, $endDate))->count();
 			$orders = Order::with('items.addons.product', 'items.product', 'customer', 'items.size', 'tracking', 'shipping')->whereBetween('created_at', array($startDate, $endDate))->orderBy('created_at', 'desc')->take($itemsPerPage)->skip($itemsPerPage*($pagenumber-1))->get();
 		}else{
-			$totalCount = DB::table('orders')->count();
+			$totalCount = \DB::table('orders')->count();
 			$orders = Order::with('items.addons.product', 'items.product', 'customer', 'items.size', 'tracking', 'shipping')->orderBy('created_at', 'desc')->take($itemsPerPage)->skip($itemsPerPage*($pagenumber-1))->get();	
 		}
 		$orders = $this->assignHumanReadableTimestampsAndOrderAmount($orders);
 		
-		return Response::json(['data' => $orders, 'total_count' => $totalCount], 200);
+		return \Response::json(['data' => $orders, 'total_count' => $totalCount], 200);
 	}
 	
 	/**
@@ -61,9 +62,9 @@ class OrderController extends BaseController {
 
 		if ($order !== true) {
 			if ($order !== false) {
-				return Response::json(['message' => $order], 404);
+				return \Response::json(['message' => $order], 404);
 			} else {
-				return Response::json(['message' => 'Sorry, something went wrong on our end. We are fixing it.'], 404);
+				return \Response::json(['message' => 'Sorry, something went wrong on our end. We are fixing it.'], 404);
 			}
 		}
 		$fname = $allData['form']['firstName'];
@@ -71,7 +72,7 @@ class OrderController extends BaseController {
 		$country = $allData['form']['country'];
 		$this->mailchimp->addSubscription($fname, $email, $country);
    
-		return Response::json(['message' => 'Thank you for the order!'], 200);
+		return \Response::json(['message' => 'Thank you for the order!'], 200);
 	}
 
 	/**
@@ -132,15 +133,11 @@ class OrderController extends BaseController {
 				$orderAmount = $orderAmount + $items->product->price;
 				
 			}
-			
+
 			$model->orderAmount = chop($orderAmount,"00");
-
 			$model->createdAtHuman = $model->created_at->timezone('America/Los_Angeles')->format('F jS Y | g:i A');
-
 		}
 
 		return $collection;
-
 	}
-
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Austen\Repositories\ShippingRequestRepository;
+use Gatku\ShippingRequest;
 
 class ShippingRequestController extends BaseController {
 
@@ -28,9 +29,9 @@ class ShippingRequestController extends BaseController {
 
 		$request = $this->request->store($input);
 
-		if ($request === false) return Response::json(['message' => 'Sorry, there was an error on our end'], 404);
+		if ($request === false) return \Response::json(['message' => 'Sorry, there was an error on our end'], 404);
 
-		return Response::json(['message' => 'request was created', "data" => $request], 200);
+		return \Response::json(['message' => 'request was created', "data" => $request], 200);
 
 	}
 
@@ -58,11 +59,11 @@ class ShippingRequestController extends BaseController {
 
 		$payment = $this->request->pay($input);
 
-		if ($payment !== true && $payment !== false) return Response::json(['message' => $payment], 404);
+		if ($payment !== true && $payment !== false) return \Response::json(['message' => $payment], 404);
 
-		if ($payment === false) return Response::json(['message' => 'This request is already paid!'], 404);
+		if ($payment === false) return \Response::json(['message' => 'This request is already paid!'], 404);
 
-		return Response::json(['message' => 'Payed!'], 200);
+		return \Response::json(['message' => 'Payed!'], 200);
 
 	}
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Austen\Repositories\ImageRepository;
+use Gatku\HomeSetting;
 
 class HomeSettingController extends BaseController {
 
@@ -29,11 +30,11 @@ class HomeSettingController extends BaseController {
 
 		} catch (Exception $e) {
 			
-			return Response::json(['message' => 'Sorry, home setting could not be retrieved.'], 404);
+			return \Response::json(['message' => 'Sorry, home setting could not be retrieved.'], 404);
 
 		}
 
-		return Response::json(['data' => $homeSettings], 200);
+		return \Response::json(['data' => $homeSettings], 200);
 
 	}
 
@@ -57,10 +58,10 @@ class HomeSettingController extends BaseController {
 		} catch (Exception $e) {
 			Log::error($e);
 
-			return Response::json(['message' => 'Sorry, there was a problem saving the image'], 404);
+			return \Response::json(['message' => 'Sorry, there was a problem saving the image'], 404);
 		}
 
-		return Response::json(['message' => 'Home setting saved!'], 200);
+		return \Response::json(['message' => 'Home setting saved!'], 200);
 	}
 
 	
@@ -97,11 +98,11 @@ class HomeSettingController extends BaseController {
 
 		if ($upload === false) {
 
-			return Response::json(['message' => 'Sorry, something went wrong during the upload'], 404);
+			return \Response::json(['message' => 'Sorry, something went wrong during the upload'], 404);
 
 		}
 
-		return Response::json(['data' => $upload['imagePath']], 200);
+		return \Response::json(['data' => $upload['imagePath']], 200);
 
 	}
 

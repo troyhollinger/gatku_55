@@ -35,9 +35,9 @@ class UserController extends BaseController {
 		
 		$user = $this->user->store(Input::all());
 
-		if ($user === false) return Response::json(['message' => 'Sorry, something went wrong and your details could not be saved. We are working on it.', 404]);
+		if ($user === false) return \Response::json(['message' => 'Sorry, something went wrong and your details could not be saved. We are working on it.', 404]);
 
-		return Response::json(['data' => $user], 200);
+		return \Response::json(['data' => $user], 200);
 
 	}
 

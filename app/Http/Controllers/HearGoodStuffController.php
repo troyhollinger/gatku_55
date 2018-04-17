@@ -32,6 +32,6 @@ class HearGoodStuffController extends BaseController {
 
         $this->mailchimp->addSubscription($fname, $email, $country);
 
-		return Response::json(['message' => 'Email address saved!'], 200);
+		return \Response::json(['message' => 'Email address saved!'], 200);
 	}
 }
