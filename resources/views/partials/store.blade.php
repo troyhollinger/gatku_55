@@ -136,37 +136,37 @@
 
 		@if($product->type->slug === 'head')
 
-		{{ $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow }}
+		{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
 
 		@elseif($product->type->slug === 'pole')
 
-		{{ $tailsRow . $packageRow . $headsRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow }}
+		{!! $tailsRow . $packageRow . $headsRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
 
 		@elseif($product->type->slug === 'extra' || $product->type->slug === 'shrinker')
 
-		{{ $extras1Row . $extras2Row . $extras3Row . $headsRow . $tailsRow . $packageRow . $apparelRow . $glassRow }}
+		{!! $extras1Row . $extras2Row . $extras3Row . $headsRow . $tailsRow . $packageRow . $apparelRow . $glassRow !!}
 
 		@elseif($product->type->slug === 'apparel')
 
-		{{ $apparelRow . $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $glassRow }}
+		{!! $apparelRow . $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $glassRow !!}
 
 		@elseif($product->type->slug === 'glass')
 
-		{{ $glassRow . $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow }}
+		{!! $glassRow . $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow !!}
 
 		@elseif($product->type->slug === 'package')
 
-		{{ $packageRow. $headsRow . $tailsRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow }}
+		{!! $packageRow. $headsRow . $tailsRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
 
 		@else
 
-		{{ $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow }}
+		{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
 
 		@endif
 
 	@else
 
-	{{ $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow }}
+	{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
 
 	@endif
 

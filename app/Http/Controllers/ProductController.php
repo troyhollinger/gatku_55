@@ -118,7 +118,7 @@ class ProductController extends BaseController
             return \Redirect::route('home');
         }
         Log::info($product);
-        return View::make('pages.product', ['product' => $product]);
+        return \View::make('pages.product', ['product' => $product]);
     }
 
 

@@ -15,12 +15,12 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 	@media only screen and (max-width: 480px) {
 		.gatku-home-banner{
 			position: relative;
-			background-image:url({{$homeSetting['mobile_image']}});
+			background-image:url({!! $homeSetting['mobile_image'] !!});
 		}
 	}
 	@media only screen and (min-width: 480px) {
 	.gatku-home-banner{
-			background-image:url({{$homeSetting['image']}});
+			background-image:url({!! $homeSetting['image'] !!});
 		}
 	}
 
@@ -31,8 +31,8 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 		<div><p class="hero-blurb">Used and Loved Worldwide.</p></div>
 	</div>
 	<div class="home-image-info">
-		<p class="live-till">{{$homeSetting['image_info']}}</p>
-		<p class="photo-credit">{{$homeSetting['image_credit']}}</p>
+		<p class="live-till">{!! $homeSetting['image_info'] !!}</p>
+		<p class="photo-credit">{!! $homeSetting['image_credit'] !!}</p>
 	</div>
 
 </div>
