@@ -79,7 +79,6 @@ app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', f
 
 	}
 
-
     CartService.getDiscount = function() {
         return Cookie('discount') || '';
     };
@@ -89,7 +88,8 @@ app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', f
     };
 
     CartService.removeDiscount = function() {
-        Cookie('discount', '', { path : '/' });
+        Cookie.remove('discount', { path : '/' });
+        $rootScope.$broadcast('update');
 	};
 
     CartService.count = function() {

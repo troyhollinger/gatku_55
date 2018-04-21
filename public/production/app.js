@@ -7705,7 +7705,6 @@ app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', f
 
 	}
 
-
     CartService.getDiscount = function() {
         return Cookie('discount') || '';
     };
@@ -7715,7 +7714,8 @@ app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', f
     };
 
     CartService.removeDiscount = function() {
-        Cookie('discount', '', { path : '/' });
+        Cookie.remove('discount', { path : '/' });
+        $rootScope.$broadcast('update');
 	};
 
     CartService.count = function() {
@@ -9096,13 +9096,12 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
     }
 
     $scope.emptyCart = function() {
-        CartService.empty();
         CartService.removeDiscount();
+        CartService.empty();
 
-        //Why this is twice? Remove in CartService and in CartController?
-        //Use only one place for coed.
+        //Update values
         $scope.getItems();
-        $scope.removeDiscount();
+        $scope.getDiscountFromCookies();
     }
 
     $scope.validate = function(index) {

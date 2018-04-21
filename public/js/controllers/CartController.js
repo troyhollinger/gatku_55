@@ -253,13 +253,12 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
     }
 
     $scope.emptyCart = function() {
-        CartService.empty();
         CartService.removeDiscount();
+        CartService.empty();
 
-        //Why this is twice? Remove in CartService and in CartController?
-        //Use only one place for coed.
+        //Update values
         $scope.getItems();
-        $scope.removeDiscount();
+        $scope.getDiscountFromCookies();
     }
 
     $scope.validate = function(index) {
