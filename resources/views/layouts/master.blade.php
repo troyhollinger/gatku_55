@@ -49,28 +49,28 @@
         <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
         <script src="{{ asset('js/vendor/modernizr-2.6.2.min.js') }}"></script>
         <script>
-            var currentRoute = '{{ Route::currentRouteName() }}';
-            var layoutType = {{ Route::currentRouteName() === 'product.show' ? "'" . $product->type->slug . "'" : "null;" }};
-            var slug = {{ Route::currentRouteName() === 'product.show' ? "'" . $product->slug . "'" : "null;" }};
+            var currentRoute = '{!! Route::currentRouteName() !!}';
+            var layoutType = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->type->slug . "'" : "null;" !!};
+            var slug = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->slug . "'" : "null;" !!};
             var CONFIG = {
 
-                base : '{{ URL::to("/") }}',
-                environment : '{{ App::environment() }}'
+                base : '{!! URL::to("/") !!}',
+                environment : '{!! App::environment() !!}'
 
             }
 
         </script>
         @if(Route::currentRouteName() === 'product.show')
         <script>
-            var productId = '{{ $product->id }}';
-            var productSlug = '{{ $product->slug }}';
+            var productId = '{!! $product->id !!}';
+            var productSlug = '{!! $product->slug !!}';
         </script>
         @endif
 
         @if(Route::currentRouteName() === 'shipping-request.show')
         <script>
-            var shippingRequestId = '{{ $request->id }}';
-            var shippingRequestFullName = '{{ $request->order->customer->fullName }}'
+            var shippingRequestId = '{!! $request->id !!}';
+            var shippingRequestFullName = '{!! $request->order->customer->fullName !!}'
         </script>
         @endif
     </head>
@@ -100,11 +100,11 @@
 
 
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-        <script src="{{ asset('bower_components/ng-file-upload/angular-file-upload.js') }}"></script>
+        <script src="{!! asset('bower_components/ng-file-upload/angular-file-upload.js') !!}"></script>
         @if(isset($product) && $product->type->slug === 'apparel')
-        <script src="{{ asset('bower_components/rollerblade/rollerblade.min.js') }}"></script>
+        <script src="{!! asset('bower_components/rollerblade/rollerblade.min.js') !!}"></script>
         @endif
-        <script src="{{ asset('production/app.js') }}"></script>
+        <script src="{!! asset('production/app.js') !!}"></script>
 
         @if(App::environment('production'))
         <script>

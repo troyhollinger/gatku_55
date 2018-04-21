@@ -118,7 +118,7 @@
 
 		<p class="product-price" ng-cloak>
 			<span class="product-price-amount" ng-cloak>${!! $product->price / 100 !!}</span> /
-			<span>{!!$product->shipping_description!!}</span>
+			<span>{!! $product->shipping_description !!}</span>
 		</p>
 		@if($product->availability->slug === 'available')
 
@@ -136,8 +136,8 @@
 				@if($product->sizeable)
 
 				<div ng-repeat="size in product.sizes" ng-cloak>
-					<input type="checkbox"  name="size-@{!! $index !!}" id="size-@{!! $index !!}" ng-model="size.checked" ng-disabled="!size.available">
-					<label for="size-@{!! $index !!}" ng-class="{ 'faded' : !size.available }"><span class="addon-name">@{!! size.shortName !!} -</span>  <span class="addon-price">$@{!! size.price | money !!}</span></label>
+					<input type="checkbox"  name="size-@{{ $index }}" id="size-@{{ $index }}" ng-model="size.checked" ng-disabled="!size.available">
+					<label for="size-@{{ $index }}" ng-class="{ 'faded' : !size.available }"><span class="addon-name">@{{ size.shortName }} -</span>  <span class="addon-price">$@{{ size.price | money }}</span></label>
 				</div>
 
 				@foreach($product->sizes as $size)
@@ -152,14 +152,14 @@
 					 ng-class="{'mark-as-included-class': addon.include_in_package, 'disable-input-field': addon.include_in_package}"
 					 ng-cloak>
 					<input type="checkbox"
-						   name="addon-@{!! $index !!}"
-						   id="addon-@{!! $index !!}"
+						   name="addon-@{{ $index }}"
+						   id="addon-@{{ $index }}"
 						   ng-model="addon.checked"
 						   ng-init="addon.checked = addon.include_in_package == 1 ? true : false">
 
-					<label for="addon-@{!! $index !!}">
-                        <span class="addon-name">@{!! addon.product.name !!} -</span>
-                        <span class="addon-price">$@{!! addon.product.price | money !!}</span>
+					<label for="addon-@{{ $index }}">
+                        <span class="addon-name">@{{ addon.product.name }} -</span>
+                        <span class="addon-price">$@{{ addon.product.price | money }}</span>
                     </label>
 				</div>
 
