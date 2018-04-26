@@ -14,8 +14,8 @@ class AuthenticationController extends BaseController {
      */
 	public function authenticate()
     {
-		$email = Input::get('email');
-		$password = Input::get('password');
+		$email = \Request::get('email');
+		$password = \Request::get('password');
 
 		if(Auth::attempt(['email' => $email, 'password' => $password], true)) {
 			if (Auth::user()->admin) {

@@ -2,14 +2,9 @@
 
 namespace Austen\Repositories;
 
-use ShippingTrack;
+use Gatku\ShippingTrack;
 use Mail;
 use Stripe_Charge;
-use Order;
-use OrderItem;
-use Product;
-use OrderItemAddon;
-use Size;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 

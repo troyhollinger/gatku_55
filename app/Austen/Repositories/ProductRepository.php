@@ -6,7 +6,7 @@ use Gatku\Product;
 use Gatku\Size;
 use Gatku\ProductType;
 use Illuminate\Support\Facades\Log;
-use Addon;
+use Gatku\Addon;
 
 class ProductRepository implements ProductRepositoryInterface {
 

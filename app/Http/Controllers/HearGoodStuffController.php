@@ -24,7 +24,7 @@ class HearGoodStuffController extends BaseController {
 	 */
 	public function store() {
 
-	    $post = Input::all();
+	    $post = \Request::all();
 
 	    $email = $post['email'];
         $fname = 'Email registered throw gatku.com'.

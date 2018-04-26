@@ -70,7 +70,7 @@ class ProductController extends BaseController
      */
     public function store()
     {
-        if ($this->product->store(Input::all())) {
+        if ($this->product->store(\Request::all())) {
             return \Response::json([], 200);
         } else {
             return \Response::json(['message' => 'Sorry, the product could not be created'], 404);
@@ -130,7 +130,7 @@ class ProductController extends BaseController
      */
     public function upload()
     {
-        $file = Input::file('file');
+        $file = \Request::file('file');
         $upload = $this->image->upload($file, 'img/uploads/');
 
         if ($upload === false) {
@@ -149,7 +149,7 @@ class ProductController extends BaseController
      */
     public function update($id)
     {
-        $input = Input::all();
+        $input = \Request::all();
         $update = $this->product->update($id, $input);
 
         if ($update === false) {

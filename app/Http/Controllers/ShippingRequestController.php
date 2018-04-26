@@ -25,7 +25,7 @@ class ShippingRequestController extends BaseController {
 	public function store()
 	{
 		
-		$input = Input::all();
+		$input = \Request::all();
 
 		$request = $this->request->store($input);
 
@@ -55,7 +55,7 @@ class ShippingRequestController extends BaseController {
 
 	public function pay() {
 
-		$input = Input::all();
+		$input = \Request::all();
 
 		$payment = $this->request->pay($input);
 

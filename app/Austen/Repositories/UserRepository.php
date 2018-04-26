@@ -1,6 +1,6 @@
 <?php namespace Austen\Repositories;
 
-use User;
+use Gatku\User;
 use Hash;
 
 class UserRepository {

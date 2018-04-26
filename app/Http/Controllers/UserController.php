@@ -33,7 +33,7 @@ class UserController extends BaseController {
 	 */
 	public function store() {
 		
-		$user = $this->user->store(Input::all());
+		$user = $this->user->store(\Request::all());
 
 		if ($user === false) return \Response::json(['message' => 'Sorry, something went wrong and your details could not be saved. We are working on it.', 404]);
 

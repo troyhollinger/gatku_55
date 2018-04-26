@@ -1,16 +1,15 @@
 <?php
 namespace Austen\Repositories;
 
-use Order;
-use OrderItem;
+use Gatku\Order;
+use Gatku\OrderItem;
 use Stripe_Charge;
-use Discount;
+use Gatku\Discount;
 use Log;
 use Mail;
-use OrderItemAddon;
+use Gatku\OrderItemAddon;
 use DB;
 use Carbon\Carbon;
-use App;
 use Stripe_CardError;
 
 /**

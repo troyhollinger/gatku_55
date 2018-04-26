@@ -1,7 +1,7 @@
 <?php namespace Austen\Repositories;
 
 
-use Customer;
+use Gatku\Customer;
 
 class CustomerRepository {
 

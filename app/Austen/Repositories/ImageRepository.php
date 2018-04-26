@@ -1,12 +1,12 @@
-<?php 
+<?php
 namespace Austen\Repositories;
 
 use Image;
 use Log;
 
-class ImageRepository 
+class ImageRepository
 {
-	public function upload($file, $directory, $thumbDirectory = null) 
+	public function upload($file, $directory, $thumbDirectory = null)
 	{
 		$response = [];
 
@@ -20,9 +20,7 @@ class ImageRepository
 			$imagePath = public_path() . '/' . $directory . $imageName;
 
 			if ($thumbDirectory !== null) {
-
 				$thumbPath = public_path() . '/' . $thumbDirectory . $imageName;
-					
 			}
 
 			// Check if image is a JPG : exif_read_data won't work on anything else.
@@ -59,13 +57,13 @@ class ImageRepository
 			} else {
 				$parsedImage = $image;
 			}
-			
-			Image::make($parsedImage)->save($imagePath);
+
+			\Image::make($parsedImage)->save($imagePath);
 
 			if ($thumbDirectory !== null) {
-				Image::make($parsedImage)->resize('45',null, function($constraint){ $constraint->aspectRatio();})->save($thumbPath);
+				\Image::make($parsedImage)->resize('45',null, function($constraint){ $constraint->aspectRatio();})->save($thumbPath);
 			}
-			
+
 		} catch(Exception $e) {
 			Log::error($e);
 			return false;
@@ -80,7 +78,7 @@ class ImageRepository
 	}
 
 
-	public function all() 
+	public function all()
 	{
 		$photos = glob( public_path() .'img/uploads/*.*');
 		return $photos;

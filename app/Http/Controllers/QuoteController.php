@@ -22,8 +22,8 @@ class QuoteController extends BaseController {
 
 	public function sendEmail() {
 
-		$form = Input::all();
-		$name = Input::get('name');
+		$form = \Request::all();
+		$name = \Request::get('name');
 
 		if (App::environment('production')) {
 
@@ -47,7 +47,7 @@ class QuoteController extends BaseController {
 
 		});
         
-        $this->mailchimp->addSubscription(Input::get('name'), Input::get('email'), Input::get('country'));
+        $this->mailchimp->addSubscription(\Request::get('name'), \Request::get('email'), \Request::get('country'));
 	
 	} 
 

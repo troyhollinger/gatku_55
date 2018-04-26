@@ -40,10 +40,10 @@ class YouImageController extends BaseController {
 	 */
 	public function store() {
 		try {
-			$productIds = Input::get('products');
+			$productIds = \Request::get('products');
 			foreach ($productIds as $productId) {
 				$image = new YouImage;
-				$image->image = Input::get('image');
+				$image->image = \Request::get('image');
 				$image->productId = $productId;
 				$image->save();	
 			}
@@ -81,7 +81,7 @@ class YouImageController extends BaseController {
 	}
 
 	public function upload() {
-		$file = Input::file('file');
+		$file = \Request::file('file');
 		$upload = $this->image->upload($file, 'img/you-images/');
 		if ($upload === false) {
 			return \Response::json(['message' => 'Sorry, something went wrong during the upload'], 404);

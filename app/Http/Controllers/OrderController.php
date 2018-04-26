@@ -57,8 +57,8 @@ class OrderController extends BaseController {
 	 * @return Response
 	 */
 	public function store() {
-		$allData = Input::all();
-		$order = $this->order->process(Input::all());
+		$allData = \Request::all();
+		$order = $this->order->process(\Request::all());
 
 		if ($order !== true) {
 			if ($order !== false) {

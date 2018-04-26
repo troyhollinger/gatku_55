@@ -48,12 +48,12 @@ class HomeSettingController extends BaseController {
 	public function store() {
 		try {
 			$homeSetting = new HomeSetting;
-			$homeSetting->logo = Input::get('logo');
-			$homeSetting->button_color = Input::get('button_color');
-			$homeSetting->image = Input::get('image');
-			$homeSetting->mobile_image = Input::get('mobile_image');
-			$homeSetting->image_info = Input::get('image_info');
-			$homeSetting->image_credit = Input::get('image_credit');
+			$homeSetting->logo = \Request::get('logo');
+			$homeSetting->button_color = \Request::get('button_color');
+			$homeSetting->image = \Request::get('image');
+			$homeSetting->mobile_image = \Request::get('mobile_image');
+			$homeSetting->image_info = \Request::get('image_info');
+			$homeSetting->image_credit = \Request::get('image_credit');
 			$homeSetting->save();
 		} catch (Exception $e) {
 			Log::error($e);
@@ -92,7 +92,7 @@ class HomeSettingController extends BaseController {
 
 	public function upload() {
 
-		$file = Input::file('file');
+		$file = \Request::file('file');
 
 		$upload = $this->image->upload($file, 'img/home-images/');
 

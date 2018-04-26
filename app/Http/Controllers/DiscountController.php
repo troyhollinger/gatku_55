@@ -50,22 +50,19 @@ class DiscountController extends BaseController {
      */
     public function store()
     {
-        $input = Input::all();
+        $input = \Request::all();
         $request = $this->repository->store($input);
         if ($request === false) return \Response::json(['message' => 'Sorry, there was an error with store discount'], 404);
         return \Response::json(['message' => 'Discount was created', "data" => $request], 200);
     }
 
     /**
-     * Remove the specified resource from storage.
-     * DELETE /shipping-request/{id}
-     *
-     * @param  int  $id
-     * @return Response
+     * @param $code
+     * @return mixed
      */
-    public function destroy($id)
+    public function destroy($code)
     {
-        $response = $this->repository->destroy($id);
+        $response = $this->repository->destroy($code);
         if ($response === false) {
             return \Response::json(['message' => 'Sorry, there was a problem removing this discount.'], 404);
         }
@@ -73,12 +70,12 @@ class DiscountController extends BaseController {
     }
 
     /**
-     * @param $id
+     * @param $code
      * @return mixed
      */
-    public function update($id) {
-        $input = Input::all();
-        $update = $this->repository->update($id, $input);
+    public function update($code) {
+        $input = \Request::all();
+        $update = $this->repository->update($code, $input);
         if ($update === false) {
             return \Response::json(['message' => 'Sorry, there was a problem updating this discount.'], 404);
         }

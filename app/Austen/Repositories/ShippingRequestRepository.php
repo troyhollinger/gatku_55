@@ -2,7 +2,7 @@
 
 namespace Austen\Repositories;
 
-use ShippingRequest;
+use Gatku\ShippingRequest;
 use Log;
 use Mail;
 use Stripe_Charge;

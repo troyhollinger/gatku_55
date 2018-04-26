@@ -24,7 +24,7 @@ class ShippingTrackController extends BaseController {
 	public function store()
 	{
 		
-		$input = Input::all();
+		$input = \Request::all();
 
 		$request = $this->request->store($input);
 
