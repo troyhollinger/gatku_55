@@ -27,8 +27,5 @@ class CustomerRepository {
 		$customer->save();
 
 		return $customer;
-
 	}
-
-
 }

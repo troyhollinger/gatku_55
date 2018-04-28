@@ -60,6 +60,11 @@
             }
 
         </script>
+
+        <!-- FRESHCHAT WIDGET - loading - start -->
+        <script src="https://wchat.freshchat.com/js/widget.js"></script>
+        <!-- FRESHCHAT WIDGET - loading - end -->
+
         @if(Route::currentRouteName() === 'product.show')
         <script>
             var productId = '{!! $product->id !!}';
@@ -116,5 +121,14 @@
           ga('send', 'pageview');
         </script>
         @endif
+
+        <!-- FRESHCHAT WIDGET - loading - start -->
+        <script>
+            window.fcWidget.init({
+                token: "967edb4c-f6d8-4209-9700-964f03b1fe1d",
+                host: "https://wchat.freshchat.com"
+            });
+        </script>
+        <!-- FRESHCHAT WIDGET - loading - start -->
     </body>
 </html>
