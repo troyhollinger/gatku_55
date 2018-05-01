@@ -19,6 +19,7 @@
 			<div class="admin-navigation-tab" ng-click="show('videos')" ng-class="{'selected' : showVideos}">Videos</div>
 			<div class="admin-navigation-tab" ng-click="show('home-setting')" ng-class="{'selected' : showHomeSetting}">Home</div>
 			<div class="admin-navigation-tab" ng-click="show('discount-manager')" ng-class="{'selected' : showDiscountManager}">Discounts</div>
+			<div class="admin-navigation-tab" ng-click="adminLogout()">Logout</div>
 			<div class="clear"></div>
 		</div>
 

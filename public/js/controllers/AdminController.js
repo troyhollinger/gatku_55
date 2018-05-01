@@ -437,6 +437,10 @@ app.controller('AdminController',
 
     //Discount part - end
 
+    $scope.adminLogout = function() {
+        window.location.replace('/logout');
+    };
+
     $scope.init();
 
 }]);

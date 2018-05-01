@@ -6,17 +6,17 @@
 
 	<div class="login-form">
 
-		{{ Form::open(['route' => 'login.authenticate']) }}
+		{!! Form::open(['route' => 'login.authenticate']) !!}
 
-			{{ Form::label('email', 'Email') }}
-			{{ Form::text('email') }}
+			{!! Form::label('email', 'Email') !!}
+			{!! Form::text('email') !!}
 
-			{{ Form::label('password', 'Password') }}
-			{{ Form::password('password') }}
+			{!! Form::label('password', 'Password') !!}
+			{!! Form::password('password') !!}
 
-			{{ Form::submit('Sign in', ['class' => 'button success-bg',]) }}
+			{!! Form::submit('Sign in', ['class' => 'button success-bg',]) !!}
 
-		{{ Form::close() }}
+		{!! Form::close() !!}
 
 	</div>
 

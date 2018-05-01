@@ -19,7 +19,6 @@ use Gatku\HomeSetting;
 //});
 
 //Gatku Routes (Original project Laravel: 4.2): /app/routes.php
-
 Route::get('/', ['as' => 'home', function() {
     $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
     return View::make('pages.home')->with('homeSetting',  $homeSetting);
@@ -41,11 +40,11 @@ Route::resource('product', 'ProductController');
 
 Route::resource('user', 'UserController', ['except' => ['create']]);
 
-Route::get('login', ['as' => 'login.index', 'uses' => 'AuthenticationController@index']);
+Route::get('login', ['as' => 'login', 'uses' => 'AuthenticationController@index']);
 Route::post('login', ['as' => 'login.authenticate', 'uses' => 'AuthenticationController@authenticate']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthenticationController@logout']);
 
-Route::group(['prefix' => 'admin', 'namespace' => 'admin', 'before' => 'auth|admin'], function() {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', ['as' => 'admin.index', function() {
         return View::make('pages.admin');
     }]);
