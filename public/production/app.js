@@ -8064,6 +8064,14 @@ app.factory('Discount', ['$http', function($http) {
     }
 }]);
 
+app.factory('DiscountExists', ['$http', function($http) {
+    return {
+        //Fetch all records from discounts table
+        all : function() {
+            return $http.get('/discounts-exists');
+        }
+    }
+}]);
 
 app.factory('HearGoodStuff', ['$http', function($http) {
     return {
@@ -8856,8 +8864,8 @@ app.controller('CartBlinderController', ['$scope', 'CartService', function($scop
 | $scope.validate method to reflect the changes.
 |
 */
-app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount',
-    function($scope, CartService, StripeService, Order, AlertService, Discount) {
+app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists',
+    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists) {
 
     $scope.items = [];
     $scope.show = false;
@@ -8873,7 +8881,14 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
     $scope.blackFriday = false;
     $scope.enteredDiscountCode = '';
     $scope.discount = '';
+    $scope.discountsExists = false;
     $scope.discountSum = 0;
+
+    //Check is are records in discount table. If no then don't display discount input
+    DiscountExists.all().then(function(response) {
+        console.log(response);
+        $scope.discountsExists = response.data;
+    });
 
     $scope.toStage = function(index) {
         Inputs.blur();

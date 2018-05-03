@@ -118,6 +118,14 @@ app.factory('Discount', ['$http', function($http) {
     }
 }]);
 
+app.factory('DiscountExists', ['$http', function($http) {
+    return {
+        //Fetch all records from discounts table
+        all : function() {
+            return $http.get('/discounts-exists');
+        }
+    }
+}]);
 
 app.factory('HearGoodStuff', ['$http', function($http) {
     return {

@@ -13,12 +13,6 @@ use Gatku\HomeSetting;
 |
 */
 
-//@TODO Remove following route
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-//Gatku Routes (Original project Laravel: 4.2): /app/routes.php
 Route::get('/', ['as' => 'home', function() {
     $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
     return View::make('pages.home')->with('homeSetting',  $homeSetting);
@@ -105,3 +99,4 @@ Route::resource('shipping-track', 'ShippingTrackController', ['except' => ['inde
 
 //Discount route
 Route::resource('discount', 'DiscountController');
+Route::resource('discounts-exists', 'DiscountExistsController'); //Check if in discounts table are any records

@@ -95,7 +95,7 @@
 
 			</div>
 
-			<div class="cart-details-row checkout-form" ng-show="!discount">
+			<div class="cart-details-row checkout-form" ng-show="!discount  && discountsExists">
 				<span class="cart-item-column">Enter Discount Code:</span>
 				<input type="text" ng-model="enteredDiscountCode">
 				<div class="button success-bg right"
