@@ -245,7 +245,7 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
                 $scope.enabled = true;
                 //window.location.replace("/thankyou");
             }).error(function(response) {
-                $scope.enabled = true;
+                // $scope.enabled = true;
                 if ('error' in response.message.jsonBody) {
                     AlertService.broadcast(response.message.jsonBody.error.message, 'error');
                 } else {

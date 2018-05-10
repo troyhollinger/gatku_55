@@ -60,10 +60,9 @@ class OrderRepository {
             $order->load('items.addons.product.type','items.addons.size', 'items.product.type', 'customer', 'items.size');
 
             //Discount part
-            $discount = null;
+            $discount = new Discount;
 
             if (isset($input['discount']['code'])) {
-                $discount = new Discount;
                 $discount = $discount->find($input['discount']['code']);
             }
 
