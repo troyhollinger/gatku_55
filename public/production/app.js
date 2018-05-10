@@ -8886,7 +8886,6 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
 
     //Check is are records in discount table. If no then don't display discount input
     DiscountExists.all().then(function(response) {
-        console.log(response);
         $scope.discountsExists = response.data;
     });
 
@@ -9100,7 +9099,7 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
                 $scope.enabled = true;
                 //window.location.replace("/thankyou");
             }).error(function(response) {
-                $scope.enabled = true;
+                // $scope.enabled = true;
                 if ('error' in response.message.jsonBody) {
                     AlertService.broadcast(response.message.jsonBody.error.message, 'error');
                 } else {

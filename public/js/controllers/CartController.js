@@ -31,7 +31,6 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
 
     //Check is are records in discount table. If no then don't display discount input
     DiscountExists.all().then(function(response) {
-        console.log(response);
         $scope.discountsExists = response.data;
     });
 
