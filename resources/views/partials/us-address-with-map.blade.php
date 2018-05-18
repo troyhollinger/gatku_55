@@ -6,6 +6,6 @@
     </div>
 
     <div class="beside-map-icon-address">
-        1250 Pioneer Way Suite H, El Cajon, CA 92020 USA
+        {!! $homeSetting['address_us'] !!}
     </div>
 </div>

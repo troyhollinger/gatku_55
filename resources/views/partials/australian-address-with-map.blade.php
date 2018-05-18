@@ -5,6 +5,6 @@
         &nbsp;&nbsp;
     </div>
     <div class="beside-map-icon-address">
-        Beach Street Fremantle, Wa 6160 AU
+        {!! $homeSetting['address_au'] !!}
     </div>
 </div>

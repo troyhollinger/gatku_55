@@ -23,6 +23,7 @@
         "classmap": [
             "database/seeds",
             "database/factories",
+            "database/migrations",
             "app/Austen/Repositories",
             "app/models"
         ],

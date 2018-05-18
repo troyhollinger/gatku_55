@@ -358,6 +358,37 @@
 
 					<label>Image Credit</label>
 					<input type="text" ng-model="homeSetting.image_credit">
+
+					<label>Facebook Url</label>
+					<input type="text" ng-model="homeSetting.facebook_url">
+
+					<label>Twitter Url</label>
+					<input type="text" ng-model="homeSetting.twitter_url">
+
+					<label>Instagram Url</label>
+					<input type="text" ng-model="homeSetting.instagram_url">
+
+					<label>Youtube Url</label>
+					<input type="text" ng-model="homeSetting.youtube_url">
+
+					<label>Address US</label>
+					<input type="text" ng-model="homeSetting.address_us">
+
+					<label>Address Australia</label>
+					<input type="text" ng-model="homeSetting.address_au">
+
+					<label>Email Html</label>
+					<input type="text" ng-model="homeSetting.email_html">
+
+					<label>Phone Html</label>
+					<input type="text" ng-model="homeSetting.phone_html">
+
+					<label>Desktop Copyright Html</label>
+					<input type="text" ng-model="homeSetting.desktop_copyright_html">
+
+					<label>Mobile Copyright Html</label>
+					<input type="text" ng-model="homeSetting.mobile_copyright_html">
+
 				</form>
 				<div class="button success-bg" ng-click="saveHomeSetting()">Save</div>
 			</div>
