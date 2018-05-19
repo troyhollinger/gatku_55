@@ -348,6 +348,7 @@ class ComposerStaticInit987a49ed413fc1b0ed7ee05b84013a37
         'App\\Http\\Controllers\\BaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/BaseController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DiscountController' => __DIR__ . '/../..' . '/app/Http/Controllers/DiscountController.php',
+        'App\\Http\\Controllers\\DiscountExistsController' => __DIR__ . '/../..' . '/app/Http/Controllers/DiscountExistsController.php',
         'App\\Http\\Controllers\\HearGoodStuffController' => __DIR__ . '/../..' . '/app/Http/Controllers/HearGoodStuffController.php',
         'App\\Http\\Controllers\\HomeSettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeSettingController.php',
         'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
