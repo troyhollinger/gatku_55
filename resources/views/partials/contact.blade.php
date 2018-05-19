@@ -1,5 +1,5 @@
 <div class="contact-section">
-	<div class="contact-top">
+	<div class="contact-top" style="background-image: url('{!! $homeSetting['contact_image'] !!}')">
 		<div class="home-container">
 			<h2 class="contact-headline">Thank You for Visiting!</h2>
 			<p class="contact-sub-headline">We hope you enjoyed your virtual shopping experience. Please let us know if we can help you with anything else. </p>

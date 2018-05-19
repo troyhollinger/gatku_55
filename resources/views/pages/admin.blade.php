@@ -336,8 +336,10 @@
 						<input type="text" ng-model="homeSetting.logo" class="image-path-storage-input">
 						<input type="file" ng-file-drop ng-file-select="uploadHomeImage($files, 'logo')">
 					</div>
+
 					<label>Button Color</label>
 					<input style="width: 150px;" placeholder="#000000" type="text" ng-model="homeSetting.button_color">
+
 					<label>Home Image</label>
 					<div class="upload-field" ng-style="{'background-image':'url(' + homeSetting.image + ')'}">
 						<i class="fa fa-image" ng-hide="homeSetting.mobile_image"></i>
@@ -388,6 +390,24 @@
 
 					<label>Mobile Copyright Html</label>
 					<input type="text" ng-model="homeSetting.mobile_copyright_html">
+
+					<label>Contact Section Image</label>
+					<div class="upload-field" ng-style="{'background-image':'url(' + homeSetting.contact_image + ')'}">
+						<input type="text" ng-model="homeSetting.contact_image" class="image-path-storage-input">
+						<input type="file" ng-file-drop ng-file-select="uploadHomeImage($files, 'contact_image')">
+					</div>
+
+					<label>Desktop Contact Logo</label>
+					<div class="upload-field" ng-style="{'background-image':'url(' + homeSetting.contact_desktop_logo_url + ')'}">
+						<input type="text" ng-model="homeSetting.contact_desktop_logo_url" class="image-path-storage-input">
+						<input type="file" ng-file-drop ng-file-select="uploadHomeImage($files, 'contact_desktop_logo_url')">
+					</div>
+
+					<label>Mobile Contact Logo</label>
+					<div class="upload-field" ng-style="{'background-image':'url(' + homeSetting.contact_mobile_logo_url + ')'}">
+						<input type="text" ng-model="homeSetting.contact_mobile_logo_url" class="image-path-storage-input">
+						<input type="file" ng-file-drop ng-file-select="uploadHomeImage($files, 'contact_mobile_logo_url')">
+					</div>
 
 				</form>
 				<div class="button success-bg" ng-click="saveHomeSetting()">Save</div>

@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="desktop-logo-footer"></div>
+        <div class="desktop-logo-footer" style="background-image: url('{!! $homeSetting['contact_desktop_logo_url'] !!}')"></div>
     </div>
 
 </div>

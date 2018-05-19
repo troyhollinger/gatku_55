@@ -59,6 +59,9 @@ class HomeSettingController extends BaseController {
             $homeSetting->phone_html = \Request::get('phone_html');
             $homeSetting->desktop_copyright_html = \Request::get('desktop_copyright_html');
             $homeSetting->mobile_copyright_html = \Request::get('mobile_copyright_html');
+            $homeSetting->contact_image = \Request::get('contact_image');
+            $homeSetting->contact_desktop_logo_url = \Request::get('contact_desktop_logo_url');
+            $homeSetting->contact_mobile_logo_url = \Request::get('contact_mobile_logo_url');
 
 			$homeSetting->save();
 		} catch (Exception $e) {
