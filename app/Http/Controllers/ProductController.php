@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Austen\Repositories\ProductRepository;
 use Austen\Repositories\ImageRepository;
+use Gatku\HomeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Gatku\Product;
@@ -118,7 +119,9 @@ class ProductController extends BaseController
             return \Redirect::route('home');
         }
         Log::info($product);
-        return \View::make('pages.product', ['product' => $product]);
+        $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+
+        return \View::make('pages.product', ['product' => $product])->with('homeSetting',  $homeSetting);
     }
 
 
