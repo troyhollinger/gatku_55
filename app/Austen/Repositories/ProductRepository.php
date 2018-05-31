@@ -7,6 +7,7 @@ use Gatku\Size;
 use Gatku\ProductType;
 use Illuminate\Support\Facades\Log;
 use Gatku\Addon;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class ProductRepository implements ProductRepositoryInterface {
 
@@ -40,6 +41,7 @@ class ProductRepository implements ProductRepositoryInterface {
 			$product = Product::findOrFail($id);
 			$product->load('type', 'addons.product.type', 'sizes', 'availability');
 		} catch (\Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}
@@ -56,6 +58,7 @@ class ProductRepository implements ProductRepositoryInterface {
 			$product = Product::where('slug', '=', $slug)->with('type')->first();
 			Log::info($product);
 		} catch (\Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}
@@ -75,6 +78,7 @@ class ProductRepository implements ProductRepositoryInterface {
 			$result->save();
 			if (isset($input['addonSelection'])) $this->assignAddons($result, $input);
 		} catch (\Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}
@@ -95,6 +99,7 @@ class ProductRepository implements ProductRepositoryInterface {
 			$result->save();
 			$this->assignAddons($result, $input);
 		} catch (\Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}
@@ -117,6 +122,7 @@ class ProductRepository implements ProductRepositoryInterface {
 		try {
 			$types = ProductType::all();	
 		} catch (\Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}
@@ -137,6 +143,7 @@ class ProductRepository implements ProductRepositoryInterface {
             $glasses = ProductType::where('name', '=', 'glass')->first()->products()->orderBy('order', 'asc')->get();
             $packages = ProductType::where('name', '=', 'package')->first()->products()->orderBy('order', 'asc')->get();
 		} catch (\Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}
@@ -163,6 +170,7 @@ class ProductRepository implements ProductRepositoryInterface {
 		try {
 			$size = Size::where('slug', '=', $slug)->first();
 		} catch (\Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}

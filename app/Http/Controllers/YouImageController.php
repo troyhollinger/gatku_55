@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Austen\Repositories\ImageRepository;
 use Gatku\YouImage;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class YouImageController extends BaseController {
 
@@ -25,6 +26,7 @@ class YouImageController extends BaseController {
 		try {
 			$images = YouImage::groupBy('image')->get();
 		} catch (Exception $e) {
+            Bugsnag::notifyException($e);
 			return \Response::json(['message' => 'Sorry, images could not be retrieved.'], 404);
 		}
 
@@ -48,6 +50,7 @@ class YouImageController extends BaseController {
 				$image->save();	
 			}
 		} catch (Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return \Response::json(['message' => 'Sorry, there was a problem saving the image'], 404);
 		}

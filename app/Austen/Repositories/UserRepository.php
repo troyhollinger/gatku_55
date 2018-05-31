@@ -2,21 +2,22 @@
 
 use Gatku\User;
 use Hash;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class UserRepository {
 
 	public function all() {
-
 		$users = User::all();
-
 		return $users;
-
 	}
 
+    /**
+     * @param $input
+     * @return bool|User
+     */
 	public function store($input) {
 
 		try {
-			
 			$user = new User;
 			$user->firstName = $input['firstName'];
 			$user->lastName = $input['lastName'];
@@ -27,15 +28,11 @@ class UserRepository {
 			$user->save();
 
 		} catch (Exception $e) {
-			
+            Bugsnag::notifyException($e);
 			Log::error($e);
-
 			return false;
-
 		}
 
 		return $user;
-
 	}
-
 }

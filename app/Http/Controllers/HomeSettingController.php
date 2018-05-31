@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Austen\Repositories\ImageRepository;
 use Gatku\HomeSetting;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class HomeSettingController extends BaseController {
 
@@ -27,6 +28,7 @@ class HomeSettingController extends BaseController {
 			$homeSettings = HomeSetting::orderBy('id', 'desc')->first();
 			//$homeSettings = HomeSetting::all();
 		} catch (Exception $e) {
+            Bugsnag::notifyException($e);
 			return \Response::json(['message' => 'Sorry, home setting could not be retrieved.'], 404);
 		}
 
@@ -67,6 +69,7 @@ class HomeSettingController extends BaseController {
 
 			$homeSetting->save();
 		} catch (Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 
 			return \Response::json(['message' => 'Sorry, there was a problem saving the image'], 404);

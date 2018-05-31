@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Gatku\AvailabilityType;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class AvailabilityController extends BaseController {
 
@@ -11,6 +12,7 @@ class AvailabilityController extends BaseController {
 		try {
 			$availabilityTypes = AvailabilityType::all();
 		} catch (Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return \Response::json(['message' => 'Sorry, availability types could not be retrieved.'], 404);
 		}

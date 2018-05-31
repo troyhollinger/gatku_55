@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Gatku\Product;
 use Illuminate\Support\Facades\Log;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class ProductController extends BaseController
 {
@@ -212,6 +213,7 @@ class ProductController extends BaseController
         try {
             $image = Product::find($id)->images;
         } catch (\Exception $e) {
+            Bugsnag::notifyException($e);
             Log::error($e);
             return \Response::json(['message' => 'Sorry, there was a problem retrieving the images'], 404);
 
