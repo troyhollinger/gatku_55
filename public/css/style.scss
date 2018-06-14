@@ -954,31 +954,24 @@ a:hover {
 
 	@include center;
 
-	color: white;
+	color:#ffffff;
+	text-shadow: 2px 2px rgba(0,0,0, 0.5);
 	font-size: 3.5rem;
 	font-weight: 600;
 	font-family: HelveticaLTPro-Black, Helvetica, Arial, sans-serif;
 	line-height: 1;
 
 	@include breakpoint(medium) {
-
 		font-size: 4rem;
 		width:75%;
-
 	}
 
 	@include breakpoint(small) {
-
 		font-size: 2.2rem;
-
 		&.smaller {
-
 			font-size: 1.8rem;
-
 		}
-
 	}
-
 }
 
 
