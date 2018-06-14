@@ -73,7 +73,7 @@ class ProductRepository implements ProductRepositoryInterface {
 	public function store($input)
     {
 		try {
-			$product = new Product();
+			$product = new Product;
 			$result = $this->assignData($product, $input);
 			$result->save();
 			if (isset($input['addonSelection'])) $this->assignAddons($result, $input);
@@ -180,11 +180,11 @@ class ProductRepository implements ProductRepositoryInterface {
 
 
     /**
-     * @param $product
-     * @param $data
-     * @return mixed
+     * @param Product $product
+     * @param array $data
+     * @return Product
      */
-	private function assignData($product, $data)
+	private function assignData(Product $product, array $data)
     {
 		$product->typeId = $data['typeId'];
 		if (isset($data['attachedImage'])) $product->attachedImage = $data['attachedImage'];
@@ -205,6 +205,7 @@ class ProductRepository implements ProductRepositoryInterface {
 		if (isset($data['stealth'])) $product->stealth = $data['stealth'];
 		if (isset($data['order'])) $product->order = $data['order'];
 		if (isset($data['shipping_description'])) $product->shipping_description = $data['shipping_description'];
+        if (isset($data['mobile_name'])) $product->mobile_name = $data['mobile_name'];
 
 		return $product;
 	}
