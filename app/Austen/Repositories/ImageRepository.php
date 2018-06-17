@@ -3,9 +3,16 @@ namespace Austen\Repositories;
 
 use Image;
 use Log;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class ImageRepository
 {
+    /**
+     * @param $file
+     * @param $directory
+     * @param null $thumbDirectory
+     * @return array|bool
+     */
 	public function upload($file, $directory, $thumbDirectory = null)
 	{
 		$response = [];
@@ -65,6 +72,7 @@ class ImageRepository
 			}
 
 		} catch(Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}
@@ -76,7 +84,6 @@ class ImageRepository
 		}
 		return $response;
 	}
-
 
 	public function all()
 	{

@@ -127,6 +127,9 @@
 					<label>Short Name</label>
 					<input type="text" ng-model="newProduct.shortName">
 
+					<label>Mobile Name</label>
+					<input type="text" ng-model="newProduct.mobile_name">
+
 					<label>Slug</label>
 					<input type="text" ng-model="newProduct.slug">
 

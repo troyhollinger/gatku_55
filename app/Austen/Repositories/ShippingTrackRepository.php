@@ -7,6 +7,7 @@ use Mail;
 use Stripe_Charge;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class ShippingTrackRepository {
 
@@ -37,6 +38,7 @@ class ShippingTrackRepository {
 
 			$this->sendEmail($request, $discount, $subtotal, $shipping, $total);
 		} catch (Exception $e) {
+            Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}

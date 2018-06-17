@@ -4,6 +4,7 @@ namespace Austen\Repositories;
 
 use Gatku\Discount;
 use Log;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class DiscountRepository {
 
@@ -21,6 +22,7 @@ class DiscountRepository {
         try {
             $discount = Discount::findOrFail($code);
         } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             Log::error($e);
             return false;
         }
@@ -39,6 +41,7 @@ class DiscountRepository {
             $result = $this->assignData($discount, $input);
             $result->save();
         } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             Log::error($e);
             return false;
         }
@@ -56,6 +59,7 @@ class DiscountRepository {
             $result = $this->assignData($discount, $input);
             $result->save();
         } catch (Exception $e) {
+            Bugsnag::notifyException($e);
             Log::error($e);
             return false;
         }
@@ -71,6 +75,7 @@ class DiscountRepository {
             $discount = Discount::findOrFail($code);
             $discount->delete();
         } catch (\Exception $e) {
+            Bugsnag::notifyException($e);
             Log::error($e);
             return false;
         }

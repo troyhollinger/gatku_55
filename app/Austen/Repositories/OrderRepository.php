@@ -11,6 +11,7 @@ use Gatku\OrderItemAddon;
 use DB;
 use Carbon\Carbon;
 use Stripe_CardError;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 /**
  *
@@ -26,9 +27,7 @@ class OrderRepository {
     public $blackFriday = false;
 
     public function __construct(CustomerRepository $customer) {
-
         $this->customer = $customer;
-
     }
 
     public function all() {
@@ -36,7 +35,6 @@ class OrderRepository {
         $orders = $this->assignHumanReadableTimestamps($orders);
         return $orders;
     }
-
 
     /**
      * Processes order, payment, and email.
@@ -77,6 +75,7 @@ class OrderRepository {
             $total = $this->calculateTotal($order, $discount);
 
         } catch(Exception $e) {
+            Bugsnag::notifyException($e);
             Log::error($e);
             DB::rollback();
 
@@ -91,6 +90,7 @@ class OrderRepository {
                 'description' => 'Order : ' . $order->number
             ]);
         } catch (Stripe_CardError $e) {
+            Bugsnag::notifyException($e);
             Log::error($e);
             DB::rollback();
             return $e;
@@ -163,11 +163,13 @@ class OrderRepository {
         }
 
         return true;
-
     }
 
-
-
+    /**
+     * @param $order
+     * @param $discountObj
+     * @return float|int
+     */
     private function calculateSubTotal($order, $discountObj) {
 
         $subtotal = 0;
@@ -216,11 +218,22 @@ class OrderRepository {
         return $subtotal - $discountHardcoded;
     }
 
+    /**
+     * @param $price
+     * @param $quantity
+     * @param $discountReverse
+     * @return float|int
+     */
     private function calculateDiscountValue($price, $quantity, $discountReverse)
     {
         return ($price * $quantity) * $discountReverse;
     }
 
+    /**
+     * @param $order
+     * @param bool $subtotal
+     * @return float|int
+     */
     private function calculateDiscount($order, $subtotal = false) {
 
         $amount = 0;
@@ -270,7 +283,6 @@ class OrderRepository {
         return $amount;
 
     }
-
 
     /**
      * Calculate the shipping.
@@ -347,6 +359,11 @@ class OrderRepository {
 
     }
 
+    /**
+     * @param $order
+     * @param $discount
+     * @return float|int
+     */
     private function calculateTotal($order, $discount) {
 
         $subtotal = $this->calculateSubTotal($order, $discount);
@@ -393,6 +410,10 @@ class OrderRepository {
         }
     }
 
+    /**
+     * @param $collection
+     * @return mixed
+     */
     private function assignHumanReadableTimestamps($collection) {
 
         foreach($collection as $model) {

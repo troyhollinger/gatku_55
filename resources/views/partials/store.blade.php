@@ -28,7 +28,7 @@
 
 	<div class="tails-links links">
 
-		<div class="product-link-container" ng-repeat="pole in poles" ng-cloak><a href="' . route('product.show', ['']) . '/{{ pole.slug }}"><span class="default-product-name">{{ pole.shortName }}<span class="unbold">\'ER</span> <span class="detail uncaps">/{{ pole.length }}</span></span><span class="mobile-product-name">{{ $index + 6 }}\'ER</span></a></div>
+		<div class="product-link-container" ng-repeat="pole in poles" ng-cloak><a href="' . route('product.show', ['']) . '/{{ pole.slug }}"><span class="default-product-name">{{ pole.shortName }}<span class="unbold">\'ER</span> <span class="detail uncaps">/{{ pole.length }}</span></span><span class="mobile-product-name">{{ (pole.mobile_name) ? pole.mobile_name : "" }}</span></a></div>
 
 		<div class="clear"></div>
 
