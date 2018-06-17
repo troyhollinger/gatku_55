@@ -9,9 +9,9 @@
 
 define('LARAVEL_START', microtime(true));
 
-require __DIR__.'/down.html';
-
-die();
+// Uncomment next two lines to display down page.
+// require __DIR__.'/down.html';
+// die();
 
 /*
 |--------------------------------------------------------------------------
