@@ -9,6 +9,10 @@
 
 define('LARAVEL_START', microtime(true));
 
+require __DIR__.'/down.html';
+
+die();
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
