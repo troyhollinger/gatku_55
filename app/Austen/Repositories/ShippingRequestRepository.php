@@ -63,24 +63,24 @@ class ShippingRequestRepository {
 	}
 
 	private function sendEmail($request) {
-		Mail::queue('emails.shipping-request', ['request' => $request], function($message) use ($request){
-			$message->to($request->order->customer->email, $request->order->customer->fullName)->subject('GATKU | Shipping Request');
-		});
+//		Mail::queue('emails.shipping-request', ['request' => $request], function($message) use ($request){
+//			$message->to($request->order->customer->email, $request->order->customer->fullName)->subject('GATKU | Shipping Request');
+//		});
 	}
 
 	private function sendReceipt($request) {
 		if (App::environment('production')) {
-			Mail::queue('emails.shipping-request-payment-notification', ['request' => $request], function($message) use ($request){
-				$message->to('dustin@gatku.com', 'Dustin McIntyre')->subject('GATKU | Shipping Payment');
-			});
+//			Mail::queue('emails.shipping-request-payment-notification', ['request' => $request], function($message) use ($request){
+//				$message->to('dustin@gatku.com', 'Dustin McIntyre')->subject('GATKU | Shipping Payment');
+//			});
 		} else {
-			Mail::queue('emails.shipping-request-payment-notification', ['request' => $request], function($message) use ($request){
-				$message->to('austenpayan@gmail.com', 'Austen Payan')->subject('GATKU | Shipping Payment');
-			});
+//			Mail::queue('emails.shipping-request-payment-notification', ['request' => $request], function($message) use ($request){
+//				$message->to('austenpayan@gmail.com', 'Austen Payan')->subject('GATKU | Shipping Payment');
+//			});
 		}
 
-		Mail::queue('emails.shipping-request-receipt', ['request' => $request], function($message) use ($request){
-			$message->to($request->order->customer->email, $request->order->customer->fullName)->subject('GATKU | Shipping Payment Receipt');
-		});
+//		Mail::queue('emails.shipping-request-receipt', ['request' => $request], function($message) use ($request){
+//			$message->to($request->order->customer->email, $request->order->customer->fullName)->subject('GATKU | Shipping Payment Receipt');
+//		});
 	}
 }
