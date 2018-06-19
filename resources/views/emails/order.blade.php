@@ -235,13 +235,13 @@
 						<table id="container" border="0" cellpadding="0" cellspacing="0" width="1000px" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: 'Helvetica', Arial, sans-serif;max-width: 800px;">
 							<thead>
 								<tr>
-									<th id="header" align="left" valign="top" colspan="2" style="height: 45px;font-family: "Helvetica", Arial, sans-serif;">
+									<th id="header" align="left" valign="top" colspan="2" style="height: 45px;font-family: 'Helvetica', Arial, sans-serif;">
 										<!-- Gatku image here -->
 										<img src="{{ asset('img/email-assets/logo.png') }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
 									</th>
 								</tr>
 								<tr>
-									<th id="order-info" colspan="2" padding="0" align="left" style="width: 100%;height: 35px;border-bottom: 1px solid black;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px;color:#E24A62"><span id="status" style="font-size: 16px;font-weight: 200;">Order : {{ $order['number'] }} - </span><span id="date" style="font-size: 20px;font-weight: 200;">{{ $date }}</span></th>
+									<th id="order-info" colspan="2" padding="0" align="left" style="width: 100%;height: 35px;border-bottom: 1px solid black;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px;color:#E24A62"><span id="status" style="font-size: 16px;font-weight: 200;">Order : {!! $order->number !!} - </span><span id="date" style="font-size: 20px;font-weight: 200;">{!! $date !!} }}</span></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -253,8 +253,8 @@
 									<p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif; font-weight:bold;">{{ $order['customer']['fullName'] }}</p>
 
 	                                <p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;">
-	                                 	{{ $order['address'] }}<br>
-	                                 	{{ $order['city'] }}, {{ $order['state'] }} {{ $order['zip'] }}<br>
+	                                 	{!! $order->address !!}<br>
+	                                 	{!! $order->city !!}, {!! $order->state !!}  {!! $order->zip !!}<br>
 	                                 	{{ $order['country'] }}<br>
 	                                 	Phone: {{ $order['customer']['phone'] }}<br>
 	                                 	Email: {{ $order['customer']['email'] }}
