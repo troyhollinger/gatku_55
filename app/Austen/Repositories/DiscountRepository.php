@@ -3,7 +3,7 @@
 namespace Austen\Repositories;
 
 use Gatku\Discount;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class DiscountRepository {

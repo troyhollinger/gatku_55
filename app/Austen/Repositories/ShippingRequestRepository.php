@@ -3,10 +3,12 @@
 namespace Austen\Repositories;
 
 use Gatku\ShippingRequest;
-use Log;
-use Mail;
+use Illuminate\Support\Facades\Log;
 use Stripe_Charge;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
+
 
 class ShippingRequestRepository {
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Gatku\AvailabilityType;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use Illuminate\Support\Facades\Log;
 
 class AvailabilityController extends BaseController {
 

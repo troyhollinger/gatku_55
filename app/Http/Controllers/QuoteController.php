@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Austen\Repositories\MailchimpRepository;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
 
 class QuoteController extends BaseController {
 

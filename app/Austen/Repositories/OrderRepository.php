@@ -5,13 +5,14 @@ use Gatku\Order;
 use Gatku\OrderItem;
 use Stripe_Charge;
 use Gatku\Discount;
-use Log;
-use Mail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Gatku\OrderItemAddon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Stripe_CardError;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use Illuminate\Support\Facades\App;
 
 /**
  *
