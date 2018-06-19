@@ -2,7 +2,7 @@
 namespace Austen\Repositories;
 
 use Image;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class ImageRepository

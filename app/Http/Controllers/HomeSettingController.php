@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Austen\Repositories\ImageRepository;
 use Gatku\HomeSetting;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use Illuminate\Support\Facades\Log;
 
 class HomeSettingController extends BaseController {
 

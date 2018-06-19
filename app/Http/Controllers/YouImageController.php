@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Austen\Repositories\ImageRepository;
 use Gatku\YouImage;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use Illuminate\Support\Facades\Log;
 
 class YouImageController extends BaseController {
 

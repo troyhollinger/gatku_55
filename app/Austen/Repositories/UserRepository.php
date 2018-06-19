@@ -1,8 +1,9 @@
 <?php namespace Austen\Repositories;
 
 use Gatku\User;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use Illuminate\Support\Facades\Log;
 
 class UserRepository {
 

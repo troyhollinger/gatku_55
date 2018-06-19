@@ -3,8 +3,7 @@
 namespace Austen\Repositories;
 
 use Gatku\ShippingTrack;
-use Mail;
-use Stripe_Charge;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
