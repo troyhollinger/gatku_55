@@ -9527,8 +9527,16 @@ app.controller('ProductController', ['$scope', 'Product', 'CartService', 'Size',
 
 				if (typeof slug !== 'undefined') {
 					Size.getBySlug(slug).success(function(response) {
-						addon.product.price = (response.data.hasOwnProperty('price')) ? response.data.price : 0;
-						addon.product.sizeId = response.data.id;
+						if (typeof response === 'object') {
+                            if (response.data) {
+                                if (response.data.hasOwnProperty('price')) {
+                                    addon.product.price = response.data.price;
+                                }
+                                if (response.data.hasOwnProperty('id')) {
+                                    addon.product.sizeId = response.data.id;
+                                }
+                            }
+						}
 					}).error(function(response) {
 						$scope.product.addons.splice(i, 1);
 					});	
