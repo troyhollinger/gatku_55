@@ -1,4 +1,5 @@
-app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'StripeService', 'ShippingRequest', function($scope, AlertService, StripeService, ShippingRequest) {
+app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'StripeService', 'ShippingRequest', '$exceptionHandler',
+	function($scope, AlertService, StripeService, ShippingRequest, $exceptionHandler) {
 
 	$scope.card = {};
 	$scope.success = false;
@@ -34,7 +35,7 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 				$scope.success = true;
 
 			}).error(function(response) {
-
+                $exceptionHandler(JSON.stringify(response));
 				if ('error' in response.message.jsonBody) {
 
 					AlertService.broadcast(response.message.jsonBody.error.message, 'error');

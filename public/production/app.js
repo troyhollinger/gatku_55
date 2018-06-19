@@ -8884,8 +8884,8 @@ app.controller('CartBlinderController', ['$scope', 'CartService', function($scop
 | $scope.validate method to reflect the changes.
 |
 */
-app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists',
-    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists) {
+app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler',
+    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists, $exceptionHandler) {
 
     $scope.items = [];
     $scope.show = false;
@@ -9119,6 +9119,7 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
                 $scope.enabled = true;
                 //window.location.replace("/thankyou");
             }).error(function(response) {
+                $exceptionHandler(JSON.stringify(response));
                 // $scope.enabled = true;
                 if ('error' in response.message.jsonBody) {
                     AlertService.broadcast(response.message.jsonBody.error.message, 'error');
@@ -9526,7 +9527,7 @@ app.controller('ProductController', ['$scope', 'Product', 'CartService', 'Size',
 
 				if (typeof slug !== 'undefined') {
 					Size.getBySlug(slug).success(function(response) {
-						addon.product.price = (response.data.price) ? response.data.price : 0;
+						addon.product.price = (response.data.hasOwnProperty('price')) ? response.data.price : 0;
 						addon.product.sizeId = response.data.id;
 					}).error(function(response) {
 						$scope.product.addons.splice(i, 1);
@@ -9652,7 +9653,8 @@ app.controller('QuoteFormController', ['$scope', 'Product', '$http', 'AlertServi
 	}
 
 }]);
-app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'StripeService', 'ShippingRequest', function($scope, AlertService, StripeService, ShippingRequest) {
+app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'StripeService', 'ShippingRequest', '$exceptionHandler',
+	function($scope, AlertService, StripeService, ShippingRequest, $exceptionHandler) {
 
 	$scope.card = {};
 	$scope.success = false;
@@ -9688,7 +9690,7 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 				$scope.success = true;
 
 			}).error(function(response) {
-
+                $exceptionHandler(JSON.stringify(response));
 				if ('error' in response.message.jsonBody) {
 
 					AlertService.broadcast(response.message.jsonBody.error.message, 'error');

@@ -9,8 +9,8 @@
 | $scope.validate method to reflect the changes.
 |
 */
-app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists',
-    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists) {
+app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler',
+    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists, $exceptionHandler) {
 
     $scope.items = [];
     $scope.show = false;
@@ -244,6 +244,7 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
                 $scope.enabled = true;
                 //window.location.replace("/thankyou");
             }).error(function(response) {
+                $exceptionHandler(JSON.stringify(response));
                 // $scope.enabled = true;
                 if ('error' in response.message.jsonBody) {
                     AlertService.broadcast(response.message.jsonBody.error.message, 'error');
