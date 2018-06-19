@@ -36,7 +36,7 @@ return [
 //    ],
 
     'stripe' => [
-        'api_key' => env('STRIPE_SECRET'),
-        'publishable_key' => env('STRIPE_PUBLISHABLE')
-    ]
+        'model' => 'User',
+        'secret' => '',
+    ],
 ];
