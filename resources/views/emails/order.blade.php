@@ -255,15 +255,15 @@
 	                                <p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;">
 	                                 	{!! $order->address !!}<br>
 	                                 	{!! $order->city !!}, {!! $order->state !!}  {!! $order->zip !!}<br>
-	                                 	{{ $order['country'] }}<br>
-	                                 	Phone: {{ $order['customer']['phone'] }}<br>
-	                                 	Email: {{ $order['customer']['email'] }}
+	                                 	{!! $order->country !!}<br>
+	                                 	Phone: {!! $order->customer->phone !!} <br>
+	                                 	Email: {!! $order->customer->email !!}
 	                             	</p>
 
-	                             	@if(isset($order['comments']))
+	                             	@if($order->comments)
 	                             	<p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;">
 	                             		Comments :<br>
-	                             		{{ $order['comments'] }}
+	                             		{!! $order->comments !!}
 	                             	</p>
 	                             	@endif
 
@@ -275,61 +275,61 @@
 									<div style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;">
 
 
-										@foreach($order['items'] as $i => $item)
+										@foreach($order->items as $i => $item)
 										<div class="product" style="{{ $i == 0 ? 'padding-top:20px;' : 'padding-top:30px; border-top:1px solid black; ' }}padding-bottom:0px;border-bottom:1px solid black;height:290px; overflow:hidden;">
 											<table style="width:100%;">
 												<tr>
 													<td class="product-image-cell">
 														<div class="image-container" style="width:100%;text-align:left;">
 															<!-- Product thumb here -->
-															<img class="product-image" style="width:200px;height:auto;vertical-align: bottom;" src="{{ $item['product']['emailImage'] }}" >
+															<img class="product-image" style="width:200px;height:auto;vertical-align: bottom;" src="{!! $item->product->emailImage !!} " >
 														</div>
 													</td>
 													<td class="product-data-cell">
 														<table class="addons-table" style="float:right;">
 															<tr class="product-name-row">
 																<!-- Product Name here -->
-																@if($item['product']['sizeable'])
-																<td><span class="product-name" style="text-transform:uppercase;"><strong>{{ $item['size']['name'] }}</strong></span></td>
+																@if($item->product->sizeable)
+																<td><span class="product-name" style="text-transform:uppercase;"><strong>{!! $item->size->name !!} </strong></span></td>
 																@else
-																<td><span class="product-name" style="text-transform:uppercase;"><strong>{{ $item['product']['shortName'] }}</strong>@if($item['product']['type']['slug'] === 'pole')<span>'ER</span>@endif
-																	@if (strpos($item['product']['slug'], 'paralyzer') !== false || $item['product']['type']['slug'] === 'glass')<small>/{{ $item['product']['length'] }}</small>@endif</span>
+																<td><span class="product-name" style="text-transform:uppercase;"><strong>{!! $item->product->shortName !!}</strong>@if($item->product->type->slug === 'pole')<span>'ER</span>@endif
+																	@if (strpos($item->product->slug, 'paralyzer') !== false || $item->product->type->slug === 'glass')<small>/{!! $item->product->length !!} </small>@endif</span>
 																</td>
 																@endif
 
-																@if($item['product']['sizeable'])
-																<td>${{ $item['size']['price'] / 100 }}</td>
+																@if($item->product->sizeable)
+																<td>${!! $item->size->price / 100 !!}</td>
 																@else
-																<td>${{ $item['product']['price'] / 100 }}</td>
+																<td>${!! $item->product->price / 100 !!}</td>
 																@endif
 
-																<td><span class="product-quantity @if($item['quantity'] > 1) multiple @endif">{{ $item['quantity'] }}</span></td>
+																<td><span class="product-quantity @if($item->quantity > 1) multiple @endif">{!!  $item->quantity !!}</span></td>
 
-																@if($item['product']['sizeable'])
-																<td><span class="product-final-price">${{ ($item['size']['price'] * $item['quantity']) / 100}}</span></td>
+																@if($item->product->sizeable)
+																<td><span class="product-final-price">${!!  ($item->size->price * $item->quantity) / 100 !!}</span></td>
 																@else
-																<td><span class="product-final-price">${{ ($item['product']['price'] * $item['quantity']) / 100}}</span></td>
+																<td><span class="product-final-price">${!!  ($item->product->price * $item->quantity) / 100 !!}</span></td>
 																@endif
 
 															</tr>
 
-															@foreach($item['addons'] as $ii => $addon)
+															@foreach($item->addons as $ii => $addon)
 															<!-- first addon -->
-															<tr class="main-product {{ $ii == 0 ? 'first-opt-set' : '' }}">
-																<td><span class="bold">{{ $addon['product']['name'] }}</span></td>
+															<tr class="main-product {!! $ii == 0 ? 'first-opt-set' : '' !!}">
+																<td><span class="bold">{!!  $addon->product->name !!}</span></td>
 
-																@if($addon['product']['sizeable'])
-																<td>${{ $addon['size']['price'] / 100 }}</td>
+																@if($addon->product->sizeable)
+																<td>${!! $addon->size->price / 100 !!}</td>
 																@else
-																<td>${{ $addon['product']['price'] / 100 }}</td>
+																<td>${!! $addon->product->price / 100 !!}</td>
 																@endif
 
-																<td><span class="product-quantity @if($addon['quantity'] > 1) multiple @endif">{{ $addon['quantity'] }}</span></td>
+																<td><span class="product-quantity @if($addon->quantity > 1) multiple @endif">{!! $addon->quantity !!}</span></td>
 
-																@if($addon['product']['sizeable'])
-																<td><span class="product-final-price">${{ ($addon['size']['price'] * $addon['quantity']) / 100 }}</span></td>
+																@if($addon->product->sizeable)
+																<td><span class="product-final-price">${!! ($addon->size->price * $addon->quantity) / 100 !!}</span></td>
 																@else
-																<td><span class="product-final-price">${{ ($addon['product']['price'] * $addon['quantity']) / 100 }}</span></td>
+																<td><span class="product-final-price">${!! ($addon->product->price * $addon->quantity) / 100 !!}</span></td>
 																@endif
 															</tr>
 
@@ -348,11 +348,11 @@
 
 									<p id="total" style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;border-top: 1px solid black;padding-top: 10px;font-weight: bold;">
 										@if($discount > 0)
-										<span style="font-weight:normal">Discount: <span style="color:#2ECC71;">- ${{ $discount / 100 }}</span></span><br>
+										<span style="font-weight:normal">Discount: <span style="color:#2ECC71;">- ${!! $discount / 100 !!}</span></span><br>
 										@endif
-										<span style="font-weight:normal">Subtotal: ${{ $subtotal / 100 }}</span><br>
-										<span style="font-weight:normal">Shipping: ${{ $shipping / 100 }}</span><br>
-										Total : ${{ $total / 100 }}
+										<span style="font-weight:normal">Subtotal: ${!! $subtotal / 100 !!}</span><br>
+										<span style="font-weight:normal">Shipping: ${!! $shipping / 100 !!}</span><br>
+										Total : ${!! $total / 100 !!}
 									</p>
 
 								</td>
@@ -373,28 +373,19 @@
 
 											<?php $displayShrinker = false; ?>
 
-											<?php 
-
-												foreach($order['items'] as $item) {
-
-													if($item['product']['slug'] === 'eighter' || $item['product']['slug'] === 'niner' || $item['product']['slug'] === 'tener') {
-
+											<?php
+												foreach($order->items as $item) {
+													if($item->product->slug === 'eighter' || $item->product->slug === 'niner' || $item->product->slug === 'tener') {
 														$displayShrinker = true;
-
 													}
 
-													foreach($item['addons'] as $addon) {
-
-														if ($addon['product']['slug'] === 'inshore-shrinker') {
-
+													/** @var \Gatku\Addon $addon */
+                                                    foreach($item->addons as $addon) {
+														if ($addon->product->slug === 'inshore-shrinker') {
 															$displayShrinker = false;
-
 														}
-
 													}
-
 												}
-
 											 ?>
 
 											{{-- Inshore Message temporatily turned off. --}}
@@ -420,10 +411,8 @@
 											
 											<tr id="thefooter" style="border-top:solid black 1px; border-bottom:solid black 1px;">
 												<td style="color:#E24A62;font-size:16px; padding:15px 0;" colspan="1">Customer Service - Email: dustin@gatku.com / Phone: +001 619 507-3860</td>
-
 												<!-- INSERT SOCIAL MEDIA IMAGES -->
 												<td style="text-align:right;" colspan="1"><a href="http://www.facebook.com/gatku"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-facebook.png') }}"></a><a href="http://www.twitter.com/gatku"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-twitter.png') }}"></a><a href="http://www.gatku.com"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-logo.png') }}"></a></td>
-
 											</tr>
 										</table>
 									</td>

@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailsOrder extends Mailable
+class EmailsOrderAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -59,6 +59,6 @@ class EmailsOrder extends Mailable
      */
     public function build()
     {
-        return $this->subject('GATKU | Order Confirmation')->view('emails.order');
+        return $this->subject('New order from GATKU')->view('emails.order-admin');
     }
 }
