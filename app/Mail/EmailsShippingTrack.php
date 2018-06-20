@@ -3,23 +3,20 @@
 namespace App\Mail;
 
 use Gatku\Discount;
-use Gatku\Order;
+use Gatku\ShippingTrack;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailsOrderAdmin extends Mailable
+class EmailsShippingTrack extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * @var Order
+     * @var ShippingTrack
      */
-    public $order;
-    /**
-     * @var Discount
-     */
+    public $request;
     public $discount;
     public $subtotal;
     public $shipping;
@@ -27,8 +24,8 @@ class EmailsOrderAdmin extends Mailable
     public $date;
 
     /**
-     * EmailsOrderAdmin constructor.
-     * @param Order $order
+     * EmailsShippingTrack constructor.
+     * @param ShippingTrack $request
      * @param Discount $discount
      * @param $subtotal
      * @param $shipping
@@ -36,15 +33,15 @@ class EmailsOrderAdmin extends Mailable
      * @param $date
      */
     public function __construct(
-        Order $order,
-        Discount $discount,
+        ShippingTrack $request,
+        $discount,
         $subtotal,
         $shipping,
         $total,
         $date
     )
     {
-        $this->order = $order;
+        $this->request = $request;
         $this->discount = $discount;
         $this->subtotal = $subtotal;
         $this->shipping = $shipping;
@@ -59,6 +56,6 @@ class EmailsOrderAdmin extends Mailable
      */
     public function build()
     {
-        return $this->subject('New order from GATKU')->view('emails.order-admin');
+        return $this->subject('GATKU | Here is your package tracking number!')->view('emails.shipping-track');
     }
 }

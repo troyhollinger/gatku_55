@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'mailgun'),
+    'driver' => env('MAIL_DRIVER', 'mandrill'),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'dustin@gatku.com'),
-        'name' => env('MAIL_FROM_NAME', 'Dustin - gatku.com'),
+        'name' => env('MAIL_FROM_NAME', 'GATKU Polespears'),
     ],
 
     /*

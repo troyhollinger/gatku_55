@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Austen\Repositories\ShippingRequestRepository;
 use Gatku\ShippingRequest;
+use Illuminate\Support\Facades\View;
 
 class ShippingRequestController extends BaseController {
 
