@@ -2,6 +2,7 @@
 
 namespace Austen\Repositories;
 
+use App\Mail\EmailsShippingTrack;
 use Gatku\ShippingTrack;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
@@ -174,11 +175,12 @@ class ShippingTrackRepository {
 	private function sendEmail($request,$discount, $subtotal, $shipping, $total)
 	{
 		$date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
-		Mail::queue('emails.shipping-track', ['order' => $request->order, 'discount' => $discount, 'subtotal' => $subtotal, 'shipping' => $shipping, 'total' => $total, 'date' => $date, 'trackId' => $request->track_id], function($message) use ($request){
-			$message->to($request->order->customer->email, $request->order->customer->email)->subject('GATKU | Here is your package tracking number!');
-		});
+
+        Mail::to([
+            [
+                'email' => $request->order->customer->email,
+                'name' => $request->order->customer->fullName
+            ]
+        ])->queue(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $total, $date));
 	}
-
-
-
 }

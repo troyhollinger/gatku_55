@@ -1,6 +1,8 @@
 <?php
 namespace Austen\Repositories;
 
+use App\Mail\EmailsOrder;
+use App\Mail\EmailsOrderAdmin;
 use Gatku\Order;
 use Gatku\OrderItem;
 use Stripe_Charge;
@@ -101,32 +103,44 @@ class OrderRepository {
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
-//        if (App::environment('production')) {
-//            Mail::queue('emails.order', ['order' => $order, 'discount' => $discount->discount, 'subtotal' => $subtotal, 'shipping' => $shipping, 'total' => $total, 'date' => $date], function($message) use ($customer){
-//                $message->to($customer->email, $customer->fullName)->subject('GATKU | Order Confirmation');
-//            });
-//
-//            Mail::queue('emails.order-admin', ['order' => $order, 'discount' => $discount->discount, 'subtotal' => $subtotal, 'shipping' => $shipping, 'total' => $total, 'date' => $date], function($message) {
-//                $message->to('dustin@gatku.com', 'Dustin McIntyre')->subject('New order from GATKU');
-//            });
-//
-//            Mail::queue('emails.order-admin', ['order' => $order, 'discount' => $discount->discount, 'subtotal' => $subtotal, 'shipping' => $shipping, 'total' => $total, 'date' => $date], function($message) {
-//                $message->to('emailme@troyhollinger.com', 'Troy Hollinger')->subject('New order from GATKU');
-//            });
-//
-//            Mail::queue('emails.order', ['order' => $order, 'discount' => $discount->discount, 'subtotal' => $subtotal, 'shipping' => $shipping, 'total' => $total, 'date' => $date], function($message) {
-//                $message->to('ryan@gatku.com', 'Ryan Gattoni')->subject('New order from GATKU');
-//            });
-//        }
-//
-//        if (App::environment('local')) {
-//
-//            if (isset($_ENV['test_transaction_email'])) {
-//                Mail::queue('emails.order-admin', ['order' => $order, 'discount' => $discount->discount, 'subtotal' => $subtotal, 'shipping' => $shipping, 'total' => $total, 'date' => $date], function($message) {
-//                    $message->to($_ENV['test_transaction_email'], 'Austen Payan')->subject('New order from GATKU');
-//                });
-//            }
-//        }
+        if (App::environment('production')) {
+
+            //Send email to Customer and to Ryan Gattoni
+            Mail::to([
+                [
+                    'email' => $customer->email,
+                    'name' => $customer->fullName
+                ],
+                [
+                    'email' => 'ryan@gatku.com',
+                    'name' => 'Ryan Gattoni'
+                ],
+            ])->queue(new EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date));
+
+            //Send email to Sellers
+            Mail::to([
+                [
+                    'email' => 'dustin@gatku.com',
+                    'name' => 'Dustin McIntyre'
+                ],
+                [
+                    'email' => 'emailme@troyhollinger.com',
+                    'name' => 'Troy Hollinger'
+                ]
+            ])->queue(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date));
+
+        }
+
+        if (App::environment('dev')) {
+            if (isset($_ENV['test_transaction_email'])) {
+                Mail::to([
+                    [
+                        'email' => 'past-email-address-here',
+                        'name' => 'past-recipient-name-here'
+                    ]
+                ])->queue(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date));
+            }
+        }
 
         return true;
     }

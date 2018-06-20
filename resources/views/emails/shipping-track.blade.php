@@ -250,10 +250,19 @@
 									</th>
 								</tr>
 								<tr>
-									<th id="order-info" colspan="2" padding="0" align="left" style="width: 100%;height: 35px;border-bottom: 1px solid black;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px;color:#E24A62"><span id="status" style="font-size: 16px;font-weight: 200;">Order : {{ $order['number'] }} - </span><span id="date" style="font-size: 20px;font-weight: 200;">{{ $date }}</span></th>
+									<th id="order-info" colspan="2" padding="0" align="left" style="width: 100%;height: 35px;border-bottom: 1px solid black;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px;color:#E24A62"><span id="status" style="font-size: 16px;font-weight: 200;">Order : {{ $request['order']['number'] }} - </span><span id="date" style="font-size: 20px;font-weight: 200;">{{ $date }}</span></th>
 								</tr>
 								<tr>
-									<th id="track-info" colspan="2" padding="0" align="left" style="width: 100%;height: 35px;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px;"><span id="status" style="font-size: 16px;font-weight: 200;">Tracking # : <a href="https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1={{ $trackId }}">{{ $trackId }}</a></span></th>
+									<th id="track-info"
+										colspan="2"
+										padding="0"
+										align="left"
+										style="width: 100%;height: 35px;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px;">
+										<span id="status" style="font-size: 16px;font-weight: 200;">Tracking # :
+											<a href="https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1={{ $request['track_id'] }}">
+												{{ $request['track_id'] }}</a>
+										</span>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -262,20 +271,20 @@
 
 									<!-- Address And Name here -->
 
-									<p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif; font-weight:bold;">{{ $order['customer']['fullName'] }}</p>
+									<p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif; font-weight:bold;">{{ $request['order']['customer']['fullName'] }}</p>
 
 	                                <p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;">
-	                                 	{{ $order['address'] }}<br>
-	                                 	{{ $order['city'] }}, {{ $order['state'] }} {{ $order['zip'] }}<br>
-	                                 	{{ $order['country'] }}<br>
-	                                 	Phone: {{ $order['customer']['phone'] }}<br>
-	                                 	Email: {{ $order['customer']['email'] }}
+	                                 	{{ $request['order']['address'] }}<br>
+	                                 	{{ $request['order']['city'] }}, {{ $request['order']['state'] }} {{ $request['order']['zip'] }}<br>
+	                                 	{{ $request['order']['country'] }}<br>
+	                                 	Phone: {{ $request['order']['customer']['phone'] }}<br>
+	                                 	Email: {{ $request['order']['customer']['email'] }}
 	                             	</p>
 
-	                             	@if(isset($order['comments']))
+	                             	@if(isset($request['order']['comments']))
 	                             	<p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;">
 	                             		Comments :<br>
-	                             		{{ $order['comments'] }}
+	                             		{{ $request['order']['comments'] }}
 	                             	</p>
 	                             	@endif
 
@@ -287,7 +296,7 @@
 									<div style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;">
 
 
-										@foreach($order['items'] as $i => $item)
+										@foreach($request['order']['items'] as $i => $item)
 										<div class="product" style="{{ $i == 0 ? 'padding-top:20px;' : 'padding-top:30px; border-top:1px solid black; ' }}padding-bottom:0px;border-bottom:1px solid black;height:290px; overflow:hidden;">
 											<table style="width:100%;">
 												<tr>
@@ -387,7 +396,7 @@
 
 											<?php 
 
-												foreach($order['items'] as $item) {
+												foreach($request['order']['items'] as $item) {
 
 													if($item['product']['slug'] === 'eighter' || $item['product']['slug'] === 'niner' || $item['product']['slug'] === 'tener') {
 

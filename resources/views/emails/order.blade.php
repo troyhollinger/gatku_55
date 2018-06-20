@@ -347,8 +347,8 @@
 									</div>
 
 									<p id="total" style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;border-top: 1px solid black;padding-top: 10px;font-weight: bold;">
-										@if($discount > 0)
-										<span style="font-weight:normal">Discount: <span style="color:#2ECC71;">- ${{ $discount / 100 }}</span></span><br>
+										@if($discount['discount'] > 0)
+										<span style="font-weight:normal">Discount: <span style="color:#2ECC71;">- ${{ $discount['discount'] / 100 }}</span></span><br>
 										@endif
 										<span style="font-weight:normal">Subtotal: ${{ $subtotal / 100 }}</span><br>
 										<span style="font-weight:normal">Shipping: ${{ $shipping / 100 }}</span><br>
@@ -373,7 +373,7 @@
 
 											<?php $displayShrinker = false; ?>
 
-											<?php 
+											<?php
 
 												foreach($order['items'] as $item) {
 

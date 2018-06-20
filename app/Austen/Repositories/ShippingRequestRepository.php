@@ -2,6 +2,9 @@
 
 namespace Austen\Repositories;
 
+use App\Mail\EmailsShippingRequest;
+use App\Mail\EmailsShippingRequestPaymentNotification;
+use App\Mail\EmailsShippingRequestReceipt;
 use Gatku\ShippingRequest;
 use Illuminate\Support\Facades\Log;
 use Stripe_Charge;
@@ -63,24 +66,37 @@ class ShippingRequestRepository {
 	}
 
 	private function sendEmail($request) {
-//		Mail::queue('emails.shipping-request', ['request' => $request], function($message) use ($request){
-//			$message->to($request->order->customer->email, $request->order->customer->fullName)->subject('GATKU | Shipping Request');
-//		});
+        Mail::to([
+            [
+                'email' => $request->order->customer->email,
+                'name' => $request->order->customer->fullName
+            ]
+        ])->queue(new EmailsShippingRequest($request));
 	}
 
 	private function sendReceipt($request) {
 		if (App::environment('production')) {
-//			Mail::queue('emails.shipping-request-payment-notification', ['request' => $request], function($message) use ($request){
-//				$message->to('dustin@gatku.com', 'Dustin McIntyre')->subject('GATKU | Shipping Payment');
-//			});
+            Mail::to([
+                [
+                    'email' => 'dustin@gatku.com',
+                    'name' => 'Dustin McIntyre'
+                ]
+            ])->queue(new EmailsShippingRequestPaymentNotification($request));
+
 		} else {
-//			Mail::queue('emails.shipping-request-payment-notification', ['request' => $request], function($message) use ($request){
-//				$message->to('austenpayan@gmail.com', 'Austen Payan')->subject('GATKU | Shipping Payment');
-//			});
+            Mail::to([
+                [
+                    'email' => 'past-email-address-here',
+                    'name' => 'past-recipient-name'
+                ]
+            ])->queue(new EmailsShippingRequestPaymentNotification($request));
 		}
 
-//		Mail::queue('emails.shipping-request-receipt', ['request' => $request], function($message) use ($request){
-//			$message->to($request->order->customer->email, $request->order->customer->fullName)->subject('GATKU | Shipping Payment Receipt');
-//		});
+        Mail::to([
+            [
+                'email' => $request->order->customer->email,
+                'name' => $request->order->customer->fullName
+            ]
+        ])->queue(new EmailsShippingRequestReceipt($request));
 	}
 }
