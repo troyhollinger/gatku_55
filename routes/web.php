@@ -106,7 +106,7 @@ Route::resource('discounts-exists', 'DiscountExistsController'); //Check if in d
 Route::get('/mailable', function () {
 
     $order = Gatku\Order::find(604);
-    $discount = Gatku\Discount::find('test_10');
+    $discount = new Gatku\Discount;
     $subtotal = 100;
     $shipping = 20;
     $total = $subtotal + $shipping;
@@ -115,12 +115,8 @@ Route::get('/mailable', function () {
     Mail::to([
         [   'email' => 'marcincyniu@gmail.com',
             'name' => 'Marcin Wojcik'
-        ],
-        [
-            'email' => 'emailme@troyhollinger.com',
-            'name' => 'Troy Hollinger'
         ]
-    ])->queue( new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date) );
+    ])->send( new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date) );
     //return new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date);
 
     return 'Sent';
