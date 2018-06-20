@@ -71,7 +71,7 @@ class ShippingRequestRepository {
                 'email' => $request->order->customer->email,
                 'name' => $request->order->customer->fullName
             ]
-        ])->queue(new EmailsShippingRequest($request));
+        ])->send(new EmailsShippingRequest($request));
 	}
 
 	private function sendReceipt($request) {
@@ -81,7 +81,7 @@ class ShippingRequestRepository {
                     'email' => 'dustin@gatku.com',
                     'name' => 'Dustin McIntyre'
                 ]
-            ])->queue(new EmailsShippingRequestPaymentNotification($request));
+            ])->send(new EmailsShippingRequestPaymentNotification($request));
 
 		} else {
             Mail::to([
@@ -89,7 +89,7 @@ class ShippingRequestRepository {
                     'email' => 'past-email-address-here',
                     'name' => 'past-recipient-name'
                 ]
-            ])->queue(new EmailsShippingRequestPaymentNotification($request));
+            ])->send(new EmailsShippingRequestPaymentNotification($request));
 		}
 
         Mail::to([
@@ -97,6 +97,6 @@ class ShippingRequestRepository {
                 'email' => $request->order->customer->email,
                 'name' => $request->order->customer->fullName
             ]
-        ])->queue(new EmailsShippingRequestReceipt($request));
+        ])->send(new EmailsShippingRequestReceipt($request));
 	}
 }

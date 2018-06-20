@@ -181,6 +181,6 @@ class ShippingTrackRepository {
                 'email' => $request->order->customer->email,
                 'name' => $request->order->customer->fullName
             ]
-        ])->queue(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $total, $date));
+        ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $total, $date));
 	}
 }

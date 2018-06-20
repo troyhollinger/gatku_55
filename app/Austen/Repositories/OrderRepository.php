@@ -77,7 +77,7 @@ class OrderRepository {
 
             $total = $this->calculateTotal($order, $discount);
 
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             Bugsnag::notifyException($e);
             Log::error($e);
             DB::rollback();
@@ -115,7 +115,7 @@ class OrderRepository {
                     'email' => 'ryan@gatku.com',
                     'name' => 'Ryan Gattoni'
                 ],
-            ])->queue(new EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date));
+            ])->send(new EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date));
 
             //Send email to Sellers
             Mail::to([
@@ -127,7 +127,7 @@ class OrderRepository {
                     'email' => 'emailme@troyhollinger.com',
                     'name' => 'Troy Hollinger'
                 ]
-            ])->queue(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date));
+            ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date));
 
         }
 
@@ -138,7 +138,7 @@ class OrderRepository {
                         'email' => 'past-email-address-here',
                         'name' => 'past-recipient-name-here'
                     ]
-                ])->queue(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date));
+                ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date));
             }
         }
 

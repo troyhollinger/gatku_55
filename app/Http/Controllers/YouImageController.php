@@ -26,7 +26,7 @@ class YouImageController extends BaseController {
 	public function index() {
 		try {
 			$images = YouImage::groupBy('image')->get();
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
             Bugsnag::notifyException($e);
 			return \Response::json(['message' => 'Sorry, images could not be retrieved.'], 404);
 		}
@@ -50,7 +50,7 @@ class YouImageController extends BaseController {
 				$image->productId = $productId;
 				$image->save();	
 			}
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
 			return \Response::json(['message' => 'Sorry, there was a problem saving the image'], 404);

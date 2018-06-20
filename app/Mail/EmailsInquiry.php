@@ -28,7 +28,7 @@ class EmailsInquiry extends Mailable
      * @param $name
      */
     public function __construct(
-        Request $form,
+        array $form,
         string $name
     )
     {

@@ -13,13 +13,16 @@ use Gatku\HomeSetting;
 |
 */
 
+
+
 Route::get('/', ['as' => 'home', function() {
     $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
     return View::make('pages.home')->with('homeSetting',  $homeSetting);
 }]);
 
 Route::get('au', ['as' => 'australia', function() {
-    return View::make('pages.australia');
+    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+    return View::make('pages.australia')->with('homeSetting',  $homeSetting);
 }]);
 
 Route::post('product/image', ['as' => 'product.image', 'uses' => 'ProductController@upload']);

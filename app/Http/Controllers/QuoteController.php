@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\EmailsInquiry;
 use Austen\Repositories\MailchimpRepository;
+use Gatku\HomeSetting;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 
 class QuoteController extends BaseController {
 
@@ -18,8 +20,8 @@ class QuoteController extends BaseController {
     }
 
 	public function index() {
-
-		return View::make('pages.quote');
+        $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+		return View::make('pages.quote')->with('homeSetting',  $homeSetting);;
 	}
 
 	public function sendEmail() {
@@ -37,8 +39,8 @@ class QuoteController extends BaseController {
                     'email' => 'emailme@troyhollinger.com',
                     'name' => 'Troy Hollinger'
                 ]
-            ])->queue(new EmailsInquiry($form, $name));
-		} 
+            ])->send(new EmailsInquiry($form, $name));
+		}
 
         $this->mailchimp->addSubscription(\Request::get('name'), \Request::get('email'), \Request::get('country'));
 	} 

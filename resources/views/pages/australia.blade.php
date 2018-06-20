@@ -10,7 +10,7 @@ Our Australian shipping rates will now match our U.S. Shipping Rates!
 
 @section('content')
 
-<div class="hero AustraliaMessageHero" style="background-image:url({{ asset('img/australia.jpg') }})">
+<div class="heroAustralia AustraliaMessageHero" style="background-image:url({{ asset('img/australia.jpg') }})">
     <div class="AustraliaMessage">
         <h1 class="AustraliaMessage-title">Australia!</h1>
         <div class="AustraliaMessage-content">

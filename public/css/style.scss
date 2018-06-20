@@ -530,6 +530,21 @@ a:hover {
 	}
 }
 
+.heroAustralia {
+	width:100%;
+	height:100%;
+	height:100vh;
+	background-size: cover;
+	background-position: center;
+	background-color: $gray;
+	text-align: center;
+
+	@include breakpoint(small) {
+		background-position: 65% 50%;
+		letter-spacing: -2px;
+	}
+}
+
 .detail {
 
 	font-size: .6em;
