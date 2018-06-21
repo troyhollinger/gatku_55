@@ -105,22 +105,22 @@ Route::resource('discount', 'DiscountController');
 Route::resource('discounts-exists', 'DiscountExistsController'); //Check if in discounts table are any records
 
 
-
-Route::get('/mailable', function () {
-
-    $order = Gatku\Order::find(604);
-    $discount = new Gatku\Discount;
-    $subtotal = 100;
-    $shipping = 20;
-    $total = $subtotal + $shipping;
-    $date = '2018-06-19';
-
-    Mail::to([
-        [   'email' => 'marcincyniu@gmail.com',
-            'name' => 'Marcin Wojcik'
-        ]
-    ])->send( new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date) );
-    //return new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date);
-
-    return 'Sent';
-});
+//Below code is to test mailable objects. Uncomment if necessary.
+//Route::get('/mailable', function () {
+//
+//    $order = Gatku\Order::find(604);
+//    $discount = new Gatku\Discount;
+//    $subtotal = 100;
+//    $shipping = 20;
+//    $total = $subtotal + $shipping;
+//    $date = '2018-06-19';
+//
+//    Mail::to([
+//        [   'email' => 'marcincyniu@gmail.com',
+//            'name' => 'Marcin Wojcik'
+//        ]
+//    ])->send( new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date) );
+//    //return new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date);
+//
+//    return 'Sent';
+//});
