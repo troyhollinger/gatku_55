@@ -25,6 +25,7 @@
     <div style="width: 100%;">
         <div class="forty-percent-left-flow">
             <div style="float: right;">
+                <div style="height: 10px;"></div>
                 <div class="width-400-class">
                     <img class="footer-label-class" src="../img/Site_GATKU_Footer-TaglineBox.png">
                 </div>
