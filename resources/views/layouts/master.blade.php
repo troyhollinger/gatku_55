@@ -108,6 +108,7 @@
         <script src="{!! asset('bower_components/rollerblade/rollerblade.min.js?v=' . config('app_version.version')) !!}"></script>
         @endif
 
+
         @if(App::environment('production'))
             <script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -117,12 +118,10 @@
               ga('create', 'UA-46881632-1', 'auto');
               ga('send', 'pageview');
             </script>
-
-            {{--<script src="{!! asset('production/app.min.js?v=' . config('app_version.version')) !!}"></script>--}}
-            <script src="{!! asset('production/app.js?v=' . config('app_version.version')) !!}"></script>
-        @else
-            <script src="{!! asset('production/app.js?v=' . config('app_version.version')) !!}"></script>
         @endif
+
+        <!-- Load main app.js -->
+        <script src="{!! asset('production/app.js?v=' . config('app_version.version')) !!}"></script>
 
         <!-- FRESHCHAT WIDGET - loading - start -->
         <script>
