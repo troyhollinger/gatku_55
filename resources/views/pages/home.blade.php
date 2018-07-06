@@ -25,11 +25,39 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 	}
 
 </style>
+
 	<div class="slideshow">
-		<div><p class="hero-blurb">The Highest Quality Polespears, Heads, and Accessories in the World.</p></div>
-		<div><p class="hero-blurb">Designed and Made in CA, USA</p></div>
-		<div><p class="hero-blurb">Used and Loved Worldwide.</p></div>
+		{{--@if ( trim($homeSetting['slideshow_text_1']) )--}}
+			<div>
+				<p class="hero-blurb hero-blurb-editable">The Highest Quality Polespears, Heads, and Accessories in the World.</p>
+			</div>
+		{{--@endif--}}
+
+		@if ( trim($homeSetting['slideshow_text_2']) )
+			<div>
+				<p class="hero-blurb hero-blurb-editable">Designed and Made in CA, USA</p>
+			</div>
+		@endif
+
+		@if ( trim($homeSetting['slideshow_text_3']) )
+			<div>
+				<p class="hero-blurb hero-blurb-editable">Used and Loved Worldwide.</p>
+			</div>
+		@endif
+
+		@if ( trim($homeSetting['slideshow_text_4']) )
+			<div>
+				<p class="hero-blurb hero-blurb-editable">{!! $homeSetting['slideshow_text_4'] !!}</p>
+			</div>
+		@endif
+
+		@if ( trim($homeSetting['slideshow_text_5']) )
+		<div>
+			<p class="hero-blurb hero-blurb-editable">{!! $homeSetting['slideshow_text_5'] !!}</p>
+		</div>
+		@endif
 	</div>
+
 	<div class="home-image-info">
 		<p class="live-till">{!! $homeSetting['image_info'] !!}</p>
 		<p class="photo-credit">{!! $homeSetting['image_credit'] !!}</p>

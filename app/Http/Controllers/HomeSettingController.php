@@ -67,6 +67,13 @@ class HomeSettingController extends BaseController {
             $homeSetting->contact_mobile_logo_url = \Request::get('contact_mobile_logo_url');
             $homeSetting->contact_title = \Request::get('contact_title');
             $homeSetting->contact_message = \Request::get('contact_message');
+            $homeSetting->slideshow_text_1 = \Request::get('slideshow_text_1');
+            $homeSetting->slideshow_text_2 = \Request::get('slideshow_text_2');
+            $homeSetting->slideshow_text_3 = \Request::get('slideshow_text_3');
+            $homeSetting->slideshow_text_4 = \Request::get('slideshow_text_4');
+            $homeSetting->slideshow_text_5 = \Request::get('slideshow_text_5');
+            $homeSetting->slideshow_text_color_css = \Request::get('slideshow_text_color_css');
+            $homeSetting->slideshow_text_shadow_css = \Request::get('slideshow_text_shadow_css');
 
 			$homeSetting->save();
 		} catch (Exception $e) {

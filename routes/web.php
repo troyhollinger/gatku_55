@@ -43,7 +43,8 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'AuthenticationController@logo
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', ['as' => 'admin.index', function() {
-        return View::make('pages.admin');
+        $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+        return View::make('pages.admin')->with('homeSetting',  $homeSetting);
     }]);
 });
 
