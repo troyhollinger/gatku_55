@@ -92,7 +92,7 @@
                 @endif
 
                 @if ( trim($homeSetting['slideshow_text_shadow_css']) )
-                text-shadow: {!! $homeSetting['slideshow_text_shadow_css'] !!}; <!-- 2px 2px rgba(0,0,0, 0.5); -->
+                text-shadow: {!! $homeSetting['slideshow_text_shadow_css'] !!};
                 @endif
             }
 

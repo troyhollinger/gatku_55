@@ -27,21 +27,21 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 </style>
 
 	<div class="slideshow">
-		{{--@if ( trim($homeSetting['slideshow_text_1']) )--}}
+		@if ( trim($homeSetting['slideshow_text_1']) )
 			<div>
-				<p class="hero-blurb hero-blurb-editable">The Highest Quality Polespears, Heads, and Accessories in the World.</p>
+				<p class="hero-blurb hero-blurb-editable">{!! $homeSetting['slideshow_text_1'] !!}</p>
 			</div>
-		{{--@endif--}}
+		@endif
 
 		@if ( trim($homeSetting['slideshow_text_2']) )
 			<div>
-				<p class="hero-blurb hero-blurb-editable">Designed and Made in CA, USA</p>
+				<p class="hero-blurb hero-blurb-editable">{!! $homeSetting['slideshow_text_2'] !!}</p>
 			</div>
 		@endif
 
 		@if ( trim($homeSetting['slideshow_text_3']) )
 			<div>
-				<p class="hero-blurb hero-blurb-editable">Used and Loved Worldwide.</p>
+				<p class="hero-blurb hero-blurb-editable">{!! $homeSetting['slideshow_text_3'] !!}</p>
 			</div>
 		@endif
 

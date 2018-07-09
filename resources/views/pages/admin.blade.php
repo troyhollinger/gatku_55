@@ -384,10 +384,10 @@
 					<input type="text" ng-model="homeSetting.slideshow_text_5">
 					<small>* To not display leave blank.</small>
 
-					<label>Slide Show Text Color</label>
+					<label>Slide Show Text Color [CSS]</label>
 					<input type="text" ng-model="homeSetting.slideshow_text_color_css">
 
-					<label>Slide Show Text Shadow Css</label>
+					<label>Slide Show Text Shadow [CSS]</label>
 					<input type="text" ng-model="homeSetting.slideshow_text_shadow_css">
 
 					<label>Facebook Url</label>

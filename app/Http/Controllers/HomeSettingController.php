@@ -46,34 +46,34 @@ class HomeSettingController extends BaseController {
 	public function store() {
 		try {
             $homeSetting = new HomeSetting;
-            $homeSetting->logo = \Request::get('logo');
-            $homeSetting->button_color = \Request::get('button_color');
-            $homeSetting->image = \Request::get('image');
-            $homeSetting->mobile_image = \Request::get('mobile_image');
+            $homeSetting->logo = \Request::get('logo') ? \Request::get('logo') : '';
+            $homeSetting->button_color = \Request::get('button_color') ? \Request::get('button_color') : '';
+            $homeSetting->image = \Request::get('image') ? \Request::get('image') : '';
+            $homeSetting->mobile_image = \Request::get('mobile_image') ? \Request::get('mobile_image') : '';
             $homeSetting->image_info = \Request::get('image_info') ? \Request::get('image_info') : '';
-            $homeSetting->image_credit = \Request::get('image_credit');
+            $homeSetting->image_credit = \Request::get('image_credit') ? \Request::get('image_credit') : '';
+            $homeSetting->slideshow_text_1 = \Request::get('slideshow_text_1') ? \Request::get('slideshow_text_1') : '';
+            $homeSetting->slideshow_text_2 = \Request::get('slideshow_text_2') ? \Request::get('slideshow_text_2') : '';
+            $homeSetting->slideshow_text_3 = \Request::get('slideshow_text_3') ? \Request::get('slideshow_text_3') : '';
+            $homeSetting->slideshow_text_4 = \Request::get('slideshow_text_4') ? \Request::get('slideshow_text_4') : '';
+            $homeSetting->slideshow_text_5 = \Request::get('slideshow_text_5') ? \Request::get('slideshow_text_5') : '';
+            $homeSetting->slideshow_text_color_css = \Request::get('slideshow_text_color_css') ? \Request::get('slideshow_text_color_css') : '';
+            $homeSetting->slideshow_text_shadow_css = \Request::get('slideshow_text_shadow_css') ? \Request::get('slideshow_text_shadow_css') : '';
             $homeSetting->facebook_url = \Request::get('facebook_url');
             $homeSetting->twitter_url = \Request::get('twitter_url');
             $homeSetting->instagram_url = \Request::get('instagram_url');
             $homeSetting->youtube_url = \Request::get('youtube_url');
-            $homeSetting->address_us = \Request::get('address_us');
-            $homeSetting->address_au = \Request::get('address_au');
-            $homeSetting->email_html = \Request::get('email_html');
-            $homeSetting->phone_html = \Request::get('phone_html');
-            $homeSetting->desktop_copyright_html = \Request::get('desktop_copyright_html');
-            $homeSetting->mobile_copyright_html = \Request::get('mobile_copyright_html');
-            $homeSetting->contact_image = \Request::get('contact_image');
-            $homeSetting->contact_desktop_logo_url = \Request::get('contact_desktop_logo_url');
-            $homeSetting->contact_mobile_logo_url = \Request::get('contact_mobile_logo_url');
-            $homeSetting->contact_title = \Request::get('contact_title');
-            $homeSetting->contact_message = \Request::get('contact_message');
-            $homeSetting->slideshow_text_1 = \Request::get('slideshow_text_1');
-            $homeSetting->slideshow_text_2 = \Request::get('slideshow_text_2');
-            $homeSetting->slideshow_text_3 = \Request::get('slideshow_text_3');
-            $homeSetting->slideshow_text_4 = \Request::get('slideshow_text_4');
-            $homeSetting->slideshow_text_5 = \Request::get('slideshow_text_5');
-            $homeSetting->slideshow_text_color_css = \Request::get('slideshow_text_color_css');
-            $homeSetting->slideshow_text_shadow_css = \Request::get('slideshow_text_shadow_css');
+            $homeSetting->address_us = \Request::get('address_us') ? \Request::get('address_us') : '';
+            $homeSetting->address_au = \Request::get('address_au') ? \Request::get('address_au') : '';
+            $homeSetting->email_html = \Request::get('email_html') ? \Request::get('email_html') : '';
+            $homeSetting->phone_html = \Request::get('phone_html') ? : \Request::get('phone_html');
+            $homeSetting->desktop_copyright_html = \Request::get('desktop_copyright_html') ? \Request::get('desktop_copyright_html') : '';
+            $homeSetting->mobile_copyright_html = \Request::get('mobile_copyright_html')? \Request::get('mobile_copyright_html') : '';
+            $homeSetting->contact_image = \Request::get('contact_image') ? \Request::get('contact_image') : '';
+            $homeSetting->contact_desktop_logo_url = \Request::get('contact_desktop_logo_url') ? \Request::get('contact_desktop_logo_url') : '';
+            $homeSetting->contact_mobile_logo_url = \Request::get('contact_mobile_logo_url') ? \Request::get('contact_mobile_logo_url') : '';
+            $homeSetting->contact_title = \Request::get('contact_title') ? \Request::get('contact_title') : '';
+            $homeSetting->contact_message = \Request::get('contact_message') ? \Request::get('contact_message') : '';
 
 			$homeSetting->save();
 		} catch (Exception $e) {
