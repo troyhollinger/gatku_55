@@ -17,7 +17,7 @@
 			<div class="admin-navigation-tab" ng-click="show('products')" ng-class="{'selected' : showProducts}">Products</div>
 			<div class="admin-navigation-tab" ng-click="show('you')" ng-class="{'selected' : showYou}">You</div>
 			<div class="admin-navigation-tab" ng-click="show('videos')" ng-class="{'selected' : showVideos}">Videos</div>
-			<div class="admin-navigation-tab" ng-click="show('home-setting')" ng-class="{'selected' : showHomeSetting}">Home</div>
+			<div class="admin-navigation-tab" ng-click="show('home-setting')" ng-class="{'selected' : showHomeSetting}">Home Settings</div>
 			<div class="admin-navigation-tab" ng-click="show('discount-manager')" ng-class="{'selected' : showDiscountManager}">Discounts</div>
 			<div class="admin-navigation-tab" ng-click="adminLogout()">Logout</div>
 			<div class="clear"></div>
@@ -363,6 +363,32 @@
 
 					<label>Image Credit</label>
 					<input type="text" ng-model="homeSetting.image_credit">
+
+					<label>Slide Show Text #1</label>
+					<input type="text" ng-model="homeSetting.slideshow_text_1">
+					<small>* To not display leave blank.</small>
+
+					<label>Slide Show Text #2</label>
+					<input type="text" ng-model="homeSetting.slideshow_text_2">
+					<small>* To not display leave blank.</small>
+
+					<label>Slide Show Text #3</label>
+					<input type="text" ng-model="homeSetting.slideshow_text_3">
+					<small>* To not display leave blank.</small>
+
+					<label>Slide Show Text #4</label>
+					<input type="text" ng-model="homeSetting.slideshow_text_4">
+					<small>* To not display leave blank.</small>
+
+					<label>Slide Show Text #5</label>
+					<input type="text" ng-model="homeSetting.slideshow_text_5">
+					<small>* To not display leave blank.</small>
+
+					<label>Slide Show Text Color [CSS]</label>
+					<input type="text" ng-model="homeSetting.slideshow_text_color_css">
+
+					<label>Slide Show Text Shadow [CSS]</label>
+					<input type="text" ng-model="homeSetting.slideshow_text_shadow_css">
 
 					<label>Facebook Url</label>
 					<input type="text" ng-model="homeSetting.facebook_url">

@@ -81,6 +81,23 @@
             var shippingRequestFullName = '{!! $request->order->customer->fullName !!}'
         </script>
         @endif
+
+        <!-- This is css created dynamically based on settings in admin section -->
+        <style>
+            .hero-blurb-editable {
+                @if ( trim($homeSetting['slideshow_text_color_css']) )
+                color: {!! $homeSetting['slideshow_text_color_css'] !!};
+                @else
+                color: #ffffff;
+                @endif
+
+                @if ( trim($homeSetting['slideshow_text_shadow_css']) )
+                text-shadow: {!! $homeSetting['slideshow_text_shadow_css'] !!};
+                @endif
+            }
+
+        </style>
+        <!-- This is css created dynamically based on settings in admin section - end -->
     </head>
     @if(Route::currentRouteName() === 'product.show')
     <body ng-app="gatku" ng-controller="ProductController" body-freeze>
