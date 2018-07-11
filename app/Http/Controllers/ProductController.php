@@ -57,7 +57,7 @@ class ProductController extends BaseController
                 $products = $this->product->all();
             }
 
-            return \Response::json(['data' => $products], 200);
+            return \Response::json($products, 200);
         } else {
             return \Redirect::route('home');
         }
@@ -92,7 +92,7 @@ class ProductController extends BaseController
         if ($product === false) {
             return \Response::json(['sorry, there was an error'], 404);
         }
-        return \Response::json(['data' => $product], 200);
+        return \Response::json($product, 200);
     }
 
     public function getBySlug($slug)
@@ -102,7 +102,7 @@ class ProductController extends BaseController
         if ($product === false) {
             return \Response::json(['message' => 'Sorry, the product could not be retrieved'], 404);
         }
-        return \Response::json(['data' => $product], 200);
+        return \Response::json($product, 200);
     }
 
     /**
@@ -140,7 +140,7 @@ class ProductController extends BaseController
         if ($upload === false) {
             return \Response::json(['message' => 'Sorry, There was an error uploading this image.'], 404);
         }
-        return \Response::json(['data' => $upload['imagePath']], 200);
+        return \Response::json($upload['imagePath'], 200);
     }
 
 
@@ -185,7 +185,7 @@ class ProductController extends BaseController
         if ($types === false) {
             return \Response::json(['message' => 'Sorry, there was problem retrieving the types'], 404);
         }
-        return \Response::json(['data' => $types], 200);
+        return \Response::json($types, 200);
     }
 
 
@@ -199,7 +199,7 @@ class ProductController extends BaseController
         if ($products === false) {
             return \Response::json(['message' => 'Sorry, could not get products by type.'], 404);
         }
-        return \Response::json(['data' => $products], 200);
+        return \Response::json($products, 200);
     }
 
     /**
@@ -218,7 +218,7 @@ class ProductController extends BaseController
             return \Response::json(['message' => 'Sorry, there was a problem retrieving the images'], 404);
 
         }
-        return \Response::json(['data' => $image], 200);
+        return \Response::json($image, 200);
     }
 
     /**
@@ -230,6 +230,6 @@ class ProductController extends BaseController
         $size = $this->product->getSizeBySlug($slug);
         if ($size === false) return \Response::json(['message' => 'Sorry, something went wrong!'], 404);
 
-        return \Response::json(['data' => $size], 200);
+        return \Response::json($size, 200);
     }
 }

@@ -1,40 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.angularCreditCards = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (global){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _angular = (typeof window !== "undefined" ? window.angular : typeof global !== "undefined" ? global.angular : null);
-
-var _angular2 = _interopRequireDefault(_angular);
-
-var _creditcards = require('creditcards');
-
-var _creditcards2 = _interopRequireDefault(_creditcards);
-
-var _number = require('./number');
-
-var _number2 = _interopRequireDefault(_number);
-
-var _expiration = require('./expiration');
-
-var _expiration2 = _interopRequireDefault(_expiration);
-
-var _cvc = require('./cvc');
-
-var _cvc2 = _interopRequireDefault(_cvc);
-
-'use strict';
-
-exports['default'] = _angular2['default'].module('credit-cards', []).value('creditcards', _creditcards2['default']).directive('ccNumber', _number2['default']).directive('ccExp', _expiration2['default']).directive('ccExpMonth', _expiration.ccExpMonth).directive('ccExpYear', _expiration.ccExpYear).directive('ccCvc', _cvc2['default']).name;
-module.exports = exports['default'];
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./cvc":14,"./expiration":15,"./number":16,"creditcards":13}],2:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.angularCreditCards = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 exports = module.exports = ap;
 function ap (args, fn) {
     return function () {
@@ -84,8 +48,8 @@ exports.curryRight = function curryRight (fn) {
     return partial(partialRight, fn);
 }
 
-},{}],3:[function(require,module,exports){
-var sentence = require('sentence-case');
+},{}],2:[function(_dereq_,module,exports){
+var sentence = _dereq_('sentence-case');
 
 /**
  * Camel case a string.
@@ -103,7 +67,7 @@ module.exports = function (string) {
     });
 };
 
-},{"sentence-case":4}],4:[function(require,module,exports){
+},{"sentence-case":3}],3:[function(_dereq_,module,exports){
 /**
  * Sentence case a string.
  *
@@ -124,7 +88,7 @@ module.exports = function (string) {
     .toLowerCase();
 };
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(_dereq_,module,exports){
 module.exports = extend
 
 function extend(target) {
@@ -141,15 +105,15 @@ function extend(target) {
     return target
 }
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(_dereq_,module,exports){
 'use strict';
 
-exports.types = require('./types');
+exports.types = _dereq_('./types');
 
-},{"./types":8}],7:[function(require,module,exports){
+},{"./types":7}],6:[function(_dereq_,module,exports){
 'use strict';
 
-var extend = require('xtend/mutable');
+var extend = _dereq_('xtend/mutable');
 
 function CardType (name, config) {
   extend(this, {name: name}, config);
@@ -177,10 +141,10 @@ function identity (value) {
   return value;
 }
 
-},{"xtend/mutable":5}],8:[function(require,module,exports){
+},{"xtend/mutable":4}],7:[function(_dereq_,module,exports){
 'use strict';
 
-var Type = require('./type');
+var Type = _dereq_('./type');
 
 var group19 = /(\d{1,4})(\d{1,4})?(\d{1,4})?(\d{1,4})?(\d{1,3})?/;
 
@@ -240,33 +204,33 @@ exports.unionPay = new Type('UnionPay', {
   luhn: false
 });
 
-},{"./type":7}],9:[function(require,module,exports){
-'use strict';
+},{"./type":6}],8:[function(_dereq_,module,exports){
+'use strict'
 
 module.exports = (function (array) {
   return function luhn (number) {
-    if (!number) return false;
-    var length = number.length;
-    var bit = 1;
-    var sum = 0;
-    var value;
+    if (!number) return false
+    var length = number.length
+    var bit = 1
+    var sum = 0
+    var value
 
     while (length) {
-      value = parseInt(number.charAt(--length), 10);
-      sum += (bit ^= 1) ? array[value] : value;
+      value = parseInt(number.charAt(--length), 10)
+      sum += (bit ^= 1) ? array[value] : value
     }
 
-    return sum && sum % 10 === 0;
-  };
-}([0, 2, 4, 6, 8, 1, 3, 5, 7, 9]));
+    return !!sum && sum % 10 === 0
+  }
+}([0, 2, 4, 6, 8, 1, 3, 5, 7, 9]))
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(_dereq_,module,exports){
 'use strict'
 
-var camel = require('camel-case')
-var luhn = require('fast-luhn')
+var camel = _dereq_('camel-case')
+var luhn = _dereq_('fast-luhn')
 
-exports.types = require('creditcards-types').types
+exports.types = _dereq_('creditcards-types').types
 
 exports.parse = function (number) {
   if (typeof number !== 'string') return ''
@@ -300,11 +264,11 @@ function getType (number, eager) {
   }
 }
 
-},{"camel-case":3,"creditcards-types":6,"fast-luhn":9}],11:[function(require,module,exports){
+},{"camel-case":2,"creditcards-types":5,"fast-luhn":8}],10:[function(_dereq_,module,exports){
 'use strict'
 
-var camel = require('camel-case')
-var card = require('./card')
+var camel = _dereq_('camel-case')
+var card = _dereq_('./card')
 
 var cvcRegex = /^\d{3,4}$/
 
@@ -315,7 +279,7 @@ exports.isValid = function (cvc, type) {
   return card.types[camel(type)].cvcLength === cvc.length
 }
 
-},{"./card":10,"camel-case":3}],12:[function(require,module,exports){
+},{"./card":9,"camel-case":2}],11:[function(_dereq_,module,exports){
 'use strict'
 
 exports.isPast = function (month, year) {
@@ -357,12 +321,12 @@ exports.year = {
   }
 }
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(_dereq_,module,exports){
 'use strict'
 
-var card = exports.card = require('./card')
-var cvc = exports.cvc = require('./cvc')
-var expiration = exports.expiration = require('./expiration')
+var card = exports.card = _dereq_('./card')
+var cvc = exports.cvc = _dereq_('./cvc')
+var expiration = exports.expiration = _dereq_('./expiration')
 
 exports.validate = function (cardObj) {
   return {
@@ -381,262 +345,300 @@ exports.validate = function (cardObj) {
   }
 }
 
-},{"./card":10,"./cvc":11,"./expiration":12}],14:[function(require,module,exports){
-(function (global){
-'use strict';
+},{"./card":9,"./cvc":10,"./expiration":11}],13:[function(_dereq_,module,exports){
+var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
+var slice = Array.prototype.slice;
+var toStr = Object.prototype.toString;
+var funcType = '[object Function]';
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
+module.exports = function bind(that) {
+    var target = this;
+    if (typeof target !== 'function' || toStr.call(target) !== funcType) {
+        throw new TypeError(ERROR_MESSAGE + target);
+    }
+    var args = slice.call(arguments, 1);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+    var binder = function () {
+        if (this instanceof bound) {
+            var result = target.apply(
+                this,
+                args.concat(slice.call(arguments))
+            );
+            if (Object(result) === result) {
+                return result;
+            }
+            return this;
+        } else {
+            return target.apply(
+                that,
+                args.concat(slice.call(arguments))
+            );
+        }
+    };
 
-var _angular = (typeof window !== "undefined" ? window.angular : typeof global !== "undefined" ? global.angular : null);
+    var boundLength = Math.max(0, target.length - args.length);
+    var boundArgs = [];
+    for (var i = 0; i < boundLength; i++) {
+        boundArgs.push('$' + i);
+    }
 
-var _angular2 = _interopRequireDefault(_angular);
+    var bound = Function('binder', 'return function (' + boundArgs.join(',') + '){ return binder.apply(this,arguments); }')(binder);
 
-var _creditcards = require('creditcards');
+    if (target.prototype) {
+        var Empty = function Empty() {};
+        Empty.prototype = target.prototype;
+        bound.prototype = new Empty();
+        Empty.prototype = null;
+    }
 
-'use strict';
+    return bound;
+};
 
-exports['default'] = factory;
 
-factory.$inject = ['$parse'];
-function factory($parse) {
+},{}],14:[function(_dereq_,module,exports){
+'use strict'
+
+var cvc = _dereq_('creditcards').cvc
+var bind = _dereq_('function-bind')
+
+module.exports = factory
+
+factory.$inject = ['$parse']
+function factory ($parse) {
   return {
     restrict: 'A',
     require: 'ngModel',
-    compile: function compile(element, attributes) {
-      attributes.$set('maxlength', 4);
-      attributes.$set('pattern', '[0-9]*');
-      attributes.$set('xAutocompletetype', 'cc-csc');
+    compile: function (element, attributes) {
+      attributes.$set('maxlength', 4)
+      attributes.$set('pattern', '[0-9]*')
+      attributes.$set('xAutocompletetype', 'cc-csc')
 
       return function (scope, element, attributes, ngModel) {
         ngModel.$validators.ccCvc = function (value) {
-          return _creditcards.cvc.isValid(value, $parse(attributes.ccType)(scope));
-        };
-        if (attributes.ccType) {
-          scope.$watch(attributes.ccType, _angular2['default'].bind(ngModel, ngModel.$validate));
+          return cvc.isValid(value, $parse(attributes.ccType)(scope))
         }
-      };
+
+        if (attributes.ccType) {
+          scope.$watch(attributes.ccType, bind.call(ngModel.$validate, ngModel))
+        }
+      }
     }
-  };
+  }
 }
-module.exports = exports['default'];
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"creditcards":13}],15:[function(require,module,exports){
-(function (global){
-'use strict';
+},{"creditcards":12,"function-bind":13}],15:[function(_dereq_,module,exports){
+'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports['default'] = ccExp;
-exports.ccExpMonth = ccExpMonth;
-exports.ccExpYear = ccExpYear;
+var expiration = _dereq_('creditcards').expiration
+var month = expiration.month
+var year = expiration.year
+var ap = _dereq_('ap')
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
-
-var _angular = (typeof window !== "undefined" ? window.angular : typeof global !== "undefined" ? global.angular : null);
-
-var _angular2 = _interopRequireDefault(_angular);
-
-var _creditcards = require('creditcards');
-
-var _ap = require('ap');
-
-'use strict';
-
-var month = _creditcards.expiration.month;
-var year = _creditcards.expiration.year;
-var isPast = _creditcards.expiration.isPast;
-
-function ccExp() {
+exports = module.exports = function ccExp () {
   return {
     restrict: 'AE',
     require: 'ccExp',
     controller: CcExpController,
-    link: function link(scope, element, attributes, ccExp) {
-      ccExp.$watch();
+    link: function (scope, element, attributes, ccExp) {
+      ccExp.$watch()
     }
-  };
+  }
 }
 
-CcExpController.$inject = ['$scope', '$element'];
-function CcExpController($scope, $element) {
+CcExpController.$inject = ['$scope', '$element']
+function CcExpController ($scope, $element) {
   var nullFormCtrl = {
-    $setValidity: _angular2['default'].noop
-  };
-  var parentForm = $element.inheritedData('$formController') || nullFormCtrl;
+    $setValidity: noop
+  }
+  var parentForm = $element.inheritedData('$formController') || nullFormCtrl
   var ngModel = {
     year: {},
     month: {}
-  };
-  this.setMonth = function (monthCtrl) {
-    ngModel.month = monthCtrl;
-  };
-  this.setYear = function (yearCtrl) {
-    ngModel.year = yearCtrl;
-  };
-  function setValidity(_ref) {
-    var month = _ref.month;
-    var year = _ref.year;
-
-    var valid = !!month && !!year && !isPast(month, year);
-    parentForm.$setValidity('ccExp', valid, $element);
   }
-  this.$watch = function $watchExp() {
-    $scope.$watch(function () {
+
+  this.setMonth = function (monthCtrl) {
+    ngModel.month = monthCtrl
+  }
+  this.setYear = function (yearCtrl) {
+    ngModel.year = yearCtrl
+  }
+
+  function setValidity (exp) {
+    var expMonth = exp.month
+    var expYear = exp.year
+    var valid = !!expMonth && !!expYear && !expiration.isPast(expMonth, expYear)
+    parentForm.$setValidity('ccExp', valid, $element)
+  }
+
+  this.$watch = function $watchExp () {
+    $scope.$watch(function watchExp () {
       return {
         month: ngModel.month.$modelValue,
         year: ngModel.year.$modelValue
-      };
-    }, setValidity, true);
-  };
+      }
+    }, setValidity, true)
+  }
 }
 
 var nullCcExp = {
-  setMonth: _angular2['default'].noop,
-  setYear: _angular2['default'].noop
-};
+  setMonth: noop,
+  setYear: noop
+}
 
-function ccExpMonth() {
+exports.month = function ccExpMonth () {
   return {
     restrict: 'A',
     require: ['ngModel', '^?ccExp'],
-    compile: function compile(element, attributes) {
-      attributes.$set('maxlength', 2);
-      attributes.$set('pattern', '[0-9]*');
-      attributes.$set('xAutocompletetype', 'cc-exp-month');
+    compile: function (element, attributes) {
+      attributes.$set('maxlength', 2)
+      attributes.$set('pattern', '[0-9]*')
+      attributes.$set('xAutocompletetype', 'cc-exp-month')
 
-      return function (scope, element, attributes, _ref2) {
-        var _ref22 = _slicedToArray(_ref2, 2);
+      return function (scope, element, attributes, controllers) {
+        var ngModel = controllers[0]
+        var ccExp = controllers[1] || nullCcExp
 
-        var ngModel = _ref22[0];
-        var ccExp = _ref22[1];
-
-        ccExp = ccExp || nullCcExp;
-        ccExp.setMonth(ngModel);
-        ngModel.$parsers.unshift(month.parse);
-        ngModel.$validators.ccExpMonth = month.isValid;
-      };
+        ccExp.setMonth(ngModel)
+        ngModel.$parsers.unshift(month.parse)
+        ngModel.$validators.ccExpMonth = month.isValid
+      }
     }
-  };
+  }
 }
 
-function ccExpYear() {
+exports.year = function ccExpYear () {
   return {
     restrict: 'A',
     require: ['ngModel', '^?ccExp'],
-    compile: function compile(element, attributes) {
-      var fullYear = attributes.fullYear !== undefined;
-      attributes.$set('maxlength', fullYear ? 4 : 2);
-      attributes.$set('pattern', '[0-9]*');
-      attributes.$set('xAutocompletetype', 'cc-exp-year');
+    compile: function (element, attributes) {
+      var fullYear = attributes.fullYear !== undefined
 
-      return function (scope, element, attributes, _ref3) {
-        var _ref32 = _slicedToArray(_ref3, 2);
+      attributes.$set('maxlength', fullYear ? 4 : 2)
+      attributes.$set('pattern', '[0-9]*')
+      attributes.$set('xAutocompletetype', 'cc-exp-year')
 
-        var ngModel = _ref32[0];
-        var ccExp = _ref32[1];
+      return function (scope, element, attributes, controllers) {
+        var ngModel = controllers[0]
+        var ccExp = controllers[1] || nullCcExp
 
-        ccExp = ccExp || nullCcExp;
-        ccExp.setYear(ngModel);
-        ngModel.$parsers.unshift(_ap.partialRight(year.parse, !fullYear));
-        ngModel.$formatters.unshift(function (value) {
-          return value ? year.format(value, !fullYear) : '';
-        });
-        ngModel.$validators.ccExpYear = function (value) {
-          return year.isValid(value) && !year.isPast(value);
-        };
-      };
+        ccExp.setYear(ngModel)
+
+        ngModel.$parsers.unshift(ap.partialRight(year.parse, !fullYear))
+
+        ngModel.$formatters.unshift(function formatExpYear (value) {
+          return value ? year.format(value, !fullYear) : ''
+        })
+
+        ngModel.$validators.ccExpYear = function validateExpYear (value) {
+          return year.isValid(value) && !year.isPast(value)
+        }
+      }
     }
-  };
+  }
 }
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"ap":2,"creditcards":13}],16:[function(require,module,exports){
-'use strict';
+function noop () {}
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
+},{"ap":1,"creditcards":12}],16:[function(_dereq_,module,exports){
+'use strict'
 
-function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
+var card = _dereq_('creditcards').card
 
-var _creditcards = require('creditcards');
+module.exports = factory
 
-'use strict';
-
-exports['default'] = factory;
-
-factory.$inject = ['$parse'];
-function factory($parse) {
+factory.$inject = ['$parse']
+function factory ($parse) {
   return {
     restrict: 'A',
     require: ['ngModel', 'ccNumber'],
-    controller: function controller() {
-      this.type = null;
-      this.eagerType = null;
+    controller: function () {
+      this.type = null
+      this.eagerType = null
     },
-    compile: function compile($element, $attributes) {
-      $attributes.$set('pattern', '[0-9]*');
-      $attributes.$set('xAutocompletetype', 'cc-number');
+    compile: function ($element, $attributes) {
+      $attributes.$set('pattern', '[0-9]*')
+      $attributes.$set('xAutocompletetype', 'cc-number')
 
-      return function ($scope, $element, $attributes, _ref) {
-        var _ref2 = _slicedToArray(_ref, 2);
-
-        var ngModel = _ref2[0];
-        var ccNumber = _ref2[1];
+      return function ($scope, $element, $attributes, controllers) {
+        var ngModel = controllers[0]
+        var ccNumber = controllers[1]
 
         $scope.$watch($attributes.ngModel, function (number) {
-          ngModel.$ccType = ccNumber.type = _creditcards.card.type(number);
-        });
-        function $viewValue() {
-          return ngModel.$viewValue;
+          ngModel.$ccType = ccNumber.type = card.type(number)
+        })
+
+        function $viewValue () {
+          return ngModel.$viewValue
         }
-        if (typeof $attributes.ccEagerType !== 'undefined') {
-          $scope.$watch($viewValue, function eagerTypeCheck(number) {
-            if (!number) return;
-            number = _creditcards.card.parse(number);
-            ngModel.$ccEagerType = ccNumber.eagerType = _creditcards.card.type(number, true);
-          });
+
+        if ($attributes.ccEagerType != null) {
+          $scope.$watch($viewValue, function eagerTypeCheck (number) {
+            if (!number) return
+            number = card.parse(number)
+            ngModel.$ccEagerType = ccNumber.eagerType = card.type(number, true)
+          })
         }
+
         if ($attributes.ccType) {
           $scope.$watch($attributes.ccType, function () {
-            ngModel.$validate();
-          });
+            ngModel.$validate()
+          })
         }
-        if (typeof $attributes.ccFormat !== 'undefined') {
-          $scope.$watch($viewValue, function formatInput(input, previous) {
-            if (!input) return;
-            var element = $element[0];
-            var formatted = _creditcards.card.format(_creditcards.card.parse(input));
-            ngModel.$setViewValue(formatted);
-            var selectionEnd = element.selectionEnd;
 
-            ngModel.$render();
+        if ($attributes.ccFormat != null) {
+          $scope.$watch($viewValue, function formatInput (input, previous) {
+            if (!input) return
+            var element = $element[0]
+            var formatted = card.format(card.parse(input))
+
+            ngModel.$setViewValue(formatted)
+            var selectionEnd = element.selectionEnd
+            ngModel.$render()
             if (formatted && !formatted.charAt(selectionEnd - 1).trim()) {
-              selectionEnd++;
+              if (previous && previous.length < input.length) {
+                selectionEnd++
+              } else {
+                selectionEnd--
+              }
             }
-            element.setSelectionRange(selectionEnd, selectionEnd);
-          });
+            element.setSelectionRange(selectionEnd, selectionEnd)
+          })
         }
-        ngModel.$parsers.unshift(_creditcards.card.parse);
-        ngModel.$validators.ccNumber = function (number) {
-          return _creditcards.card.isValid(number);
-        };
-        ngModel.$validators.ccNumberType = function (number) {
-          return _creditcards.card.isValid(number, $parse($attributes.ccType)($scope));
-        };
-      };
-    }
-  };
-}
-module.exports = exports['default'];
 
-},{"creditcards":13}]},{},[1])(1)
+        ngModel.$parsers.unshift(card.parse)
+
+        ngModel.$validators.ccNumber = function validateCcNumber (number) {
+          return card.isValid(number)
+        }
+
+        ngModel.$validators.ccNumberType = function validateCcNumberType (number) {
+          return card.isValid(number, $parse($attributes.ccType)($scope))
+        }
+      }
+    }
+  }
+}
+
+},{"creditcards":12}],17:[function(_dereq_,module,exports){
+(function (global){
+'use strict'
+
+var angular = (typeof window !== "undefined" ? window.angular : typeof global !== "undefined" ? global.angular : null)
+var creditcards = _dereq_('creditcards')
+var number = _dereq_('./number')
+var cvc = _dereq_('./cvc')
+var expiration = _dereq_('./expiration')
+
+module.exports = angular
+  .module('credit-cards', [])
+  .value('creditcards', creditcards)
+  .directive('ccNumber', number)
+  .directive('ccExp', expiration)
+  .directive('ccExpMonth', expiration.month)
+  .directive('ccExpYear', expiration.year)
+  .directive('ccCvc', cvc)
+  .name
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./cvc":14,"./expiration":15,"./number":16,"creditcards":12}]},{},[17])(17)
 });

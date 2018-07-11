@@ -12,13 +12,14 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests"Product.getByType
   ],
   "dependencies": {
-    "angular": "~1.*",
+    "angular": "~1.7.2",
     "fitvids": "~1.1.0",
     "skippr": "austenpayan/skippr#~1.1.0",
     "ng-file-upload": "~3.2.4",
-    "nanobar": "~0.2.0"
+    "nanobar": "~0.2.0",
+    "angular-animate": "^1.7.2"
   }
 }

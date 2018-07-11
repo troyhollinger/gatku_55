@@ -1,13 +1,16 @@
-app.controller('HearGoodStuffController', ['$scope', 'HearGoodStuff', function($scope, HearGoodStuff) {
+app.controller('HearGoodStuffController', [
+	'$scope', 'HearGoodStuff', '$exceptionHandler',
+	function($scope, HearGoodStuff, $exceptionHandler) {
 
 	$scope.email_address = '';
 
 	$scope.addEmailToMailingList = function() {
         HearGoodStuff.store({email: $scope.email_address})
-			.success(function(response) {
+			.then(function(response) {
                 $scope.email_address = '';
-            }).error(function(response) {
-            	//console.log(response);
+            }, function(error) {
+                $exceptionHandler(JSON.stringify(error));
+            	console.log('Something went wrong.');
 			});
 	}
 }]);

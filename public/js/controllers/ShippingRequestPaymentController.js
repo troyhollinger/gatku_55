@@ -5,13 +5,9 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 	$scope.success = false;
 
 	if (typeof(shippingRequestId) !== undefined) {
-
 		$scope.shippingRequestId = shippingRequestId;
-
 	} else {
-
 		$scope.shippingRequestId = null;
-
 	}
 
 	$scope.pay = function() {
@@ -23,35 +19,19 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 		StripeService.createToken(card).then(function(token) {
 
 			var data = {
-
 				shippingRequestId : $scope.shippingRequestId,
 				token : token
-
-			}
+			};
 		
 			ShippingRequest.pay(data).success(function(response) {
-
 				AlertService.broadcast('Success!', 'success');
 				$scope.success = true;
-
-			}).error(function(response) {
-                $exceptionHandler(JSON.stringify(response));
-				if ('error' in response.message.jsonBody) {
-
-					AlertService.broadcast(response.message.jsonBody.error.message, 'error');
-
-				} else {
-
-					AlertService.broadcast('Sorry, something went wrong on our end. We are fixing it soon!', 'error');					
-
-				}
-
+			}).error(function(error) {
+                $exceptionHandler(JSON.stringify(error));
+				AlertService.broadcast('Sorry, something went wrong on our end. We are fixing it soon!', 'error');
 			});
-
 		});
-
-	}
-
+	};
 
 	function extractCardDetails() {
 
@@ -63,17 +43,10 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 		card.cvc = $scope.card.securityCode;
 
 		if (typeof(shippingRequestId) !== undefined) {
-
 			card.name = shippingRequestFullName;
-
 		} else {
-
 			card.name = null;
-
 		}
-
 		return card;
-
 	}
-
 }]);

@@ -1,10 +1,12 @@
 {
   "name": "angular-credit-cards",
-  "version": "2.3.2",
+  "version": "2.3.5",
   "description": "Angular directives for formatting and validating credit card inputs",
   "main": "./src",
   "scripts": {
-    "test": "standard && karma start --single-run"
+    "test": "standard && zuul --phantom -- test/*.js",
+    "umd": "browserify -e . -s angularCreditCards -t [exposify --expose [ --angular=angular ] ] -p derequire/plugin > ./release/angular-credit-cards.js",
+    "preversion": "npm run umd && git add -A ../release/* && git commit -m 'UMD Build'"
   },
   "repository": {
     "type": "git",
@@ -26,49 +28,31 @@
   },
   "homepage": "https://github.com/bendrucker/angular-credit-cards",
   "devDependencies": {
-    "angular": "~1.3.4",
-    "angular-mocks": "~1.3.4",
-    "chai": "1",
-    "karma": "0.12",
-    "karma-browserify": "^1.0.0",
-    "karma-chai-sinon": "0",
-    "karma-cli": "0",
-    "karma-coverage": "0.2.6",
-    "karma-mocha": "0",
-    "karma-phantomjs-launcher": "0",
-    "mocha": "1",
-    "partialify": "~3.1.1",
-    "publicist": "~4.0.4",
-    "publicist-umd": "~1.0.2",
-    "sinon": "1",
-    "sinon-chai": "2",
-    "standard": "~3.7.3"
+    "angular": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "brfs": "~1.4.0",
+    "browserify": "~10.2.4",
+    "chai": "~3.0.0",
+    "derequire": "~2.0.0",
+    "exposify": "~0.4.1",
+    "phantomjs": "~1.9.17",
+    "sinon": "~1.15.3",
+    "sinon-chai": "~2.8.0",
+    "standard": "~4.2.1",
+    "zuul": "~3.0.0"
   },
   "dependencies": {
     "ap": "~0.2.0",
-    "babelify": "~6.0.2",
-    "browserify-shim": "~3.8.0",
-    "creditcards": "~1.5.0"
+    "creditcards": "~1.5.0",
+    "function-bind": "~1.0.2"
   },
   "peerDependencies": {
-    "angular": "~1.3.0"
+    "angular": ">=1.3 <1.5"
   },
-  "browserify": {
-    "transform": [
-      "babelify",
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "angular": "global:angular"
-  },
-  "publicist": {
-    "builds": {
-      "umd": {
-        "dest": "./release"
-      }
-    }
-  },
+  "files": [
+    "src/*.js",
+    "readme.md"
+  ],
   "standard": {
     "ignore": [
       "release/"

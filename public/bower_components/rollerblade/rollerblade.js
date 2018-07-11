@@ -131,14 +131,14 @@
 			document.ondragstart = function () { return false; };
 
 			_.image.mousedown(function(e) {
-				// e.preventDefault;
+				e.preventDefault;
 				if (!dragging) {
 					dragging = true;
 				}
 			});
 
 			$("body").mousemove(function(e) {
-				// e.preventDefault;
+				e.preventDefault;
 				if (dragging) {
 					var xcoord = e.clientX;
 
@@ -147,7 +147,7 @@
 			});
 
 			$("body").mouseup(function(e) {
-				// e.preventDefault;
+				e.preventDefault;
 				if(dragging) {
 					dragging = false;
 				}

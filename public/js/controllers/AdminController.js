@@ -1,6 +1,6 @@
 app.controller('AdminController',
-    ['$scope', 'Image', 'Product', 'Discount', 'Order', 'YouImage', 'AvailabilityType', 'AlertService', 'HomeSetting',
-        function($scope, Image, Product, Discount, Order, YouImage, AvailabilityType, AlertService,HomeSetting) {
+    ['$scope', 'Image', 'Product', 'Discount', 'Order', 'YouImage', 'AvailabilityType', 'AlertService', 'HomeSetting', '$exceptionHandler',
+        function($scope, Image, Product, Discount, Order, YouImage, AvailabilityType, AlertService, HomeSetting, $exceptionHandler) {
 
     $scope.init = function() {
         $scope.show('orders');
@@ -67,17 +67,19 @@ app.controller('AdminController',
     }
 
     function getProductsForPeriod() {
-        Product.forPeriod($scope.order_start_date, $scope.order_end_date).success(function(response) {
+        Product.forPeriod($scope.order_start_date, $scope.order_end_date).then(function(response) {
             countSoldItems(response.data);
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             console.log("Sorry, there was an error retrieving the products");
         });
     }
 
     function getAllProducts() {
-        Product.all().success(function(response) {
+        Product.all().then(function(response) {
             countSoldItems(response.data);
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             console.log("Sorry, there was an error retrieving the products");
         });
     }
@@ -94,9 +96,10 @@ app.controller('AdminController',
     }
 
     function getAvailabilityTypes() {
-        AvailabilityType.all().success(function(response) {
+        AvailabilityType.all().then(function(response) {
             $scope.availabilityTypes = response.data;
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             console.log("Something went wrong on our end");
         });
     }
@@ -106,12 +109,13 @@ app.controller('AdminController',
 
         nanobar.go(60);
 
-        Product.store($scope.newProduct).success(function(response) {
+        Product.store($scope.newProduct).then(function(response) {
             $scope.getProducts();
             $scope.reset();
             nanobar.go(100);
             AlertService.broadcast('Product saved!', 'success');
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             nanobar.go(100);
             AlertService.broadcast('There was a problem', 'error');
         });
@@ -139,12 +143,13 @@ app.controller('AdminController',
 
         nanobar.go(65);
 
-        Product.update(data.id, data).success(function(response) {
+        Product.update(data.id, data).then(function(response) {
             $scope.getProducts();
             $scope.reset();
             nanobar.go(100);
             AlertService.broadcast('Product updated!', 'success');
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             nanobar.go(100);
             AlertService.broadcast('There was a problem.', 'error');
         });
@@ -165,16 +170,14 @@ app.controller('AdminController',
 
         Image.upload(data).progress(function(evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        }).success(function(response) {
+        }).then(function(response) {
             $scope.newProduct[model] = response.data;
-
             nanobar.go(100);
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             nanobar.go(100);
         });
-
-    }
-
+    };
     
     $scope.reset = function() {
 
@@ -186,9 +189,10 @@ app.controller('AdminController',
     }
 
     function getTypes() {
-        Product.getTypes().success(function(response) {
+        Product.getTypes().then(function(response) {
             $scope.types = response.data;
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             console.log("Sorry, types could not be retrieved");
         });
     }
@@ -240,9 +244,10 @@ app.controller('AdminController',
 
     //Orders
     /*function getOrders() {
-        Order.all().success(function(response) {
+        Order.all().then(function(response) {
             $scope.orders = response.data;
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             console.log(response.message);
         });
     }*/
@@ -252,10 +257,11 @@ app.controller('AdminController',
     $scope.newYouImage = {};
 
     function getYouImages() {
-        YouImage.all().success(function(response) {
+        YouImage.all().then(function(response) {
             $scope.youImages = response.data;
             Squares.init();
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             console.log("There was an error getting the You images");
         });
     }
@@ -272,10 +278,11 @@ app.controller('AdminController',
 
         $scope.editState = true;
 
-        Image.upload(data).success(function(response) {
+        Image.upload(data).then(function(response) {
             $scope.newYouImage.image = response.data;
-        }).error(function(response) {
-            console.log(response.message);
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
+            console.log('Something went wrong.');
         });
     }
 
@@ -283,13 +290,13 @@ app.controller('AdminController',
         var nanobar = new Nanobar({ bg : '#fff' });
         nanobar.go(40);
 
-        YouImage.save($scope.newYouImage).success(function() {
+        YouImage.save($scope.newYouImage).then(function() {
             getYouImages();
             $scope.reset();
-
             nanobar.go(100);
-        }).error(function(response) {
-            console.log(response.message);
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
+            console.log('Something went wrong.');
         });
     }
 
@@ -299,10 +306,11 @@ app.controller('AdminController',
 
     // home settings
     function getHomeSettings() {
-        HomeSetting.all().success(function(response) {
+        HomeSetting.all().then(function(response) {
             $scope.homeSetting = response.data ? response.data : {};
             Squares.init();        
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             console.log("There was an error getting the home settings");
         });
     }
@@ -319,10 +327,11 @@ app.controller('AdminController',
 
         $scope.editState = true;
 
-        Image.upload(data).success(function(response) {
+        Image.upload(data).then(function(response) {
             console.log(model);
            $scope.homeSetting[model] = response.data;
-        }).error(function(response) {
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
             AlertService.broadcast('Sorry, there was an error, please try again', 'error');
         });
 
@@ -332,12 +341,13 @@ app.controller('AdminController',
         var nanobar = new Nanobar({ bg : '#fff' });
         nanobar.go(40);
 
-        HomeSetting.save($scope.homeSetting).success(function() {
+        HomeSetting.save($scope.homeSetting).then(function() {
             getHomeSettings();
             AlertService.broadcast('Photo was successfully updated.', 'success');
             nanobar.go(100);
-        }).error(function(response) {
-            console.log(response.message);
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
+            console.log('Something went wrong.');
         });
     }
 
@@ -349,8 +359,10 @@ app.controller('AdminController',
 
     //Discount part
     function fetchAllDiscounts() {
-        Discount.all().success(function(response) {
+        Discount.all().then(function(response) {
             $scope.discounts = response.data;
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
         });
     };
 
@@ -384,18 +396,20 @@ app.controller('AdminController',
             alert('This discount code is already in use. Please change code or update previous use.');
         } else {
             if (!data.created_at) {
-                Discount.store(data).success(function() {
+                Discount.store(data).then(function() {
                     AlertService.broadcast('Discount added!', 'success');
                     fetchAllDiscounts();
-                }).error(function(error) {
-                    AlertService.broadcast('There was a problem with Discounts adding: ' + error, 'error');
+                }, function(error) {
+                    $exceptionHandler(JSON.stringify(error));
+                    AlertService.broadcast('There was a problem with adding Discount.');
                 });
             } else {
-                Discount.update(data.code, data).success(function() {
+                Discount.update(data.code, data).then(function() {
                     AlertService.broadcast('Discount updated!', 'success');
                     fetchAllDiscounts();
-                }).error(function(error) {
-                    AlertService.broadcast('There was a problem with Discounts updates: ' + error, 'error');
+                }, function(error) {
+                    $exceptionHandler(JSON.stringify(error));
+                    AlertService.broadcast('There was a problem with Discount update.');
                 });
             }
 
@@ -421,11 +435,12 @@ app.controller('AdminController',
                 $scope.discounts.slice(discountIndex);
                 fetchAllDiscounts();
             } else {
-                Discount.remove(data.code).success(function() {
+                Discount.remove(data.code).then(function() {
                     AlertService.broadcast('Discount removed!', 'success');
                     fetchAllDiscounts();
                 }).error(function(error) {
-                    AlertService.broadcast('There was a problem with Discount remove: ' + error, 'error');
+                    $exceptionHandler(JSON.stringify(error));
+                    AlertService.broadcast('There was a problem with Discount removing.');
                 });
             }
         }

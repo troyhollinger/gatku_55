@@ -18,7 +18,7 @@ class AvailabilityController extends BaseController {
 			return \Response::json(['message' => 'Sorry, availability types could not be retrieved.'], 404);
 		}
 
-		return \Response::json(['data' => $availabilityTypes], 200);
+		return \Response::json($availabilityTypes, 200);
 	}
 
 }

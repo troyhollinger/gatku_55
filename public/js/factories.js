@@ -29,7 +29,6 @@ app.factory('AvailabilityType', ['$http', function($http) {
 app.factory('Product', ['$http', function($http) {
 
     return {
-
         all : function() {
             return $http.get('/product');
         },
@@ -44,47 +43,32 @@ app.factory('Product', ['$http', function($http) {
         },
 
         get : function(productId) {
-
             return $http.get('/product/get/' + productId)
-
         },
     
         getBySlug : function(slug) {
-
             return $http.get('/product/by/slug/' + slug);
-
         },
 
         store : function(data) {
-
             return $http.post('/product', data);
-
         },
 
         update : function(id, data) {
-
             return $http.put('/product/' + id, data);
-
         },
 
         getTypes : function() {
-
             return $http.get('/product/types');
-
         },
 
         getByType : function() {
-
             return $http.get('/product/by/type');
-
         },
 
         customerPhotos : function(productId) {
-
             return $http.get('/product/photos/' + productId);
-
         }
-
     }
 
 }]);

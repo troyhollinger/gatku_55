@@ -28,7 +28,7 @@ class DiscountController extends BaseController {
     {
         $request = $this->repository->all();
         if ($request === false) return \Response::json(['message' => 'Sorry, there was an error on our end'], 404);
-        return \Response::json(['message' => 'request was created', "data" => $request], 200);
+        return \Response::json($request, 200);
     }
 
     /**
@@ -53,7 +53,7 @@ class DiscountController extends BaseController {
         $input = \Request::all();
         $request = $this->repository->store($input);
         if ($request === false) return \Response::json(['message' => 'Sorry, there was an error with store discount'], 404);
-        return \Response::json(['message' => 'Discount was created', "data" => $request], 200);
+        return \Response::json($request, 200);
     }
 
     /**

@@ -33,7 +33,7 @@ class HomeSettingController extends BaseController {
 			return \Response::json(['message' => 'Sorry, home setting could not be retrieved.'], 404);
 		}
 
-		return \Response::json(['data' => $homeSettings], 200);
+		return \Response::json($homeSettings, 200);
 	}
 
 
@@ -120,6 +120,6 @@ class HomeSettingController extends BaseController {
 			return \Response::json(['message' => 'Sorry, something went wrong during the upload'], 404);
 		}
 
-		return \Response::json(['data' => $upload['imagePath']], 200);
+		return \Response::json($upload['imagePath'], 200);
 	}
 }

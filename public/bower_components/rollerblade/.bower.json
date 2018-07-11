@@ -1,14 +1,13 @@
 {
   "name": "rollerblade",
   "homepage": "https://github.com/austenpayan/rollerblade",
-  "_release": "c75c5644e1",
+  "_release": "416da2f4d1",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "c75c5644e1df4da1a9353ca66c654efe9e6f7c85"
+    "commit": "416da2f4d1bfecf791bd51a6b75bba971f043bb2"
   },
-  "_source": "git://github.com/austenpayan/rollerblade.git",
+  "_source": "https://github.com/austenpayan/rollerblade.git",
   "_target": "*",
-  "_originalSource": "austenpayan/rollerblade",
-  "_direct": true
+  "_originalSource": "austenpayan/rollerblade"
 }

@@ -1,4 +1,6 @@
-app.controller('AdminordersController', ['$scope', 'Order','$http', function($scope, Order, $http) {
+app.controller('AdminordersController', [
+    '$scope', 'Order','$http', '$exceptionHandler',
+    function($scope, Order, $http, $exceptionHandler) {
 
 	var gatkuOrder = this;
     gatkuOrder.orders = []; 
@@ -18,21 +20,24 @@ app.controller('AdminordersController', ['$scope', 'Order','$http', function($sc
         }catch(e){
 
         }
-        $http.get(Url).success(function(response){
-            $scope.orders = response.data;
-            gatkuOrder.orders = response.data;
+        $http.get(Url).then(function(response){
+            $scope.orders = response.data.orders;
+            gatkuOrder.orders = response.data.orders;
             gatkuOrder.total_count = response.total_count;
+        }, function(error) {
+            $exceptionHandler(JSON.stringify(error));
+            console.log('Something went wrong.');
         });
     };
     
-    gatkuOrder.getData(gatkuOrder.pageno); 
-    gatkuOrder.searchOrder = function(){ 
-        if($scope.order_start_date){
-             gatkuOrder.getData(1, $scope.order_start_date, $scope.order_end_date);    
-            }else{
-                alert('select start date');
-            }
-     };
+    gatkuOrder.getData(gatkuOrder.pageno);
+    gatkuOrder.searchOrder = function () {
+        if ($scope.order_start_date) {
+            gatkuOrder.getData(1, $scope.order_start_date, $scope.order_end_date);
+        } else {
+            alert('select start date');
+        }
+    };
 
 
     gatkuOrder.resetDateFilter = function() {

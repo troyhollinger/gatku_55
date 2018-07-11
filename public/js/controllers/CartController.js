@@ -9,7 +9,8 @@
 | $scope.validate method to reflect the changes.
 |
 */
-app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler',
+app.controller('CartController',
+    ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler',
     function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists, $exceptionHandler) {
 
     $scope.items = [];
@@ -237,20 +238,16 @@ app.controller('CartController', ['$scope', 'CartService', 'StripeService', 'Ord
                 token : token
             }
 
-            Order.store(data).success(function(response) {
+            Order.store(data).then(function(response) {
                 AlertService.broadcast('Success! Redirecting...', 'success');
                 $scope.show = false;
                 $scope.emptyCart();
                 $scope.enabled = true;
                 //window.location.replace("/thankyou");
-            }).error(function(response) {
-                $exceptionHandler(JSON.stringify(response));
-                // $scope.enabled = true;
-                if ('error' in response.message.jsonBody) {
-                    AlertService.broadcast(response.message.jsonBody.error.message, 'error');
-                } else {
-                    AlertService.broadcast('Sorry, something went wrong on our end. We are fixing it soon!', 'error');
-                }
+            }, function(error) {
+                $exceptionHandler(JSON.stringify(error));
+                AlertService.broadcast('Sorry, something went wrong on our end. We are fixing it soon!', 'error');
+                console.log('Something went wrong.');
             });
         });
     }

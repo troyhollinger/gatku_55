@@ -1,4 +1,6 @@
-app.controller('ProductController', ['$scope', 'Product', 'CartService', 'Size', 'AlertService', '$timeout', function($scope, Product, CartService, Size, AlertService, $timeout) {
+app.controller('ProductController', [
+	'$scope', 'Product', 'CartService', 'Size', 'AlertService', '$timeout', '$exceptionHandler',
+	function($scope, Product, CartService, Size, AlertService, $timeout, $exceptionHandler) {
 	$scope.fullSize = true;
 	$scope.loaded = false;
 	$scope.productAdded = false;
@@ -16,11 +18,12 @@ app.controller('ProductController', ['$scope', 'Product', 'CartService', 'Size',
 	}
 
 	$scope.getProduct = function() {
-		Product.get(productId).success(function(response) {
+		Product.get(productId).then(function(response) {
 			$scope.product = response.data;
 			parseSizeableAddons();
 			$scope.loaded = true;
-		}).error(function(response) {
+		}, function(error) {
+            $exceptionHandler(JSON.stringify(error));
 			AlertService.broadcast('Sorry, there is an error. Your page may have not rendered correctly.', 'error');
 		});
 	}
@@ -113,7 +116,7 @@ app.controller('ProductController', ['$scope', 'Product', 'CartService', 'Size',
 				}
 
 				if (typeof slug !== 'undefined') {
-					Size.getBySlug(slug).success(function(response) {
+					Size.getBySlug(slug).then(function(response) {
 						if (typeof response === 'object') {
                             if (response.data) {
                                 if (response.data.hasOwnProperty('price')) {
@@ -124,7 +127,8 @@ app.controller('ProductController', ['$scope', 'Product', 'CartService', 'Size',
                                 }
                             }
 						}
-					}).error(function(response) {
+					}, function(error) {
+                        $exceptionHandler(JSON.stringify(error));
 						$scope.product.addons.splice(i, 1);
 					});	
 				}

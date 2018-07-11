@@ -1,4 +1,6 @@
-app.controller('StoreController', ['$scope', 'Product', function($scope, Product) {
+app.controller('StoreController', [
+	'$scope', 'Product', '$exceptionHandler',
+	function($scope, Product, $exceptionHandler) {
 
 	$scope.heads = [];
 
@@ -18,8 +20,7 @@ app.controller('StoreController', ['$scope', 'Product', function($scope, Product
 
 	$scope.getStore = function() {
 
-		Product.getByType().success(function(response) {
-
+		Product.getByType().then(function(response) {
             $scope.heads = response.data['heads'];
             $scope.poles = response.data['poles'];
             $scope.shrinker = response.data['shrinker'];
@@ -29,13 +30,10 @@ app.controller('StoreController', ['$scope', 'Product', function($scope, Product
             $scope.apparel = response.data['apparel'];
             $scope.glasses = response.data['glasses'];
             $scope.packages = response.data['packages'];
-
-		}).error(function(response) {
-
-			console.log("Something went wrong getting the store data");
-
+		}, function(error) {
+            $exceptionHandler(JSON.stringify(error));
+			console.log("Something went wrong getting the store data.");
 		})
-
 	}
 
 	$scope.init();

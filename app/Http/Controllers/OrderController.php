@@ -30,7 +30,7 @@ class OrderController extends BaseController {
 			return \Response::json(['message' => 'Sorry, there was an error'], 404);
 		}
 		$totalCount = \DB::table('orders')->count();
-		return \Response::json(['data' => $orders, 'total_count' => $totalCount], 200);
+		return \Response::json(['orders' => $orders, 'total_count' => $totalCount], 200);
 	}
 
 
@@ -47,7 +47,7 @@ class OrderController extends BaseController {
 		}
 		$orders = $this->assignHumanReadableTimestampsAndOrderAmount($orders);
 		
-		return \Response::json(['data' => $orders, 'total_count' => $totalCount], 200);
+		return \Response::json(['orders' => $orders, 'total_count' => $totalCount], 200);
 	}
 	
 	/**

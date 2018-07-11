@@ -16,7 +16,8 @@ angular
 var app = angular.module('gatku', [
 	'angularFileUpload',
 	'ipCookie',
-	'ngAnimate',
+    'ngAnimate',
+    'ngRoute',
 	'angular-stripe',
 	'ngTouch',
 	'credit-cards',

@@ -59,7 +59,9 @@ return {
 
 
 
-app.directive('hoverCard', ['$compile', '$window', 'Product', '$filter', function($compile, $window, Product, $filter) {
+app.directive('hoverCard', [
+    '$compile', '$window', 'Product', '$filter', '$exceptionHandler',
+    function($compile, $window, Product, $filter, $exceptionHandler) {
 
     return {
 
@@ -102,19 +104,13 @@ app.directive('hoverCard', ['$compile', '$window', 'Product', '$filter', functio
             }
 
             $scope.fetchProduct = function() {
-
-                Product.getBySlug(attrs.slug).success(function(response) {
-
+                Product.getBySlug(attrs.slug).then(function(response) {
                     $scope.product = response.data;
-
                     $scope.productFetched = true;
-
                     $scope.positionCard();
-
-                }).error(function(response) {
-
-                    console.log(response.message);
-
+                }, function(error) {
+                    $exceptionHandler(JSON.stringify(error));
+                    console.log('Something went wrong.');
                 });
 
             }
@@ -220,29 +216,19 @@ app.directive('productBuyers', ['Product', function(Product) {
             '</div>',
 
         link : function($scope, element, attrs) {
-
             $scope.photos = [];
 
             function getImages() {
-
-                Product.customerPhotos(attrs.productId).success(function(response) {
-
+                Product.customerPhotos(attrs.productId).then(function(response) {
                     $scope.photos = response.data;
-
                     Squares.init();
-
-                }).error(function(response) {
-
+                }, function(error) {
+                    $exceptionHandler(JSON.stringify(error));
                     console.log("There was a problem getting the product images");
-
                 });
-
             }
-
             getImages();
-
         }
-
     }
 
 }]);
@@ -537,23 +523,19 @@ app.directive('shippingRequest', ['$window', '$compile','ShippingRequest', 'Aler
 
                 nanobar.go(60);
 
-                ShippingRequest.send(data).success(function(response) {
+                ShippingRequest.send(data).then(function(response) {
                     $scope.order.shipping = response.data;
                     $scope.open = false;
                     nanobar.go(100);
                     AlertService.broadcast('Shipping Request Sent!', 'success');
-
-                }).error(function(response) {
-
+                }, function(error) {
+                    $exceptionHandler(JSON.stringify(error));
                     nanobar.go(100);
                     AlertService.broadcast('Sorry, there was a problem.', 'error');
-
                 });
-
             }
 
             init();
-
         }
 
     }
@@ -622,13 +604,14 @@ app.directive('shippingTrack', ['$window', '$compile','ShippingTrack', 'AlertSer
  
                 nanobar.go(60);
 
-                ShippingTrack.send(data).success(function(response) {
+                ShippingTrack.send(data).then(function(response) {
                     $scope.order.tracking = response.data;
                     $scope.open = false;
                     shippingTrackPanel.remove();
                     nanobar.go(100);
                     AlertService.broadcast('Tracking Number set!', 'success');
-                }).error(function(response) {
+                }, function(error) {
+                    $exceptionHandler(JSON.stringify(error));
                     nanobar.go(100);
                     AlertService.broadcast('Sorry, there was a problem.', 'error');
                 });
