@@ -64,12 +64,14 @@ Route::resource('hear-good-stuff', 'HearGoodStuffController');
 Route::post('home-image/upload', ['as' => 'home-image.upload', 'uses' => 'HomeSettingController@upload']);
 
 Route::get('thankyou', ['as' => 'thankyou', function() {
-    return View::make('pages.thankyou');
+    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+    return View::make('pages.thankyou')->with('homeSetting',  $homeSetting);
 }]);
 
 Route::get('thespear', ['as' => 'thespear', function() {
     $homeSettingThespear = HomeSetting::orderBy('id', 'desc')->first();
-    return View::make('pages.thespear')->with('thespear',  $homeSettingThespear);;
+    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+    return View::make('pages.thespear')->with('thespear',  $homeSettingThespear)->with('homeSetting',  $homeSetting);
 }]);
 
 Route::get('images', function() {
@@ -91,7 +93,8 @@ Route::get('quote', ['as' => 'quote', 'uses' => 'QuoteController@index']);
 Route::post('quote', ['as' => 'quote.post', 'uses' => 'QuoteController@sendEmail']);
 
 Route::get('media', ['as' => 'media', function() {
-    return View::make('pages.media');
+    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+    return View::make('pages.media')->with('homeSetting',  $homeSetting);
 }]);
 
 Route::get('availability-type', ['as' => 'availabilityType.index', 'uses' => 'AvailabilityController@index']);
