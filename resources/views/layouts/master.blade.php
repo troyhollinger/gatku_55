@@ -1,3 +1,6 @@
+<!-- Keep this php code in first line -->
+<?php $homeSetting = \Gatku\HomeSetting::orderBy('id', 'desc')->first(); ?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
