@@ -44,16 +44,7 @@
         */
 
         -->
-        <!-- Bugsnag for JavaScript See: https://docs.bugsnag.com/platforms/browsers/js/ -->
-        <script src="//d2wy8f7a9ursnm.cloudfront.net/v4/bugsnag.min.js"></script>
-        <script>window.bugsnagClient = bugsnag('a76deca11eb34ca6b18e6010ec00a39d')</script>
 
-        <link rel="stylesheet" href="{{ asset('production/app.css?v=' . config('app_version.version') ) }}">
-        <script src="{{ asset('js/vendor/jquery-1.10.2.min.js?v=' . config('app_version.version')) }}"></script>
-        <script src="{{ asset('js/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js?v=' . config('app_version.version')) }}"></script>
-        <link rel="stylesheet" href="{{ asset('js/vendor/jquery-ui-1.12.1.custom/jquery-ui.min.css?v=' . config('app_version.version')) }}">
-        <script src="{{ asset('bower_components/angular/angular.min.js?v=' . config('app_version.version') ) }}"></script>
-        <script src="{{ asset('js/vendor/modernizr-2.6.2.min.js?v=' . config('app_version.version') ) }}"></script>
         <script>
             var currentRoute = '{!! Route::currentRouteName() !!}';
             var layoutType = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->type->slug . "'" : "null;" !!};
@@ -66,6 +57,18 @@
             }
 
         </script>
+
+        <!-- Bugsnag for JavaScript See: https://docs.bugsnag.com/platforms/browsers/js/ -->
+        <script src="//d2wy8f7a9ursnm.cloudfront.net/v4/bugsnag.min.js"></script>
+{{--<script>window.bugsnagClient = bugsnag('a76deca11eb34ca6b18e6010ec00a39d')</script>--}}
+
+        <link rel="stylesheet" href="{{ asset('production/app.css?v=' . config('app_version.version') ) }}">
+        <link rel="stylesheet" href="{{ asset('bower_components/jquery-ui/themes/base/jquery-ui.min.css?v=' . config('app_version.version')) }}">
+
+        <script src="{{ asset('js/vendor/modernizr-2.6.2.min.js?v=' . config('app_version.version') ) }}"></script>
+
+        <!-- Load main app.js -->
+        <script src="{!! asset('production/app.js?v=' . config('app_version.version')) !!}"></script>
 
         <!-- FRESHCHAT WIDGET - loading - start -->
         <script src="https://wchat.freshchat.com/js/widget.js"></script>
@@ -123,11 +126,6 @@
         <alerter></alerter>
 
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-        <script src="{!! asset('bower_components/ng-file-upload/angular-file-upload.js?v=' . config('app_version.version')) !!}"></script>
-        @if(isset($product) && $product->type->slug === 'apparel')
-        <script src="{!! asset('bower_components/rollerblade/rollerblade.min.js?v=' . config('app_version.version')) !!}"></script>
-        @endif
-
 
         @if(App::environment('production'))
             <script>
@@ -139,9 +137,6 @@
               ga('send', 'pageview');
             </script>
         @endif
-
-        <!-- Load main app.js -->
-        <script src="{!! asset('production/app.js?v=' . config('app_version.version')) !!}"></script>
 
         <!-- FRESHCHAT WIDGET - loading - start -->
         <script>
