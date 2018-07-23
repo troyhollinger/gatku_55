@@ -34,14 +34,15 @@ var BlurbSlider = {
 			navType : 'bubble'
 		});
 	}
-}
+};
 
 var Mast = {
-	init : function() {
-		requestAnimationFrame(Mast.track);
+	init: function() {
+        Mast.element = jQuery(".mast");	//this works
+        requestAnimationFrame(Mast.track);
 	},
-	element : $(".mast"),
-	track : function() {
+	element: $(".mast"), //Make = assignment in init function this style is not working
+	track: function() {
 		var distance = $(document).scrollTop();
 		var height = Mast.element.height();
 		var windowHeight = $(window).height();
@@ -53,14 +54,15 @@ var Mast = {
 		}
 		requestAnimationFrame(Mast.track);
 	}
-}
+};
 
 var MobileMast = {
-	init : function() {
+	init: function() {
+        MobileMast.element = $(".mobile-mast"); //this works
 		requestAnimationFrame(MobileMast.track);
 	},
-	element : $(".mobile-mast"),
-	track : function() {
+	element: $(".mobile-mast"), //Make = assignment in init function this style is not working
+	track: function() {
 		var distance = $(document).scrollTop();
 		var height = MobileMast.element.height();
 		var windowHeight = $(window).height();
@@ -72,7 +74,7 @@ var MobileMast = {
 		}
 		requestAnimationFrame(MobileMast.track);
 	}
-}
+};
 
 var Squares = {
 	init : function() {
@@ -88,21 +90,22 @@ var Squares = {
 		});
 		squares = null;
 	}
-}
+};
 
 var PurchaseColumn = {
-	init : function() {
+	init: function() {
+        PurchaseColumn.element = $(".product-column-right");
 		if ($(window).width() > 1300) {
 			this.parent = this.element.parent();
 			this.parentHeight = this.parent.height();
-			this.initialOffsetTop = this.element.offset().top;
+			this.initialOffsetTop = this.element.initialOffsetTop;
 			this.elementHeight = this.element.height();
 
 			requestAnimationFrame(PurchaseColumn.stick);			
 		}
 	},
-	element : $(".product-column-right"),
-	parent : null,
+	element: $(".product-column-right"),
+	parent: null,
 	parentHeight : null,
 	initialOffsetTop : 0,
 	elementHeight : null,
@@ -126,7 +129,9 @@ var PurchaseColumn = {
 }
 
 var PoleScroll = {
-	init : function() {
+	init: function() {
+
+        PoleScroll.element = $(".scroller");
 		var _ = this;
 
 		_.scrollPosition();
@@ -135,8 +140,8 @@ var PoleScroll = {
 			_.scrollPosition();
 		}, 1000);
 	},
-	element : $(".scroller"),
-	scrollPosition : function() {
+	element: $(".scroller"),
+	scrollPosition: function() {
 		var scroller = $(".scroller");
 		var windowWidth = $(window).width();
 
@@ -306,35 +311,26 @@ $(document).ready(function() {
 	Squares.init();
 
 	if (currentRoute === 'media') {
-
 		Grid.init();
-
 	}
 
 	if (currentRoute === 'home' || currentRoute === 'australia') {
-
 		Mast.init();
 		MobileMast.init();
 		// You.init();
 		BlurbSlider.init();
-
 	}
 
 	if (currentRoute === 'product.show') {
-
 		PurchaseColumn.init();
-
 	}
 
 	if (layoutType === 'apparel' && slug !== null) {
-
 		ApparelRotator.init(slug);
-
 	}
 
 	// Smooth scrolling to anchor tag
 	$('a[href*=#]:not([href=#])').on('click', function() {
-
 	    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 
 			var target = $(this.hash);
