@@ -1,18 +1,13 @@
 app.config(function($routeProvider) {
 
-    console.log('This is executed');
-
     $routeProvider
-        .when("/admin/main", {
-            templateUrl : "main.htm"
+        .when('/orders', {
+            templateUrl : "angular-routes/orders.html"
         })
-        .when("/red", {
-            templateUrl : "red.htm"
+        .when('/products', {
+            templateUrl : "angular-routes/products.html"
         })
-        .when("/green", {
-            templateUrl : "green.htm"
-        })
-        .when("/blue", {
-            templateUrl : "blue.htm"
+        .otherwise({
+            redirectTo: '/'
         });
-});
+})

@@ -27,6 +27,12 @@ var app = angular.module('gatku', [
 ]);
 
 app.config(function(stripeProvider) {
+app.config(function(stripeProvider, $locationProvider) {
+
+    //Need to use following line to avoid conflict with jQuery
+	//In this case use href="#path" instead of href="#!path"
+	//This hack works for: $routeProvider
+    $locationProvider.hashPrefix('');
 	if (CONFIG.environment === 'production') {
 		stripeProvider.setPublishableKey('pk_live_5MrQVqT1OSrL1lyeYe54NWgs');
 	} else {
