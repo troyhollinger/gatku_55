@@ -12,6 +12,7 @@ module.exports = function(grunt) {
                     'bower_components/skippr/js/jquery.skippr.js',
                     'bower_components/fancybox-plus/dist/jquery.fancybox-plus.js',
                     'bower_components/nanobar/nanobar.js',
+                    'bower_components/bootstrap/dist/js/bootstrap.min.js',
                     'bower_components/angular/angular.min.js',
                     'bower_components/angular-cookie/angular-cookie.js',
                     'bower_components/angular-animate/angular-animate.js',
@@ -56,13 +57,14 @@ module.exports = function(grunt) {
             combine : {
                 files : {
                     'production/app.css' : [
-                        'css/bootstrap/*.min.css',
+                        'bower_components/bootstrap/dist/css/bootstrap.min.css',
                         'css/font-awesome.min.css',
                         'css/reset.css',
                         'css/MyFontsWebfontsKit.css',
                         'bower_components/skippr/css/jquery.skippr.css',
                         'bower_components/rollerblade/rollerblade.css',
                         'bower_components/fancybox-plus/css/jquery.fancybox-plus.css',
+                        'bower_components/jquery-ui/themes/base/jquery-ui.min.css',
                         'css/style.css'
                     ]
                 }

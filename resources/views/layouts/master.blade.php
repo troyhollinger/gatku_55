@@ -63,8 +63,6 @@
 {{--<script>window.bugsnagClient = bugsnag('a76deca11eb34ca6b18e6010ec00a39d')</script>--}}
 
         <link rel="stylesheet" href="{{ asset('production/app.css?v=' . config('app_version.version') ) }}">
-        <link rel="stylesheet" href="{{ asset('bower_components/jquery-ui/themes/base/jquery-ui.min.css?v=' . config('app_version.version')) }}">
-
         <script src="{{ asset('js/vendor/modernizr-2.6.2.min.js?v=' . config('app_version.version') ) }}"></script>
 
         <!-- Load main app.js -->
