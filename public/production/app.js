@@ -13749,7 +13749,7 @@ app.config(function($routeProvider) {
             templateUrl : "angular-routes/products.html"
         })
         .otherwise({
-            redirectTo: '/'
+            templateUrl: 'angular-routes/tab-not-supported.html'
         });
 })
 app.controller('AdminController',
