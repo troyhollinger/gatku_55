@@ -1,0 +1,53 @@
+<h1>Discounts</h1>
+
+<br>
+
+<div class="order-search">
+
+    <div>
+        <button type="button"
+                class="btn btn-success"
+                ng-click="addDiscount()">Add Discount
+        </button>
+    </div>
+
+    <br>
+
+    <table class="admin-products-table">
+        <thead>
+        <tr>
+            <th>Discount code</th>
+            <th>Discount [%]</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="discount in discounts track by $index">
+            <td>
+                <input type="text"
+                       ng-change="discountRowChanged($index)"
+                       ng-model="discount.code"
+                       ng-disabled="discount.code && discount.created_at">
+            </td>
+            <td>
+                <input type="text"
+                       ng-change="discountRowChanged($index)"
+                       ng-model="discount.discount">
+            </td>
+            <td>
+                <button type="button"
+                        class="btn btn-success"
+                        ng-disabled="!discount.changed"
+                        ng-click="discountUpdate($index)">{{getSaveUpdateButtonCaption(discount)}}
+                </button>
+                &nbsp;
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="discountRemove($index)">Remove
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

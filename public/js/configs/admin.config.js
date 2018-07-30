@@ -1,13 +1,28 @@
 app.config(function($routeProvider) {
 
     $routeProvider
+        .when('/discounts', {
+            templateUrl : 'js/app/admin/discounts/discounts.html',
+            controller: 'AdminDiscountsController'
+        })
+        .when('/home-settings', {
+            templateUrl : "js/app/admin/home-settings/home-settings.html"
+        })
         .when('/orders', {
-            templateUrl : "angular-routes/orders.html"
+            templateUrl : 'js/app/admin/orders/orders.html',
+            controller: 'AdminOrdersController'
         })
         .when('/products', {
-            templateUrl : "angular-routes/products.html"
+            templateUrl : 'js/app/admin/products/products.html',
+            controller: 'AdminProductsController'
+        })
+        .when('/videos', {
+            templateUrl : "js/app/admin/videos/videos.html"
+        })
+        .when('/you', {
+            templateUrl : "js/app/admin/you/you.html"
         })
         .otherwise({
-            templateUrl: 'angular-routes/tab-not-supported.html'
+            templateUrl: 'js/app/admin/tab-not-supported.html'
         });
 })

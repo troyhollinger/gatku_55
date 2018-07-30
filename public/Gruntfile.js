@@ -31,6 +31,7 @@ module.exports = function(grunt) {
                     'js/checklist-model.js',
                     'js/configs/*.js',
                     'js/controllers/*.js',
+                    'js/app/**/*.js',
                     'js/main.js'
                 ],
                 dest: 'production/app.js'
@@ -76,7 +77,8 @@ module.exports = function(grunt) {
                     'js/*.js',
                     'js/configs/*.js',
                     'js/controllers/*.js',
-                    'js/services/*.js'
+                    'js/services/*.js',
+                    'js/app/**/*.js'
                 ],
                 tasks: ['concat', 'uglify'],
                 options: {

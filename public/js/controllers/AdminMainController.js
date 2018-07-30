@@ -1,4 +1,4 @@
-app.controller('AdminController',
+app.controller('AdminMainController',
     ['$scope', 'Image', 'Product', 'Discount', 'Order', 'YouImage', 'AvailabilityType', 'AlertService', 'HomeSetting', '$exceptionHandler',
         function($scope, Image, Product, Discount, Order, YouImage, AvailabilityType, AlertService, HomeSetting, $exceptionHandler) {
 
@@ -453,7 +453,11 @@ app.controller('AdminController',
     //Discount part - end
 
     $scope.adminLogout = function() {
-        window.location.replace('/logout');
+        var r = confirm("Do you want to logout?");
+
+        if (r === true) {
+            window.location.replace('/logout');
+        }
     };
 
     $scope.init();
