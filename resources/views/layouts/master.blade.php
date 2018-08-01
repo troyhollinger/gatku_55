@@ -62,6 +62,7 @@
         <script src="//d2wy8f7a9ursnm.cloudfront.net/v4/bugsnag.min.js"></script>
 {{--<script>window.bugsnagClient = bugsnag('a76deca11eb34ca6b18e6010ec00a39d')</script>--}}
 
+
         <link rel="stylesheet" href="{{ asset('production/app.css?v=' . config('app_version.version') ) }}">
         <script src="{{ asset('js/vendor/modernizr-2.6.2.min.js?v=' . config('app_version.version') ) }}"></script>
 
@@ -136,6 +137,7 @@
             </script>
         @endif
 
+        @if(Route::currentRouteName() !== 'admin.index')
         <!-- FRESHCHAT WIDGET - loading - start -->
         <script>
             window.fcWidget.init({
@@ -144,5 +146,6 @@
             });
         </script>
         <!-- FRESHCHAT WIDGET - loading - start -->
+        @endif;
     </body>
 </html>

@@ -43,13 +43,20 @@ class YouImageController extends BaseController {
 	 */
 	public function store() {
 		try {
-			$productIds = \Request::get('products');
-			foreach ($productIds as $productId) {
-				$image = new YouImage;
-				$image->image = \Request::get('image');
-				$image->productId = $productId;
-				$image->save();	
-			}
+			//Create YouImage object
+            $image = new YouImage;
+            $image->image = \Request::get('image');
+
+            $productIds = \Request::get('products');
+			if ($productIds) {
+                foreach ($productIds as $productId) {
+                    $image->productId = $productId;
+                    $image->save();
+                }
+            } else {
+			    $image->save();
+            }
+
 		} catch (\Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
