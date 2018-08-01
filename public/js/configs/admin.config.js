@@ -20,8 +20,9 @@ app.config(function($routeProvider) {
             templateUrl : 'js/app/admin/products/AdminProducts.html',
             controller: 'AdminProductsController'
         })
-        .when('/you', {
-            templateUrl : 'js/app/admin/you/AdminYou.html',
-            controller: 'AdminYouController'
+        .when('/images', {
+            templateUrl : 'js/app/admin/you/AdminImages.html',
+            controller: 'AdminImagesController',
+            controllerAs: '$ctrl'
         });
 });

@@ -26,9 +26,9 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#you">
-                <i class="fa fa-user"></i>
-                &nbsp;You
+            <a class="nav-link" data-toggle="tab" href="#images">
+                <i class="fa fa-picture-o"></i>
+                &nbsp;Images
             </a>
         </li>
         <li class="nav-item">

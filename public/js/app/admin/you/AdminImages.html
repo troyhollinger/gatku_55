@@ -1,0 +1,41 @@
+<h1>Image Manager</h1>
+
+<div class="admin-sub-section" ng-cloak>
+
+    <div class="button success-bg"
+         ng-hide="$ctrl.editState"
+         ng-file-select="$ctrl.uploadYouImage($files)">Upload New
+    </div>
+
+    <span ng-show="$ctrl.editState" class="edit-indicator">Editing You Image</span>
+
+    <div class="admin-you-image-staging" ng-show="$ctrl.editState">
+        <div class="upload-field"
+             ng-style="{'background-image':'url(' + $ctrl.newYouImage.image + ')'}">
+        </div>
+
+        <label>Select Products</label>
+
+        <div class="you-image-checkbox-container" ng-repeat="product in $ctrl.products">
+            <input type="checkbox"
+                   checklist-model="$ctrl.newYouImage.products"
+                   checklist-value="product.id">
+            &nbsp;<span class="uppercase">{{ product.name }}</span>
+        </div>
+
+        <div class="button success-bg" ng-click="$ctrl.saveYouImage()">Save</div>
+        <div class="button error-bg" ng-click="$ctrl.reset()">Cancel</div>
+    </div>
+</div>
+
+<div class="admin-sub-section">
+
+    <div class="grid-container">
+        <div class="grid-square square" ng-repeat="youImage in $ctrl.youImages"
+             ng-style="{'background-image':'url(' + youImage.image + ')'}"></div>
+        <div class="grid-square square"
+             ng-repeat="youImage in $ctrl.youImages"
+             back-img="{{ youImage.image }}"></div>
+        <div class="clear"></div>
+    </div>
+</div>

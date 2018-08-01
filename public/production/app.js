@@ -13761,9 +13761,10 @@ app.config(function($routeProvider) {
             templateUrl : 'js/app/admin/products/AdminProducts.html',
             controller: 'AdminProductsController'
         })
-        .when('/you', {
-            templateUrl : 'js/app/admin/you/AdminYou.html',
-            controller: 'AdminYouController'
+        .when('/images', {
+            templateUrl : 'js/app/admin/you/AdminImages.html',
+            controller: 'AdminImagesController',
+            controllerAs: '$ctrl'
         });
 });
 
@@ -15730,16 +15731,19 @@ app.controller('AdminProductsController',
 
 
 (function () {
-    app.controller('AdminYouController', AdminYouController);
+    app.controller('AdminImagesController', AdminImagesController);
 
-    function AdminYouController($scope, YouImage, Image, $exceptionHandler) {
+    function AdminImagesController($scope, YouImage, Image, Product, $exceptionHandler) {
 
-        $scope.youImages = [];
-        $scope.newYouImage = {};
+        var $ctrl = this;
+
+        $ctrl.youImages = [];
+        $ctrl.products = [];
+        $ctrl.newYouImage = {};
 
         function getYouImages() {
             YouImage.all().then(function (response) {
-                $scope.youImages = response.data;
+                $ctrl.youImages = response.data;
                 Squares.init();
             }, function (error) {
                 $exceptionHandler(JSON.stringify(error));
@@ -15747,7 +15751,16 @@ app.controller('AdminProductsController',
             });
         }
 
-        $scope.uploadYouImage = function ($files) {
+        function getAllProducts() {
+            Product.all().then(function(response) {
+                $ctrl.products = response.data;
+            }, function(error) {
+                $exceptionHandler(JSON.stringify(error));
+                console.log("Sorry, there was an error retrieving the products");
+            });
+        }
+
+        $ctrl.uploadYouImage = function ($files) {
             var file = $files[0];
 
             if (!file) return false;
@@ -15755,25 +15768,25 @@ app.controller('AdminProductsController',
             var data = {
                 url: '/you-image/upload',
                 file: file
-            }
+            };
 
-            $scope.editState = true;
+            $ctrl.editState = true;
 
             Image.upload(data).then(function (response) {
-                $scope.newYouImage.image = response.data;
+                $ctrl.newYouImage.image = response.data;
             }, function (error) {
                 $exceptionHandler(JSON.stringify(error));
                 console.log('Something went wrong.');
             });
         };
 
-        $scope.saveYouImage = function () {
+        $ctrl.saveYouImage = function () {
             var nanobar = new Nanobar({bg: '#fff'});
             nanobar.go(40);
 
-            YouImage.save($scope.newYouImage).then(function () {
+            YouImage.save($ctrl.newYouImage).then(function () {
                 getYouImages();
-                $scope.reset();
+                $ctrl.reset();
                 nanobar.go(100);
             }, function (error) {
                 $exceptionHandler(JSON.stringify(error));
@@ -15781,17 +15794,20 @@ app.controller('AdminProductsController',
             });
         };
 
-        $scope.clearNewYouImage = function () {
-            $scope.newYouImage = false;
+        $ctrl.clearNewYouImage = function () {
+            $ctrl.newYouImage = false;
         };
 
-        $scope.reset = function() {
-            $scope.newYouImage = {};
-            $scope.editState = false;
-            $scope.editingNew = true;
+        $ctrl.reset = function() {
+            $ctrl.newProduct = {};
+            $ctrl.newYouImage = {};
+            $ctrl.editState = false;
+            $ctrl.editingNew = true;
+
         };
 
         getYouImages();
+        getAllProducts();
     }
 }());
 
