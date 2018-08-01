@@ -1,11 +1,11 @@
-<h1>Orders</h1>
+<h1>Orders Manager</h1>
 
-<div class="order-search">
+<div class="order-search" ng-cloak>
     <div class="ord-src">
         <label>Start From</label>
         <input style="width: 150px;"
                class="date-ord-input"
-               placeholder="<?php echo date('Y-m-d')?>"
+               placeholder="{{$ctrl.placeholderToday}}"
                type="text"
                ng-model="order_start_date"
                datepickerstartdate/>
@@ -14,18 +14,18 @@
         <label>End To</label>
         <input style="width: 150px;"
                class="date-ord-input"
-               placeholder="<?php echo date('Y-m-d')?>"
+               placeholder="{{$ctrl.placeholderToday}}"
                type="text"
                ng-model="order_end_date"
                datepickerenddate/>
     </div>
     <div class="ord-src">
         <div class="button success-bg"
-             ng-click="data.searchOrder()">Search Order
+             ng-click="$ctrl.searchOrder()">Search Order
         </div>
     </div>
-    <div class="ord-src" ng-show="order_start_date || order_end_date">
-        <div class="button danger-bg" ng-click="data.resetDateFilter()">Reset range
+    <div class="ord-src" ng-show="$ctrl.order_start_date || $ctrl.order_end_date">
+        <div class="button danger-bg" ng-click="$ctrl.resetDateFilter()">Reset range
         </div>
     </div>
 </div>
@@ -39,7 +39,7 @@
         <th>Date</th>
     </tr>
 
-    <tr dir-paginate="order in orders|itemsPerPage:15" total-items="data.total_count">
+    <tr dir-paginate="order in $ctrl.orders|itemsPerPage:15" total-items="$ctrl.total_count">
         <td>
             <span class="brand">{{ order.number }}</span>
             <br>
@@ -63,7 +63,10 @@
             </ul>
         </td>
         <td>
-            <div class="button info-bg">Print Label</div>
+            <!-- @TODO Make decision what to do with 'Print Label' button. -->
+            <!-- What 'Print Label' button should do. At the moment there is not bind any functionality. Commented for now.-->
+            <!--<div class="button info-bg">Print Label</div>-->
+
             <shipping-request order="order" shipping="order.shipping"></shipping-request>
             <div ng-if="!order.tracking" style="margin-right: 5px;float:left;">
                 <shipping-track order="order" tracking=""></shipping-track>
@@ -106,5 +109,5 @@
 <dir-pagination-controls max-size="8"
                          direction-links="true"
                          boundary-links="true"
-                         on-page-change="data.getData(newPageNumber)" >
+                         on-page-change="$ctrl.getData(newPageNumber)" >
 </dir-pagination-controls>

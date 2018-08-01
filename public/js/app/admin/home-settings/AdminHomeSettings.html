@@ -1,0 +1,124 @@
+<h1>Home Settings</h1>
+
+<div class="admin-sub-section"  ng-cloak>
+
+    <form name="home-setting" class="home-setting-form">
+
+        <!-- upload mobile image -->
+        <label>Logo</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.logo + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.logo"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.logo" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'logo')">
+        </div>
+
+        <label>Button Color</label>
+        <input style="width: 150px;" placeholder="#000000" type="text" ng-model="$ctrl.homeSetting.button_color">
+
+        <label>Home Image</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.image + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.mobile_image"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.image" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'image')">
+            </div>
+
+        <label>Mobile Image</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.mobile_image + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.mobile_image"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.mobile_image" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'mobile_image')">
+        </div>
+
+
+        <label>On Site Live Til</label>
+        <input type="text" ng-model="$ctrl.homeSetting.image_info">
+
+        <label>Image Credit</label>
+        <input type="text" ng-model="$ctrl.homeSetting.image_credit">
+
+        <label>Slide Show Text #1</label>
+        <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_1">
+        <small>* To not display leave blank.</small>
+
+        <label>Slide Show Text #2</label>
+        <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_2">
+        <small>* To not display leave blank.</small>
+
+        <label>Slide Show Text #3</label>
+        <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_3">
+        <small>* To not display leave blank.</small>
+
+        <label>Slide Show Text #4</label>
+        <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_4">
+        <small>* To not display leave blank.</small>
+
+        <label>Slide Show Text #5</label>
+        <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_5">
+        <small>* To not display leave blank.</small>
+
+        <label>Slide Show Text Color [CSS]</label>
+        <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_color_css">
+
+        <label>Slide Show Text Shadow [CSS]</label>
+        <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_shadow_css">
+
+        <label>Facebook Url</label>
+        <input type="text" ng-model="$ctrl.homeSetting.facebook_url">
+
+        <label>Twitter Url</label>
+        <input type="text" ng-model="$ctrl.homeSetting.twitter_url">
+
+        <label>Instagram Url</label>
+        <input type="text" ng-model="$ctrl.homeSetting.instagram_url">
+
+        <label>Youtube Url</label>
+        <input type="text" ng-model="$ctrl.homeSetting.youtube_url">
+
+        <label>Address US</label>
+        <input type="text" ng-model="$ctrl.homeSetting.address_us">
+
+        <label>Address Australia</label>
+        <input type="text" ng-model="$ctrl.homeSetting.address_au">
+
+        <label>Email Html</label>
+        <input type="text" ng-model="$ctrl.homeSetting.email_html">
+
+        <label>Phone Html</label>
+        <input type="text" ng-model="$ctrl.homeSetting.phone_html">
+
+        <label>Desktop Copyright Html</label>
+        <input type="text" ng-model="$ctrl.homeSetting.desktop_copyright_html">
+
+        <label>Mobile Copyright Html</label>
+        <input type="text" ng-model="$ctrl.homeSetting.mobile_copyright_html">
+
+        <label>Contact Section Image</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.contact_image + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.contact_image"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.contact_image" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_image')">
+        </div>
+
+        <label>Contact Title</label>
+        <input type="text" ng-model="$ctrl.homeSetting.contact_title">
+
+        <label>Contact Message</label>
+        <input type="text" ng-model="$ctrl.homeSetting.contact_message">
+
+        <label>Desktop Contact Logo</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.contact_desktop_logo_url + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.contact_desktop_logo_url"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.contact_desktop_logo_url" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_desktop_logo_url')">
+        </div>
+
+        <label>Mobile Contact Logo</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.contact_mobile_logo_url + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.contact_mobile_logo_url"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.contact_mobile_logo_url" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_mobile_logo_url')">
+        </div>
+
+        </form>
+    <div class="button success-bg" ng-click="$ctrl.saveHomeSetting()">Save</div>
+    </div>

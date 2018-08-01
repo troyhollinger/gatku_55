@@ -1,13 +1,13 @@
-<h1>Discounts</h1>
+<h1>Discounts Manager</h1>
 
 <br>
 
-<div class="order-search">
+<div class="order-search" ng-cloak>
 
     <div>
         <button type="button"
                 class="btn btn-success"
-                ng-click="addDiscount()">Add Discount
+                ng-click="$ctrl.addDiscount()">Add Discount
         </button>
     </div>
 
@@ -23,7 +23,7 @@
         </thead>
 
         <tbody>
-        <tr ng-repeat="discount in discounts track by $index">
+        <tr ng-repeat="discount in $ctrl.discounts track by $index">
             <td>
                 <input type="text"
                        ng-change="discountRowChanged($index)"
@@ -32,19 +32,19 @@
             </td>
             <td>
                 <input type="text"
-                       ng-change="discountRowChanged($index)"
+                       ng-change="$ctrl.discountRowChanged($index)"
                        ng-model="discount.discount">
             </td>
             <td>
                 <button type="button"
                         class="btn btn-success"
                         ng-disabled="!discount.changed"
-                        ng-click="discountUpdate($index)">{{getSaveUpdateButtonCaption(discount)}}
+                        ng-click="$ctrl.discountUpdate($index)">{{$ctrl.getSaveUpdateButtonCaption(discount)}}
                 </button>
                 &nbsp;
                 <button type="button"
                         class="btn btn-danger"
-                        ng-click="discountRemove($index)">Remove
+                        ng-click="$ctrl.discountRemove($index)">Remove
                 </button>
             </td>
         </tr>

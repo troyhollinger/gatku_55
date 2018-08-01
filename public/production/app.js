@@ -13743,497 +13743,44 @@ app.config(function($routeProvider) {
 
     $routeProvider
         .when('/discounts', {
-            templateUrl : 'js/app/admin/discounts/discounts.html',
-            controller: 'AdminDiscountsController'
+            templateUrl : 'js/app/admin/discounts/AdminDiscounts.html',
+            controller: 'AdminDiscountsController',
+            controllerAs: '$ctrl'
         })
         .when('/home-settings', {
-            templateUrl : "js/app/admin/home-settings/home-settings.html"
+            templateUrl : 'js/app/admin/home-settings/AdminHomeSettings.html',
+            controller: 'AdminHomeSettingsController',
+            controllerAs: '$ctrl'
         })
         .when('/orders', {
-            templateUrl : 'js/app/admin/orders/orders.html',
-            controller: 'AdminOrdersController'
+            templateUrl : 'js/app/admin/orders/AdminOrders.html',
+            controller: 'AdminOrdersController',
+            controllerAs: '$ctrl'
         })
         .when('/products', {
-            templateUrl : 'js/app/admin/products/products.html',
+            templateUrl : 'js/app/admin/products/AdminProducts.html',
             controller: 'AdminProductsController'
         })
-        .when('/videos', {
-            templateUrl : "js/app/admin/videos/videos.html"
-        })
         .when('/you', {
-            templateUrl : "js/app/admin/you/you.html"
-        })
-        .otherwise({
-            templateUrl: 'js/app/admin/tab-not-supported.html'
+            templateUrl : 'js/app/admin/you/AdminYou.html',
+            controller: 'AdminYouController'
         });
-})
-app.controller('AdminMainController',
-    ['$scope', 'Image', 'Product', 'Discount', 'Order', 'YouImage', 'AvailabilityType', 'AlertService', 'HomeSetting', '$exceptionHandler',
-        function($scope, Image, Product, Discount, Order, YouImage, AvailabilityType, AlertService, HomeSetting, $exceptionHandler) {
+});
 
-    $scope.init = function() {
-        $scope.show('orders');
-        $scope.getProducts();
-        getTypes();
-        getYouImages();
-        getHomeSettings();
-        getAvailabilityTypes();
-    }
+(function() {
+    app.controller('AdminMainController', AdminMainController);
 
-    $scope.orders = [];
-    $scope.types = [];
-    $scope.availabilityTypes = [];
-    $scope.products = [];
-    $scope.newProduct = {};
-    $scope.youImages = [];
-    $scope.newYouImage = {};
-    $scope.homeSetting = {};
-    $scope.editState = false;
-    $scope.editingNew = true;
+    function AdminMainController($scope) {
 
-    $scope.submitButton = 'Submit';
+        $scope.adminLogout = function() {
+            var r = confirm("Do you want to logout?");
 
-    $scope.show = function(section) {
-        $scope.showOrders = false;
-        $scope.showProducts = false;
-        $scope.showYou = false;
-        $scope.showVideos = false;
-        $scope.showHomeSetting = false;
-        $scope.showDiscountManager = false;
-        $scope.reset();
-
-        switch(section) {
-
-            case 'orders' :
-                $scope.showOrders = true;
-                break;
-            case 'products' : 
-                $scope.showProducts = true;
-                break;
-            case 'you' :
-                $scope.showYou = true;
-                break;
-            case 'videos' : 
-                $scope.showVideos = true;
-                break;
-            case 'home-setting' : 
-                $scope.showHomeSetting = true;
-                break;
-            case 'discount-manager' :
-                $scope.showDiscountManager = true;
-                break;
-
-        }
-
-    }
-
-    $scope.getProducts = function() {
-        if ($scope.order_start_date && $scope.order_end_date) {
-            getProductsForPeriod();
-        } else {
-            getAllProducts();
-        }
-    }
-
-    function getProductsForPeriod() {
-        Product.forPeriod($scope.order_start_date, $scope.order_end_date).then(function(response) {
-            countSoldItems(response.data);
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log("Sorry, there was an error retrieving the products");
-        });
-    }
-
-    function getAllProducts() {
-        Product.all().then(function(response) {
-            countSoldItems(response.data);
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log("Sorry, there was an error retrieving the products");
-        });
-    }
-
-    function countSoldItems(products) {
-        angular.forEach(products, function(product, idx) {
-            var sold = 0;
-            angular.forEach(product.orderitems, function(orderitem) {
-                 sold += orderitem.quantity;
-            });
-            products[idx].sold = sold;
-        });
-        $scope.products = products;
-    }
-
-    function getAvailabilityTypes() {
-        AvailabilityType.all().then(function(response) {
-            $scope.availabilityTypes = response.data;
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log("Something went wrong on our end");
-        });
-    }
-
-    $scope.saveProduct = function() {
-        var nanobar = new Nanobar({ bg : '#fff' });
-
-        nanobar.go(60);
-
-        Product.store($scope.newProduct).then(function(response) {
-            $scope.getProducts();
-            $scope.reset();
-            nanobar.go(100);
-            AlertService.broadcast('Product saved!', 'success');
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            nanobar.go(100);
-            AlertService.broadcast('There was a problem', 'error');
-        });
-    }
-
-    $scope.createProduct = function() {
-        $scope.newProduct = {};
-        $scope.editState = true;
-        $scope.editingNew = true;
-
-        registerAddons();
-    }
-
-    $scope.editProduct = function(product) {
-        $scope.newProduct = product;
-        $scope.editState = true;
-        $scope.editingNew = false;
-
-        registerAddons();
-    }
-
-    $scope.updateProduct = function() {
-        var nanobar = new Nanobar({ bg : '#fff' });
-        var data = $scope.newProduct;
-
-        nanobar.go(65);
-
-        Product.update(data.id, data).then(function(response) {
-            $scope.getProducts();
-            $scope.reset();
-            nanobar.go(100);
-            AlertService.broadcast('Product updated!', 'success');
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            nanobar.go(100);
-            AlertService.broadcast('There was a problem.', 'error');
-        });
-    }
-
-    $scope.upload = function($files, model) {
-        var nanobar = new Nanobar({ bg : '#fff' });
-        var file = $files[0];
-
-        if (!file) return false;
-
-        var data = {
-            url : '/product/image',
-            file : file
-        }
-
-        nanobar.go(40);
-
-        Image.upload(data).progress(function(evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        }).then(function(response) {
-            $scope.newProduct[model] = response.data;
-            nanobar.go(100);
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            nanobar.go(100);
-        });
-    };
-    
-    $scope.reset = function() {
-
-        $scope.newProduct = {};
-        $scope.newYouImage = {};
-        $scope.editState = false;
-        $scope.editingNew = true;
-
-    }
-
-    function getTypes() {
-        Product.getTypes().then(function(response) {
-            $scope.types = response.data;
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log("Sorry, types could not be retrieved");
-        });
-    }
-
-    function registerAddons() {
-        $scope.newProduct.addonSelection = [];
-
-        for(var i = 0; i < $scope.products.length; i++) {
-            var addon = {};
-            addon.id = $scope.products[i].id;
-            addon.name = $scope.products[i].name;
-
-            // If creating a new product, it has no addons obviously...
-            if (!$scope.editingNew) {
-                // If selected products has addons
-                if ($scope.newProduct.addons.length) {
-                    for(var e = 0; e < $scope.newProduct.addons.length; e++) {
-                        if ($scope.newProduct.addons[e].childId == $scope.products[i].id) {
-                            addon.isAddon = true;
-
-                            //
-                            if ($scope.newProduct.addons[e].include_in_package) {
-                                addon.include_in_package = true;
-                            } else {
-                                addon.include_in_package = false;
-                            }
-
-                            if ($scope.newProduct.addons[e].price_zero) {
-                                addon.price_zero = true;
-                            } else {
-                                addon.price_zero = false;
-                            }
-
-                            break;
-
-                        } else {
-                            addon.isAddon = false;
-                        }
-                    }
-                } else {
-                    addon.isAddon = false;
-                }
-            } else {
-                addon.isAddon = false;
+            if (r === true) {
+                window.location.replace('/logout');
             }
-            $scope.newProduct.addonSelection.push(addon);
-        }
-    }
-
-    //Orders
-    /*function getOrders() {
-        Order.all().then(function(response) {
-            $scope.orders = response.data;
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log(response.message);
-        });
-    }*/
-
-    // You
-    $scope.youImages = [];
-    $scope.newYouImage = {};
-
-    function getYouImages() {
-        YouImage.all().then(function(response) {
-            $scope.youImages = response.data;
-            Squares.init();
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log("There was an error getting the You images");
-        });
-    }
-    
-    $scope.uploadYouImage = function($files) {
-        var file = $files[0];
-
-        if (!file) return false;
-
-        var data = {
-            url : '/you-image/upload',
-            file : file
-        }
-
-        $scope.editState = true;
-
-        Image.upload(data).then(function(response) {
-            $scope.newYouImage.image = response.data;
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log('Something went wrong.');
-        });
-    }
-
-    $scope.saveYouImage = function() {
-        var nanobar = new Nanobar({ bg : '#fff' });
-        nanobar.go(40);
-
-        YouImage.save($scope.newYouImage).then(function() {
-            getYouImages();
-            $scope.reset();
-            nanobar.go(100);
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log('Something went wrong.');
-        });
-    }
-
-    $scope.clearNewYouImage = function() {
-        $scope.newYouImage = false;
-    }
-
-    // home settings
-    function getHomeSettings() {
-        HomeSetting.all().then(function(response) {
-            $scope.homeSetting = response.data ? response.data : {};
-            Squares.init();        
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log("There was an error getting the home settings");
-        });
-    }
-
-    $scope.uploadHomeImage = function($files, model) {    
-        var file = $files[0];
-
-        if (!file) return false;
-
-        var data = {
-            url : '/home-image/upload',
-            file : file
-        }
-
-        $scope.editState = true;
-
-        Image.upload(data).then(function(response) {
-            console.log(model);
-           $scope.homeSetting[model] = response.data;
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            AlertService.broadcast('Sorry, there was an error, please try again', 'error');
-        });
-
-    }
-
-    $scope.saveHomeSetting = function() {
-        var nanobar = new Nanobar({ bg : '#fff' });
-        nanobar.go(40);
-
-        HomeSetting.save($scope.homeSetting).then(function() {
-            getHomeSettings();
-            AlertService.broadcast('Photo was successfully updated.', 'success');
-            nanobar.go(100);
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-            console.log('Something went wrong.');
-        });
-    }
-
-    $scope.resetDateFilter = function() {
-        $scope.order_start_date = ''
-        $scope.order_end_date = '';
-        $scope.getProducts();
-    }
-
-    //Discount part
-    function fetchAllDiscounts() {
-        Discount.all().then(function(response) {
-            $scope.discounts = response.data;
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-        });
-    };
-
-    fetchAllDiscounts();
-
-    function confirmUnusedCode(data) {
-        //Here is condition to more then 1 because one record obviously exists by adding new record.
-        if ($scope.discounts.filter(function(row) { return row.code === data.code; }).length > 1) {
-            return true;
-        }
-        return false;
-    }
-
-    $scope.addDiscount = function() {
-        var data = {
-            discount: 0,
-            code: ''
         };
-
-        $scope.discounts.push(data);
     };
-
-    $scope.discountUpdate = function(discountIndex) {
-        $scope.discounts[discountIndex].changed = false;
-
-        var data = $scope.discounts[discountIndex];
-
-        //Check if code is already use don't allow to store data.
-        //Code is unique field and primary key.
-        if (confirmUnusedCode(data)) {
-            alert('This discount code is already in use. Please change code or update previous use.');
-        } else {
-            if (!data.created_at) {
-                Discount.store(data).then(function() {
-                    AlertService.broadcast('Discount added!', 'success');
-                    fetchAllDiscounts();
-                }, function(error) {
-                    $exceptionHandler(JSON.stringify(error));
-                    AlertService.broadcast('There was a problem with adding Discount.');
-                });
-            } else {
-                Discount.update(data.code, data).then(function() {
-                    AlertService.broadcast('Discount updated!', 'success');
-                    fetchAllDiscounts();
-                }, function(error) {
-                    $exceptionHandler(JSON.stringify(error));
-                    AlertService.broadcast('There was a problem with Discount update.');
-                });
-            }
-
-        }
-    };
-
-    $scope.getSaveUpdateButtonCaption = function(discount) {
-        var buttonCaption = 'Update';
-
-        if (!discount.created_at) {
-            buttonCaption = 'Save';
-        }
-
-        return buttonCaption;
-    };
-
-    $scope.discountRemove = function(discountIndex) {
-        var r = confirm('Do you want to remove this Discount?');
-        if (r == true) {
-            var data = $scope.discounts[discountIndex];
-
-            if (!data.created_at) {
-                $scope.discounts.slice(discountIndex);
-                fetchAllDiscounts();
-            } else {
-                Discount.remove(data.code).then(function() {
-                    AlertService.broadcast('Discount removed!', 'success');
-                    fetchAllDiscounts();
-                }).error(function(error) {
-                    $exceptionHandler(JSON.stringify(error));
-                    AlertService.broadcast('There was a problem with Discount removing.');
-                });
-            }
-        }
-    };
-
-    $scope.discountRowChanged = function(discountIndex) {
-        $scope.discounts[discountIndex].changed = true;
-    };
-
-    //Discount part - end
-
-    $scope.adminLogout = function() {
-        var r = confirm("Do you want to logout?");
-
-        if (r === true) {
-            window.location.replace('/logout');
-        }
-    };
-
-    $scope.init();
-
-}]);
-
-
+}());
 
 
 // app.controller('AdminordersController', [
@@ -14283,6 +13830,475 @@ app.controller('AdminMainController',
 //         $scope.order_end_date = '';
 //         gatkuOrder.getData(1, $scope.order_start_date, $scope.order_end_date);
 //     }
+// }]);
+//
+//
+//
+
+// app.controller('AdminMainController',
+//     ['$scope', 'Image', 'Product', 'Discount', 'Order', 'YouImage', 'AvailabilityType', 'AlertService', 'HomeSetting', '$exceptionHandler',
+//         function($scope, Image, Product, Discount, Order, YouImage, AvailabilityType, AlertService, HomeSetting, $exceptionHandler) {
+//
+//     $scope.init = function() {
+//         $scope.show('orders');
+//         $scope.getProducts();
+//         getTypes();
+//         getYouImages();
+//         getHomeSettings();
+//         getAvailabilityTypes();
+//     }
+//
+//     $scope.orders = [];
+//     $scope.types = [];
+//     $scope.availabilityTypes = [];
+//     $scope.products = [];
+//     $scope.newProduct = {};
+//     $scope.youImages = [];
+//     $scope.newYouImage = {};
+//     $scope.homeSetting = {};
+//     $scope.editState = false;
+//     $scope.editingNew = true;
+//
+//     $scope.submitButton = 'Submit';
+//
+//     $scope.show = function(section) {
+//         $scope.showOrders = false;
+//         $scope.showProducts = false;
+//         $scope.showYou = false;
+//         $scope.showVideos = false;
+//         $scope.showHomeSetting = false;
+//         $scope.showDiscountManager = false;
+//         $scope.reset();
+//
+//         switch(section) {
+//
+//             case 'orders' :
+//                 $scope.showOrders = true;
+//                 break;
+//             case 'products' :
+//                 $scope.showProducts = true;
+//                 break;
+//             case 'you' :
+//                 $scope.showYou = true;
+//                 break;
+//             case 'videos' :
+//                 $scope.showVideos = true;
+//                 break;
+//             case 'home-setting' :
+//                 $scope.showHomeSetting = true;
+//                 break;
+//             case 'discount-manager' :
+//                 $scope.showDiscountManager = true;
+//                 break;
+//
+//         }
+//
+//     }
+//
+//     $scope.getProducts = function() {
+//         if ($scope.order_start_date && $scope.order_end_date) {
+//             getProductsForPeriod();
+//         } else {
+//             getAllProducts();
+//         }
+//     }
+//
+//     function getProductsForPeriod() {
+//         Product.forPeriod($scope.order_start_date, $scope.order_end_date).then(function(response) {
+//             countSoldItems(response.data);
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log("Sorry, there was an error retrieving the products");
+//         });
+//     }
+//
+//     function getAllProducts() {
+//         Product.all().then(function(response) {
+//             countSoldItems(response.data);
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log("Sorry, there was an error retrieving the products");
+//         });
+//     }
+//
+//     function countSoldItems(products) {
+//         angular.forEach(products, function(product, idx) {
+//             var sold = 0;
+//             angular.forEach(product.orderitems, function(orderitem) {
+//                  sold += orderitem.quantity;
+//             });
+//             products[idx].sold = sold;
+//         });
+//         $scope.products = products;
+//     }
+//
+//     function getAvailabilityTypes() {
+//         AvailabilityType.all().then(function(response) {
+//             $scope.availabilityTypes = response.data;
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log("Something went wrong on our end");
+//         });
+//     }
+//
+//     $scope.saveProduct = function() {
+//         var nanobar = new Nanobar({ bg : '#fff' });
+//
+//         nanobar.go(60);
+//
+//         Product.store($scope.newProduct).then(function(response) {
+//             $scope.getProducts();
+//             $scope.reset();
+//             nanobar.go(100);
+//             AlertService.broadcast('Product saved!', 'success');
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             nanobar.go(100);
+//             AlertService.broadcast('There was a problem', 'error');
+//         });
+//     }
+//
+//     $scope.createProduct = function() {
+//         $scope.newProduct = {};
+//         $scope.editState = true;
+//         $scope.editingNew = true;
+//
+//         registerAddons();
+//     }
+//
+//     $scope.editProduct = function(product) {
+//         $scope.newProduct = product;
+//         $scope.editState = true;
+//         $scope.editingNew = false;
+//
+//         registerAddons();
+//     }
+//
+//     $scope.updateProduct = function() {
+//         var nanobar = new Nanobar({ bg : '#fff' });
+//         var data = $scope.newProduct;
+//
+//         nanobar.go(65);
+//
+//         Product.update(data.id, data).then(function(response) {
+//             $scope.getProducts();
+//             $scope.reset();
+//             nanobar.go(100);
+//             AlertService.broadcast('Product updated!', 'success');
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             nanobar.go(100);
+//             AlertService.broadcast('There was a problem.', 'error');
+//         });
+//     }
+//
+//     $scope.upload = function($files, model) {
+//         var nanobar = new Nanobar({ bg : '#fff' });
+//         var file = $files[0];
+//
+//         if (!file) return false;
+//
+//         var data = {
+//             url : '/product/image',
+//             file : file
+//         }
+//
+//         nanobar.go(40);
+//
+//         Image.upload(data).progress(function(evt) {
+//             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+//         }).then(function(response) {
+//             $scope.newProduct[model] = response.data;
+//             nanobar.go(100);
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             nanobar.go(100);
+//         });
+//     };
+//
+//     $scope.reset = function() {
+//
+//         $scope.newProduct = {};
+//         $scope.newYouImage = {};
+//         $scope.editState = false;
+//         $scope.editingNew = true;
+//
+//     }
+//
+//     function getTypes() {
+//         Product.getTypes().then(function(response) {
+//             $scope.types = response.data;
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log("Sorry, types could not be retrieved");
+//         });
+//     }
+//
+//     function registerAddons() {
+//         $scope.newProduct.addonSelection = [];
+//
+//         for(var i = 0; i < $scope.products.length; i++) {
+//             var addon = {};
+//             addon.id = $scope.products[i].id;
+//             addon.name = $scope.products[i].name;
+//
+//             // If creating a new product, it has no addons obviously...
+//             if (!$scope.editingNew) {
+//                 // If selected products has addons
+//                 if ($scope.newProduct.addons.length) {
+//                     for(var e = 0; e < $scope.newProduct.addons.length; e++) {
+//                         if ($scope.newProduct.addons[e].childId == $scope.products[i].id) {
+//                             addon.isAddon = true;
+//
+//                             //
+//                             if ($scope.newProduct.addons[e].include_in_package) {
+//                                 addon.include_in_package = true;
+//                             } else {
+//                                 addon.include_in_package = false;
+//                             }
+//
+//                             if ($scope.newProduct.addons[e].price_zero) {
+//                                 addon.price_zero = true;
+//                             } else {
+//                                 addon.price_zero = false;
+//                             }
+//
+//                             break;
+//
+//                         } else {
+//                             addon.isAddon = false;
+//                         }
+//                     }
+//                 } else {
+//                     addon.isAddon = false;
+//                 }
+//             } else {
+//                 addon.isAddon = false;
+//             }
+//             $scope.newProduct.addonSelection.push(addon);
+//         }
+//     }
+//
+//     //Orders
+//     /*function getOrders() {
+//         Order.all().then(function(response) {
+//             $scope.orders = response.data;
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log(response.message);
+//         });
+//     }*/
+//
+//     // You
+//     $scope.youImages = [];
+//     $scope.newYouImage = {};
+//
+//     function getYouImages() {
+//         YouImage.all().then(function(response) {
+//             $scope.youImages = response.data;
+//             Squares.init();
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log("There was an error getting the You images");
+//         });
+//     }
+//
+//     $scope.uploadYouImage = function($files) {
+//         var file = $files[0];
+//
+//         if (!file) return false;
+//
+//         var data = {
+//             url : '/you-image/upload',
+//             file : file
+//         }
+//
+//         $scope.editState = true;
+//
+//         Image.upload(data).then(function(response) {
+//             $scope.newYouImage.image = response.data;
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log('Something went wrong.');
+//         });
+//     }
+//
+//     $scope.saveYouImage = function() {
+//         var nanobar = new Nanobar({ bg : '#fff' });
+//         nanobar.go(40);
+//
+//         YouImage.save($scope.newYouImage).then(function() {
+//             getYouImages();
+//             $scope.reset();
+//             nanobar.go(100);
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log('Something went wrong.');
+//         });
+//     }
+//
+//     $scope.clearNewYouImage = function() {
+//         $scope.newYouImage = false;
+//     }
+//
+//     // home settings
+//     function getHomeSettings() {
+//         HomeSetting.all().then(function(response) {
+//             $scope.homeSetting = response.data ? response.data : {};
+//             Squares.init();
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log("There was an error getting the home settings");
+//         });
+//     }
+//
+//     $scope.uploadHomeImage = function($files, model) {
+//         var file = $files[0];
+//
+//         if (!file) return false;
+//
+//         var data = {
+//             url : '/home-image/upload',
+//             file : file
+//         }
+//
+//         $scope.editState = true;
+//
+//         Image.upload(data).then(function(response) {
+//             console.log(model);
+//            $scope.homeSetting[model] = response.data;
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             AlertService.broadcast('Sorry, there was an error, please try again', 'error');
+//         });
+//
+//     }
+//
+//     $scope.saveHomeSetting = function() {
+//         var nanobar = new Nanobar({ bg : '#fff' });
+//         nanobar.go(40);
+//
+//         HomeSetting.save($scope.homeSetting).then(function() {
+//             getHomeSettings();
+//             AlertService.broadcast('Photo was successfully updated.', 'success');
+//             nanobar.go(100);
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//             console.log('Something went wrong.');
+//         });
+//     }
+//
+//     $scope.resetDateFilter = function() {
+//         $scope.order_start_date = ''
+//         $scope.order_end_date = '';
+//         $scope.getProducts();
+//     }
+//
+//     //Discount part
+//     function fetchAllDiscounts() {
+//         Discount.all().then(function(response) {
+//             $scope.discounts = response.data;
+//         }, function(error) {
+//             $exceptionHandler(JSON.stringify(error));
+//         });
+//     };
+//
+//     fetchAllDiscounts();
+//
+//     function confirmUnusedCode(data) {
+//         //Here is condition to more then 1 because one record obviously exists by adding new record.
+//         if ($scope.discounts.filter(function(row) { return row.code === data.code; }).length > 1) {
+//             return true;
+//         }
+//         return false;
+//     }
+//
+//     $scope.addDiscount = function() {
+//         var data = {
+//             discount: 0,
+//             code: ''
+//         };
+//
+//         $scope.discounts.push(data);
+//     };
+//
+//     $scope.discountUpdate = function(discountIndex) {
+//         $scope.discounts[discountIndex].changed = false;
+//
+//         var data = $scope.discounts[discountIndex];
+//
+//         //Check if code is already use don't allow to store data.
+//         //Code is unique field and primary key.
+//         if (confirmUnusedCode(data)) {
+//             alert('This discount code is already in use. Please change code or update previous use.');
+//         } else {
+//             if (!data.created_at) {
+//                 Discount.store(data).then(function() {
+//                     AlertService.broadcast('Discount added!', 'success');
+//                     fetchAllDiscounts();
+//                 }, function(error) {
+//                     $exceptionHandler(JSON.stringify(error));
+//                     AlertService.broadcast('There was a problem with adding Discount.');
+//                 });
+//             } else {
+//                 Discount.update(data.code, data).then(function() {
+//                     AlertService.broadcast('Discount updated!', 'success');
+//                     fetchAllDiscounts();
+//                 }, function(error) {
+//                     $exceptionHandler(JSON.stringify(error));
+//                     AlertService.broadcast('There was a problem with Discount update.');
+//                 });
+//             }
+//
+//         }
+//     };
+//
+//     $scope.getSaveUpdateButtonCaption = function(discount) {
+//         var buttonCaption = 'Update';
+//
+//         if (!discount.created_at) {
+//             buttonCaption = 'Save';
+//         }
+//
+//         return buttonCaption;
+//     };
+//
+//     $scope.discountRemove = function(discountIndex) {
+//         var r = confirm('Do you want to remove this Discount?');
+//         if (r == true) {
+//             var data = $scope.discounts[discountIndex];
+//
+//             if (!data.created_at) {
+//                 $scope.discounts.slice(discountIndex);
+//                 fetchAllDiscounts();
+//             } else {
+//                 Discount.remove(data.code).then(function() {
+//                     AlertService.broadcast('Discount removed!', 'success');
+//                     fetchAllDiscounts();
+//                 }).error(function(error) {
+//                     $exceptionHandler(JSON.stringify(error));
+//                     AlertService.broadcast('There was a problem with Discount removing.');
+//                 });
+//             }
+//         }
+//     };
+//
+//     $scope.discountRowChanged = function(discountIndex) {
+//         $scope.discounts[discountIndex].changed = true;
+//     };
+//
+//     //Discount part - end
+//
+//     $scope.adminLogout = function() {
+//         var r = confirm("Do you want to logout?");
+//
+//         if (r === true) {
+//             window.location.replace('/logout');
+//         }
+//     };
+//
+//     $scope.init();
+//
 // }]);
 //
 //
@@ -15254,159 +15270,262 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 	$scope.init();
 
 }]);
-app.controller('AdminDiscountsController',
-    ['$scope', 'Discount', 'AlertService', '$exceptionHandler',
-        function($scope, Discount, AlertService, $exceptionHandler) {
+(function () {
+    app.controller('AdminDiscountsController', AdminDiscountsController);
 
-    //Discount part
-    function fetchAllDiscounts() {
-        Discount.all().then(function(response) {
-            $scope.discounts = response.data;
-        }, function(error) {
-            $exceptionHandler(JSON.stringify(error));
-        });
-    };
+    function AdminDiscountsController($scope, Discount, AlertService, $exceptionHandler) {
 
-    fetchAllDiscounts();
+        var $ctrl = this;
 
-    function confirmUnusedCode(data) {
-        //Here is condition to more then 1 because one record obviously exists by adding new record.
-        if ($scope.discounts.filter(function(row) { return row.code === data.code; }).length > 1) {
-            return true;
+        //Don't move this method below. Need to be on top.
+        function fetchAllDiscounts() {
+            Discount.all().then(function (response) {
+                $ctrl.discounts = response.data;
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+            });
         }
-        return false;
-    }
 
-    $scope.addDiscount = function() {
-        var data = {
-            discount: 0,
-            code: ''
+        fetchAllDiscounts();
+
+        $ctrl.addDiscount = function () {
+            var data = {
+                discount: 0,
+                code: ''
+            };
+
+            $ctrl.discounts.push(data);
         };
 
-        $scope.discounts.push(data);
-    };
+        $ctrl.discountUpdate = function (discountIndex) {
 
-    $scope.discountUpdate = function(discountIndex) {
-        $scope.discounts[discountIndex].changed = false;
+            $ctrl.discounts[discountIndex].changed = false;
 
-        var data = $scope.discounts[discountIndex];
+            var data = $ctrl.discounts[discountIndex];
 
-        //Check if code is already use don't allow to store data.
-        //Code is unique field and primary key.
-        if (confirmUnusedCode(data)) {
-            alert('This discount code is already in use. Please change code or update previous use.');
-        } else {
-            if (!data.created_at) {
-                Discount.store(data).then(function() {
-                    AlertService.broadcast('Discount added!', 'success');
-                    fetchAllDiscounts();
-                }, function(error) {
-                    $exceptionHandler(JSON.stringify(error));
-                    AlertService.broadcast('There was a problem with adding Discount.');
-                });
+            //Check if code is already use don't allow to store data.
+            //Code is unique field and primary key.
+            if (confirmUnusedCode(data)) {
+                alert('This discount code is already in use. Please change code or update previous use.');
             } else {
-                Discount.update(data.code, data).then(function() {
-                    AlertService.broadcast('Discount updated!', 'success');
-                    fetchAllDiscounts();
-                }, function(error) {
-                    $exceptionHandler(JSON.stringify(error));
-                    AlertService.broadcast('There was a problem with Discount update.');
-                });
-            }
-
-        }
-    };
-
-    $scope.getSaveUpdateButtonCaption = function(discount) {
-        var buttonCaption = 'Update';
-
-        if (!discount.created_at) {
-            buttonCaption = 'Save';
-        }
-
-        return buttonCaption;
-    };
-
-    $scope.discountRemove = function(discountIndex) {
-        var r = confirm('Do you want to remove this Discount?');
-        if (r == true) {
-            var data = $scope.discounts[discountIndex];
-
-            if (!data.created_at) {
-                $scope.discounts.slice(discountIndex);
-                fetchAllDiscounts();
-            } else {
-                Discount.remove(data.code).then(function() {
-                    AlertService.broadcast('Discount removed!', 'success');
-                    fetchAllDiscounts();
-                }).error(function(error) {
-                    $exceptionHandler(JSON.stringify(error));
-                    AlertService.broadcast('There was a problem with Discount removing.');
-                });
-            }
-        }
-    };
-
-    $scope.discountRowChanged = function(discountIndex) {
-        $scope.discounts[discountIndex].changed = true;
-    };
-
-    //Discount part - end
-}]);
-
-
-
-
-app.controller('AdminOrdersController',
-    ['$scope', 'Order','$http', '$exceptionHandler',
-    function($scope, Order, $http, $exceptionHandler) {
-
-        var gatkuOrder = this;
-        gatkuOrder.orders = [];
-        gatkuOrder.pageno = 1;
-        gatkuOrder.itemsPerPage = 15;
-        gatkuOrder.getData = function(pageno, start_date, end_date){
-            gatkuOrder.orders = [];
-
-            var Url = "/orderall/" + gatkuOrder.itemsPerPage + "/" + pageno;
-            try{
-                if($scope.order_start_date){
-                    Url = Url + "/" + $scope.order_start_date;
+                if (!data.created_at) {
+                    Discount.store(data).then(function () {
+                        AlertService.broadcast('Discount added!', 'success');
+                        fetchAllDiscounts();
+                    }, function (error) {
+                        $exceptionHandler(JSON.stringify(error));
+                        AlertService.broadcast('There was a problem with adding Discount.');
+                    });
+                } else {
+                    Discount.update(data.code, data).then(function () {
+                        AlertService.broadcast('Discount updated!', 'success');
+                        fetchAllDiscounts();
+                    }, function (error) {
+                        $exceptionHandler(JSON.stringify(error));
+                        AlertService.broadcast('There was a problem with Discount update.');
+                    });
                 }
-                if($scope.order_end_date){
-                    Url = Url + "/" + $scope.order_end_date;
-                }
-            }catch(e){
 
             }
-            $http.get(Url).then(function(response){
-                $scope.orders = response.data.orders;
-                gatkuOrder.orders = response.data.orders;
-                gatkuOrder.total_count = response.total_count;
+        };
+
+        $ctrl.getSaveUpdateButtonCaption = function (discount) {
+            var buttonCaption = 'Update';
+
+            if (!discount.created_at) {
+                buttonCaption = 'Save';
+            }
+
+            return buttonCaption;
+        };
+
+        $ctrl.discountRemove = function (discountIndex) {
+            var r = confirm('Do you want to remove this Discount?');
+            if (r == true) {
+                var data = $ctrl.discounts[discountIndex];
+
+                if (!data.created_at) {
+                    $ctrl.discounts.slice(discountIndex);
+                    fetchAllDiscounts();
+                } else {
+                    Discount.remove(data.code).then(function () {
+                        AlertService.broadcast('Discount removed!', 'success');
+                        fetchAllDiscounts();
+                    }, function (error) {
+                        $exceptionHandler(JSON.stringify(error));
+                        AlertService.broadcast('There was a problem with Discount removing.');
+                    });
+                }
+            }
+        };
+
+        $ctrl.discountRowChanged = function (discountIndex) {
+            $ctrl.discounts[discountIndex].changed = true;
+        };
+
+        function confirmUnusedCode(data) {
+            //Here is condition to more then 1 because one record obviously exists by adding new record.
+            if ($ctrl.discounts.filter(function (row) {
+                return row.code === data.code;
+            }).length > 1) {
+                return true;
+            }
+            return false;
+        }
+    };
+}());
+
+
+(function () {
+    app.controller('AdminHomeSettingsController', AdminHomeSettingsController);
+
+    function AdminHomeSettingsController($scope, Image, HomeSetting, AlertService, $exceptionHandler) {
+
+        var $ctrl = this;
+        
+        $ctrl.homeSetting = {};
+        $ctrl.editState = false;
+        $ctrl.editingNew = true;
+
+        $ctrl.submitButton = 'Submit';
+
+        $ctrl.upload = function ($files, model) {
+            var nanobar = new Nanobar({bg: '#fff'});
+            var file = $files[0];
+
+            if (!file) return false;
+
+            var data = {
+                url: '/product/image',
+                file: file
+            };
+
+            nanobar.go(40);
+
+            Image.upload(data).progress(function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            }).then(function (response) {
+                $ctrl.newProduct[model] = response.data;
+                nanobar.go(100);
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+                nanobar.go(100);
+            });
+        };
+
+        // home settings
+        function getHomeSettings() {
+            HomeSetting.all().then(function (response) {
+                $ctrl.homeSetting = response.data ? response.data : {};
+                Squares.init();
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+                console.log("There was an error getting the home settings");
+            });
+        }
+
+        $ctrl.uploadHomeImage = function ($files, model) {
+            var file = $files[0];
+
+            if (!file) return false;
+
+            var data = {
+                url: '/home-image/upload',
+                file: file
+            };
+
+            $ctrl.editState = true;
+
+            Image.upload(data).then(function (response) {
+                console.log(model);
+                $ctrl.homeSetting[model] = response.data;
+            }, function(error) {
+                $exceptionHandler(JSON.stringify(error));
+                AlertService.broadcast('Sorry, there was an error, please try again', 'error');
+            });
+
+        };
+
+        $ctrl.saveHomeSetting = function () {
+            var nanobar = new Nanobar({bg: '#fff'});
+            nanobar.go(40);
+
+            HomeSetting.save($ctrl.homeSetting).then(function () {
+                getHomeSettings();
+                AlertService.broadcast('Photo was successfully updated.', 'success');
+                nanobar.go(100);
             }, function(error) {
                 $exceptionHandler(JSON.stringify(error));
                 console.log('Something went wrong.');
             });
         };
 
-        gatkuOrder.getData(gatkuOrder.pageno);
-        gatkuOrder.searchOrder = function () {
+        getHomeSettings();
+    }
+}());
+
+(function () {
+    app.controller('AdminOrdersController', AdminOrdersController);
+
+    function AdminOrdersController($scope, Order, $http, $exceptionHandler) {
+
+        var $ctrl = this;
+
+        $ctrl.placeholderToday = dateToYMD(new Date());
+
+        $ctrl.orders = [];
+        $ctrl.pageno = 1;
+        $ctrl.itemsPerPage = 15;
+
+        $ctrl.getData = function (pageno, start_date, end_date) {
+            $ctrl.orders = [];
+
+            var Url = "/orderall/" + $ctrl.itemsPerPage + "/" + pageno;
+            try {
+                if ($scope.order_start_date) {
+                    Url = Url + "/" + $scope.order_start_date;
+                }
+                if($scope.order_end_date){
+                    Url = Url + "/" + $scope.order_end_date;
+                }
+            } catch (e) {
+                $exceptionHandler(JSON.stringify(e));
+            }
+
+            $http.get(Url).then(function (response) {
+                $ctrl.orders = response.data.orders;
+                $ctrl.orders = response.data.orders;
+                $ctrl.total_count = response.total_count;
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+                console.log('Something went wrong.');
+            });
+        };
+
+        $ctrl.getData($ctrl.pageno);
+
+        $ctrl.searchOrder = function () {
             if ($scope.order_start_date) {
-                gatkuOrder.getData(1, $scope.order_start_date, $scope.order_end_date);
+                $ctrl.getData(1, $scope.order_start_date, $scope.order_end_date);
             } else {
-                alert('select start date');
+                alert('Select start date.');
             }
         };
 
-
-        gatkuOrder.resetDateFilter = function() {
+        $ctrl.resetDateFilter = function () {
             $scope.order_start_date = ''
             $scope.order_end_date = '';
-            gatkuOrder.getData(1, $scope.order_start_date, $scope.order_end_date);
+            $ctrl.getData(1, $scope.order_start_date, $scope.order_end_date);
+        };
+
+        function dateToYMD(date) {
+            var d = date.getDate();
+            var m = date.getMonth() + 1; //Month from 0 to 11
+            var y = date.getFullYear();
+            return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
         }
-}]);
-
-
+    };
+}());
 
 
 app.controller('AdminProductsController',
@@ -15606,6 +15725,77 @@ app.controller('AdminProductsController',
         }
     }
 }]);
+
+
+
+
+(function () {
+    app.controller('AdminYouController', AdminYouController);
+
+    function AdminYouController($scope, YouImage, Image, $exceptionHandler) {
+
+        $scope.youImages = [];
+        $scope.newYouImage = {};
+
+        function getYouImages() {
+            YouImage.all().then(function (response) {
+                $scope.youImages = response.data;
+                Squares.init();
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+                console.log("There was an error getting the You images");
+            });
+        }
+
+        $scope.uploadYouImage = function ($files) {
+            var file = $files[0];
+
+            if (!file) return false;
+
+            var data = {
+                url: '/you-image/upload',
+                file: file
+            }
+
+            $scope.editState = true;
+
+            Image.upload(data).then(function (response) {
+                $scope.newYouImage.image = response.data;
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+                console.log('Something went wrong.');
+            });
+        };
+
+        $scope.saveYouImage = function () {
+            var nanobar = new Nanobar({bg: '#fff'});
+            nanobar.go(40);
+
+            YouImage.save($scope.newYouImage).then(function () {
+                getYouImages();
+                $scope.reset();
+                nanobar.go(100);
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+                console.log('Something went wrong.');
+            });
+        };
+
+        $scope.clearNewYouImage = function () {
+            $scope.newYouImage = false;
+        };
+
+        $scope.reset = function() {
+            $scope.newYouImage = {};
+            $scope.editState = false;
+            $scope.editingNew = true;
+        };
+
+        getYouImages();
+    }
+}());
+
+
 
 
 
