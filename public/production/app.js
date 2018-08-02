@@ -13437,7 +13437,12 @@ app.factory('Product', ['$http', function($http) {
 
         customerPhotos : function(productId) {
             return $http.get('/product/photos/' + productId);
-        }
+        },
+
+        //Delete one Product record with id
+        // remove: function(id) {
+        //     return $http.delete('/product/' + id);
+        // }
     }
 
 }]);
@@ -15631,6 +15636,24 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $ctrl.editingNew = false;
             registerAddons();
         };
+
+        // $ctrl.deleteProduct = function(product) {
+        //
+        //     var r = confirm("Do you want to delete this product?");
+        //
+        //     if (r === true) {
+        //         Product.remove(product.id).then(function(){
+        //             $ctrl.getProducts();
+        //             $ctrl.reset();
+        //             nanobar.go(100);
+        //             AlertService.broadcast('Product deleted!', 'success');
+        //         }, function (error) {
+        //             $exceptionHandler(JSON.stringify(error));
+        //             nanobar.go(100);
+        //             AlertService.broadcast('There was a problem', 'error');
+        //         });
+        //     }
+        // };
 
         $ctrl.updateProduct = function () {
             var nanobar = new Nanobar({bg: '#fff'});

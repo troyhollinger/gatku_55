@@ -62,11 +62,11 @@ class DiscountController extends BaseController {
      */
     public function destroy($code)
     {
-        $response = $this->repository->destroy($code);
-        if ($response === false) {
-            return \Response::json(['message' => 'Sorry, there was a problem removing this discount.'], 404);
-        }
-        return \Response::json(['message' => 'Discount updated'], 200);
+//        $response = $this->repository->destroy($code);
+//        if ($response === false) {
+//            return \Response::json(['message' => 'Sorry, there was a problem removing this discount.'], 404);
+//        }
+//        return \Response::json(['message' => 'Discount removed.'], 200);
     }
 
     /**

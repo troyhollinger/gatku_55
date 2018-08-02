@@ -68,7 +68,12 @@ app.factory('Product', ['$http', function($http) {
 
         customerPhotos : function(productId) {
             return $http.get('/product/photos/' + productId);
-        }
+        },
+
+        //Delete one Product record with id
+        // remove: function(id) {
+        //     return $http.delete('/product/' + id);
+        // }
     }
 
 }]);

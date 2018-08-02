@@ -171,6 +171,11 @@ class ProductController extends BaseController
      */
     public function destroy($id)
     {
+//        $response = $this->product->destroy($id);
+//        if ($response === false) {
+//            return \Response::json(['message' => 'Sorry, there was a problem removing this product.'], 404);
+//        }
+//        return \Response::json(['message' => 'Product removed.'], 200);
     }
 
     /**

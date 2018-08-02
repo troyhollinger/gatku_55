@@ -100,6 +100,24 @@
             registerAddons();
         };
 
+        // $ctrl.deleteProduct = function(product) {
+        //
+        //     var r = confirm("Do you want to delete this product?");
+        //
+        //     if (r === true) {
+        //         Product.remove(product.id).then(function(){
+        //             $ctrl.getProducts();
+        //             $ctrl.reset();
+        //             nanobar.go(100);
+        //             AlertService.broadcast('Product deleted!', 'success');
+        //         }, function (error) {
+        //             $exceptionHandler(JSON.stringify(error));
+        //             nanobar.go(100);
+        //             AlertService.broadcast('There was a problem', 'error');
+        //         });
+        //     }
+        // };
+
         $ctrl.updateProduct = function () {
             var nanobar = new Nanobar({bg: '#fff'});
             var data = $ctrl.newProduct;

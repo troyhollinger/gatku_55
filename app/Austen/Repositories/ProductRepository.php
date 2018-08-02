@@ -109,9 +109,19 @@ class ProductRepository implements ProductRepositoryInterface {
 
     /**
      * @param $id
+     * @return bool
      */
 	public function destroy($id)
     {
+//        try {
+//            $product = Product::findOrFail($id);
+//            $product->delete();
+//        } catch (\Exception $e) {
+//            Bugsnag::notifyException($e);
+//            Log::error($e);
+//            return false;
+//        }
+//        return true;
 	}
 
     /**
