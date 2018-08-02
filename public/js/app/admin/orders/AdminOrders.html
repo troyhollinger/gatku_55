@@ -20,13 +20,16 @@
                datepickerenddate/>
     </div>
     <div class="ord-src">
-        <div class="button success-bg"
+        <button type="button"
+                class="btn btn-success"
              ng-click="$ctrl.searchOrder()">Search Order
-        </div>
+        </button>
     </div>
     <div class="ord-src" ng-show="$ctrl.order_start_date || $ctrl.order_end_date">
-        <div class="button danger-bg" ng-click="$ctrl.resetDateFilter()">Reset range
-        </div>
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.resetDateFilter()">Reset range
+        </button>
     </div>
 </div>
 
@@ -65,7 +68,7 @@
         <td>
             <!-- @TODO Make decision what to do with 'Print Label' button. -->
             <!-- What 'Print Label' button should do. At the moment there is not bind any functionality. Commented for now.-->
-            <!--<div class="button info-bg">Print Label</div>-->
+            <!--<button type="button" class="btn btn-default">Print Label</div>-->
 
             <shipping-request order="order" shipping="order.shipping"></shipping-request>
             <div ng-if="!order.tracking" style="margin-right: 5px;float:left;">
@@ -75,22 +78,22 @@
                 <a ng-if="order.tracking.carrier == 'usps'"
                    href="https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1={{ order.tracking.track_id }}"
                    target="_blank">
-                    <div class="button success-bg">Track# {{ order.tracking.track_id }}</div>
+                    <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
                 </a>
                 <a ng-if="order.tracking.carrier == 'auspost'"
                    href="https://auspost.com.au/parcels-mail/track.html#/track?id={{ order.tracking.track_id }}"
                    target="_blank">
-                    <div class="button success-bg">Track# {{ order.tracking.track_id }}</div>
+                    <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
                 </a>
                 <a ng-if="order.tracking.carrier == 'packsend'"
                    href="https://online.packsend.com.au/tracktrace?trackingnumber={{ order.tracking.track_id }}"
                    target="_blank">
-                    <div class="button success-bg">Track# {{ order.tracking.track_id }}</div>
+                    <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
                 </a>
                 <a ng-if="order.tracking.carrier == 'ups'"
                    href="https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={{ order.tracking.track_id }}"
                    target="_blank">
-                   <div class="button success-bg">Track# {{ order.tracking.track_id }}</div>
+                   <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
                 </a>
             </div>
             <div ng-if="order.tracking" style="margin-right: 5px;float:right;">

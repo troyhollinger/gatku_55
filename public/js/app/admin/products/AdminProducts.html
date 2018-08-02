@@ -180,14 +180,18 @@
                    datepickerenddate>
             </div>
         <div class="ord-src">
-            <div class="button success-bg" ng-click="$ctrl.getProducts()">Submit</div>
-            </div>
-        <div class="ord-src" ng-show="order_start_date || order_end_date">
-            <div class="button danger-bg" ng-click="$ctrl.resetDateFilter()">Reset range</div>
-            </div>
+            <button type="button"
+                    class="btn btn-success"
+                    ng-click="$ctrl.getProducts()">Submit
+            </button>
         </div>
-
-
+        <div class="ord-src" ng-show="order_start_date || order_end_date">
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="$ctrl.resetDateFilter()">Reset range
+            </button>
+        </div>
+    </div>
 
     <table class="admin-products-table">
         <tr>

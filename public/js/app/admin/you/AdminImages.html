@@ -2,10 +2,11 @@
 
 <div class="admin-sub-section" ng-cloak>
 
-    <div class="button success-bg"
-         ng-hide="$ctrl.editState"
-         ng-file-select="$ctrl.uploadYouImage($files)">Upload New
-    </div>
+    <button type="button"
+            class="btn btn-success"
+            ng-hide="$ctrl.editState"
+            ng-file-select="$ctrl.uploadYouImage($files)">Upload New
+    </button>
 
     <span ng-show="$ctrl.editState" class="edit-indicator">Editing You Image</span>
 
@@ -23,8 +24,8 @@
             &nbsp;<span class="uppercase">{{ product.name }}</span>
         </div>
 
-        <div class="button success-bg" ng-click="$ctrl.saveYouImage()">Save</div>
-        <div class="button error-bg" ng-click="$ctrl.reset()">Cancel</div>
+        <button type="button" class="btn btn-success" ng-click="$ctrl.saveYouImage()">Save</button>
+        <button type="button" class="btn btn-danger" ng-click="$ctrl.reset()">Cancel</button>
     </div>
 </div>
 
