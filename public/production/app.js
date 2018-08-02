@@ -15536,18 +15536,18 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
         var $ctrl = this;
 
-        $scope.types = [];
-        $scope.availabilityTypes = [];
-        $scope.products = [];
-        $scope.newProduct = {};
-        $scope.editState = false;
-        $scope.editingNew = true;
+        $ctrl.types = [];
+        $ctrl.availabilityTypes = [];
+        $ctrl.products = [];
+        $ctrl.newProduct = {};
+        $ctrl.editState = false;
+        $ctrl.editingNew = true;
 
-        $scope.submitButton = 'Submit';
+        $ctrl.submitButton = 'Submit';
 
         $ctrl.placeholderToday = dateToYMD(new Date());
 
-        $scope.getProducts = function () {
+        $ctrl.getProducts = function () {
             //This variables have to be in $scope
             if ($scope.order_start_date && $scope.order_end_date) {
                 getProductsForPeriod();
@@ -15589,26 +15589,26 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
                 });
                 products[idx].sold = sold;
             });
-            $scope.products = products;
+            $ctrl.products = products;
         }
 
         function getAvailabilityTypes() {
             AvailabilityType.all().then(function (response) {
-                $scope.availabilityTypes = response.data;
+                $ctrl.availabilityTypes = response.data;
             }, function (error) {
                 $exceptionHandler(JSON.stringify(error));
                 console.log("Something went wrong on our end");
             });
         }
 
-        $scope.saveProduct = function () {
+        $ctrl.saveProduct = function () {
             var nanobar = new Nanobar({bg: '#fff'});
 
             nanobar.go(60);
 
-            Product.store($scope.newProduct).then(function (response) {
-                $scope.getProducts();
-                $scope.reset();
+            Product.store($ctrl.newProduct).then(function (response) {
+                $ctrl.getProducts();
+                $ctrl.reset();
                 nanobar.go(100);
                 AlertService.broadcast('Product saved!', 'success');
             }, function (error) {
@@ -15618,29 +15618,29 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             });
         };
 
-        $scope.createProduct = function () {
-            $scope.newProduct = {};
-            $scope.editState = true;
-            $scope.editingNew = true;
+        $ctrl.createProduct = function () {
+            $ctrl.newProduct = {};
+            $ctrl.editState = true;
+            $ctrl.editingNew = true;
             registerAddons();
         };
 
-        $scope.editProduct = function (product) {
-            $scope.newProduct = product;
-            $scope.editState = true;
-            $scope.editingNew = false;
+        $ctrl.editProduct = function (product) {
+            $ctrl.newProduct = product;
+            $ctrl.editState = true;
+            $ctrl.editingNew = false;
             registerAddons();
         };
 
-        $scope.updateProduct = function () {
+        $ctrl.updateProduct = function () {
             var nanobar = new Nanobar({bg: '#fff'});
-            var data = $scope.newProduct;
+            var data = $ctrl.newProduct;
 
             nanobar.go(65);
 
             Product.update(data.id, data).then(function (response) {
-                $scope.getProducts();
-                $scope.reset();
+                $ctrl.getProducts();
+                $ctrl.reset();
                 nanobar.go(100);
                 AlertService.broadcast('Product updated!', 'success');
             }, function (error) {
@@ -15650,7 +15650,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             });
         };
 
-        $scope.upload = function ($files, model) {
+        $ctrl.upload = function ($files, model) {
             var nanobar = new Nanobar({bg: '#fff'});
             var file = $files[0];
 
@@ -15666,7 +15666,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             Image.upload(data).progress(function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             }).then(function (response) {
-                $scope.newProduct[model] = response.data;
+                $ctrl.newProduct[model] = response.data;
                 nanobar.go(100);
             }, function (error) {
                 $exceptionHandler(JSON.stringify(error));
@@ -15674,17 +15674,17 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             });
         };
 
-        $scope.reset = function () {
+        $ctrl.reset = function () {
 
-            $scope.newProduct = {};
-            $scope.newYouImage = {};
-            $scope.editState = false;
-            $scope.editingNew = true;
+            $ctrl.newProduct = {};
+            $ctrl.newYouImage = {};
+            $ctrl.editState = false;
+            $ctrl.editingNew = true;
         };
 
         function getTypes() {
             Product.getTypes().then(function (response) {
-                $scope.types = response.data;
+                $ctrl.types = response.data;
             }, function (error) {
                 $exceptionHandler(JSON.stringify(error));
                 console.log("Sorry, types could not be retrieved");
@@ -15692,29 +15692,29 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         }
 
         function registerAddons() {
-            $scope.newProduct.addonSelection = [];
+            $ctrl.newProduct.addonSelection = [];
 
-            for (var i = 0; i < $scope.products.length; i++) {
+            for (var i = 0; i < $ctrl.products.length; i++) {
                 var addon = {};
-                addon.id = $scope.products[i].id;
-                addon.name = $scope.products[i].name;
+                addon.id = $ctrl.products[i].id;
+                addon.name = $ctrl.products[i].name;
 
                 // If creating a new product, it has no addons obviously...
-                if (!$scope.editingNew) {
+                if (!$ctrl.editingNew) {
                     // If selected products has addons
-                    if ($scope.newProduct.addons.length) {
-                        for (var e = 0; e < $scope.newProduct.addons.length; e++) {
-                            if ($scope.newProduct.addons[e].childId == $scope.products[i].id) {
+                    if ($ctrl.newProduct.addons.length) {
+                        for (var e = 0; e < $ctrl.newProduct.addons.length; e++) {
+                            if ($ctrl.newProduct.addons[e].childId == $ctrl.products[i].id) {
                                 addon.isAddon = true;
 
                                 //
-                                if ($scope.newProduct.addons[e].include_in_package) {
+                                if ($ctrl.newProduct.addons[e].include_in_package) {
                                     addon.include_in_package = true;
                                 } else {
                                     addon.include_in_package = false;
                                 }
 
-                                if ($scope.newProduct.addons[e].price_zero) {
+                                if ($ctrl.newProduct.addons[e].price_zero) {
                                     addon.price_zero = true;
                                 } else {
                                     addon.price_zero = false;
@@ -15730,7 +15730,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
                 } else {
                     addon.isAddon = false;
                 }
-                $scope.newProduct.addonSelection.push(addon);
+                $ctrl.newProduct.addonSelection.push(addon);
             }
         }
 
@@ -15740,7 +15740,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             getAllProducts();
         };
 
-        $scope.getProducts();
+        $ctrl.getProducts();
         getTypes();
         getAvailabilityTypes();
     }
