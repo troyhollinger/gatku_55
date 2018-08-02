@@ -18,7 +18,8 @@ app.config(function($routeProvider) {
         })
         .when('/products', {
             templateUrl : 'js/app/admin/products/AdminProducts.html',
-            controller: 'AdminProductsController'
+            controller: 'AdminProductsController',
+            controllerAs: '$ctrl'
         })
         .when('/images', {
             templateUrl : 'js/app/admin/you/AdminImages.html',

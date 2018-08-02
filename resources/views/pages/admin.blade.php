@@ -4,7 +4,7 @@
 	Admin
 @stop
 
-<div class="admin-container-new"  ng-controller="AdminMainController">
+<div class="admin-container-new" ng-controller="AdminMainController" ng-cloak>
 
     <ul class="nav nav-tabs">
         <li class="nav-item">

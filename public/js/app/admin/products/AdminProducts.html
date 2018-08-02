@@ -1,13 +1,33 @@
-<h1>Products</h1>
+<h1>Products Manager</h1>
 
 
-<div class="admin-sub-section">
+<div class="admin-sub-section" ng-cloak>
 
-    <div class="button success-bg" ng-hide="editState" ng-click="createProduct()">Create Product</div>
-    <div class="button success-bg" ng-show="editState && editingNew" ng-click="saveProduct();">Save</div>
-    <div class="button success-bg" ng-show="editState && editingNew === false" ng-click="updateProduct();">Update</div>
-    <div class="button error-bg" ng-show="editState" ng-click="reset();">Cancel</div>
-    <span ng-show="editState" class="edit-indicator">Editing Product</span>
+    <button type="button"
+            class="btn btn-success"
+            ng-hide="editState"
+            ng-click="createProduct()">Create Product
+    </button>
+    <button type="button"
+            class="btn btn-success"
+            ng-show="editState && editingNew"
+            ng-click="saveProduct();">Save
+    </button>
+    <button type="button"
+            class="btn btn-success"
+            ng-show="editState && editingNew === false"
+            ng-click="updateProduct();">Update
+    </button>
+    <button type="button"
+            class="btn btn-danger"
+            ng-show="editState"
+            ng-click="reset();">Cancel
+    </button>
+
+    <br>
+    <br>
+
+    <h2><span ng-show="editState" class="edit-indicator">Editing Product</span></h2>
 
     <form class="new-product-form" ng-show="editState" ng-cloak>
 
@@ -125,20 +145,29 @@
 
     <div class="order-search">
 
-        <h2>Products</h2>
         <div class="ord-src">
             <label>Start From</label>
-            <input style="width: 150px;" class="date-ord-input"; placeholder="<?php echo date('Y-m-d')?>" type="text" ng-model="order_start_date" datepickerstartdate />
+            <input style="width: 150px;"
+                   class="date-ord-input"
+                   placeholder="{{$ctrl.placeholderToday}}"
+                   type="text"
+                   ng-model="order_start_date"
+                   datepickerstartdate >
             </div>
         <div class="ord-src">
             <label>End To</label>
-            <input style="width: 150px;" class="date-ord-input"; placeholder="<?php echo date('Y-m-d')?>" type="text" ng-model="order_end_date" datepickerenddate />
+            <input style="width: 150px;"
+                   class="date-ord-input"
+                   placeholder="{{$ctrl.placeholderToday}}"
+                   type="text"
+                   ng-model="order_end_date"
+                   datepickerenddate>
             </div>
         <div class="ord-src">
             <div class="button success-bg" ng-click="getProducts()">Submit</div>
             </div>
         <div class="ord-src" ng-show="order_start_date || order_end_date">
-            <div class="button danger-bg" ng-click="resetDateFilter()">Reset range</div>
+            <div class="button danger-bg" ng-click="$ctrl.resetDateFilter()">Reset range</div>
             </div>
         </div>
 
@@ -151,7 +180,7 @@
             <th>Stock</th>
             <th>Sold</th>
             <th>Display Order</th>
-            <th>Actions (hover)</th>
+            <th>Actions</th>
             </tr>
         <tr ng-repeat="product in products">
             <td class="bold uppercase">{{ product.name }}</td>
@@ -161,9 +190,18 @@
             <td class="faded">{{ product.order }}</td>
 
             <td>
-                <a href="/product/{{ product.slug }}" target="_blank"><div class="button info-bg">View</div></a>
-                <div class="button info-bg" ng-click="editProduct(product)">Edit</div>
-                <div class="button error-bg">Delete</div>
+                <a href="/product/{{ product.slug }}" target="_blank">
+                    <button type="button"
+                            class="btn btn-default">View
+                    </button>
+                </a>
+                <button type="button"
+                        class="btn btn-default"
+                        ng-click="editProduct(product)">Edit
+                </button>
+                <button type="button"
+                        class="btn btn-danger">Delete
+                </button>
                 </td>
             </tr>
         </table>
