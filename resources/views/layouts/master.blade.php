@@ -9,14 +9,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>@yield('title')</title>
+        <title>{!! $homeSetting['page_title'] !!}</title>
         <meta name="description" content="@yield('description')">
-        <meta property="og:title" content="GATKU Polespears">
+        <meta property="og:title" content="{!! $homeSetting['page_title'] !!}">
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://gatku.com/">
         <meta property="og:image" content="{{ asset('img/fbscreenshot.jpg') }}" />
         <meta property="og:description" content="@yield('description')">
-        <meta property="og:site_name" content="GATKU">
+        <meta property="og:site_name" content="{!! $homeSetting['page_title'] !!}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--
         /**
@@ -101,6 +101,9 @@
                 @endif
             }
 
+            .below-fold {
+                background-image: url( ' {!! $homeSetting["top_stripe_background_image_url"] !!}');
+            }
         </style>
         <!-- This is css created dynamically based on settings in admin section - end -->
     </head>

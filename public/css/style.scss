@@ -385,27 +385,18 @@ a:hover {
 	font-size: 1.6rem;
 
 	#logo-below {
-
 		display: none;
-
 	}
 
 	&.below-fold {
 
-		background-image: url(../img/mast-background.jpg);
-
 		#logo-above {
-
 			display: none;
-
 		}
 
 		#logo-below {
-
 			display: inline;
-
 		}
-
 	}
 
 	li:hover {

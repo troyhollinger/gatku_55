@@ -24,7 +24,7 @@ class AuthenticationController extends BaseController {
 			if (Auth::user()->admin) {
 				return \Redirect::route('admin.index');
 			} else {
-				return \Redirect::route('home');
+				return \Redirect::route('admin.index');
 			}
 		} else {
 			return \Redirect::route('login.index');

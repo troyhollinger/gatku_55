@@ -4,12 +4,22 @@
 
     <form name="home-setting" class="home-setting-form">
 
+        <label>Page Title</label>
+        <input type="text" ng-model="$ctrl.homeSetting.page_title">
+
         <!-- upload mobile image -->
         <label>Logo</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.logo + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.logo"></i>
             <input type="text" ng-model="$ctrl.homeSetting.logo" class="image-path-storage-input">
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'logo')">
+        </div>
+
+        <label>Top Stripe Background Image Url</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.top_stripe_background_image_url + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.top_stripe_background_image_url"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.top_stripe_background_image_url" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'top_stripe_background_image_url')">
         </div>
 
         <label>Button Color</label>
@@ -28,7 +38,6 @@
             <input type="text" ng-model="$ctrl.homeSetting.mobile_image" class="image-path-storage-input">
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'mobile_image')">
         </div>
-
 
         <label>On Site Live Til</label>
         <input type="text" ng-model="$ctrl.homeSetting.image_info">

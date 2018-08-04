@@ -313,8 +313,16 @@
 																@if($item['product']['sizeable'])
 																<td><span class="product-name" style="text-transform:uppercase;"><strong>{{ $item['size']['name'] }}</strong></span></td>
 																@else
-																<td><span class="product-name" style="text-transform:uppercase;"><strong>{{ $item['product']['shortName'] }}</strong>@if($item['product']['type']['slug'] === 'pole')<span>'ER</span>@endif
-																	@if (strpos($item['product']['slug'], 'paralyzer') !== false || $item['product']['type']['slug'] === 'glass')<small>/{{ $item['product']['length'] }}</small>@endif</span>
+																<td>
+																	<span class="product-name" style="text-transform:uppercase;">
+																		<strong>{{ $item['product']['shortName'] }}</strong>
+																		@if($item['product']['type']['slug'] === 'pole')
+																			<span>{{ $item['product']['short_name_extension'] }}</span>
+																		@endif
+																		@if (strpos($item['product']['slug'], 'paralyzer') !== false || $item['product']['type']['slug'] === 'glass')
+																			<small>/{{ $item['product']['length'] }}</small>
+																		@endif
+																	</span>
 																</td>
 																@endif
 

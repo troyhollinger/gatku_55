@@ -204,6 +204,7 @@ class ProductRepository implements ProductRepositoryInterface {
 		if (isset($data['availabilityTypeId'])) $product->availabilityTypeId = $data['availabilityTypeId'];
 		$product->name = $data['name'];
 		$product->shortName = $data['shortName'];
+        if (isset($data['short_name_extension'])) $product->short_name_extension = $data['short_name_extension'];
 		$product->slug = $data['slug'];
 		$product->price = $data['price'];
 		$product->description = $data['description'];

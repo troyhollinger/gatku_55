@@ -60,7 +60,17 @@
 		</div>
 		@endif
 
-		<h1 class="product-title {!! $product->slug === 'inshore-shrinker' ? 'shrinker-title' : '' !!}"><span class="bold {!! $product->type->slug === 'pole' ? 'uppercase' : '' !!}">{!! $product->type->slug === 'apparel' ? $product->name : $product->shortName !!}</span>{!! $product->type->slug === 'pole' ? "'ER" : '' !!} @if($product->length) <span class="detail"><span class="detail">/{!! $product->length !!}</span></span> @endif</h1>
+
+		<h1 class="product-title {!! $product->slug === 'inshore-shrinker' ? 'shrinker-title' : '' !!}">
+            <span class="bold {!! $product->type->slug === 'pole' ? 'uppercase' : '' !!}">
+                {!! $product->type->slug === 'apparel' ? $product->name : $product->shortName !!}
+            </span>{!! $product->type->slug === 'pole' ?  $product->short_name_extension : '' !!}
+            @if($product->length)
+                <span class="detail">
+                    <span class="detail">/{!! $product->length !!}</span>
+                </span>
+            @endif
+        </h1>
 
 		<div class="product-description {!! $product->type->slug === 'apparel' ? 'apparel-description' : '' !!} {!! $product->type->slug === 'glass' ? 'glass-description' : '' !!}">
 

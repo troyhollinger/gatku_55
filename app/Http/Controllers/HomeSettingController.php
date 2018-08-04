@@ -46,7 +46,9 @@ class HomeSettingController extends BaseController {
 	public function store() {
 		try {
             $homeSetting = new HomeSetting;
+            $homeSetting->page_title = \Request::get('page_title') ? \Request::get('page_title') : '';
             $homeSetting->logo = \Request::get('logo') ? \Request::get('logo') : '';
+            $homeSetting->top_stripe_background_image_url = \Request::get('top_stripe_background_image_url') ? \Request::get('top_stripe_background_image_url') : '';
             $homeSetting->button_color = \Request::get('button_color') ? \Request::get('button_color') : '';
             $homeSetting->image = \Request::get('image') ? \Request::get('image') : '';
             $homeSetting->mobile_image = \Request::get('mobile_image') ? \Request::get('mobile_image') : '';
