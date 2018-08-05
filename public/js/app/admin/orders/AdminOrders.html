@@ -33,80 +33,84 @@
     </div>
 </div>
 
-<table class="admin-orders-table">
-    <tr>
-        <th>Info</th>
-        <th>Products</th>
-        <th>Actions</th>
-        <th>Amount</th>
-        <th>Date</th>
-    </tr>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th><b>Info</b></th>
+            <th><b>Products</b></th>
+            <th><b>Actions</b></th>
+            <th><b>Amount</b></th>
+            <th><b>Date</b></th>
+        </tr>
+    </thead>
 
-    <tr dir-paginate="order in $ctrl.orders|itemsPerPage:15" total-items="$ctrl.total_count">
-        <td>
-            <span class="brand">{{ order.number }}</span>
-            <br>
-            <span class="bold">{{ order.customer.fullName }}</span><br>
-            {{ order.address }}
-            <br>
-            {{ order.city }}, {{ order.state }} {{ order.zip }}
-        </td>
-        <td>
-            <ul>
-                <li ng-repeat="item in order.items" class="uppercase bold">
-                    {{ item.product.sizeable ? item.size.name : item.product.name }}
-                    &nbsp;<span ng-show="item.quantity > 1" class="lowercase brand">x {{ item.quantity }}</span>
-                    <ul class="admin-order-addons-list">
-                        <li ng-repeat="addon in item.addons">
-                            {{ addon.product.name }}
-                            &nbsp;<span ng-show="addon.quantity > 1" class="lowercase brand">x {{ addon.quantity }}</span>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </td>
-        <td>
-            <!-- @TODO Make decision what to do with 'Print Label' button. -->
-            <!-- What 'Print Label' button should do. At the moment there is not bind any functionality. Commented for now.-->
-            <!--<button type="button" class="btn btn-default">Print Label</div>-->
+    <tbody>
+        <tr dir-paginate="order in $ctrl.orders|itemsPerPage:15" total-items="$ctrl.total_count">
+            <td>
+                <span class="brand">{{ order.number }}</span>
+                <br>
+                <span class="bold">{{ order.customer.fullName }}</span><br>
+                {{ order.address }}
+                <br>
+                {{ order.city }}, {{ order.state }} {{ order.zip }}
+            </td>
+            <td>
+                <ul>
+                    <li ng-repeat="item in order.items" class="uppercase bold">
+                        {{ item.product.sizeable ? item.size.name : item.product.name }}
+                        &nbsp;<span ng-show="item.quantity > 1" class="lowercase brand">x {{ item.quantity }}</span>
+                        <ul class="admin-order-addons-list">
+                            <li ng-repeat="addon in item.addons">
+                                {{ addon.product.name }}
+                                &nbsp;<span ng-show="addon.quantity > 1" class="lowercase brand">x {{ addon.quantity }}</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <!-- @TODO Make decision what to do with 'Print Label' button. -->
+                <!-- What 'Print Label' button should do. At the moment there is not bind any functionality. Commented for now.-->
+                <!--<button type="button" class="btn btn-default">Print Label</div>-->
 
-            <shipping-request order="order" shipping="order.shipping"></shipping-request>
-            <div ng-if="!order.tracking" style="margin-right: 5px;float:left;">
-                <shipping-track order="order" tracking=""></shipping-track>
-            </div>
-            <div ng-if="order.tracking" style="margin-right: 5px;float:left;">
-                <a ng-if="order.tracking.carrier == 'usps'"
-                   href="https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1={{ order.tracking.track_id }}"
-                   target="_blank">
-                    <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
-                </a>
-                <a ng-if="order.tracking.carrier == 'auspost'"
-                   href="https://auspost.com.au/parcels-mail/track.html#/track?id={{ order.tracking.track_id }}"
-                   target="_blank">
-                    <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
-                </a>
-                <a ng-if="order.tracking.carrier == 'packsend'"
-                   href="https://online.packsend.com.au/tracktrace?trackingnumber={{ order.tracking.track_id }}"
-                   target="_blank">
-                    <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
-                </a>
-                <a ng-if="order.tracking.carrier == 'ups'"
-                   href="https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={{ order.tracking.track_id }}"
-                   target="_blank">
-                   <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
-                </a>
-            </div>
-            <div ng-if="order.tracking" style="margin-right: 5px;float:right;">
-                <shipping-track order="order" tracking="order.tracking"></shipping-track>
-            </div>
-        </td>
-        <td>
-            <span ng-if="order.orderAmount">${{ order.orderAmount }}</span>
-        </td>
-        <td>
-            {{ order.createdAtHuman }}
-        </td>
-    </tr>
+                <shipping-request order="order" shipping="order.shipping"></shipping-request>
+                <div ng-if="!order.tracking" style="margin-right: 5px;float:left;">
+                    <shipping-track order="order" tracking=""></shipping-track>
+                </div>
+                <div ng-if="order.tracking" style="margin-right: 5px;float:left;">
+                    <a ng-if="order.tracking.carrier == 'usps'"
+                       href="https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1={{ order.tracking.track_id }}"
+                       target="_blank">
+                        <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
+                    </a>
+                    <a ng-if="order.tracking.carrier == 'auspost'"
+                       href="https://auspost.com.au/parcels-mail/track.html#/track?id={{ order.tracking.track_id }}"
+                       target="_blank">
+                        <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
+                    </a>
+                    <a ng-if="order.tracking.carrier == 'packsend'"
+                       href="https://online.packsend.com.au/tracktrace?trackingnumber={{ order.tracking.track_id }}"
+                       target="_blank">
+                        <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
+                    </a>
+                    <a ng-if="order.tracking.carrier == 'ups'"
+                       href="https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums={{ order.tracking.track_id }}"
+                       target="_blank">
+                       <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
+                    </a>
+                </div>
+                <div ng-if="order.tracking" style="margin-right: 5px;float:right;">
+                    <shipping-track order="order" tracking="order.tracking"></shipping-track>
+                </div>
+            </td>
+            <td>
+                <span ng-if="order.orderAmount">${{ order.orderAmount }}</span>
+            </td>
+            <td>
+                {{ order.createdAtHuman }}
+            </td>
+        </tr>
+    </tbody>
 </table>
 
 <dir-pagination-controls max-size="8"

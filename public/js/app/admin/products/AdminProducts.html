@@ -196,39 +196,43 @@
         </div>
     </div>
 
-    <table class="admin-products-table">
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Stock</th>
-            <th>Sold</th>
-            <th>Display Order</th>
-            <th>Actions</th>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th><b>Name</b></th>
+                <th><b>Type</b></th>
+                <th><b>Stock</b></th>
+                <th><b>Sold</b></th>
+                <th><b>Display Order</b></th>
+                <th><b>Actions</b></th>
             </tr>
-        <tr ng-repeat="product in $ctrl.products">
-            <td class="bold uppercase">{{ product.name }}</td>
-            <td class="faded">{{ product.type.name }}</td>
-            <td class="faded">{{ product.availability.name }}</td>
-            <td class="faded">{{ product.sold | number | customNumber }}</td>
-            <td class="faded">{{ product.order }}</td>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in $ctrl.products">
+                <td class="bold uppercase">{{ product.name }}</td>
+                <td class="faded">{{ product.type.name }}</td>
+                <td class="faded">{{ product.availability.name }}</td>
+                <td class="faded">{{ product.sold | number | customNumber }}</td>
+                <td class="faded">{{ product.order }}</td>
 
-            <td>
-                <a href="/product/{{ product.slug }}" target="_blank">
+                <td>
+                    <a href="/product/{{ product.slug }}" target="_blank">
+                        <button type="button"
+                                class="btn btn-default">View
+                        </button>
+                    </a>
+
                     <button type="button"
-                            class="btn btn-default">View
+                            class="btn btn-default"
+                            ng-click="$ctrl.editProduct(product)">Edit
                     </button>
-                </a>
 
-                <button type="button"
-                        class="btn btn-default"
-                        ng-click="$ctrl.editProduct(product)">Edit
-                </button>
-
-                <!--<button type="button"-->
-                        <!--class="btn btn-danger"-->
-                        <!--ng-click="$ctrl.deleteProduct(product);">Delete-->
-                <!--</button>-->
+                    <!--<button type="button"-->
+                    <!--class="btn btn-danger"-->
+                    <!--ng-click="$ctrl.deleteProduct(product);">Delete-->
+                    <!--</button>-->
                 </td>
             </tr>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
