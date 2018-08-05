@@ -9,7 +9,7 @@ DELETE FROM orders;
 -- Remove all customers
 DELETE FROM customers;
 
---Remove all you_images
+-- Remove all you_images
 DELETE FROM you_images;
 
 -- Remove all not used product on page.
