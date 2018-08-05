@@ -42,9 +42,8 @@
 				ng-repeat="pole in poles"
 				ng-cloak>
 				<a href="' . route('product.show', ['']) . '/{{ pole.slug }}">
-					<span class="default-product-name">{{ pole.shortName }}
-						<span class="unbold">{{ pole.short_name_extension }}</span>
-						<span class="detail uncaps">/{{ pole.length }}</span>
+					<!-- Don\'t breake following line in separate lines to avoid spaces between words. -->
+					<span class="default-product-name">{{ pole.shortName }}<span class="unbold">{{ pole.short_name_extension }}</span><span class="detail uncaps">/{{ pole.length }}</span>
 					</span>
 					<span class="mobile-product-name">{{ (pole.mobile_name) ? pole.mobile_name : "" }}</span>
 				</a>

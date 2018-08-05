@@ -62,9 +62,8 @@
 
 
 		<h1 class="product-title {!! $product->slug === 'inshore-shrinker' ? 'shrinker-title' : '' !!}">
-            <span class="bold {!! $product->type->slug === 'pole' ? 'uppercase' : '' !!}">
-                {!! $product->type->slug === 'apparel' ? $product->name : $product->shortName !!}
-            </span>{!! $product->type->slug === 'pole' ?  $product->short_name_extension : '' !!}
+			<!-- Don't breake following line in separate lines to avoid spaces between words. -->
+			<span class="bold {!! $product->type->slug === 'pole' ? 'uppercase' : '' !!}">{!! $product->type->slug === 'apparel' ? $product->name : $product->shortName !!}</span><span>{!! $product->type->slug === 'pole' ?  $product->short_name_extension : '' !!}</span>
             @if($product->length)
                 <span class="detail">
                     <span class="detail">/{!! $product->length !!}</span>

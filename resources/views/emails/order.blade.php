@@ -350,10 +350,8 @@
 
                                                                 <td><span class="product-name"
                                                                           style="text-transform:uppercase;">
-                                                                        <strong>{{ $item['product']['shortName'] }}</strong>
-                                                                        @if($item['product']['type']['slug'] === 'pole')
-                                                                            <span>{{ $item['product']['short_name_extension'] }}</span>
-                                                                        @endif
+                                                                        <!-- Don't breake following line in separate lines to avoid spaces between words. -->
+                                                                        <strong>{{ $item['product']['shortName'] }}</strong>@if($item['product']['type']['slug'] === 'pole')<span>{{ $item['product']['short_name_extension'] }}</span>@endif
                                                                         @if (strpos($item['product']['slug'], 'paralyzer') !== false || $item['product']['type']['slug'] === 'glass')
                                                                             <small>/{{ $item['product']['length'] }}</small>
                                                                         @endif
