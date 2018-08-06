@@ -21,6 +21,11 @@ app.config(function($routeProvider) {
             controller: 'AdminProductsController',
             controllerAs: '$ctrl'
         })
+        .when('/shelves', {
+            templateUrl : 'js/app/admin/shelves/AdminShelves.html',
+            controller: 'AdminShelvesController',
+            controllerAs: '$ctrl'
+        })
         .when('/images', {
             templateUrl : 'js/app/admin/you/AdminImages.html',
             controller: 'AdminImagesController',

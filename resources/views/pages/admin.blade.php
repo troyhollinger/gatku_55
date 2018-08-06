@@ -20,6 +20,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#shelves">
+                <i class="fa fa-bars"></i>
+                &nbsp;Shelves
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#discounts">
                 <i class="fa fa-usd"></i>
                 &nbsp;Discounts
