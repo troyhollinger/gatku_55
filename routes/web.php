@@ -13,8 +13,6 @@ use Gatku\HomeSetting;
 |
 */
 
-
-
 Route::get('/', ['as' => 'home', function() {
     $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
     return View::make('pages.home')->with('homeSetting',  $homeSetting);
@@ -108,6 +106,8 @@ Route::resource('shipping-track', 'ShippingTrackController', ['except' => ['inde
 Route::resource('discount', 'DiscountController');
 Route::resource('discounts-exists', 'DiscountExistsController'); //Check if in discounts table are any records
 
+//Shelf route
+Route::resource('shelf', 'ShelfController');
 
 //Below code is to test mailable objects. Uncomment if necessary.
 //Route::get('/mailable', function () {

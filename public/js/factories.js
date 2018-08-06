@@ -107,6 +107,35 @@ app.factory('Discount', ['$http', function($http) {
     }
 }]);
 
+app.factory('Shelf', ['$http', function($http) {
+    return {
+        //Fetch all records from discounts table
+        all : function() {
+            return $http.get('/shelf');
+        },
+
+        //Get one discount record with id
+        get : function(id) {
+            return $http.get('/shelf/' + id);
+        },
+
+        //Delete one discount record with id
+        remove: function(id) {
+            return $http.delete('/shelf/' + id);
+        },
+
+        //Add record to discounts table
+        store : function(id) {
+            return $http.post('/shelf', id);
+        },
+
+        //Update record in discounts table
+        update : function(id, data) {
+            return $http.put('/shelf/' + id, data);
+        }
+    }
+}]);
+
 app.factory('DiscountExists', ['$http', function($http) {
     return {
         //Fetch all records from discounts table
