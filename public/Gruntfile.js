@@ -20,6 +20,7 @@ module.exports = function(grunt) {
                     'bower_components/angular-touch/angular-touch.js',
                     'bower_components/angular-credit-cards/release/angular-credit-cards.js',
                     'bower_components/angular-route/angular-route.js',
+                    'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                     'bower_components/angular-fancybox-plus/js/angular-fancybox-plus.js',
                     'bower_components/angularUtils-pagination/dirPagination.js',
                     'bower_components/ng-file-upload/angular-file-upload.js',

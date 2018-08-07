@@ -60,7 +60,7 @@
 
         <!-- Bugsnag for JavaScript See: https://docs.bugsnag.com/platforms/browsers/js/ -->
         <script src="//d2wy8f7a9ursnm.cloudfront.net/v4/bugsnag.min.js"></script>
-{{--<script>window.bugsnagClient = bugsnag('a76deca11eb34ca6b18e6010ec00a39d')</script>--}}
+        <script>window.bugsnagClient = bugsnag('a76deca11eb34ca6b18e6010ec00a39d')</script>
 
 
         <link rel="stylesheet" href="{{ asset('production/app.css?v=' . config('app_version.version') ) }}">

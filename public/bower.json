@@ -22,6 +22,9 @@
     "nanobar": "~0.2.0",
     "angular-animate": "^1.7.2",
     "jquery-ui": "^1.12.1",
-    "angular-stripe": "^5.0.0"
+    "angular-stripe": "^5.0.0",
+    "angular-bootstrap": "^2.5.0",
+    "angular-touch": "^1.7.2",
+    "bootstrap": "^4.1.3"
   }
 }

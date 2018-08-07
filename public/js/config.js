@@ -20,6 +20,7 @@ var app = angular.module('gatku', [
     'ngRoute',
 	'angular-stripe',
 	'ngTouch',
+    'ui.bootstrap',
 	'credit-cards',
 	'checklist-model',
 	'angularUtils.directives.dirPagination',
