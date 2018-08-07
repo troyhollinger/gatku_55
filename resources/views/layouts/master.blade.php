@@ -149,6 +149,6 @@
             });
         </script>
         <!-- FRESHCHAT WIDGET - loading - start -->
-        @endif;
+        @endif
     </body>
 </html>
