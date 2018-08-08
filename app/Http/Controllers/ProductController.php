@@ -50,12 +50,16 @@ class ProductController extends BaseController
     public function index()
     {
         if ($this->request->wantsJson()) {
-            $requestParams = $this->request->input();
-            if (isset($requestParams['start_date']) && isset($requestParams['end_date'])) {
-                $products = $this->product->getProductsForPeriod($requestParams['start_date'], $requestParams['end_date']);
-            } else {
-                $products = $this->product->all();
-            }
+
+            $products = $this->product->all();
+
+            //Commented temporary remove in future if not used
+//            $requestParams = $this->request->input();
+//            if (isset($requestParams['start_date']) && isset($requestParams['end_date'])) {
+//                $products = $this->product->getProductsForPeriod($requestParams['start_date'], $requestParams['end_date']);
+//            } else {
+//                $products = $this->product->all();
+//            }
 
             return \Response::json($products, 200);
         } else {
@@ -81,9 +85,8 @@ class ProductController extends BaseController
 
 
     /**
-     * API Hook, get product
-     *
-     * @return JSON Response
+     * @param $id
+     * @return mixed
      */
     public function get($id)
     {
@@ -95,6 +98,10 @@ class ProductController extends BaseController
         return \Response::json($product, 200);
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     */
     public function getBySlug($slug)
     {
         $product = $this->product->find($slug);
@@ -236,5 +243,9 @@ class ProductController extends BaseController
         if ($size === false) return \Response::json(['message' => 'Sorry, something went wrong!'], 404);
 
         return \Response::json($size, 200);
+    }
+
+    public function getByShelf(int $shelfId) {
+        //@TODO finish this method
     }
 }

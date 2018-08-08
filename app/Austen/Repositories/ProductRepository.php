@@ -13,27 +13,28 @@ class ProductRepository implements ProductRepositoryInterface {
 
 	public function all()
     {
-		$products = Product::with('type', 'addons', 'availability', 'orderitems')->get();
+		$products = Product::with('type', 'addons', 'availability')->get();
 		Log::info($products);
 		return $products;
 	}
 
-	public function getProductsForPeriod($startDate, $endDate)
-    {
-        if (!$startDate) {
-            $startDate = date('y-m-d');
-        }
-
-        //Just in case no endDate
-        if (!$endDate) {
-            $endDate = date('y-m-d');
-        }
-
-        $products = Product::with(['type', 'addons', 'availability', 'orderitems' => Product::orderItemsWithParams($startDate, $endDate)])->get();
-
-        Log::info($products);
-        return $products;
-    }
+	//Commented temporary - remove in future if not used.
+//	public function getProductsForPeriod($startDate, $endDate)
+//    {
+//        if (!$startDate) {
+//            $startDate = date('y-m-d');
+//        }
+//
+//        //Just in case no endDate
+//        if (!$endDate) {
+//            $endDate = date('y-m-d');
+//        }
+//
+//        $products = Product::with(['type', 'addons', 'availability', 'orderitems' => Product::orderItemsWithParams($startDate, $endDate)])->get();
+//
+//        Log::info($products);
+//        return $products;
+//    }
 
 	public function get($id)
     {
@@ -217,6 +218,7 @@ class ProductRepository implements ProductRepositoryInterface {
 		if (isset($data['order'])) $product->order = $data['order'];
 		if (isset($data['shipping_description'])) $product->shipping_description = $data['shipping_description'];
         if (isset($data['mobile_name'])) $product->mobile_name = $data['mobile_name'];
+        $product->shelf_id = $data['shelf_id'];
 
 		return $product;
 	}

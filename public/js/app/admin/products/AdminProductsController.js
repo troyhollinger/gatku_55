@@ -1,6 +1,6 @@
 (function () {
     app.controller('AdminProductsController', AdminProductsController);
-    function AdminProductsController($scope, Product, AvailabilityType, AlertService, Image, $http, $exceptionHandler) {
+    function AdminProductsController($scope, Product, AvailabilityType, AlertService, Image, Shelf, $http, $exceptionHandler) {
 
         var $ctrl = this;
 
@@ -15,29 +15,11 @@
 
         $ctrl.placeholderToday = dateToYMD(new Date());
 
-        $ctrl.getProducts = function () {
-            //This variables have to be in $scope
-            if ($scope.order_start_date && $scope.order_end_date) {
-                getProductsForPeriod();
-            } else {
-                getAllProducts();
-            }
-        }
-
         function dateToYMD(date) {
             var d = date.getDate();
             var m = date.getMonth() + 1; //Month from 0 to 11
             var y = date.getFullYear();
             return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
-        }
-
-        function getProductsForPeriod() {
-            Product.forPeriod($scope.order_start_date, $scope.order_end_date).then(function (response) {
-                countSoldItems(response.data);
-            }, function (error) {
-                $exceptionHandler(JSON.stringify(error));
-                console.log("Sorry, there was an error retrieving the products");
-            });
         }
 
         function getAllProducts() {
@@ -74,8 +56,8 @@
 
             nanobar.go(60);
 
-            Product.store($ctrl.newProduct).then(function (response) {
-                $ctrl.getProducts();
+            Product.store($ctrl.newProduct).then(function () {
+                getAllProducts();
                 $ctrl.reset();
                 nanobar.go(100);
                 AlertService.broadcast('Product saved!', 'success');
@@ -100,32 +82,14 @@
             registerAddons();
         };
 
-        // $ctrl.deleteProduct = function(product) {
-        //
-        //     var r = confirm("Do you want to delete this product?");
-        //
-        //     if (r === true) {
-        //         Product.remove(product.id).then(function(){
-        //             $ctrl.getProducts();
-        //             $ctrl.reset();
-        //             nanobar.go(100);
-        //             AlertService.broadcast('Product deleted!', 'success');
-        //         }, function (error) {
-        //             $exceptionHandler(JSON.stringify(error));
-        //             nanobar.go(100);
-        //             AlertService.broadcast('There was a problem', 'error');
-        //         });
-        //     }
-        // };
-
         $ctrl.updateProduct = function () {
             var nanobar = new Nanobar({bg: '#fff'});
             var data = $ctrl.newProduct;
 
             nanobar.go(65);
 
-            Product.update(data.id, data).then(function (response) {
-                $ctrl.getProducts();
+            Product.update(data.id, data).then(function () {
+                getAllProducts();
                 $ctrl.reset();
                 nanobar.go(100);
                 AlertService.broadcast('Product updated!', 'success');
@@ -159,6 +123,30 @@
                 nanobar.go(100);
             });
         };
+
+        $ctrl.getAllShelves = function() {
+            var promise = Shelf.all();
+
+            promise.then(function(response) {
+                $ctrl.shelves = response.data;
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+            });
+        };
+
+        $ctrl.getShelfNameForProductsTable = function(id) {
+            var shelfName = 'No shelf chosen';
+
+            angular.forEach($ctrl.shelves, function(shelf) {
+                if (shelf.id === id) {
+                    shelfName = shelf.name;
+                }
+            });
+
+            return shelfName;
+        };
+
+        $ctrl.getAllShelves();
 
         $ctrl.reset = function () {
 
@@ -226,7 +214,7 @@
             getAllProducts();
         };
 
-        $ctrl.getProducts();
+        getAllProducts();
         getTypes();
         getAvailabilityTypes();
     }
