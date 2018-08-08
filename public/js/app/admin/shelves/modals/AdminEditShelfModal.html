@@ -10,13 +10,36 @@
 
 <!-- Modal Body -->
 <div class="modal-body">
-    <label>Shelf name:</label>
-    <br>
-    <label>Shelf hidden:</label>
+    <div class="form-group row">
+        <label for="name" class="col-sm-4 col-form-label pull-right">Shelf name:</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="name" placeholder="Shelf name..." ng-model="$ctrl.shelf.name">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-4 pull-right">Shelf hidden:</div>
+        <div class="col-sm-8">
+            <div class="form-check">
+                <input type="checkbox"
+                       class="form-check-input"
+                       ng-true-value="1"
+                       ng-false-value="0"
+                       ng-model="$ctrl.shelf.hidden">
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal Footer -->
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="$dismiss('close')">Cancel</button>
+    <button class="btn btn-default"
+            type="button"
+            ng-click="$dismiss('close')">Cancel
+    </button>
+    <button class="btn btn-success"
+            type="button"
+            ng-click="$ctrl.shelfSaveUpdate()">Save
+        &nbsp;<i class="fa fa-save"></i>
+    </button>
 </div>

@@ -28,7 +28,7 @@ class ShelfController extends BaseController {
     {
         $request = $this->repository->all();
         if ($request === false) return \Response::json(['message' => 'Sorry, there was an error on our end'], 404);
-        return \Response::json(['message' => 'request was created', "data" => $request], 200);
+        return \Response::json($request, 200);
     }
 
     /**
@@ -79,6 +79,6 @@ class ShelfController extends BaseController {
         if ($update === false) {
             return \Response::json(['message' => 'Sorry, there was a problem updating this discount.'], 404);
         }
-        return \Response::json(['message' => 'Discount updated'], 200);
+        return \Response::json(['message' => 'Shelf updated'], 200);
     }
 }

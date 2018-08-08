@@ -93,6 +93,7 @@ class ShelfRepository {
         $shelf->id = $data['id'];
         $shelf->name = $data['name'];
         $shelf->order = $data['order'];
+        $shelf->hidden = $data['hidden'];
 
         return $shelf;
     }
