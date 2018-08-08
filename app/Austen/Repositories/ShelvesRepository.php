@@ -9,6 +9,15 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 class ShelvesRepository {
 
     /**
+     * @return mixed
+     */
+    public function getAllActive() {
+        $shelves = Shelf::where('hidden', 0)->orderBy('order')->get();
+        Log::info($shelves);
+        return $shelves;
+    }
+
+    /**
      * @param $input
      * @return bool
      */

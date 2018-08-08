@@ -8,6 +8,9 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class ShelfRepository {
 
+    /**
+     * @return mixed
+     */
     public function all() {
         $shelves = Shelf::orderBy('order')->get();
         Log::info($shelves);

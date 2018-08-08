@@ -106,9 +106,10 @@ Route::resource('shipping-track', 'ShippingTrackController', ['except' => ['inde
 Route::resource('discount', 'DiscountController');
 Route::resource('discounts-exists', 'DiscountExistsController'); //Check if in discounts table are any records
 
-//Shelf route
+//Shelf and Shelves routes
 Route::resource('shelf', 'ShelfController');
-Route::put('shelves', ['as' => 'array', 'uses' => 'ShelvesController@update']);
+Route::resource('shelves', 'ShelvesController')->only(['index']);
+Route::put('shelves', ['uses' => 'ShelvesController@update']);
 
 //Below code is to test mailable objects. Uncomment if necessary.
 //Route::get('/mailable', function () {

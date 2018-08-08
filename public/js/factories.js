@@ -138,6 +138,10 @@ app.factory('Shelf', ['$http', function($http) {
 
 app.factory('Shelves', ['$http', function($http) {
     return {
+        //Fetch all records from shelves table with hidden value = 0
+        allActive : function() {
+            return $http.get('/shelves');
+        },
         //Update record in discounts table
         update : function(data) {
             return $http.put('/shelves', data);

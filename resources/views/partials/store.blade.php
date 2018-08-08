@@ -220,49 +220,82 @@
 	</div>
 
 	<h2 class="store-label">Glasses</h2>';
+
+	$shelves = '
+		<div ng-repeat="shelf in shelves">
+        	<div class="heads-row product-row">
+				<div class="product-thumb-container"
+					 ng-repeat="head in heads">
+					<a href="' . route('product.show', ['']) . '/{{ head.slug }}">
+						<img ng-src="{{ head.thumb }}">
+					</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+
+			<div class="heads-links links">
+				<div class="product-link-container"
+					 ng-repeat="head in heads">
+					<a href="' . route('product.show', ['']) . '/{{ head.slug }}">{{ head.shortName }}
+						<span class="detail" ng-if="head.slug === \'signature-paralyzer\' || head.slug === \'barbed-paralyzer\'"> /{{ head.length }}</span>
+					</a>
+				</div>
+
+				<div class="clear"></div>
+			</div>
+
+			<h2 class="store-label">{{ shelf.name }}</h2>
+		</div>
+	';
  ?>
 
 
 <div class="store-container" ng-controller="StoreController">
 
+	{{--store.blade.php--}}
+	{!! $shelves !!}
 
 
-	@if(isset($product))
+	{{--<div ng-repeat="shelf in shelves">--}}
+		{{--<span>{{ shelf.name }}</span>--}}
+	{{--</div>--}}
 
-		@if($product->type->slug === 'head')
+	{{--@if(isset($product))--}}
 
-		{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
+		{{--@if($product->type->slug === 'head')--}}
 
-		@elseif($product->type->slug === 'pole')
+		{{--{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}--}}
 
-		{!! $tailsRow . $packageRow . $headsRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
+		{{--@elseif($product->type->slug === 'pole')--}}
 
-		@elseif($product->type->slug === 'extra' || $product->type->slug === 'shrinker')
+		{{--{!! $tailsRow . $packageRow . $headsRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}--}}
 
-		{!! $extras1Row . $extras2Row . $extras3Row . $headsRow . $tailsRow . $packageRow . $apparelRow . $glassRow !!}
+		{{--@elseif($product->type->slug === 'extra' || $product->type->slug === 'shrinker')--}}
 
-		@elseif($product->type->slug === 'apparel')
+		{{--{!! $extras1Row . $extras2Row . $extras3Row . $headsRow . $tailsRow . $packageRow . $apparelRow . $glassRow !!}--}}
 
-		{!! $apparelRow . $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $glassRow !!}
+		{{--@elseif($product->type->slug === 'apparel')--}}
 
-		@elseif($product->type->slug === 'glass')
+		{{--{!! $apparelRow . $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $glassRow !!}--}}
 
-		{!! $glassRow . $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow !!}
+		{{--@elseif($product->type->slug === 'glass')--}}
 
-		@elseif($product->type->slug === 'package')
+		{{--{!! $glassRow . $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow !!}--}}
 
-		{!! $packageRow. $headsRow . $tailsRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
+		{{--@elseif($product->type->slug === 'package')--}}
 
-		@else
+		{{--{!! $packageRow. $headsRow . $tailsRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}--}}
 
-		{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
+		{{--@else--}}
 
-		@endif
+		{{--{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}--}}
 
-	@else
+		{{--@endif--}}
 
-	{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}
+	{{--@else--}}
 
-	@endif
+	{{--{!! $headsRow . $tailsRow . $packageRow . $extras1Row . $extras2Row . $extras3Row . $apparelRow . $glassRow !!}--}}
+
+	{{--@endif--}}
 
 </div>

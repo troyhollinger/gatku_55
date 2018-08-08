@@ -21,6 +21,15 @@ class ShelvesController extends BaseController {
         parent::__construct();
     }
 
+    /**
+     * @return mixed
+     */
+    public function index()
+    {
+        $request = $this->repository->getAllActive();
+        if ($request === false) return \Response::json(['message' => 'Sorry, there was an error on our end'], 404);
+        return \Response::json($request, 200);
+    }
 
     /**
      * @return mixed
