@@ -26,6 +26,7 @@ Route::get('au', ['as' => 'australia', function() {
 Route::post('product/image', ['as' => 'product.image', 'uses' => 'ProductController@upload']);
 Route::get('product/types', ['as' => 'product.types', 'uses' => 'ProductController@types']);
 Route::get('product/by/type', ['as' => 'product.getByType', 'uses' => 'ProductController@getByType']);
+Route::get('product/available', ['as' => 'product.getAllAvailable', 'uses' => 'ProductController@getAllAvailable']);
 Route::get('product/by/slug/{slug}', ['as' => 'product.getBySlug', 'uses' => 'ProductController@getBySlug']);
 Route::get('product/get/{id}', ['as' => 'product.get', 'uses' => 'ProductController@get']); //done
 Route::get('product/photos/{id}', ['as' => 'product.customerPhotos', 'uses' => 'ProductController@photos']);

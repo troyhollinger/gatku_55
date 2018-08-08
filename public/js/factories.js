@@ -33,6 +33,10 @@ app.factory('Product', ['$http', function($http) {
             return $http.get('/product');
         },
 
+        allAvailabel : function() {
+            return $http.get('/product/available');
+        },
+
         forPeriod : function(startDate, endDate) {  //consider to merge this function with all !!!
             return $http.get('/product', {
                 params: {

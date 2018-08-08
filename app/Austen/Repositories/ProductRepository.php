@@ -311,5 +311,16 @@ class ProductRepository implements ProductRepositoryInterface {
 			}
 		}
 	}
+
+    /**
+     * @return mixed
+     */
+    public function getAllAvailable()
+    {
+        $products = Product::where('available', 1)->get();
+
+        Log::info($products);
+        return $products;
+    }
 }
 

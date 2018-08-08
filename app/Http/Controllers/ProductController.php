@@ -215,6 +215,19 @@ class ProductController extends BaseController
     }
 
     /**
+     * @return mixed
+     */
+    public function getAllAvailable()
+    {
+        $products = $this->product->getAllAvailable();
+
+        if ($products === false) {
+            return \Response::json(['message' => 'Sorry, could not get All Available Products.'], 404);
+        }
+        return \Response::json($products, 200);
+    }
+
+    /**
      * Retrieve you images corresponding to the product
      *
      * @param $id
