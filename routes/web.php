@@ -108,6 +108,7 @@ Route::resource('discounts-exists', 'DiscountExistsController'); //Check if in d
 
 //Shelf route
 Route::resource('shelf', 'ShelfController');
+Route::put('shelves', ['as' => 'array', 'uses' => 'ShelvesController@update']);
 
 //Below code is to test mailable objects. Uncomment if necessary.
 //Route::get('/mailable', function () {

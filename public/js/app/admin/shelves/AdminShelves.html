@@ -38,19 +38,37 @@
                            ng-disabled="true">
                 </td>
                 <td>
-                    <button type="button"
-                            class="btn btn-success"
-                            ng-click="$ctrl.editAddShelf(shelf)">
-                        Edit
-                        &nbsp;<i class="fa fa-pencil"></i>
-                    </button>
-                    &nbsp;
-                    <button type="button"
-                            class="btn btn-danger"
-                            ng-click="$ctrl.removeShelf(shelf)">
-                        Remove
-                        &nbsp;<i class="fa fa-trash"></i>
-                    </button>
+                    <div class="shelves-list-buttons-spacer">
+                        <button type="button"
+                                class="btn btn-success"
+                                ng-click="$ctrl.editAddShelf(shelf)">
+                            Edit
+                            &nbsp;<i class="fa fa-pencil"></i>
+                        </button>
+                        &nbsp;
+                    </div>
+
+                    <div class="shelves-list-buttons-spacer">
+                        <button type="button"
+                                ng-hide="$first"
+                                class="btn btn-default"
+                                ng-click="$ctrl.updateOrder(shelf, -1)">
+                            Up
+                            &nbsp;<i class="fa fa-arrow-up"></i>
+                        </button>
+                        &nbsp;
+                    </div>
+
+                    <div class="shelves-list-buttons-spacer">
+                        <button type="button"
+                                class="btn btn-default"
+                                ng-hide="$last"
+                                ng-click="$ctrl.updateOrder(shelf, +1)">
+                            Down
+                            &nbsp;<i class="fa fa-arrow-down"></i>
+                        </button>
+                        &nbsp;
+                    </div>
                 </td>
             </tr>
         </tbody>

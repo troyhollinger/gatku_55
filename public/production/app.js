@@ -13226,29 +13226,38 @@ app.factory('Discount', ['$http', function($http) {
 
 app.factory('Shelf', ['$http', function($http) {
     return {
-        //Fetch all records from discounts table
+        //Fetch all records from shelves table
         all : function() {
             return $http.get('/shelf');
         },
 
-        //Get one discount record with id
+        //Get one shelf record with id
         get : function(id) {
             return $http.get('/shelf/' + id);
         },
 
-        //Delete one discount record with id
+        //Delete one shelves record with id
         remove: function(id) {
             return $http.delete('/shelf/' + id);
         },
 
-        //Add record to discounts table
+        //Add record to shelves table
         store : function(id) {
             return $http.post('/shelf', id);
         },
 
-        //Update record in discounts table
+        //Update record in shelves table
         update : function(id, data) {
             return $http.put('/shelf/' + id, data);
+        }
+    }
+}]);
+
+app.factory('Shelves', ['$http', function($http) {
+    return {
+        //Update record in discounts table
+        update : function(data) {
+            return $http.put('/shelves', data);
         }
     }
 }]);
@@ -15555,7 +15564,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 (function () {
     app.controller('AdminShelvesController', AdminShelvesController);
 
-    function AdminShelvesController($scope, $uibModal, Shelf, AlertService, $exceptionHandler) {
+    function AdminShelvesController($scope, $uibModal, Shelf, Shelves, AlertService, $exceptionHandler) {
         'use strict';
 
         var $ctrl = this;
@@ -15572,16 +15581,24 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
         $ctrl.getAllShelves();
 
-        $ctrl.updateOrder = function() {
-            var previousShelf = null;
+        $ctrl.updateOrder = function(shelf, direction) {
 
-            angular.forEach($ctrl.shelves, function(shelf) {
-                if (shelf.order === 0) {
-                    shelf.order = (previousShelf) ? previousShelf.order + 1 : 1;
-                }
+            var oldPosition = shelf.order;
+            var newPosition = oldPosition + direction;
 
-                previousShelf = shelf;
-            });
+            if ($ctrl.shelves[newPosition]) {
+                var replacedShelf = $ctrl.shelves[newPosition];
+
+                shelf.order = newPosition;
+                $ctrl.shelves[newPosition] = shelf;
+
+                replacedShelf.order = oldPosition;
+                $ctrl.shelves[oldPosition] = replacedShelf;
+
+                Shelves.update($ctrl.shelves).then(function() {
+                    $ctrl.getAllShelves();
+                });
+            }
         };
 
         $ctrl.editAddShelf = function(shelf) {
@@ -15605,6 +15622,12 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
         $ctrl.shelfSaveUpdate = function(shelf) {
             if (!shelf.created_at) {
+
+                //Below is code to update order for shelf
+                var shelfCounts = $ctrl.shelves.push(shelf);
+                var order = shelfCounts - 1;
+                shelf.order = order;
+
                 Shelf.store(shelf).then(function () {
                     AlertService.broadcast('Discount added!', 'success');
                     $ctrl.getAllShelves();
@@ -15621,10 +15644,6 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
                     AlertService.broadcast('There was a problem with Shelf update.');
                 });
             }
-        };
-
-        $ctrl.removeShelf = function(shelf) {
-console.log('Remove : ' + shelf);
         };
     };
 }());

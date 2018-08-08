@@ -1,0 +1,45 @@
+<?php
+
+namespace Austen\Repositories;
+
+use Gatku\Shelf;
+use Illuminate\Support\Facades\Log;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+
+class ShelvesRepository {
+
+    /**
+     * @param $input
+     * @return bool
+     */
+    public function update($input) {
+        try {
+            foreach ($input as $shelfUpdated) {
+                $shelf = Shelf::findOrFail($shelfUpdated['id']);
+                $result = $this->assignData($shelf, $shelfUpdated);
+                $result->save();
+            }
+        } catch (Exception $e) {
+            Bugsnag::notifyException($e);
+            Log::error($e);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Assigns shelf data from input
+     *
+     * @param Shelf $shelf
+     * @param $data
+     * @return Shelf
+     */
+    private function assignData(Shelf $shelf, $data) {
+        $shelf->id = $data['id'];
+        $shelf->name = $data['name'];
+        $shelf->order = $data['order'];
+        $shelf->hidden = $data['hidden'];
+
+        return $shelf;
+    }
+}

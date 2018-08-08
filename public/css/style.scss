@@ -198,12 +198,19 @@ html {
 	filter: alpha(opacity=50);
 	opacity: .5;
 }
-//Special Bootstrap v4 hack - end
 
-h1 {
+.modal-header h1 {
 	font-size: 2em;
 }
+//Special Bootstrap v4 hack - end
 
+
+
+// This is special div to keep buttons alligned
+div.shelves-list-buttons-spacer {
+	width: 100px;
+	float: left;
+}
 
 .info-bg {
 

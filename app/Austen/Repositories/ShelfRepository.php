@@ -9,7 +9,7 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 class ShelfRepository {
 
     public function all() {
-        $shelves = Shelf::all();
+        $shelves = Shelf::orderBy('order')->get();
         Log::info($shelves);
         return $shelves;
     }

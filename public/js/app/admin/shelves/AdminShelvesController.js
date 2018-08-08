@@ -1,7 +1,7 @@
 (function () {
     app.controller('AdminShelvesController', AdminShelvesController);
 
-    function AdminShelvesController($scope, $uibModal, Shelf, AlertService, $exceptionHandler) {
+    function AdminShelvesController($scope, $uibModal, Shelf, Shelves, AlertService, $exceptionHandler) {
         'use strict';
 
         var $ctrl = this;
@@ -18,16 +18,24 @@
 
         $ctrl.getAllShelves();
 
-        $ctrl.updateOrder = function() {
-            var previousShelf = null;
+        $ctrl.updateOrder = function(shelf, direction) {
 
-            angular.forEach($ctrl.shelves, function(shelf) {
-                if (shelf.order === 0) {
-                    shelf.order = (previousShelf) ? previousShelf.order + 1 : 1;
-                }
+            var oldPosition = shelf.order;
+            var newPosition = oldPosition + direction;
 
-                previousShelf = shelf;
-            });
+            if ($ctrl.shelves[newPosition]) {
+                var replacedShelf = $ctrl.shelves[newPosition];
+
+                shelf.order = newPosition;
+                $ctrl.shelves[newPosition] = shelf;
+
+                replacedShelf.order = oldPosition;
+                $ctrl.shelves[oldPosition] = replacedShelf;
+
+                Shelves.update($ctrl.shelves).then(function() {
+                    $ctrl.getAllShelves();
+                });
+            }
         };
 
         $ctrl.editAddShelf = function(shelf) {
@@ -51,6 +59,12 @@
 
         $ctrl.shelfSaveUpdate = function(shelf) {
             if (!shelf.created_at) {
+
+                //Below is code to update order for shelf
+                var shelfCounts = $ctrl.shelves.push(shelf);
+                var order = shelfCounts - 1;
+                shelf.order = order;
+
                 Shelf.store(shelf).then(function () {
                     AlertService.broadcast('Discount added!', 'success');
                     $ctrl.getAllShelves();
@@ -67,10 +81,6 @@
                     AlertService.broadcast('There was a problem with Shelf update.');
                 });
             }
-        };
-
-        $ctrl.removeShelf = function(shelf) {
-console.log('Remove : ' + shelf);
         };
     };
 }());
