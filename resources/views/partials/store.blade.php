@@ -224,23 +224,23 @@
 	$shelves = '
 		<div ng-repeat="shelf in shelves">
 
-
-
-        	<div class="heads-row product-row">
-				<div class="product-thumb-container"
-					 ng-repeat="head in heads">
-					<a href="' . route('product.show', ['']) . '/{{ head.slug }}">
-						<img ng-src="{{ head.thumb }}">
+			<div class="heads-row product-row">
+				<div 	class="product-thumb-container"
+						ng-repeat="product in products"
+						ng-show="product.shelf_id == shelf.id">
+					<a href="' . route('product.show', ['']) . '/{{ product.slug }}">
+						<img ng-src="{{ product.thumb }}">
 					</a>
 				</div>
 				<div class="clear"></div>
 			</div>
 
 			<div class="heads-links links">
-				<div class="product-link-container"
-					 ng-repeat="head in heads">
-					<a href="' . route('product.show', ['']) . '/{{ head.slug }}">{{ head.shortName }}
-						<span class="detail" ng-if="head.slug === \'signature-paralyzer\' || head.slug === \'barbed-paralyzer\'"> /{{ head.length }}</span>
+				<div 	class="product-link-container"
+						ng-repeat="product in products"
+						ng-show="product.shelf_id == shelf.id">
+					<a href="' . route('product.show', ['']) . '/{{ product.slug }}">{{ product.shortName }}
+						<span class="detail" ng-if="product.slug === \'signature-paralyzer\' || product.slug === \'barbed-paralyzer\'"> /{{ product.length }}</span>
 					</a>
 				</div>
 

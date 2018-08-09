@@ -50,10 +50,8 @@
             var layoutType = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->type->slug . "'" : "null;" !!};
             var slug = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->slug . "'" : "null;" !!};
             var CONFIG = {
-
                 base : '{!! URL::to("/") !!}',
                 environment : '{!! App::environment() !!}'
-
             }
 
         </script>
