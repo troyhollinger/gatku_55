@@ -598,393 +598,227 @@ a:hover {
 	overflow: hidden;
 
 	img {
-
 		@include transition(all .15s ease);
 		@include transform(rotate(20deg));
-
-
-
 	}
 
 	@include breakpoint(1100px) {
-
 		height:340px;
-
 	}
 
 	@include breakpoint(900px) {
-
 		height:300px;
-
 	}
 
 	@include breakpoint(small) {
-
 		height: 250px;
-
 	}
 
 	@include breakpoint(600px) {
-
 		height:200px;
-
 	}
 
 	@include breakpoint(xsmall) {
-
 		height:150px;
-
 	}
 
 	@include breakpoint(xxsmall) {
-
 		height:115px;
-
 	}
 }
 
 .links {
-
 	text-transform: uppercase;
 	font-weight: bold;
 
 	@include breakpoint(small) {
-
 		&:not(.tails-links) {
-
 			display: none;
-
 		}
-
 	}
-
 }
 
 .store-label {
-
 	text-transform: uppercase;
 	margin-top: 5px;
 	margin-bottom: 50px;
 	font-style: italic;
 
 	@include breakpoint(xsmall) {
-
 		font-size: 1.1rem;
-
 	}
-
 }
 
 .product-thumb-container {
-
 	position: relative;
 	float:left;
 	text-align: center;
-
 }
 
 .product-link-container {
-
 	@extend .product-thumb-container;
-
 	&:first-child {
-
 		text-align: left;
-
 	}
-
 	@include breakpoint(small) {
-
 		text-align: left;
-
 	}
-
 }
 
-
-.heads {
-
+.product-on-shelf {
 	&-row {
-
 		.product-thumb-container {
 
-			width:20%;
-
-		}
-
-		img {
-
-			width:30%;
-
-			&:hover {
-
-				@include transform(rotate(20deg) translate(0, -20px));
-
+			&-Head {
+				@extend .product-thumb-container;
+				width:20%;
+				img {
+					width:30%;
+					&:hover {
+						@include transform(rotate(20deg) translate(0, -20px));
+					}
+				}
 			}
 
-		}
+            &-Pole {
+                @extend .product-thumb-container;
+                width:20%;
+                img {
+                    width:40%;
+                    &:hover {
+                        @include transform(rotate(20deg) translate(0, -20px));
+                    }
+                }
+            }
 
+            &-Package,
+            &-Shrinker,
+            &-Extra {
+                @extend .product-thumb-container;
+                width:25%;
+                img {
+                  width:30%;
+                  &:hover {
+                    @include transform(rotate(20deg) translate(0, -20px));
+                  }
+                }
+                .knife-thumb {
+                    width:57%;
+                }
+                .flashers-thumb {
+                    width:46%;
+                }
+                .bands-thumb {
+                    width:34%;
+                    &-large {
+                        width:60%;
+                    }
+                }
+                .monty-thumb {
+                    width:111%;
+                    @include transform(rotate(0) translate(0,0));
+                    &:hover {
+                        @include transform(rotate(0deg) translate(0, 0px));
+                    }
+                }
+                .big-game-thumb {
+                    width:50%;
+                }
+                .cable-w-tip-thumb {
+                    width:66%;
+                }
+            }
+
+			&-Apparel {
+				@extend .product-thumb-container;
+				width:33.3333%;
+				width:calc(100% / 3);
+				img {
+					width:88%;
+					@include transform(rotate(0deg));
+					&:hover {
+						width:90%;
+					}
+				}
+			}
+
+			&-Glass {
+				@extend .product-thumb-container;
+				width:25%;
+				img {
+					width:74%;
+					@include transform(rotate(0deg));
+					@include transform(translate(0, 9%));
+
+					&:hover {
+						@include transform(rotate(0deg) translate(0, 5px));
+					}
+				}
+			}
+		}
 	}
 
 	&-links {
-
 		.product-link-container {
 
-			width:20%;
-
-		}
-
-	}
-
-
-}
-
-.tails {
-
-	&-row {
-
-		.product-thumb-container {
-
-			width:20%;
-
-		}
-
-		img {
-
-			width:40%;
-
-			&:hover {
-
-				@include transform(rotate(20deg) translate(0, -20px));
-
+			&-Head {
+				@extend .product-link-container;
+				width:20%;
 			}
 
-		}
+            &-Pole {
+                @extend .product-thumb-container;
+                width:20%;
+            }
 
-	}
+			&-Package,
+			&-Shrinker,
+            &-Extra {
+				@extend .product-link-container;
+              	width:25%;
+            }
 
-	&-links {
-
-		.product-link-container {
-
-			width:20%;
-
-		}
-
-	}
-
-}
-
-
-.extras {
-
-	&-row {
-
-		.product-thumb-container {
-
-			// width:33.3333%;
-			// width:calc(100% / 3);
-			width:25%;
-
-		}
-
-		img {
-
-			width:30%;
-
-			&:hover {
-
-				@include transform(rotate(20deg) translate(0, -20px));
-
+			&-Apparel {
+				@extend .product-link-container;
+				width:33.3333%;
+				width:calc(100% / 3);
+				&:first-child {
+					text-align: center;
+				}
 			}
 
-
-		}
-
-		.knife-thumb {
-			width:57%;
-		}
-
-		.flashers-thumb {
-			width:46%;
-		}
-
-		.bands-thumb {
-			width:34%;
-
-			&-large {
-				width:60%;
-			}
-
-		}
-
-		.monty-thumb {
-
-			width:111%;
-
-			@include transform(rotate(0) translate(0,0));
-
-			&:hover {
-
-				@include transform(rotate(0deg) translate(0, 0px));
-
-			}
-
-		}
-
-		.big-game-thumb {
-
-			width:50%;
-
-		}
-
-		.cable-w-tip-thumb {
-
-			width:66%;
-
-		}
-
-	}
-
-	&-links {
-
-		.product-link-container {
-
-			// width:33.3333%;
-			// width:calc(100% / 3);
-			width:25%;
-
-		}
-
-	}
-
-}
-
-.apparel {
-
-	&-row {
-
-		.product-thumb-container {
-
-			width:33.3333%;
-			width:calc(100% / 3);
-
-		}
-
-		img {
-
-			width:88%;
-			@include transform(rotate(0deg));
-
-			&:hover {
-
-				width:90%;
-
-			}
-
-		}
-
-	}
-
-	&-links {
-
-		.product-link-container {
-
-			width:33.3333%;
-			width:calc(100% / 3);
-
-			&:first-child {
-
-				text-align: center;
-
-			}
-
-		}
-
-	}
-
-}
-
-.glass {
-
-	&-row {
-
-		.product-thumb-container {
-
-			width:25%;
-
-		}
-
-		img {
-
-			width:74%;
-			@include transform(rotate(0deg));
-			@include transform(translate(0, 9%));
-
-			&:hover {
-
-				@include transform(rotate(0deg) translate(0, 5px));
-
+			&-Glass {
+				@extend .product-link-container;
+				width:25%;
+				&:first-child {
+					text-align: center;
+				}
 			}
 		}
-
 	}
-
-	&-links {
-
-		.product-link-container {
-
-			width:25%;
-
-			&:first-child {
-
-				text-align: center;
-
-			}
-
-		}
-
-	}
-
 }
 
 .default-product-name {
-
 	@include breakpoint(small) {
-
 		display: none;
-
 	}
-
 }
 
 .mobile-product-name {
-
 	font-size: .9rem;
 	display: none;
-
 	@include breakpoint(small) {
-
 		display: inline-block;
-
 	}
-
 }
 
 .mobile-product-name-suffix {
-
-
 	@include breakpoint(xxsmall) {
-
 		display: none;
-
 	}
-
-
 }
 
 .hero-blurb {
-
 	@include center;
 
 	//color:#ffffff;
@@ -1007,30 +841,21 @@ a:hover {
 	}
 }
 
-
-
-
 .active-video-section {
-
 	width:80%;
 	float:left;
-
 }
 
 .video-list-section {
-
 	width:20%;
 	float:right;
 	text-align: right;
 
 	li {
-
 		font-size: 1.2rem;
 		margin-bottom: 10px;
 		cursor: pointer;
-
 	}
-
 }
 
 .active-video-container {
