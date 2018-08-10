@@ -27,7 +27,7 @@
             <div style="float: right;">
                 <div style="height: 10px;"></div>
                 <div class="width-400-class">
-                    <img class="footer-label-class" src="../img/Site_GATKU_Footer-TaglineBox.png">
+                    <img class="footer-label-class" src="{!! $homeSetting['footer_banner_url'] !!}">
                 </div>
             </div>
         </div>

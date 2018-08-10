@@ -49,6 +49,7 @@ class HomeSettingController extends BaseController {
             $homeSetting->page_title = \Request::get('page_title') ? \Request::get('page_title') : '';
             $homeSetting->logo = \Request::get('logo') ? \Request::get('logo') : '';
             $homeSetting->top_stripe_background_image_url = \Request::get('top_stripe_background_image_url') ? \Request::get('top_stripe_background_image_url') : '';
+            $homeSetting->top_stripe_logo_url = \Request::get('top_stripe_logo_url') ? \Request::get('top_stripe_logo_url') : '';
             $homeSetting->button_color = \Request::get('button_color') ? \Request::get('button_color') : '';
             $homeSetting->image = \Request::get('image') ? \Request::get('image') : '';
             $homeSetting->mobile_image = \Request::get('mobile_image') ? \Request::get('mobile_image') : '';
@@ -76,6 +77,7 @@ class HomeSettingController extends BaseController {
             $homeSetting->contact_mobile_logo_url = \Request::get('contact_mobile_logo_url') ? \Request::get('contact_mobile_logo_url') : '';
             $homeSetting->contact_title = \Request::get('contact_title') ? \Request::get('contact_title') : '';
             $homeSetting->contact_message = \Request::get('contact_message') ? \Request::get('contact_message') : '';
+            $homeSetting->footer_banner_url = \Request::get('footer_banner_url') ? \Request::get('footer_banner_url') : '';
 
 			$homeSetting->save();
 		} catch (Exception $e) {

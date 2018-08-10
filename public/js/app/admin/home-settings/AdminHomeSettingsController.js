@@ -46,6 +46,15 @@
             });
         }
 
+        $ctrl.removeFooterBannerImage = function() {
+
+            var r = confirm('Do you want to remove Footer Banner Image?');
+
+            if (r) {
+                 $ctrl.homeSetting.footer_banner_url = '';
+            }
+        };
+
         $ctrl.uploadHomeImage = function ($files, model) {
             var file = $files[0];
 

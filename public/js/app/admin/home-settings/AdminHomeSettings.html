@@ -10,7 +10,6 @@
         <label>Page Title</label>
         <input type="text" ng-model="$ctrl.homeSetting.page_title">
 
-        <!-- upload mobile image -->
         <label>Logo</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.logo + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.logo"></i>
@@ -18,11 +17,18 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'logo')">
         </div>
 
-        <label>Top Stripe Background Image Url</label>
+        <label>Top Stripe Background Image</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.top_stripe_background_image_url + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.top_stripe_background_image_url"></i>
             <input type="text" ng-model="$ctrl.homeSetting.top_stripe_background_image_url" class="image-path-storage-input">
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'top_stripe_background_image_url')">
+        </div>
+
+        <label>Top Stripe Logo</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.top_stripe_logo_url + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.top_stripe_logo_url"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.top_stripe_logo_url" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'top_stripe_logo_url')">
         </div>
 
         <label>Button Color</label>
@@ -131,7 +137,28 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_mobile_logo_url')">
         </div>
 
-        </form>
+        <label>Footer Banner</label>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeFooterBannerImage();">
+            Remove Footer Banner Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+
+        <br>
+        <br>
+
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.footer_banner_url + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.footer_banner_url"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.footer_banner_url" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'footer_banner_url')">
+        </div>
+
+    </form>
+
+    <br>
+    <br>
+
     <button type="button"
             class="btn btn-success"
             ng-click="$ctrl.saveHomeSetting()">Save
