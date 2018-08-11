@@ -1,7 +1,7 @@
 (function () {
-    app.controller('AdminEditShelvesController', AdminEditShelvesController);
+    app.controller('AdminEditShelfModalController', AdminEditShelfModalController);
 
-    function AdminEditShelvesController($scope, AlertService, shelf, $uibModalInstance) {
+    function AdminEditShelfModalController($scope, AlertService, shelf, $uibModalInstance) {
         'use strict';
 
         var $ctrl = this;

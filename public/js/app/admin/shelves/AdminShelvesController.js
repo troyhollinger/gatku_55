@@ -42,7 +42,7 @@
 
             var modalInstance = $uibModal.open({
                 templateUrl: 'js/app/admin/shelves/modals/AdminEditShelfModal.html',
-                controller: 'AdminEditShelvesController',
+                controller: 'AdminEditShelfModalController',
                 controllerAs: '$ctrl',
                 backdrop: 'static',
                 resolve: {

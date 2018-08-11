@@ -15377,7 +15377,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
 (function () {
     app.controller('AdminProductsController', AdminProductsController);
-    function AdminProductsController($scope, Product, AvailabilityType, AlertService, Image, Shelf, $http, $exceptionHandler) {
+    function AdminProductsController($scope, Product, AvailabilityType, AlertService, Image, Shelf, $uibModal, $http, $exceptionHandler) {
 
         var $ctrl = this;
 
@@ -15446,17 +15446,29 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         };
 
         $ctrl.createProduct = function () {
-            $ctrl.newProduct = {};
-            $ctrl.editState = true;
-            $ctrl.editingNew = true;
-            registerAddons();
+            $ctrl.editProduct({});
         };
 
         $ctrl.editProduct = function (product) {
-            $ctrl.newProduct = product;
-            $ctrl.editState = true;
-            $ctrl.editingNew = false;
-            registerAddons();
+            var modalInstance = $uibModal.open({
+                templateUrl: 'js/app/admin/products/modals/AdminProductModal.html',
+                controller: 'AdminProductModalController',
+                controllerAs: '$ctrl',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    productObject: function() {
+                        return product;
+                    },
+                    products: function() {
+                        return $ctrl.products
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(updatedShelf) {
+                $ctrl.shelfSaveUpdate(updatedShelf);
+            });
         };
 
         $ctrl.updateProduct = function () {
@@ -15542,6 +15554,91 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             });
         }
 
+        // function registerAddons() {
+        //     $ctrl.newProduct.addonSelection = [];
+        //
+        //     for (var i = 0; i < $ctrl.products.length; i++) {
+        //         var addon = {};
+        //         addon.id = $ctrl.products[i].id;
+        //         addon.name = $ctrl.products[i].name;
+        //
+        //         // If creating a new product, it has no addons obviously...
+        //         if (!$ctrl.editingNew) {
+        //             // If selected products has addons
+        //             if ($ctrl.newProduct.addons.length) {
+        //                 for (var e = 0; e < $ctrl.newProduct.addons.length; e++) {
+        //                     if ($ctrl.newProduct.addons[e].childId == $ctrl.products[i].id) {
+        //                         addon.isAddon = true;
+        //
+        //                         //
+        //                         if ($ctrl.newProduct.addons[e].include_in_package) {
+        //                             addon.include_in_package = true;
+        //                         } else {
+        //                             addon.include_in_package = false;
+        //                         }
+        //
+        //                         if ($ctrl.newProduct.addons[e].price_zero) {
+        //                             addon.price_zero = true;
+        //                         } else {
+        //                             addon.price_zero = false;
+        //                         }
+        //                         break;
+        //                     } else {
+        //                         addon.isAddon = false;
+        //                     }
+        //                 }
+        //             } else {
+        //                 addon.isAddon = false;
+        //             }
+        //         } else {
+        //             addon.isAddon = false;
+        //         }
+        //         $ctrl.newProduct.addonSelection.push(addon);
+        //     }
+        // }
+
+        $ctrl.resetDateFilter = function () {
+            $scope.order_start_date = ''
+            $scope.order_end_date = '';
+            getAllProducts();
+        };
+
+        getAllProducts();
+        getTypes();
+        getAvailabilityTypes();
+    }
+}());
+
+
+(function () {
+    app.controller('AdminProductModalController', AdminProductModalController);
+
+    function AdminProductModalController(
+        $scope,
+        Product,
+        AvailabilityType,
+        AlertService,
+        Image,
+        Shelf,
+        productObject,
+        products,
+        $http,
+        $uibModalInstance
+    ) {
+
+        'use strict';
+
+        var $ctrl = this;
+
+        $ctrl.products = products;
+console.log($ctrl.products);
+        $ctrl.newProduct = productObject;
+        if (!$ctrl.newProduct.hasOwnProperty('name')) {
+            $ctrl.editingNew = true;
+        } else {
+            $ctrl.editingNew = false;
+        }
+
         function registerAddons() {
             $ctrl.newProduct.addonSelection = [];
 
@@ -15585,16 +15682,8 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             }
         }
 
-        $ctrl.resetDateFilter = function () {
-            $scope.order_start_date = ''
-            $scope.order_end_date = '';
-            getAllProducts();
-        };
-
-        getAllProducts();
-        getTypes();
-        getAvailabilityTypes();
-    }
+        registerAddons();
+    };
 }());
 
 
@@ -15642,7 +15731,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
             var modalInstance = $uibModal.open({
                 templateUrl: 'js/app/admin/shelves/modals/AdminEditShelfModal.html',
-                controller: 'AdminEditShelvesController',
+                controller: 'AdminEditShelfModalController',
                 controllerAs: '$ctrl',
                 backdrop: 'static',
                 resolve: {
@@ -15687,9 +15776,9 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
 
 (function () {
-    app.controller('AdminEditShelvesController', AdminEditShelvesController);
+    app.controller('AdminEditShelfModalController', AdminEditShelfModalController);
 
-    function AdminEditShelvesController($scope, AlertService, shelf, $uibModalInstance) {
+    function AdminEditShelfModalController($scope, AlertService, shelf, $uibModalInstance) {
         'use strict';
 
         var $ctrl = this;

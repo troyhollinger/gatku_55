@@ -2160,7 +2160,6 @@ product-buyers {
 
 
 .admin-container {
-
 	@extend .container;
 	min-height: 400px;
 	margin-top: 100px;
@@ -2169,20 +2168,15 @@ product-buyers {
 	padding:30px;
 
 	h1 {
-
 		font-size: 2em;
 		font-weight: bold;
-
 	}
 
 	h2 {
-
 		font-size: 1.5em;
-
 	}
 
 	input[type='text'], input[type='number'], textarea {
-
 		display: block;
 		width:100%;
 		box-sizing:border-box;
@@ -2193,33 +2187,30 @@ product-buyers {
 		font-size: .9rem;
 
 		&.image-path-storage-input {
-
 			display: none;
 		}
-
 	}
 
 	textarea {
-
 		height:215px;
-
 	}
 
-
 	label {
-
 		margin-top: 20px;
 		font-weight: bold;
 		margin-bottom: 5px;
 		display: block;
-
 	}
+
 	.order-search{ padding-bottom: 30px; }
     .order-search div.ord-src{
 		width: 20%;
 		display: inline-block;
 	}
+}
 
+.hide-input-field {
+	display: none;
 }
 
 .admin-container-new {
