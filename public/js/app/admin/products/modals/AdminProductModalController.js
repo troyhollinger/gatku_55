@@ -4,28 +4,78 @@
     function AdminProductModalController(
         $scope,
         Product,
-        AvailabilityType,
+        availabilityTypes,
         AlertService,
         Image,
-        Shelf,
+        shelves,
         productObject,
         products,
-        $http,
-        $uibModalInstance
+        types,
+        $uibModalInstance,
+        $exceptionHandler
     ) {
-
         'use strict';
 
         var $ctrl = this;
 
         $ctrl.products = products;
-console.log($ctrl.products);
         $ctrl.newProduct = productObject;
-        if (!$ctrl.newProduct.hasOwnProperty('name')) {
-            $ctrl.editingNew = true;
+        if (!$ctrl.newProduct.hasOwnProperty('id')) {
+            $ctrl.editingNew = true;    //This is needed for function registerAddons
         } else {
-            $ctrl.editingNew = false;
+            $ctrl.editingNew = false;   //This is needed for function registerAddons
         }
+
+        $ctrl.shelves = shelves;
+        $ctrl.types = types;
+        $ctrl.availabilityTypes = availabilityTypes;
+
+        $ctrl.upload = function ($files, model) {
+            var nanobar = new Nanobar({bg: '#fff'});
+            var file = $files[0];
+
+            if (!file) return false;
+
+            var data = {
+                url: '/product/image',
+                file: file
+            };
+
+            nanobar.go(40);
+
+            Image.upload(data).progress(function(evt) {
+            }).then(function (response) {
+                $ctrl.newProduct[model] = response.data;
+                nanobar.go(100);
+            }, function (error) {
+                $exceptionHandler(JSON.stringify(error));
+                nanobar.go(100);
+            });
+        };
+
+        $ctrl.productSaveUpdate = function () {
+            var nanobar = new Nanobar({bg: '#fff'});
+            nanobar.go(65);
+
+            if ($ctrl.newProduct.hasOwnProperty('id')) {
+                Product.update($ctrl.newProduct.id, $ctrl.newProduct).then(function () {
+                    $uibModalInstance.close($ctrl.newProduct);
+                }, function (error) {
+                    $exceptionHandler(JSON.stringify(error));
+                    nanobar.go(100);
+                    AlertService.broadcast('There was a problem.', 'error');
+                });
+            } else {
+                Product.store($ctrl.newProduct).then(function () {
+                    $uibModalInstance.close($ctrl.newProduct);
+                }, function (error) {
+                    $exceptionHandler(JSON.stringify(error));
+                    nanobar.go(100);
+                    AlertService.broadcast('There was a problem.', 'error');
+                });
+            }
+
+        };
 
         function registerAddons() {
             $ctrl.newProduct.addonSelection = [];
