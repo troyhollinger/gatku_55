@@ -219,6 +219,7 @@ class ProductRepository implements ProductRepositoryInterface {
 		if (isset($data['shipping_description'])) $product->shipping_description = $data['shipping_description'];
         if (isset($data['mobile_name'])) $product->mobile_name = $data['mobile_name'];
         $product->shelf_id = $data['shelf_id'];
+        if (isset($data['name_alignment'])) $product->name_alignment = $data['name_alignment'];
 
 		return $product;
 	}

@@ -1,6 +1,6 @@
 <?php
 	$shelves = '
-		<div ng-repeat="shelf in shelves">
+		<div ng-repeat="shelf in shelves" ng-cloak>
 
 			<div class="product-on-shelf-row product-row">
 				<div 	class="{{getThumbClass(product)}}"
@@ -25,9 +25,9 @@
 				<div 	class="{{getLinkClass(product)}}"
 						ng-repeat="product in products"
 						ng-if="product.shelf_id == shelf.id">
-					<a href="' . route('product.show', ['']) . '/{{ product.slug }}">
-						{{shelfProductNameToDisplay(product)}}{{$scope.shelfProductDisplayLength(product)}}{{shelfProductDisplayLength(product)}}
-
+					<a href="' . route('product.show', ['']) . '/{{ product.slug }}"
+						class="{{product.name_alignment}}">
+							{{shelfProductNameToDisplay(product)}}{{shelfProductDisplayLength(product)}}{{shelfProductDisplayLength(product)}}
 						<span class="detail"
 							ng-if="product.slug === \'signature-paralyzer\' || product.slug === \'barbed-paralyzer\'"> /{{ product.length }}
 						</span>
