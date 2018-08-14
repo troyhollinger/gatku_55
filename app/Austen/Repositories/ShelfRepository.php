@@ -97,6 +97,9 @@ class ShelfRepository {
         $shelf->name = $data['name'];
         $shelf->order = $data['order'];
         $shelf->hidden = $data['hidden'];
+        $shelf->name_text_align = $data['name_text_align'];
+        $shelf->name_font_style = $data['name_font_style'];
+        $shelf->name_font_weight = $data['name_font_weight'];
 
         return $shelf;
     }

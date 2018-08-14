@@ -33,6 +33,36 @@
             </div>
         </div>
     </div>
+
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Shelf Alignment:</label>
+        <div class="col-sm-8">
+            <select class="custom-select col-sm-4"
+                    ng-options=" value for value in $ctrl.text_align_options"
+                    ng-model="$ctrl.shelf.name_text_align">
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Shelf Font Weight:</label>
+        <div class="col-sm-8">
+            <select class="custom-select col-sm-4"
+                    ng-options="value for value in $ctrl.text_font_weight"
+                    ng-model="$ctrl.shelf.name_font_weight">
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Shelf Font Style:</label>
+        <div class="col-sm-8">
+            <select class="custom-select col-sm-4"
+                    ng-options="value for value in $ctrl.text_font_style"
+                    ng-model="$ctrl.shelf.name_font_style">
+            </select>
+        </div>
+    </div>
 </div>
 
 <!-- Modal Footer -->
