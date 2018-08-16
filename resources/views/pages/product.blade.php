@@ -12,14 +12,22 @@
 @section('content')
 
 @if($product->type->slug != 'apparel' && $product->type->slug != 'glass')
-<div class="scroller {!! $product->slug === 'budk' ? 'knife-scroller no-attached-state' : '' !!} {!! $product->slug === 'bands' ? 'band-scroller' : '' !!} {!! $product->slug === 'g-string' || $product->slug === 'offshore-striker' || $product->slug === 'black g-string' ? 'g-string-scroller' : '' !!}">
 
 	@if($product->attachedImage || $product->detachedImage)
 
-	@if($product->attachedImage)
-	<img class="scroller-image {!! $product->slug === 'budk' ? 'no-attached-state' : '' !!}" ng-if="attached" src="{!! $product->attachedImage !!}" ng-class="{'fit' : fullSize === false, 'visible' : attached }" ng-cloak loaded="poleScrollInit()">
-	@endif
-	<img class="scroller-image {!! $product->slug === 'inshore-shrinker' ? 'shrinker' : '' !!} " ng-if="!attached" src="{!! $product->detachedImage !!}" ng-class="{'fit' : fullSize === false, 'visible' : attached === false }" ng-cloak loaded="poleScrollInit()">
+		<div class="scroll-watermark-like" ng-class="{'invisible' : fullSize === false, 'visible' : attached === false }"></div>
+		<div class="scroller {!! $product->slug === 'budk' ? 'knife-scroller no-attached-state' : '' !!} {!! $product->slug === 'bands' ? 'band-scroller' : '' !!} {!! $product->slug === 'g-string' || $product->slug === 'offshore-striker' || $product->slug === 'black g-string' ? 'g-string-scroller' : '' !!}">
+
+		@if($product->attachedImage)
+			<img class="scroller-image {!! $product->slug === 'budk' ? 'no-attached-state' : '' !!}"
+				 ng-if="attached" src="{!! $product->attachedImage !!}"
+				 ng-class="{'fit' : fullSize === false, 'visible' : attached }"
+				 ng-cloak loaded="poleScrollInit()">
+		@endif
+		<img class="scroller-image {!! $product->slug === 'inshore-shrinker' ? 'shrinker' : '' !!} "
+			 ng-if="!attached" src="{!! $product->detachedImage !!}"
+			 ng-class="{'fit' : fullSize === false, 'visible' : attached === false }"
+			 ng-cloak loaded="poleScrollInit()">
 	@endif
 
 </div>

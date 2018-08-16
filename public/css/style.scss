@@ -1084,6 +1084,15 @@ a:hover {
 
 }
 
+.scroll-watermark-like {
+	margin-top: 55px;
+	width: 100%;
+	height: 40px;
+	background-image: url('../img/scroll-arrows.png');
+	background-repeat: no-repeat;
+	background-position-x: center;
+}
+
 .mobile-logo {
 	margin-top: 20px;
 	background-position: left center;
@@ -1472,71 +1481,53 @@ a:hover {
 
 
 .scroller {
-
 	position:relative;
 	width:100%;
 	height:125px;
 	background-color:white;
 	overflow-x:scroll;
 	overflow-y:visible;
-	margin-top: 105px;
+	//margin-top: 105px;
 	text-align: center;
 	-webkit-overflow-scrolling: touch;
 
 	&.knife-scroller {
-
 		height:220px;
-
 	}
 
 	&.no-attached-state {
-
 		@include breakpoint(small) {
-
 			height:auto;
 			box-sizing:border-box;
 			padding:20px 0;
-
 		}
-
 	}
 
 	&.band-scroller {
-
 		height:130px;
 		margin-bottom: 30px;
 
 		@include breakpoint(small) {
-
 			height:auto;
 			margin-bottom:20px;
 			margin-top: 70px;
 			// margin:20px 0;
 
 			& .scroller-image {
-
 				width:100%;
 				height:auto;
-
 			}
-
 		}
-
 	}
 
 	&.g-string-scroller {
-
 		height:162px;
-
 	}
 
 	@include breakpoint(small) {
-
 		margin-top: 50px;
 		padding-bottom:35px;
-
 	}
-
 }
 
 
