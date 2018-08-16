@@ -18,10 +18,17 @@
 
         var $ctrl = this;
 
+        $ctrl.text_align_options = ['left', 'right', 'center', 'justify', 'initial', 'inherit'];
+        $ctrl.text_font_weight = ['normal', 'bold', 'bolder', 'lighter', 'number', 'initial', 'inherit'];
+        $ctrl.text_font_style = ['normal', 'italic', 'oblique', 'initial', 'inherit'];
+
         $ctrl.products = products;
         $ctrl.newProduct = productObject;
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
+            $ctrl.newProduct.text_align_options = 'left';
+            $ctrl.newProduct.text_font_weight = 'normal';
+            $ctrl.newProduct.name_font_style = 'normal';
         } else {
             $ctrl.editingNew = false;   //This is needed for function registerAddons
         }

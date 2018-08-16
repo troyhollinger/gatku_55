@@ -15015,16 +15015,16 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
             return product.name;
         };
 
-        $scope.shelfProductDisplayLength = function(product) {
-            if ($scope.displayLengthForProduct.indexOf(product.type.name) !== -1) {
-                return product.length;
+        $scope.shelfProductDisplayShortNameExtension = function(product) {
+            if ($scope.displayShortNameExtensionForProduct.indexOf(product.type.name) !== -1) {
+                return product.short_name_extension;
             }
             return '';
         };
 
         $scope.shelfProductDisplayLength = function(product) {
-            if ($scope.displayShortNameExtensionForProduct.indexOf(product.type.name) !== -1) {
-                return product.short_name_extension;
+            if ($scope.displayLengthForProduct.indexOf(product.type.name) !== -1) {
+                return product.length;
             }
             return '';
         };
@@ -15560,10 +15560,17 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
         var $ctrl = this;
 
+        $ctrl.text_align_options = ['left', 'right', 'center', 'justify', 'initial', 'inherit'];
+        $ctrl.text_font_weight = ['normal', 'bold', 'bolder', 'lighter', 'number', 'initial', 'inherit'];
+        $ctrl.text_font_style = ['normal', 'italic', 'oblique', 'initial', 'inherit'];
+
         $ctrl.products = products;
         $ctrl.newProduct = productObject;
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
+            $ctrl.newProduct.text_align_options = 'left';
+            $ctrl.newProduct.text_font_weight = 'normal';
+            $ctrl.newProduct.name_font_style = 'normal';
         } else {
             $ctrl.editingNew = false;   //This is needed for function registerAddons
         }

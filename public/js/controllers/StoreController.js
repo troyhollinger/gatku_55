@@ -41,16 +41,16 @@
             return product.name;
         };
 
-        $scope.shelfProductDisplayLength = function(product) {
-            if ($scope.displayLengthForProduct.indexOf(product.type.name) !== -1) {
-                return product.length;
+        $scope.shelfProductDisplayShortNameExtension = function(product) {
+            if ($scope.displayShortNameExtensionForProduct.indexOf(product.type.name) !== -1) {
+                return product.short_name_extension;
             }
             return '';
         };
 
         $scope.shelfProductDisplayLength = function(product) {
-            if ($scope.displayShortNameExtensionForProduct.indexOf(product.type.name) !== -1) {
-                return product.short_name_extension;
+            if ($scope.displayLengthForProduct.indexOf(product.type.name) !== -1) {
+                return product.length;
             }
             return '';
         };

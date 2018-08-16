@@ -23,11 +23,11 @@
 
 			<div class="product-on-shelf-links links">
 				<div 	class="{{getLinkClass(product)}}"
+				        style="text-align: {{product.name_text_align}}; font-weight: {{product.name_font_weight}}; font-style: {{product.name_font_style}};"
 						ng-repeat="product in products"
 						ng-if="product.shelf_id == shelf.id">
-					<a href="' . route('product.show', ['']) . '/{{ product.slug }}"
-						class="{{product.name_alignment}}">
-							{{shelfProductNameToDisplay(product)}}{{shelfProductDisplayLength(product)}}{{shelfProductDisplayLength(product)}}
+					<a href="' . route('product.show', ['']) . '/{{ product.slug }}">
+							{{  shelfProductNameToDisplay(product) }}{{  shelfProductDisplayShortNameExtension(product) }}{{  shelfProductDisplayLength(product) }}
 						<span class="detail"
 							ng-if="product.slug === \'signature-paralyzer\' || product.slug === \'barbed-paralyzer\'"> /{{ product.length }}
 						</span>
