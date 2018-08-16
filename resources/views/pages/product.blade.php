@@ -1,35 +1,35 @@
 @extends('layouts.master')
 
 @section('title')
-{{ strtoupper($product->name) }} | {{ $homeSetting['page_title'] }}
+{!! strtoupper($product->name) !!} | {!! $homeSetting['page_title'] !!}
 @stop
 
 @section('description')
-{{ $product->metaDescription }}
+{!! $product->metaDescription !!}
 @stop
 
 
 @section('content')
 
 @if($product->type->slug != 'apparel' && $product->type->slug != 'glass')
-<div class="scroller {{ $product->slug === 'budk' ? 'knife-scroller no-attached-state' : '' }} {{ $product->slug === 'bands' ? 'band-scroller' : '' }} {{ $product->slug === 'g-string' || $product->slug === 'offshore-striker' || $product->slug === 'black g-string' ? 'g-string-scroller' : '' }}">
+<div class="scroller {!! $product->slug === 'budk' ? 'knife-scroller no-attached-state' : '' !!} {!! $product->slug === 'bands' ? 'band-scroller' : '' !!} {!! $product->slug === 'g-string' || $product->slug === 'offshore-striker' || $product->slug === 'black g-string' ? 'g-string-scroller' : '' !!}">
 
 	@if($product->attachedImage || $product->detachedImage)
 
 	@if($product->attachedImage)
-	<img class="scroller-image {{ $product->slug === 'budk' ? 'no-attached-state' : '' }}" ng-if="attached" src="{{ $product->attachedImage }}" ng-class="{'fit' : fullSize === false, 'visible' : attached }" ng-cloak loaded="poleScrollInit()">
+	<img class="scroller-image {!! $product->slug === 'budk' ? 'no-attached-state' : '' !!}" ng-if="attached" src="{!! $product->attachedImage !!}" ng-class="{'fit' : fullSize === false, 'visible' : attached }" ng-cloak loaded="poleScrollInit()">
 	@endif
-	<img class="scroller-image {{ $product->slug === 'inshore-shrinker' ? 'shrinker' : '' }} " ng-if="!attached" src="{{ $product->detachedImage }}" ng-class="{'fit' : fullSize === false, 'visible' : attached === false }" ng-cloak loaded="poleScrollInit()">
+	<img class="scroller-image {!! $product->slug === 'inshore-shrinker' ? 'shrinker' : '' !!} " ng-if="!attached" src="{!! $product->detachedImage !!}" ng-class="{'fit' : fullSize === false, 'visible' : attached === false }" ng-cloak loaded="poleScrollInit()">
 	@endif
 
 </div>
 @endif
 
-<div class="container {{ $product->type->slug === 'apparel' ? 'apparel-height' : ''}} {{ $product->type->slug === 'glass' ? 'glass-height' : '' }}">
+<div class="container {!! $product->type->slug === 'apparel' ? 'apparel-height' : ''!!} {!! $product->type->slug === 'glass' ? 'glass-height' : '' !!}">
 
 	@if($product->type->slug === 'apparel')
 	<div class="apparel-container">
-		<img class="rollerblade-img" src="{{ $product->attachedImage}}">
+		<img class="rollerblade-img" src="{!! $product->attachedImage!!}">
 
 		<span class="drag-indicator"><-- Drag to rotate --></span>
 	</div>
@@ -37,11 +37,11 @@
 
 	@if($product->type->slug === 'glass')
 	<div class="apparel-container">
-		<img class="rollerblade-img" src="{{ $product->attachedImage }}">
+		<img class="rollerblade-img" src="{!! $product->attachedImage !!}">
 	</div>
 	@endif
 
-	<div class="product-column-left {{ $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''}}">
+	<div class="product-column-left {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
 	@if($product->attachedImage && $product->detachedImage)
 		<div class="mobile-take-pole">
 			<div class="pole-view-actions">
@@ -61,55 +61,55 @@
 		@endif
 
 
-		<h1 class="product-title {{ $product->slug === 'inshore-shrinker' ? 'shrinker-title' : '' }}">
+		<h1 class="product-title {!! $product->slug === 'inshore-shrinker' ? 'shrinker-title' : '' !!}">
 			<!-- Don't breake following line in separate lines to avoid spaces between words. -->
-			<span class="bold {{ $product->type->slug === 'pole' ? 'uppercase' : '' }}">{{ $product->type->slug === 'apparel' ? $product->name : $product->shortName }}</span><span>{{ $product->type->slug === 'pole' ?  $product->short_name_extension : '' }}</span>
+			<span class="bold {!! $product->type->slug === 'pole' ? 'uppercase' : '' !!}">{!! $product->type->slug === 'apparel' ? $product->name : $product->shortName !!}</span><span>{!! $product->type->slug === 'pole' ?  $product->short_name_extension : '' !!}</span>
             @if($product->length)
                 <span class="detail">
-                    <span class="detail">/{{ $product->length }}</span>
+                    <span class="detail">/{!! $product->length !!}</span>
                 </span>
             @endif
         </h1>
 
-		<div class="product-description {{ $product->type->slug === 'apparel' ? 'apparel-description' : '' }} {{ $product->type->slug === 'glass' ? 'glass-description' : '' }}">
+		<div class="product-description {!! $product->type->slug === 'apparel' ? 'apparel-description' : '' !!} {!! $product->type->slug === 'glass' ? 'glass-description' : '' !!}">
 
-			{{ $product->description }}
+			{!! $product->description !!}
 
 		</div>
 
 		<div class="product-performance">
 
-			<div ng-show="{{ $product->editable_1 }}">
-				<img class="product-performance-icon" src="{{ $product->editable_1_image }}">
-				<h3 class="product-performance-title bold">{{ $product->editable_1_label }}</h3>
-				<p class="product-performance-description">{{ $product->editable_1 }}</p>
+			<div ng-show="{!! $product->editable_1 !!}">
+				<img class="product-performance-icon" src="{!! $product->editable_1_image !!}">
+				<h3 class="product-performance-title bold">{!! $product->editable_1_label !!}</h3>
+				<p class="product-performance-description">{!! $product->editable_1 !!}</p>
 			</div>
 
-			<div ng-show="{{ $product->editable_2 }}">
-				<img class="product-performance-icon" src="{{ $product->editable_2_image }}">
-				<h3 class="product-performance-title bold">{{ $product->editable_2_label }}</h3>
-				<p class="product-performance-description">{{ $product->editable_2 }}</p>
+			<div ng-show="{!! $product->editable_2 !!}">
+				<img class="product-performance-icon" src="{!! $product->editable_2_image !!}">
+				<h3 class="product-performance-title bold">{!! $product->editable_2_label !!}</h3>
+				<p class="product-performance-description">{!! $product->editable_2 !!}</p>
 			</div>
 
-			<div ng-show="{{ $product->editable_3 }}">
-				<img class="product-performance-icon" src="{{ $product->editable_3_image }}">
-				<h3 class="product-performance-title bold">{{ $product->editable_3_label }}</h3>
-				<p class="product-performance-description">{{ $product->editable_3 }}</p>
+			<div ng-show="{!! $product->editable_3 !!}">
+				<img class="product-performance-icon" src="{!! $product->editable_3_image !!}">
+				<h3 class="product-performance-title bold">{!! $product->editable_3_label !!}</h3>
+				<p class="product-performance-description">{!! $product->editable_3 !!}</p>
 			</div>
 
-			<div ng-show="{{ $product->editable_4 }}">
-				<img class="product-performance-icon" src="{{ $product->editable_4_image }}">
-				<h3 class="product-performance-title bold">{{ $product->editable_4_label }}</h3>
-				<p class="product-performance-description">{{ $product->editable_4 }}</p>
+			<div ng-show="{!! $product->editable_4 !!}">
+				<img class="product-performance-icon" src="{!! $product->editable_4_image !!}">
+				<h3 class="product-performance-title bold">{!! $product->editable_4_label !!}</h3>
+				<p class="product-performance-description">{!! $product->editable_4 !!}</p>
 			</div>
 
 		</div>
 
-		<product-buyers product-id="{{ $product->id }}"></product-buyers>
+		<product-buyers product-id="{!! $product->id !!}"></product-buyers>
 
 	</div>
 
-	<div class="product-column-right {{ $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''}}">
+	<div class="product-column-right {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
 		<!-- Increase the width of this element to increase margin between children -->
 		@if($product->attachedImage && $product->detachedImage)
 		<div class="pole-view-actions">
@@ -130,8 +130,8 @@
 		<br>
 
 		<p class="product-price" ng-cloak>
-			<span class="product-price-amount" ng-cloak>${{ $product->price / 100 }}</span> /
-			<span>{{ $product->shipping_description }}</span>
+			<span class="product-price-amount" ng-cloak>${!! $product->price / 100 !!}</span> /
+			<span>{!! $product->shipping_description !!}</span>
 		</p>
 		@if($product->availability->slug === 'available')
 
