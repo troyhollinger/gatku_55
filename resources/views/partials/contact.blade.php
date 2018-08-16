@@ -1,5 +1,9 @@
 <div class="contact-section">
-	<div class="contact-top" style="background-image: url('{!! $homeSetting['contact_image'] !!}')">
+	<div class="contact-top"
+		 style="background-image: url('{!! $homeSetting['contact_image'] !!}');
+				background-repeat: no-repeat;
+				background-position: center top;
+				">
 		<div class="home-container">
 			<h2 class="contact-headline">{!! $homeSetting['contact_title'] !!}</h2>
 			<p class="contact-sub-headline">{!! $homeSetting['contact_message'] !!}</p>
