@@ -3,8 +3,7 @@
 @section('content')
 
 
-<h3>You have received a request for additional internation shipping funds for your recent purchase from 
-GATKU Polespears</h3>
+<h3>You have received a request for additional internation shipping funds for your recent purchase from {{ $homeSetting['page_title'] }}</h3>
 
 <br>
 

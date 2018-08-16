@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-GATKU Polespears
+{{ $homeSetting['page_title'] }}
 @stop
 
 @section('description')

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Shipping Quote | GATKU Polespears
+Shipping Quote | {{ $homeSetting['page_title'] }}
 @stop
 
 @section('content')

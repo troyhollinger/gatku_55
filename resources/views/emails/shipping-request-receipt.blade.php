@@ -11,7 +11,7 @@
 <br>
 <p>Thanks, </p>
 <br>
-<p>GATKU Polespears</p>
+<p>{{ $homeSetting['page_title'] }}</p>
 
 
 @stop
