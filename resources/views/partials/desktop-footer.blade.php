@@ -13,7 +13,9 @@
             </div>
         </div>
 
-        <div class="desktop-logo-footer" style="background-image: url('{!! $homeSetting['contact_desktop_logo_url'] !!}')"></div>
+        <div class="desktop-logo-footer"
+             style="background-image: url('{!! $homeSetting['contact_desktop_logo_url'] !!}'); height: {!! $homeSetting['contact_desktop_logo_height'] !!}px;">
+        </div>
     </div>
 
 </div>

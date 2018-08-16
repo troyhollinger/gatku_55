@@ -78,6 +78,8 @@ class HomeSettingController extends BaseController {
             $homeSetting->contact_title = \Request::get('contact_title') ? \Request::get('contact_title') : '';
             $homeSetting->contact_message = \Request::get('contact_message') ? \Request::get('contact_message') : '';
             $homeSetting->footer_banner_url = \Request::get('footer_banner_url') ? \Request::get('footer_banner_url') : '';
+            $homeSetting->contact_desktop_logo_height = \Request::get('contact_desktop_logo_height') ? \Request::get('contact_desktop_logo_height') : 0;
+            $homeSetting->contact_mobile_logo_height = \Request::get('contact_mobile_logo_height') ? \Request::get('contact_mobile_logo_height') : 0;
 
 			$homeSetting->save();
 		} catch (Exception $e) {

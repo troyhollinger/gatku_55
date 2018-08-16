@@ -130,12 +130,18 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_desktop_logo_url')">
         </div>
 
+        <label>Desktop Contact Logo Height</label>
+        <input type="text" ng-model="$ctrl.homeSetting.contact_desktop_logo_height">
+
         <label>Mobile Contact Logo</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.contact_mobile_logo_url + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.contact_mobile_logo_url"></i>
             <input type="text" ng-model="$ctrl.homeSetting.contact_mobile_logo_url" class="image-path-storage-input">
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_mobile_logo_url')">
         </div>
+
+        <label>Mobile Contact Logo Height</label>
+        <input type="text" ng-model="$ctrl.homeSetting.contact_mobile_logo_height">
 
         <label>Footer Banner</label>
 
