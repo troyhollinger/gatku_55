@@ -47,5 +47,18 @@
  ?>
 
 <div class="store-container" ng-controller="StoreController">
-	{!! $shelves !!}
+
+    <!-- This is hack how to pass shelf number to StoreController for picked product to set shelves order. -->
+    @if(!empty($product))
+        <script type="application/javascript">
+            var shelfIdForProduct = '{!! $product->shelf_id !!}';
+        </script>
+    @else
+        <script type="application/javascript">
+            var shelfIdForProduct = '';
+        </script>
+    @endif
+
+    {!! $shelves !!}
+
 </div>

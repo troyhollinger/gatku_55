@@ -3,6 +3,10 @@
 
     function StoreController($scope, Product, Shelves, $exceptionHandler) {
 
+        $scope.shelves = [];
+
+        $scope.shelfIdForProduct = shelfIdForProduct;
+
         $scope.shortNamesForProductTypes = [
             'Head',
             'Glass',
@@ -17,7 +21,7 @@
             'Pole'
         ];
 
-        $scope.init = function () {
+        $scope.start = function () {
             $scope.getStore();
             $scope.getShelves();
         };
@@ -63,10 +67,24 @@
 
         $scope.getShelves = function () {
             Shelves.allActive().then(function (response) {
-                $scope.shelves = response.data;
+                if ($scope.shelfIdForProduct) {
+                    //get first shelf for products
+                    angular.forEach(response.data, function(row, idx) {
+                       if (row.id == $scope.shelfIdForProduct) {
+                           $scope.shelves.push(row);
+                           response.data.splice(idx, 1);
+                       }
+                    });
+                    //get rest of shelves for products
+                    angular.forEach(response.data, function(row) {
+                        $scope.shelves.push(row);
+                    });
+                } else {
+                    $scope.shelves = response.data;
+                }
             });
         };
 
-        $scope.init();
+        $scope.start();
     };
 })();

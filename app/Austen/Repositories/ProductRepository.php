@@ -331,7 +331,7 @@ class ProductRepository implements ProductRepositoryInterface {
      */
     public function getAllAvailable()
     {
-        $products = Product::with('type')->where('available', 1)->get();
+        $products = Product::with('type')->where('available', 1)->orderBy('shelf_id')->orderBy('order')->get();
 
         Log::info($products);
         return $products;
