@@ -74,32 +74,36 @@
 		<div class="product-description {!! $product->type->slug === 'apparel' ? 'apparel-description' : '' !!} {!! $product->type->slug === 'glass' ? 'glass-description' : '' !!}">
 
 			{!! $product->description !!}
-			
-		</div>
 
-		@if($product->type->slug === 'pole')
+		</div>
 
 		<div class="product-performance">
 
-			<img class="product-performance-icon" src="{!! asset('img/movement.jpg') !!}">
-			<h3 class="product-performance-title bold">Maneuverability</h3>
-			<p class="product-performance-description">{!! $product->maneuverability !!}</p>
+			<div ng-show="{!! $product->editable_1 !!}">
+				<img class="product-performance-icon" src="{!! $product->editable_1_image !!}">
+				<h3 class="product-performance-title bold">{!! $product->editable_1_label !!}</h3>
+				<p class="product-performance-description">{!! $product->editable_1 !!}</p>
+			</div>
 
-			<img class="product-performance-icon" src="{!! asset('img/crosshairs.jpg') !!}">
-			<h3 class="product-performance-title bold">Trajectory</h3>
-			<p class="product-performance-description">{!! $product->trajectory !!}</p>
+			<div ng-show="{!! $product->editable_2 !!}">
+				<img class="product-performance-icon" src="{!! $product->editable_2_image !!}">
+				<h3 class="product-performance-title bold">{!! $product->editable_2_label !!}</h3>
+				<p class="product-performance-description">{!! $product->editable_2 !!}</p>
+			</div>
 
-			<img class="product-performance-icon" src="{!! asset('img/balance.jpg') !!}">
-			<h3 class="product-performance-title bold">Balance</h3>
-			<p class="product-performance-description">{!! $product->balance !!}</p>
+			<div ng-show="{!! $product->editable_3 !!}">
+				<img class="product-performance-icon" src="{!! $product->editable_3_image !!}">
+				<h3 class="product-performance-title bold">{!! $product->editable_3_label !!}</h3>
+				<p class="product-performance-description">{!! $product->editable_3 !!}</p>
+			</div>
 
-			<img class="product-performance-icon" src="{!! asset('img/diver-shadow.jpg') !!}">
-			<h3 class="product-performance-title bold">Stealth</h3>
-			<p class="product-performance-description">{!! $product->stealth !!}</p>
+			<div ng-show="{!! $product->editable_4 !!}">
+				<img class="product-performance-icon" src="{!! $product->editable_4_image !!}">
+				<h3 class="product-performance-title bold">{!! $product->editable_4_label !!}</h3>
+				<p class="product-performance-description">{!! $product->editable_4 !!}</p>
+			</div>
 
 		</div>
-
-		@endif
 
 		<product-buyers product-id="{!! $product->id !!}"></product-buyers>
 

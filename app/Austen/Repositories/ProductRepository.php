@@ -211,11 +211,24 @@ class ProductRepository implements ProductRepositoryInterface {
 		$product->description = $data['description'];
 		if (isset($data['metaDescription'])) $product->metaDescription = $data['metaDescription'];
 		if (isset($data['length'])) $product->length = $data['length'];
-		if (isset($data['maneuverability'])) $product->maneuverability = $data['maneuverability'];
-		if (isset($data['trajectory'])) $product->trajectory = $data['trajectory'];
-		if (isset($data['balance'])) $product->balance = $data['balance'];
-		if (isset($data['stealth'])) $product->stealth = $data['stealth'];
-		if (isset($data['order'])) $product->order = $data['order'];
+
+        if (isset($data['editable_1_label']))   $product->editable_1_label  = $data['editable_1_label'];
+        if (isset($data['editable_1']))         $product->editable_1        = $data['editable_1'];
+        if (isset($data['editable_1_image']))   $product->editable_1_image  = $data['editable_1_image'];
+
+        if (isset($data['editable_2_label']))   $product->editable_2_label  = $data['editable_2_label'];
+        if (isset($data['editable_2']))         $product->editable_2        = $data['editable_2'];
+        if (isset($data['editable_2_image']))   $product->editable_2_image  = $data['editable_2_image'];
+
+        if (isset($data['editable_3_label']))   $product->editable_3_label  = $data['editable_3_label'];
+        if (isset($data['editable_3']))         $product->editable_3        = $data['editable_3'];
+        if (isset($data['editable_3_image']))   $product->editable_3_image  = $data['editable_3_image'];
+
+        if (isset($data['editable_4_label']))   $product->editable_4_label  = $data['editable_4_label'];
+        if (isset($data['editable_4']))         $product->editable_4        = $data['editable_4'];
+        if (isset($data['editable_4_image']))   $product->editable_4_image  = $data['editable_4_image'];
+
+        if (isset($data['order'])) $product->order = $data['order'];
 		if (isset($data['shipping_description'])) $product->shipping_description = $data['shipping_description'];
         if (isset($data['mobile_name'])) $product->mobile_name = $data['mobile_name'];
         $product->shelf_id = $data['shelf_id'];

@@ -11,7 +11,7 @@
 <div class="modal-body">
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Product Type:</label>
+        <label class="col-sm-3 col-form-label">Product Type:</label>
         <div class="col-sm-9">
             <select class="form-control col-sm-4"
                     ng-options="type.id as type.name for type in $ctrl.types"
@@ -44,7 +44,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Short Name:</label>
+        <label for="shortName" class="col-sm-3 col-form-label">Short Name:</label>
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
@@ -55,7 +55,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Short Name Extension:</label>
+        <label for="short_name_extension" class="col-sm-3 col-form-label">Short Name Extension:</label>
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
@@ -66,7 +66,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Mobile Name:</label>
+        <label for="mobile_name" class="col-sm-3 col-form-label">Mobile Name:</label>
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
@@ -77,7 +77,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Shelf:</label>
+        <label class="col-sm-3 col-form-label">Shelf:</label>
         <div class="col-sm-9">
             <select class="custom-select col-sm-4"
                     ng-options="shelf.id as shelf.name for shelf in $ctrl.shelves"
@@ -88,7 +88,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Slug:</label>
+        <label for="slug" class="col-sm-3 col-form-label">Slug:</label>
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
@@ -99,7 +99,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Availability:</label>
+        <label class="col-sm-3 col-form-label">Availability:</label>
         <div class="col-sm-9">
             <select class="custom-select col-sm-4"
                     ng-options="availabilityType.id as availabilityType.name for availabilityType in $ctrl.availabilityTypes"
@@ -109,7 +109,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Shipping Description:</label>
+        <label for="shipping_description" class="col-sm-3 col-form-label">Shipping Description:</label>
         <div class="col-sm-9">
             <textarea type="text"
                       class="form-control"
@@ -123,7 +123,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Description [HTML]:</label>
+        <label for="description" class="col-sm-3 col-form-label">Description [HTML]:</label>
         <div class="col-sm-9">
             <textarea type="text"
                       class="form-control"
@@ -136,7 +136,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Meta Description:</label>
+        <label for="metaDescription" class="col-sm-3 col-form-label">Meta Description:</label>
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
@@ -147,7 +147,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Length:</label>
+        <label for="length" class="col-sm-3 col-form-label">Length:</label>
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
@@ -158,7 +158,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Price:</label>
+        <label for="price" class="col-sm-3 col-form-label">Price:</label>
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
@@ -196,7 +196,7 @@
     </table>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Attached Image:</label>
+        <label class="col-sm-3 col-form-label">Attached Image:</label>
         <div class="col-sm-9">
             <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.attachedImage + ')'}">
                 <i class="fa fa-image" ng-hide="$ctrl.newProduct.attachedImage"></i>
@@ -209,7 +209,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Detached Image:</label>
+        <label class="col-sm-3 col-form-label">Detached Image:</label>
         <div class="col-sm-9">
             <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.detachedImage + ')'}">
                 <i class="fa fa-image" ng-hide="$ctrl.newProduct.detachedImage"></i>
@@ -223,7 +223,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Thumb:</label>
+        <label class="col-sm-3 col-form-label">Thumb:</label>
         <div class="col-sm-9">
             <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.thumb + ')'}">
                 <i class="fa fa-image" ng-hide="$ctrl.newProduct.thumb"></i>
@@ -237,7 +237,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Email Image:</label>
+        <label class="col-sm-3 col-form-label">Email Image:</label>
         <div class="col-sm-9">
             <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.emailImage + ')'}">
                 <i class="fa fa-image" ng-hide="$ctrl.newProduct.emailImage"></i>
@@ -251,50 +251,6 @@
     </div>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Maneuverability:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="maneuverability"
-                   placeholder="Maneuverability..."
-                   ng-model="$ctrl.newProduct.maneuverability">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Trajectory:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="trajectory"
-                   placeholder="Trajectory..."
-                   ng-model="$ctrl.newProduct.trajectory">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Balance:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="balance"
-                   placeholder="Balance..."
-                   ng-model="$ctrl.newProduct.balance">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Stealth:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="stealth"
-                   placeholder="Stealth..."
-                   ng-model="$ctrl.newProduct.stealth">
-        </div>
-    </div>
-
-    <div class="form-group row">
         <label for="name" class="col-sm-3 col-form-label">Product order:</label>
         <div class="col-sm-9">
             <input type="text"
@@ -304,6 +260,168 @@
                    ng-model="$ctrl.newProduct.order">
         </div>
     </div>
+
+    <hr>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">
+            <b>Product performance:</b>
+        </label>
+    </div>
+
+    <hr>
+
+    <div class="form-group row">
+        <label for="editable_1_label" class="col-sm-3 col-form-label">Editable #1 Label:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="editable_1_label"
+                   placeholder="Label Name..."
+                   ng-model="$ctrl.newProduct.editable_1_label">
+        </div>
+    </div>
+
+    <!-- Former: maneuverability -->
+    <div class="form-group row">
+        <label for="editable_1" class="col-sm-3 col-form-label">Editable #1:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="editable_1"
+                   ng-model="$ctrl.newProduct.editable_1">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Editable #1 Image:</label>
+        <div class="col-sm-9">
+            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_1_image + ')'}">
+                <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_1_image"></i>
+                <input class="hide-input-field"
+                       type="text"
+                       ng-model="$ctrl.newProduct.editable_1_image"
+                       class="image-path-storage-input">
+                <input type="file" ng-file-select="$ctrl.upload($files, 'editable_1_image')">
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="form-group row">
+        <label for="editable_2_label" class="col-sm-3 col-form-label">Editable #2 Label:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="editable_2_label"
+                   placeholder="Label Name..."
+                   ng-model="$ctrl.newProduct.editable_2_label">
+        </div>
+    </div>
+
+    <!-- Former: trajectory -->
+    <div class="form-group row">
+        <label for="editable_2" class="col-sm-3 col-form-label">Editable #2:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="editable_2"
+                   ng-model="$ctrl.newProduct.editable_2">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Editable #2 Image:</label>
+        <div class="col-sm-9">
+            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_2_image + ')'}">
+                <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_2_image"></i>
+                <input class="hide-input-field"
+                       type="text"
+                       ng-model="$ctrl.newProduct.editable_2_image"
+                       class="image-path-storage-input">
+                <input type="file" ng-file-select="$ctrl.upload($files, 'editable_2_image')">
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+
+    <div class="form-group row">
+        <label for="editable_3_label" class="col-sm-3 col-form-label">Editable #3 Label:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="editable_3_label"
+                   placeholder="Label Name..."
+                   ng-model="$ctrl.newProduct.editable_3_label">
+        </div>
+    </div>
+
+    <!-- Former: balance -->
+    <div class="form-group row">
+        <label for="editable_3" class="col-sm-3 col-form-label">Editable #3:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="editable_3"
+                   ng-model="$ctrl.newProduct.editable_3">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Editable #3 Image:</label>
+        <div class="col-sm-9">
+            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_3_image + ')'}">
+                <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_3_image"></i>
+                <input class="hide-input-field"
+                       type="text"
+                       ng-model="$ctrl.newProduct.editable_3_image"
+                       class="image-path-storage-input">
+                <input type="file" ng-file-select="$ctrl.upload($files, 'editable_3_image')">
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+
+    <div class="form-group row">
+        <label for="editable_4_label" class="col-sm-3 col-form-label">Editable #4 Label:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="editable_4_label"
+                   placeholder="Label Name..."
+                   ng-model="$ctrl.newProduct.editable_4_label">
+        </div>
+    </div>
+
+    <!-- Former: stealth -->
+    <div class="form-group row">
+        <label for="editable_4" class="col-sm-3 col-form-label">Editable #4:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="editable_4"
+                   ng-model="$ctrl.newProduct.editable_4">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Editable #4 Image:</label>
+        <div class="col-sm-9">
+            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_4_image + ')'}">
+                <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_4_image"></i>
+                <input class="hide-input-field"
+                       type="text"
+                       ng-model="$ctrl.newProduct.editable_4_image"
+                       class="image-path-storage-input">
+                <input type="file" ng-file-select="$ctrl.upload($files, 'editable_4_image')">
+            </div>
+        </div>
+    </div>
+    
+    <hr>
 
 </div>
 
@@ -319,3 +437,5 @@
         &nbsp;<i class="fa fa-save"></i>
     </button>
 </div>
+
+
