@@ -1833,16 +1833,11 @@ product-buyers {
 }
 
 .product-performance {
-
 	font-size: 1.3rem;
 	margin-top: 40px;
-
 	@include breakpoint(small) {
-
 		display: none;
-
 	}
-
 }
 
 

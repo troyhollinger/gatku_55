@@ -79,33 +79,37 @@
 
 		<div class="product-performance">
 
-			<div ng-show="{!! $product->editable_1 !!}">
-				<img class="product-performance-icon" src="{!! $product->editable_1_image !!}">
-				<h3 class="product-performance-title bold">{!! $product->editable_1_label !!}</h3>
-				<p class="product-performance-description">{!! $product->editable_1 !!}</p>
+			<!-- Need to count trimmed string to avoid [$parse:lexerr] error -->
+			<div ng-show="{{ count(trim($product->editable_1)) }}">
+				<img class="product-performance-icon" src="{{ $product->editable_1_image }}">
+				<h3 class="product-performance-title bold">{{ $product->editable_1_label }}</h3>
+				<p class="product-performance-description">{{ $product->editable_1 }}</p>
 			</div>
 
-			<div ng-show="{!! $product->editable_2 !!}">
-				<img class="product-performance-icon" src="{!! $product->editable_2_image !!}">
-				<h3 class="product-performance-title bold">{!! $product->editable_2_label !!}</h3>
-				<p class="product-performance-description">{!! $product->editable_2 !!}</p>
+			<!-- Need to count trimmed string to avoid [$parse:lexerr] error -->
+			<div ng-show="{{ count(trim($product->editable_2)) }}">
+				<img class="product-performance-icon" src="{{ $product->editable_2_image }}">
+				<h3 class="product-performance-title bold">{{ $product->editable_2_label }}</h3>
+				<p class="product-performance-description">{{ $product->editable_2 }}</p>
 			</div>
 
-			<div ng-show="{!! $product->editable_3 !!}">
-				<img class="product-performance-icon" src="{!! $product->editable_3_image !!}">
-				<h3 class="product-performance-title bold">{!! $product->editable_3_label !!}</h3>
-				<p class="product-performance-description">{!! $product->editable_3 !!}</p>
+			<!-- Need to count trimmed string to avoid [$parse:lexerr] error -->
+			<div ng-show="{{ count(trim($product->editable_3)) }}">
+				<img class="product-performance-icon" src="{{ $product->editable_3_image }}">
+				<h3 class="product-performance-title bold">{{ $product->editable_3_label }}</h3>
+				<p class="product-performance-description">{{ $product->editable_3 }}</p>
 			</div>
 
-			<div ng-show="{!! $product->editable_4 !!}">
-				<img class="product-performance-icon" src="{!! $product->editable_4_image !!}">
-				<h3 class="product-performance-title bold">{!! $product->editable_4_label !!}</h3>
-				<p class="product-performance-description">{!! $product->editable_4 !!}</p>
+			<!-- Need to count trimmed string to avoid [$parse:lexerr] error -->
+			<div ng-show="{{ count(trim($product->editable_4)) }}">
+				<img class="product-performance-icon" src="{{ $product->editable_4_image }}">
+				<h3 class="product-performance-title bold">{{ $product->editable_4_label }}</h3>
+				<p class="product-performance-description">{{ $product->editable_4 }}</p>
 			</div>
 
 		</div>
 
-		<product-buyers product-id="{!! $product->id !!}"></product-buyers>
+		<product-buyers product-id="{{ $product->id }}"></product-buyers>
 
 	</div>
 
