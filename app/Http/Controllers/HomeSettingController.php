@@ -80,8 +80,9 @@ class HomeSettingController extends BaseController {
             $homeSetting->footer_banner_url = \Request::get('footer_banner_url') ? \Request::get('footer_banner_url') : '';
             $homeSetting->contact_desktop_logo_height = \Request::get('contact_desktop_logo_height') ? \Request::get('contact_desktop_logo_height') : 0;
             $homeSetting->contact_mobile_logo_height = \Request::get('contact_mobile_logo_height') ? \Request::get('contact_mobile_logo_height') : 0;
+            $homeSetting->additional_images_label_for_product = \Request::get('additional_images_label_for_product') ? \Request::get('additional_images_label_for_product') : '';
 
-			$homeSetting->save();
+            $homeSetting->save();
 		} catch (Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);

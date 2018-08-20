@@ -117,7 +117,9 @@
 
 		</div>
 
-		<product-buyers product-id="{{ $product->id }}"></product-buyers>
+		<product-buyers product-id="{{ $product->id }}"
+						section-label="{{ $homeSetting['additional_images_label_for_product'] }}">
+		</product-buyers>
 
 	</div>
 
