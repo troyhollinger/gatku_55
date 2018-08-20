@@ -14,6 +14,8 @@
         $ctrl.getData = function (pageno, start_date, end_date) {
             $ctrl.orders = [];
 
+            $ctrl.pageno = pageno;
+
             var Url = "/orderall/" + $ctrl.itemsPerPage + "/" + pageno;
             try {
                 if ($scope.order_start_date) {
@@ -28,8 +30,7 @@
 
             $http.get(Url).then(function (response) {
                 $ctrl.orders = response.data.orders;
-                $ctrl.orders = response.data.orders;
-                $ctrl.total_count = response.total_count;
+                $ctrl.total_count = response.data.total_count;
             }, function (error) {
                 $exceptionHandler(JSON.stringify(error));
                 console.log('Something went wrong.');

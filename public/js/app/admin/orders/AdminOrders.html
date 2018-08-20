@@ -116,8 +116,13 @@
     </tbody>
 </table>
 
-<dir-pagination-controls max-size="8"
-                         direction-links="true"
-                         boundary-links="true"
-                         on-page-change="$ctrl.getData(newPageNumber)" >
-</dir-pagination-controls>
+<ul uib-pagination
+    class="pagination"
+    total-items="$ctrl.total_count"
+    ng-model="$ctrl.pageno"
+    max-size="10"
+    boundary-links="true"
+    items-per-page="$ctrl.itemsPerPage"
+    force-ellipses="true"
+    ng-change="$ctrl.getData($ctrl.pageno)">
+</ul>
