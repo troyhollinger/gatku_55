@@ -53,10 +53,15 @@ class OrderRepository {
         DB::beginTransaction();
 
         try {
+            //Store customer data
             $customer = $this->customer->store($input['form']);
+
+            //Create and store Order
             $order = new Order;
             $order = $this->assignFields($order, $customer, $input['form']);
             $order->save();
+
+            //Assign and store order items
             $this->assignOrderItems($order, $input['items']);
             $order->load('items.addons.product.type','items.addons.size', 'items.product.type', 'customer', 'items.size');
 
@@ -67,15 +72,18 @@ class OrderRepository {
                 $discount = $discount->find($input['discount']['code']);
             }
 
-            //Following function for discount calculation is for hardcoded discount 'Black Friday'.
-            //Consider to remove this code. Temporary commented.
-            //$discountHardcoded = $this->calculateDiscount($order);
-
+            //Make all sum calculations
             $subtotal = $this->calculateSubTotal($order, $discount);
-
             $shipping = $this->calculateShipping($order, $discount);
-
             $total = $this->calculateTotal($order, $discount);
+
+            //Update Order
+            $order->discount_percentage = ($discount->discount) ? $discount->discount * 100 : 0;
+            $order->order_sum = $subtotal;
+            $order->shipping_cost = $shipping;
+            $order->total_sum = $total;
+
+            $order->update();
 
         } catch(\Exception $e) {
             Bugsnag::notifyException($e);
@@ -161,6 +169,10 @@ class OrderRepository {
         $order->zip = $input['zip'];
         $order->number = strtoupper(str_random(15));
         if (isset($input['comments'])) $order->comments = $input['comments'];
+        $order->discount_percentage = (isset($input['discount_percentage'])) ? $input['discount_percentage'] * 100 : 0;
+        $order->order_sum = (isset($input['order_sum'])) ? $input['order_sum'] * 100 : 0;
+        $order->shipping_cost = (isset($input['shipping_cost'])) ? $input['shipping_cost'] * 100 : 0;
+        $order->total_sum = (isset($input['total_sum'])) ? $input['total_sum'] * 100 : 0;
 
         return $order;
     }
