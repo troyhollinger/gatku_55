@@ -14997,20 +14997,6 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 
         $scope.shelfIdForProduct = shelfIdForProduct;
 
-        $scope.shortNamesForProductTypes = [
-            'Head',
-            'Glass',
-            'Pole'
-        ];
-
-        $scope.displayLengthForProduct = [
-            'Glass'
-        ];
-
-        $scope.displayShortNameExtensionForProduct = [
-            'Pole'
-        ];
-
         $scope.start = function () {
             $scope.getStore();
             $scope.getShelves();
@@ -15022,27 +15008,6 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 
         $scope.getLinkClass = function(product){
             return 'product-link-container-' + product.type.name;
-        };
-
-        $scope.shelfProductNameToDisplay = function(product) {
-            if ($scope.shortNamesForProductTypes.indexOf(product.type.name) !== -1) {
-                return product.shortName;
-            }
-            return product.name;
-        };
-
-        $scope.shelfProductDisplayShortNameExtension = function(product) {
-            if ($scope.displayShortNameExtensionForProduct.indexOf(product.type.name) !== -1) {
-                return product.short_name_extension;
-            }
-            return '';
-        };
-
-        $scope.shelfProductDisplayLength = function(product) {
-            if ($scope.displayLengthForProduct.indexOf(product.type.name) !== -1) {
-                return product.length;
-            }
-            return '';
         };
 
         $scope.getStore = function () {
@@ -15585,9 +15550,16 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         $ctrl.newProduct = productObject;
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
-            $ctrl.newProduct.text_align_options = 'left';
-            $ctrl.newProduct.text_font_weight = 'normal';
+
+            $ctrl.newProduct.name_text_align = 'left';
+            $ctrl.newProduct.name_font_weight = 'normal';
             $ctrl.newProduct.name_font_style = 'normal';
+
+            $ctrl.newProduct.name_extension_font_weight = 'normal';
+            $ctrl.newProduct.name_extension_font_style = 'normal';
+
+            $ctrl.newProduct.length_font_weight = 'normal';
+            $ctrl.newProduct.length_font_style = 'normal';
         } else {
             $ctrl.editingNew = false;   //This is needed for function registerAddons
         }

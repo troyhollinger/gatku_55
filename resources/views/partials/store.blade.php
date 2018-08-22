@@ -23,14 +23,19 @@
 
 			<div class="product-on-shelf-links links">
 				<div 	class="{{getLinkClass(product)}}"
-				        style="text-align: {{product.name_text_align}}; font-weight: {{product.name_font_weight}}; font-style: {{product.name_font_style}};"
+				        style="text-align: {{product.name_text_align}};"
 						ng-repeat="product in products"
 						ng-if="product.shelf_id == shelf.id">
 					<a href="' . route('product.show', ['']) . '/{{ product.slug }}">
-							{{  shelfProductNameToDisplay(product) }}{{  shelfProductDisplayShortNameExtension(product) }}{{  shelfProductDisplayLength(product) }}
-						<span class="detail"
-							ng-if="product.slug === \'signature-paralyzer\' || product.slug === \'barbed-paralyzer\'"> /{{ product.length }}
-						</span>
+					    <span style="font-weight: {{product.name_font_weight}}; font-style: {{product.name_font_style}};">
+					        {{  (product.shortName) ? product.shortName : product.name }}
+                        </span>
+                        <span style="font-weight: {{product.name_extension_font_weight}}; font-style: {{product.name_extension_font_style}};">
+					        {{  product.short_name_extension }}
+                        </span>
+                        <span style="font-weight: {{product.length_font_weight}}; font-style: {{product.length_font_style}};">
+					        {{  product.length }}
+                        </span>
 
 						<span class="mobile-product-name">{{ (product.mobile_name) ? product.mobile_name : "" }}</span>
 					</a>

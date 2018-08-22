@@ -26,9 +26,16 @@
         $ctrl.newProduct = productObject;
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
-            $ctrl.newProduct.text_align_options = 'left';
-            $ctrl.newProduct.text_font_weight = 'normal';
+
+            $ctrl.newProduct.name_text_align = 'left';
+            $ctrl.newProduct.name_font_weight = 'normal';
             $ctrl.newProduct.name_font_style = 'normal';
+
+            $ctrl.newProduct.name_extension_font_weight = 'normal';
+            $ctrl.newProduct.name_extension_font_style = 'normal';
+
+            $ctrl.newProduct.length_font_weight = 'normal';
+            $ctrl.newProduct.length_font_style = 'normal';
         } else {
             $ctrl.editingNew = false;   //This is needed for function registerAddons
         }

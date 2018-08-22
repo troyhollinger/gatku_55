@@ -7,20 +7,6 @@
 
         $scope.shelfIdForProduct = shelfIdForProduct;
 
-        $scope.shortNamesForProductTypes = [
-            'Head',
-            'Glass',
-            'Pole'
-        ];
-
-        $scope.displayLengthForProduct = [
-            'Glass'
-        ];
-
-        $scope.displayShortNameExtensionForProduct = [
-            'Pole'
-        ];
-
         $scope.start = function () {
             $scope.getStore();
             $scope.getShelves();
@@ -32,27 +18,6 @@
 
         $scope.getLinkClass = function(product){
             return 'product-link-container-' + product.type.name;
-        };
-
-        $scope.shelfProductNameToDisplay = function(product) {
-            if ($scope.shortNamesForProductTypes.indexOf(product.type.name) !== -1) {
-                return product.shortName;
-            }
-            return product.name;
-        };
-
-        $scope.shelfProductDisplayShortNameExtension = function(product) {
-            if ($scope.displayShortNameExtensionForProduct.indexOf(product.type.name) !== -1) {
-                return product.short_name_extension;
-            }
-            return '';
-        };
-
-        $scope.shelfProductDisplayLength = function(product) {
-            if ($scope.displayLengthForProduct.indexOf(product.type.name) !== -1) {
-                return product.length;
-            }
-            return '';
         };
 
         $scope.getStore = function () {

@@ -203,13 +203,17 @@ class ProductRepository implements ProductRepositoryInterface {
 		if (isset($data['emailImage'])) $product->emailImage = $data['emailImage'];
 		if (isset($data['thumb'])) $product->thumb = $data['thumb'];
 		if (isset($data['availabilityTypeId'])) $product->availabilityTypeId = $data['availabilityTypeId'];
+
 		$product->name = $data['name'];
+
 		$product->shortName = $data['shortName'];
-        $product->short_name_extension = $data['short_name_extension'];
+
+		$product->short_name_extension = $data['short_name_extension'];
 		$product->slug = $data['slug'];
 		$product->price = $data['price'];
 		$product->description = $data['description'];
 		$product->metaDescription = $data['metaDescription'];
+
 		$product->length = $data['length'];
 
         $product->editable_1_label  = $data['editable_1_label'];
@@ -233,9 +237,15 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->mobile_name = $data['mobile_name'];
         $product->shelf_id = $data['shelf_id'];
         
-        if (isset($data['name_text_align'])) $product->name_text_align = $data['name_text_align'];
-        if (isset($data['name_font_style'])) $product->name_font_style = $data['name_font_style'];
-        if (isset($data['name_font_weight'])) $product->name_font_weight = $data['name_font_weight'];
+        $product->name_text_align = $data['name_text_align'];
+        $product->name_font_style = $data['name_font_style'];
+        $product->name_font_weight = $data['name_font_weight'];
+
+        $product->name_extension_font_style = $data['name_extension_font_style'];
+        $product->name_extension_font_weight = $data['name_extension_font_weight'];
+
+        $product->length_font_style = $data['length_font_style'];
+        $product->length_font_weight = $data['length_font_weight'];
 
 		return $product;
 	}
