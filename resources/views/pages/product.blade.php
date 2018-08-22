@@ -1,3 +1,7 @@
+<?php
+$fontMultiplySize = 4.5;
+?>
+
 @extends('layouts.master')
 
 @section('title')
@@ -69,15 +73,23 @@
 		@endif
 
 
-		<h1 class="product-title {!! $product->slug === 'inshore-shrinker' ? 'shrinker-title' : '' !!}">
-			<!-- Don't breake following line in separate lines to avoid spaces between words. -->
-			<span class="bold {!! $product->type->slug === 'pole' ? 'uppercase' : '' !!}">{!! $product->type->slug === 'apparel' ? $product->name : $product->shortName !!}</span><span>{!! $product->type->slug === 'pole' ?  $product->short_name_extension : '' !!}</span>
-            @if($product->length)
-                <span class="detail">
-                    <span class="detail">/{!! $product->length !!}</span>
-                </span>
-            @endif
-        </h1>
+		<div class="product-title">
+			<span style="	font-weight: {{ $product->name_font_weight }};
+							font-style: {{ $product->name_font_style}};
+							font-size: {{ $product->name_font_size * $fontMultiplySize }}px;">
+				{{  ($product->shortName) ? $product->shortName : $product->name }}
+            </span>
+			<span style="	font-weight: {{ $product->name_extension_font_weight }};
+							font-style: {{ $product->name_extension_font_style }};
+							font-size: {{ $product->name_extension_font_size * $fontMultiplySize }}px;">
+				{{  $product->short_name_extension }}
+            </span>
+			<span style="	font-weight: {{ $product->length_font_weight }};
+							font-style: {{ $product->length_font_style }};
+							font-size: {{ $product->length_font_size * $fontMultiplySize }}px;">
+				{{  $product->length }}
+            </span>
+		</div>
 
 		<div class="product-description {!! $product->type->slug === 'apparel' ? 'apparel-description' : '' !!} {!! $product->type->slug === 'glass' ? 'glass-description' : '' !!}">
 

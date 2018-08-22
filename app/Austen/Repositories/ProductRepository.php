@@ -247,6 +247,10 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->length_font_style = $data['length_font_style'];
         $product->length_font_weight = $data['length_font_weight'];
 
+        $product->name_font_size = $data['name_font_size'];
+        $product->name_extension_font_size = $data['name_extension_font_size'];
+        $product->length_font_size = $data['length_font_size'];
+
 		return $product;
 	}
 

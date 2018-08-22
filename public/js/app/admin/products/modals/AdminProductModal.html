@@ -64,6 +64,17 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <label for="name_font_size" class="col-sm-3 col-form-label">Name Font Size [px]:</label>
+        <div class="col-sm-2">
+            <input type="text"
+                   class="form-control"
+                   id="name_font_size"
+                   placeholder=""
+                   ng-model="$ctrl.newProduct.name_font_size">
+        </div>
+    </div>
+
     <!-- Short Name -->
 
     <hr>
@@ -111,6 +122,18 @@
                     ng-options="value for value in $ctrl.text_font_style"
                     ng-model="$ctrl.newProduct.name_extension_font_style">
             </select>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="name_extension_font_size" class="col-sm-3 col-form-label">Ext. Font Size [px]:</label>
+        <div class="col-sm-2">
+            <input type="text"
+                   class="form-control"
+                   id="name_extension_font_size"
+                   placeholder=""
+                   ng-model="$ctrl.newProduct.name_extension_font_size">
         </div>
     </div>
 
@@ -255,6 +278,17 @@
                     ng-options="value for value in $ctrl.text_font_style"
                     ng-model="$ctrl.newProduct.length_font_style">
             </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="length_font_size" class="col-sm-3 col-form-label">Length Font Size [px]:</label>
+        <div class="col-sm-2">
+            <input type="text"
+                   class="form-control"
+                   id="length_font_size"
+                   placeholder=""
+                   ng-model="$ctrl.newProduct.length_font_size">
         </div>
     </div>
 
