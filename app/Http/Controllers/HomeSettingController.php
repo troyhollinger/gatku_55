@@ -69,7 +69,7 @@ class HomeSettingController extends BaseController {
             $homeSetting->address_us = \Request::get('address_us') ? \Request::get('address_us') : '';
             $homeSetting->address_au = \Request::get('address_au') ? \Request::get('address_au') : '';
             $homeSetting->email_html = \Request::get('email_html') ? \Request::get('email_html') : '';
-            $homeSetting->phone_html = \Request::get('phone_html') ? : \Request::get('phone_html');
+            $homeSetting->phone_html = \Request::get('phone_html') ? \Request::get('phone_html') : '' ;
             $homeSetting->desktop_copyright_html = \Request::get('desktop_copyright_html') ? \Request::get('desktop_copyright_html') : '';
             $homeSetting->mobile_copyright_html = \Request::get('mobile_copyright_html')? \Request::get('mobile_copyright_html') : '';
             $homeSetting->contact_image = \Request::get('contact_image') ? \Request::get('contact_image') : '';
