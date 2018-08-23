@@ -15554,12 +15554,15 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $ctrl.newProduct.name_text_align = 'left';
             $ctrl.newProduct.name_font_weight = 'normal';
             $ctrl.newProduct.name_font_style = 'normal';
+            $ctrl.newProduct.name_font_size = 16;
 
             $ctrl.newProduct.name_extension_font_weight = 'normal';
             $ctrl.newProduct.name_extension_font_style = 'normal';
+            $ctrl.newProduct.name_extension_font_size = 16;
 
             $ctrl.newProduct.length_font_weight = 'normal';
             $ctrl.newProduct.length_font_style = 'normal';
+            $ctrl.newProduct.length_font_size = 16;
         } else {
             $ctrl.editingNew = false;   //This is needed for function registerAddons
         }

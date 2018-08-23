@@ -23,17 +23,17 @@
 
 			<div class="product-on-shelf-links links">
 				<div 	class="{{getLinkClass(product)}}"
-				        style="text-align: {{product.name_text_align}};"
+				        style="text-align: {{product.name_text_align}}; font-size: {{product.name_font_size}}px;"
 						ng-repeat="product in products"
 						ng-if="product.shelf_id == shelf.id">
 					<a href="' . route('product.show', ['']) . '/{{ product.slug }}">
-					    <span style="font-weight: {{product.name_font_weight}}; font-style: {{product.name_font_style}};">
+					    <span style="font-weight: {{product.name_font_weight}}; font-style: {{product.name_font_style}}; font-size: {{product.name_font_size}}px;">
 					        {{  (product.shortName) ? product.shortName : product.name }}
                         </span>
-                        <span style="font-weight: {{product.name_extension_font_weight}}; font-style: {{product.name_extension_font_style}};">
+                        <span style="font-weight: {{product.name_extension_font_weight}}; font-style: {{product.name_extension_font_style}}; font-size: {{product.name_extension_font_size}}px;">
 					        {{  product.short_name_extension }}
                         </span>
-                        <span style="font-weight: {{product.length_font_weight}}; font-style: {{product.length_font_style}};">
+                        <span style="font-weight: {{product.length_font_weight}}; font-style: {{product.length_font_style}}; font-size: {{product.length_font_size}}px;">
 					        {{  product.length }}
                         </span>
 
