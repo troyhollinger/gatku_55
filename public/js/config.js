@@ -1,17 +1,33 @@
 //Bugsnag Error Handler for AngularJS - See: https://docs.bugsnag.com/platforms/browsers/angular/#legacy-angular-support
 //Remember to register for AngularJS applications.
+
+//This function allow to avoid exceptions in some cases
+function checkIfExceptionShouldBeSent(exception) {
+	var notyfy = true;
+	switch(exception) {
+		case 'Possibly unhandled rejection: close':
+			notyfy = false;
+			break;
+	}
+	return notyfy;
+}
+
 angular
     .module('exceptionOverride', [])
     .factory('$exceptionHandler', function () {
         return function (exception, cause) {
-            bugsnagClient.notify(exception, {
-                beforeSend: function (report) {
-                    report.updateMetaData('angular', { cause: cause })
-                }
-            })
+
+        	if (checkIfExceptionShouldBeSent(exception)) {
+                bugsnagClient.notify(exception, {
+                    beforeSend: function (report) {
+                        report.updateMetaData('angular', { cause: cause })
+                    }
+                })
+			}
         }
     });
 
+//Bugsnag configuration end.
 
 var app = angular.module('gatku', [
 	'angularFileUpload',
