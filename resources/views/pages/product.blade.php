@@ -1,7 +1,3 @@
-<?php
-$fontMultiplySize = 4.5;
-?>
-
 @extends('layouts.master')
 
 @section('title')
@@ -76,17 +72,17 @@ $fontMultiplySize = 4.5;
 		<div class="product-title">
 			<span style="	font-weight: {{ $product->name_font_weight }};
 							font-style: {{ $product->name_font_style}};
-							font-size: {{ $product->name_font_size * $fontMultiplySize }}px;">
+							font-size: {{ $product->name_font_size * $homeSetting['product_font_multiply_size'] }}px;">
 				{{  ($product->shortName) ? $product->shortName : $product->name }}
             </span>
 			<span style="	font-weight: {{ $product->name_extension_font_weight }};
 							font-style: {{ $product->name_extension_font_style }};
-							font-size: {{ $product->name_extension_font_size * $fontMultiplySize }}px;">
+							font-size: {{ $product->name_extension_font_size * $homeSetting['product_font_multiply_size'] }}px;">
 				{{  $product->short_name_extension }}
             </span>
 			<span style="	font-weight: {{ $product->length_font_weight }};
 							font-style: {{ $product->length_font_style }};
-							font-size: {{ $product->length_font_size * $fontMultiplySize }}px;">
+							font-size: {{ $product->length_font_size * $homeSetting['product_font_multiply_size'] }}px;">
 				{{  $product->length }}
             </span>
 		</div>
