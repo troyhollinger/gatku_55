@@ -4449,7 +4449,10 @@ hover-card {
 
 .shipping-request-panel {
 
-	@include center;
+	position: fixed;
+	top:50%;
+	left:50%;
+	@include transform(translate(-50%,-50%));
 	width:400px;
 	height:auto;
 	background-color: white;
@@ -4460,31 +4463,24 @@ hover-card {
 	padding:25px;
 
 	h2 {
-
 		display: block;
 		border-bottom: 3px solid black;
 		font-size: 1.2rem;
 		font-weight: bold;
 		padding-bottom: 5px;
 		margin-bottom: 15px;
-
 	}
 
 	form {
-
 		@extend .checkout-form;
-
 	}
 
 	i {
-
 		position: absolute;
 		top:15px;
 		right:10px;
 		cursor: pointer;
-
 	}
-
 }
 
 
