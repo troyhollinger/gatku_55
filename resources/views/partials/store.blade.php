@@ -44,7 +44,7 @@
 				<div class="clear"></div>
 			</div>
 
-			<h2 style="text-align: {{shelf.name_text_align}}; font-weight: {{shelf.name_font_weight}}; font-style: {{shelf.name_font_style}};">
+			<h2 style="text-align: {{shelf.name_text_align}}; font-weight: {{shelf.name_font_weight}}; font-style: {{shelf.name_font_style}}; margin-bottom: ' . $homeSetting['shelves_between_space'] . 'px;">
 				{{ shelf.name }}
 			</h2>
 		</div>
