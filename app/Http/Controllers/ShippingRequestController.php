@@ -48,7 +48,7 @@ class ShippingRequestController extends BaseController {
 			
 		$request = ShippingRequest::where('token','=', $token)->with('order.customer')->first();
 
-		if ($request->paid) return Redirect::route('home');
+		if ($request->paid) return \Redirect::route('home');
 
 		return View::make('pages.shipping-request', ['request' => $request]);
 
