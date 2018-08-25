@@ -5,7 +5,6 @@
         Product,
         AvailabilityType,
         AlertService,
-        Image,
         Shelf,
         $uibModal,
         $http,

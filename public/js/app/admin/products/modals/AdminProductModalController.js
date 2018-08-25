@@ -24,6 +24,7 @@
 
         $ctrl.products = products;
         $ctrl.newProduct = productObject;
+
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
 

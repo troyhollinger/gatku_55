@@ -197,59 +197,58 @@ class ProductRepository implements ProductRepositoryInterface {
      */
 	private function assignData(Product $product, array $data)
     {
-		$product->typeId = $data['typeId'];
-		if (isset($data['attachedImage'])) $product->attachedImage = $data['attachedImage'];
-		if (isset($data['detachedImage'])) $product->detachedImage = $data['detachedImage'];
-		if (isset($data['emailImage'])) $product->emailImage = $data['emailImage'];
-		if (isset($data['thumb'])) $product->thumb = $data['thumb'];
+		$product->typeId = (isset($data['typeId'])) ? $data['typeId'] : '';
+		$product->attachedImage = (isset($data['attachedImage'])) ? $data['attachedImage'] : '';
+		$product->detachedImage = (isset($data['detachedImage'])) ? $data['detachedImage'] : '';
+		$product->emailImage = (isset($data['emailImage'])) ? $data['emailImage'] : '';
+		$product->thumb = (isset($data['thumb'])) ? $data['thumb'] : '';
 		if (isset($data['availabilityTypeId'])) $product->availabilityTypeId = $data['availabilityTypeId'];
 
-		$product->name = $data['name'];
+		$product->name = (isset($data['name'])) ? $data['name'] : '';
+		$product->shortName = (isset($data['shortName'])) ? $data['shortName'] : '' ;
 
-		$product->shortName = $data['shortName'];
+		$product->short_name_extension = (isset($data['short_name_extension'])) ? $data['short_name_extension'] : '';
+		$product->slug = (isset($data['slug'])) ? $data['slug'] : '';
+		$product->price = (isset($data['price'])) ? $data['price'] : '';
+		$product->description = (isset($data['description'])) ? $data['description'] : '';
+		$product->metaDescription = (isset($data['metaDescription'] )) ? $data['metaDescription']  : '';
 
-		$product->short_name_extension = $data['short_name_extension'];
-		$product->slug = $data['slug'];
-		$product->price = $data['price'];
-		$product->description = $data['description'];
-		$product->metaDescription = $data['metaDescription'];
+		$product->length = (isset($data['length'])) ? $data['length'] : '';
 
-		$product->length = $data['length'];
-
-        $product->editable_1_label  = $data['editable_1_label'];
-        $product->editable_1        = $data['editable_1'];
+        $product->editable_1_label  = (isset($data['editable_1_label'])) ? $data['editable_1_label']  : '' ;
+        $product->editable_1        = (isset($data['editable_1'])) ? $data['editable_1'] : '';
         if (isset($data['editable_1_image']))   $product->editable_1_image  = $data['editable_1_image'];
 
-        $product->editable_2_label  = $data['editable_2_label'];
-        $product->editable_2        = $data['editable_2'];
+        $product->editable_2_label  = (isset($data['editable_2_label'])) ? $data['editable_2_label'] : '';
+        $product->editable_2        = (isset($data['editable_2'])) ? $data['editable_2'] : '';
         if (isset($data['editable_2_image']))   $product->editable_2_image  = $data['editable_2_image'];
 
-        $product->editable_3_label  = $data['editable_3_label'];
-        $product->editable_3        = $data['editable_3'];
+        $product->editable_3_label  = (isset($data['editable_3_label'])) ? $data['editable_3_label'] : '';
+        $product->editable_3        = (isset($data['editable_3'])) ? $data['editable_3'] : '';
         if (isset($data['editable_3_image']))   $product->editable_3_image  = $data['editable_3_image'];
 
-        $product->editable_4_label  = $data['editable_4_label'];
-        $product->editable_4        = $data['editable_4'];
+        $product->editable_4_label  = (isset($data['editable_4_label'])) ? $data['editable_4_label'] : '';
+        $product->editable_4        = (isset($data['editable_4'])) ? $data['editable_4'] : '';
         if (isset($data['editable_4_image']))   $product->editable_4_image  = $data['editable_4_image'];
 
         if (isset($data['order'])) $product->order = $data['order'];
-		$product->shipping_description = $data['shipping_description'];
-        $product->mobile_name = $data['mobile_name'];
-        $product->shelf_id = $data['shelf_id'];
+		$product->shipping_description = (isset($data['shipping_description'])) ? $data['shipping_description']  : '';
+        $product->mobile_name = (isset($data['mobile_name'])) ? $data['mobile_name'] : '';
+        $product->shelf_id = (isset($data['shelf_id'] )) ? $data['shelf_id'] : '';
         
-        $product->name_text_align = $data['name_text_align'];
-        $product->name_font_style = $data['name_font_style'];
-        $product->name_font_weight = $data['name_font_weight'];
+        $product->name_text_align = (isset($data['name_text_align'])) ? $data['name_text_align']  : '';
+        $product->name_font_style = (isset($data['name_font_style'])) ? $data['name_font_style']  : '';
+        $product->name_font_weight = (isset($data['name_font_weight'])) ? $data['name_font_weight'] : '';
 
-        $product->name_extension_font_style = $data['name_extension_font_style'];
-        $product->name_extension_font_weight = $data['name_extension_font_weight'];
+        $product->name_extension_font_style = (isset($data['name_extension_font_style'])) ? $data['name_extension_font_style'] : '';
+        $product->name_extension_font_weight = (isset($data['name_extension_font_weight'])) ? $data['name_extension_font_weight'] : '';
 
-        $product->length_font_style = $data['length_font_style'];
-        $product->length_font_weight = $data['length_font_weight'];
+        $product->length_font_style = (isset($data['length_font_style'])) ? $data['length_font_style'] : '';
+        $product->length_font_weight = (isset($data['length_font_weight'])) ? $data['length_font_weight'] : '';
 
-        $product->name_font_size = $data['name_font_size'];
-        $product->name_extension_font_size = $data['name_extension_font_size'];
-        $product->length_font_size = $data['length_font_size'];
+        $product->name_font_size = (isset($data['name_font_size'])) ? $data['name_font_size'] : 0;
+        $product->name_extension_font_size = (isset($data['name_extension_font_size'])) ? $data['name_extension_font_size'] : 0;
+        $product->length_font_size = (isset($data['length_font_size'])) ? $data['length_font_size'] : 0;
 
 		return $product;
 	}

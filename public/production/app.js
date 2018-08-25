@@ -15398,7 +15398,6 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         Product,
         AvailabilityType,
         AlertService,
-        Image,
         Shelf,
         $uibModal,
         $http,
@@ -15564,6 +15563,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
         $ctrl.products = products;
         $ctrl.newProduct = productObject;
+
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
 
