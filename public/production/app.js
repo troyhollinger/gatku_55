@@ -15004,6 +15004,14 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 	}
 }]);
 
+(function() {
+    app.controller('SocialMediaFooterController', SocialMediaFooterController);
+
+    function SocialMediaFooterController($scope) {
+    };
+}());
+
+
 (function () {
     app.controller('StoreController', StoreController);
 

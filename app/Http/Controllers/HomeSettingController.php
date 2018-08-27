@@ -62,10 +62,10 @@ class HomeSettingController extends BaseController {
             $homeSetting->slideshow_text_5 = \Request::get('slideshow_text_5') ? \Request::get('slideshow_text_5') : '';
             $homeSetting->slideshow_text_color_css = \Request::get('slideshow_text_color_css') ? \Request::get('slideshow_text_color_css') : '';
             $homeSetting->slideshow_text_shadow_css = \Request::get('slideshow_text_shadow_css') ? \Request::get('slideshow_text_shadow_css') : '';
-            $homeSetting->facebook_url = \Request::get('facebook_url');
-            $homeSetting->twitter_url = \Request::get('twitter_url');
-            $homeSetting->instagram_url = \Request::get('instagram_url');
-            $homeSetting->youtube_url = \Request::get('youtube_url');
+            $homeSetting->facebook_url = \Request::get('facebook_url') ? \Request::get('facebook_url') : '';
+            $homeSetting->twitter_url = \Request::get('twitter_url') ? \Request::get('twitter_url') : '';
+            $homeSetting->instagram_url = \Request::get('instagram_url') ? \Request::get('instagram_url') : '';
+            $homeSetting->youtube_url = \Request::get('youtube_url') ? \Request::get('youtube_url') : '';
             $homeSetting->address_us = \Request::get('address_us') ? \Request::get('address_us') : '';
             $homeSetting->address_au = \Request::get('address_au') ? \Request::get('address_au') : '';
             $homeSetting->email_html = \Request::get('email_html') ? \Request::get('email_html') : '';
