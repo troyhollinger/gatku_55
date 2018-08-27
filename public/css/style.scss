@@ -449,38 +449,34 @@ a:hover {
 }
 
 .container {
-
 	position: relative;
 	width:1250px;
 	margin:0 auto;
 
-	&.apparel-height {
+	//#140 additional 80px to .container width
+	@media (min-width: 1220px) {
+		max-width: 1220px;
+	}
 
+	&.apparel-height {
 		height:1400px;
 		margin-bottom: 350px;
 
 		@include breakpoint(small) {
-
 			height:auto;
 			margin-bottom: 0;
-
 		}
-
 	}
 
 	&.glass-height {
-
 		height:85%;
 		height:85vh;
 		margin-bottom: 200px;
 
 		@include breakpoint(small) {
-
 			height:auto;
 			margin-bottom: 0;
-
 		}
-
 	}
 
 	@include breakpoint(medium) {
@@ -488,11 +484,9 @@ a:hover {
 		width:100%;
 		box-sizing:border-box;
 		padding:0 25px;
-
 	}
 
 	@include breakpoint(xxsmall) {
-
 		padding:0 17px;
 	}
 }
@@ -935,7 +929,7 @@ a:hover {
 	color:white;
 	text-align: center;
 
-	@media screen and (min-width: 1440px) {
+	@media screen and (min-width: 1520px) { //#140 Added extra 80px
 		min-height: 800px;
 	}
 
@@ -945,11 +939,11 @@ a:hover {
 
 		@include center;
 
-		@media screen and (max-width: 1440px) {
+		@media screen and (max-width: 1520px) { //#140 Added extra 80px
 			width: 100%;
 		}
 
-		@media screen and (min-width: 1440px) {
+		@media screen and (min-width: 1520px) { //#140 Added extra 80px
 			width: 800px;
 		}
 
