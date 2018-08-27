@@ -27,17 +27,28 @@
 						ng-repeat="product in products"
 						ng-if="product.shelf_id == shelf.id">
 					<a href="' . route('product.show', ['']) . '/{{ product.slug }}">
-					    <span style="font-weight: {{product.name_font_weight}}; font-style: {{product.name_font_style}}; font-size: {{product.name_font_size}}px;">
-					        {{  (product.shortName) ? product.shortName : product.name }}
-                        </span>
-                        <span style="font-weight: {{product.name_extension_font_weight}}; font-style: {{product.name_extension_font_style}}; font-size: {{product.name_extension_font_size}}px;">
-					        {{  product.short_name_extension }}
-                        </span>
-                        <span style="font-weight: {{product.length_font_weight}}; font-style: {{product.length_font_style}}; font-size: {{product.length_font_size}}px;">
-					        {{  product.length }}
-                        </span>
+					    <div>
+                            <span style="font-weight: {{product.name_font_weight}};
+                                         font-style: {{product.name_font_style}};
+                                         font-size: {{product.name_font_size}}px;">
+                                {{  (product.shortName) ? product.shortName : product.name }}
+                            </span>
+                            <span style="font-weight: {{product.name_extension_font_weight}};
+                                         font-style: {{product.name_extension_font_style}};
+                                         font-size: {{product.name_extension_font_size}}px;">
+                                {{  product.short_name_extension }}
+                            </span>
+                            <span style="font-weight: {{product.length_font_weight}};
+                                         font-style: {{product.length_font_style}};
+                                         font-size: {{product.length_font_size}}px;">
+                                {{  product.length }}
+                            </span>
+                        </div>
 
-						<span class="mobile-product-name">{{ (product.mobile_name) ? product.mobile_name : "" }}</span>
+					    <div class="mobile-product-name">
+					        <span>{{  product.mobile_name }}</span>
+                        </div>
+
 					</a>
 				</div>
 

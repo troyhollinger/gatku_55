@@ -40,6 +40,11 @@
             $ctrl.newProduct.length_font_weight = 'normal';
             $ctrl.newProduct.length_font_style = 'normal';
             $ctrl.newProduct.length_font_size = 16;
+
+            $ctrl.newProduct.mobile_name_text_align = 'left';
+            $ctrl.newProduct.mobile_name_font_style = 'normal';
+            $ctrl.newProduct.mobile_name_font_weight = 'normal';
+            $ctrl.newProduct.mobile_name_font_size = 16;
         } else {
             $ctrl.editingNew = false;   //This is needed for function registerAddons
         }

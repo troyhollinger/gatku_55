@@ -250,6 +250,11 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->name_extension_font_size = (isset($data['name_extension_font_size'])) ? $data['name_extension_font_size'] : 0;
         $product->length_font_size = (isset($data['length_font_size'])) ? $data['length_font_size'] : 0;
 
+        $product->mobile_name_text_align = (isset($data['mobile_name_text_align'])) ? $data['mobile_name_text_align'] : '';
+        $product->mobile_name_font_style = (isset($data['mobile_name_font_style'])) ? $data['mobile_name_font_style'] : '';
+        $product->mobile_name_font_weight = (isset($data['mobile_name_font_weight'])) ? $data['mobile_name_font_weight'] : '';
+        $product->mobile_name_font_size = (isset($data['mobile_name_font_size'])) ? $data['mobile_name_font_size'] : 0;
+
 		return $product;
 	}
 
