@@ -15,7 +15,7 @@
 
 	@if($product->attachedImage || $product->detachedImage)
 
-		<div class="scroll-watermark-like" ng-class="{'invisible' : fullSize === false, 'visible' : attached === false }"></div>
+		<div class="scroll-watermark-like invisible" ng-class="{'invisible' : displayScrollWaterMark === false, 'visible' : displayScrollWaterMark === true }"></div>
 		<div class="scroller {!! $product->slug === 'budk' ? 'knife-scroller no-attached-state' : '' !!} {!! $product->slug === 'bands' ? 'band-scroller' : '' !!} {!! $product->slug === 'g-string' || $product->slug === 'offshore-striker' || $product->slug === 'black g-string' ? 'g-string-scroller' : '' !!}">
 
 		@if($product->attachedImage)

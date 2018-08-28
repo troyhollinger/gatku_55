@@ -2,6 +2,7 @@ app.controller('ProductController', [
 	'$scope', 'Product', 'CartService', 'Size', 'AlertService', '$timeout', '$exceptionHandler',
 	function($scope, Product, CartService, Size, AlertService, $timeout, $exceptionHandler) {
 	$scope.fullSize = true;
+	$scope.displayScrollWaterMark = false;
 	$scope.loaded = false;
 	$scope.productAdded = false;
 	$scope.productAddedText = "Add to Cart";
@@ -72,13 +73,18 @@ app.controller('ProductController', [
 	}
 
 	$scope.poleScrollInit = function() {
-		PoleScroll.init();
+        getPoleScrollInit();
 	}
 
 	$scope.goFullSize = function() {
 		setTimeout(function() {
-			PoleScroll.init();
+            getPoleScrollInit();
 		}, 20);
+	}
+
+	function getPoleScrollInit() {
+        PoleScroll.init();
+        $scope.displayScrollWaterMark = PoleScroll.displayScrollWaterMark();
 	}
 
 	function verifySizeIsChecked() {

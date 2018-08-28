@@ -14708,6 +14708,7 @@ app.controller('ProductController', [
 	'$scope', 'Product', 'CartService', 'Size', 'AlertService', '$timeout', '$exceptionHandler',
 	function($scope, Product, CartService, Size, AlertService, $timeout, $exceptionHandler) {
 	$scope.fullSize = true;
+	$scope.displayScrollWaterMark = false;
 	$scope.loaded = false;
 	$scope.productAdded = false;
 	$scope.productAddedText = "Add to Cart";
@@ -14778,13 +14779,18 @@ app.controller('ProductController', [
 	}
 
 	$scope.poleScrollInit = function() {
-		PoleScroll.init();
+        getPoleScrollInit();
 	}
 
 	$scope.goFullSize = function() {
 		setTimeout(function() {
-			PoleScroll.init();
+            getPoleScrollInit();
 		}, 20);
+	}
+
+	function getPoleScrollInit() {
+        PoleScroll.init();
+        $scope.displayScrollWaterMark = PoleScroll.displayScrollWaterMark();
 	}
 
 	function verifySizeIsChecked() {
@@ -16100,26 +16106,30 @@ var PoleScroll = {
 		var left = scroller.scrollLeft();
 
 		if (left < width / 2) {
-
 			scroller.stop().animate({ scrollLeft: width }, 2500);
-
 		} else {
-
 			scroller.stop().animate({ scrollLeft: 0 }, 2500);
-
 		}
-
-
 	},
 
 	center : function() {
-
 		var scroller = $(".scroller");		
 		scroller.scrollLeft($(".scroller-image").width() - 5300);
+	},
 
+    displayScrollWaterMark : function() {
+		var displayWaterMark = true;
+
+        var windowWidth = $(window).width();
+        var imageSize = $(".scroller-image").width();
+
+        if (imageSize < windowWidth) {
+            displayWaterMark = false;
+		}
+
+		return displayWaterMark;
 	}
-
-}
+};
 
 var ApparelRotator = {
 
