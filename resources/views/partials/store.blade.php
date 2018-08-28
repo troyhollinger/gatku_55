@@ -50,7 +50,7 @@
 
                         <!-- Mobile Page Size Product Name -->
                         <div class="mobile-product-name"
-                             style="mobile_ntext-align: {{product.mobile_name_text_align}};
+                             style="text-align: {{product.mobile_name_text_align}};
                                     font-weight: {{product.mobile_name_font_weight}};
                                     font-style: {{product.mobile_name_font_style}};
                                     font-size: {{product.mobile_name_font_size}}px;">
