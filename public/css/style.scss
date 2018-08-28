@@ -754,7 +754,6 @@ a:hover {
 
 	&-links {
 		.product-link-container {
-
 			&-Head {
 				@extend .product-link-container;
 				width:20%;
@@ -789,6 +788,19 @@ a:hover {
 				}
 			}
 		}
+
+		.mobile-product-name {
+			display: none;
+			@include breakpoint(small) {
+				display: inline-block;
+			}
+		}
+
+		.default-product-name {
+			@include breakpoint(small) {
+				display: none;
+			}
+		}
 	}
 }
 
@@ -799,7 +811,6 @@ a:hover {
 }
 
 .mobile-product-name {
-	font-size: .9rem;
 	display: none;
 	@include breakpoint(small) {
 		display: inline-block;

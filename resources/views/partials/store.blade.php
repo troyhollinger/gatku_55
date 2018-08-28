@@ -21,13 +21,16 @@
 				<div class="clear"></div>
 			</div>
 
-			<div class="product-on-shelf-links links">
-				<div 	class="{{getLinkClass(product)}}"
-				        style="text-align: {{product.name_text_align}}; font-size: {{product.name_font_size}}px;"
-						ng-repeat="product in products"
-						ng-if="product.shelf_id == shelf.id">
+			<div class="product-on-shelf-links" class="default-product-name">
+				<div ng-repeat="product in products"
+				     class="{{getLinkClass(product)}}"
+					 ng-if="product.shelf_id == shelf.id">
 					<a href="' . route('product.show', ['']) . '/{{ product.slug }}">
-					    <div>
+
+					    <!-- Regular Page Size Product Name -->
+                        <div class="default-product-name"
+				             style="text-align: {{product.name_text_align}};
+				                    font-size: {{product.name_font_size}}px;">
                             <span style="font-weight: {{product.name_font_weight}};
                                          font-style: {{product.name_font_style}};
                                          font-size: {{product.name_font_size}}px;">
@@ -45,10 +48,14 @@
                             </span>
                         </div>
 
-					    <div class="mobile-product-name">
-					        <span>{{  product.mobile_name }}</span>
+                        <!-- Mobile Page Size Product Name -->
+                        <div class="mobile-product-name"
+                             style="mobile_ntext-align: {{product.mobile_name_text_align}};
+                                    font-weight: {{product.mobile_name_font_weight}};
+                                    font-style: {{product.mobile_name_font_style}};
+                                    font-size: {{product.mobile_name_font_size}}px;">
+                            {{  product.mobile_name }}
                         </div>
-
 					</a>
 				</div>
 
@@ -58,6 +65,8 @@
 			<h2 style="text-align: {{shelf.name_text_align}}; font-weight: {{shelf.name_font_weight}}; font-style: {{shelf.name_font_style}}; margin-bottom: ' . $homeSetting['shelves_between_space'] . 'px;">
 				{{ shelf.name }}
 			</h2>
+
+
 		</div>
 	';
  ?>
