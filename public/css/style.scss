@@ -650,13 +650,8 @@ a:hover {
 }
 
 .product-link-container {
-	@extend .product-thumb-container;
-	&:first-child {
-		text-align: left;
-	}
-	@include breakpoint(small) {
-		text-align: left;
-	}
+	position: relative;
+	float:left;
 }
 
 .product-on-shelf {
@@ -775,24 +770,18 @@ a:hover {
 				@extend .product-link-container;
 				width:33.3333%;
 				width:calc(100% / 3);
-				&:first-child {
-					text-align: center;
-				}
 			}
 
 			&-Glass {
 				@extend .product-link-container;
 				width:25%;
-				&:first-child {
-					text-align: center;
-				}
 			}
 		}
 
 		.mobile-product-name {
 			display: none;
 			@include breakpoint(small) {
-				display: inline-block;
+				display: block;
 			}
 		}
 
