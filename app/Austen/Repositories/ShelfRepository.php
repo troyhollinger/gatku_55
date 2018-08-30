@@ -94,12 +94,14 @@ class ShelfRepository {
      */
     private function assignData(Shelf $shelf, $data) {
         $shelf->id = $data['id'];
-        $shelf->name = $data['name'];
-        $shelf->order = $data['order'];
-        $shelf->hidden = $data['hidden'];
+        $shelf->name = (isset($data['name'])) ? $data['name'] : '';
+        $shelf->order = (isset($data['order'])) ? $data['order'] : 0;
+        $shelf->hidden = (isset($data['hidden'])) ? $data['hidden'] : 0;;
         $shelf->name_text_align = $data['name_text_align'];
         $shelf->name_font_style = $data['name_font_style'];
         $shelf->name_font_weight = $data['name_font_weight'];
+        $shelf->desktop_shelf_font_size = (isset($data['desktop_shelf_font_size'])) ? $data['desktop_shelf_font_size'] : 0;
+        $shelf->mobile_shelf_font_size = (isset($data['mobile_shelf_font_size'])) ? $data['mobile_shelf_font_size'] : 0;
 
         return $shelf;
     }

@@ -27,8 +27,8 @@
 
         <tbody>
             <tr ng-repeat="shelf in $ctrl.shelves">
-                <td>
-                    {{shelf.name}}
+                <td class="bold uppercase">
+                    <a href ng-click="$ctrl.editAddShelf(shelf)">{{shelf.name}}</a>
                 </td>
                 <td>
                     <input type="checkbox"
@@ -38,16 +38,6 @@
                            ng-disabled="true">
                 </td>
                 <td>
-                    <div class="shelves-list-buttons-spacer">
-                        <button type="button"
-                                class="btn btn-success"
-                                ng-click="$ctrl.editAddShelf(shelf)">
-                            Edit
-                            &nbsp;<i class="fa fa-pencil"></i>
-                        </button>
-                        &nbsp;
-                    </div>
-
                     <div class="shelves-list-buttons-spacer">
                         <button type="button"
                                 ng-hide="$first"

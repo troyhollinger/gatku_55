@@ -62,10 +62,27 @@
 				<div class="clear"></div>
 			</div>
 
-			<h2 style="text-align: {{shelf.name_text_align}}; font-weight: {{shelf.name_font_weight}}; font-style: {{shelf.name_font_style}}; margin-bottom: ' . $homeSetting['shelves_between_space'] . 'px;">
+            <!-- Desktop Shelf Name -->
+			<div class="default-product-name"
+			      style="text-align: {{shelf.name_text_align}};
+			             font-weight: {{shelf.name_font_weight}};
+			             font-style: {{shelf.name_font_style}};
+			             font-size: {{shelf.desktop_shelf_font_size}}px;
+			             margin-bottom: ' . $homeSetting['shelves_between_space'] . 'px;">
 				{{ shelf.name }}
-			</h2>
+			</div>
+			<!-- Desktop Shelf Name - end -->
 
+            <!-- Mobile Shelf Name -->
+			<div class="mobile-product-name"
+			      style="text-align: {{shelf.name_text_align}};
+			             font-weight: {{shelf.name_font_weight}};
+			             font-style: {{shelf.name_font_style}};
+			             font-size: {{shelf.mobile_shelf_font_size}}px;
+			             margin-bottom: ' . $homeSetting['shelves_between_space'] . 'px;">
+				{{ shelf.name }}
+			</div>
+			<!-- Mobile Shelf Name - end -->
 
 		</div>
 	';

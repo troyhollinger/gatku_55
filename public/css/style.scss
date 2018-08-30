@@ -802,7 +802,7 @@ a:hover {
 .mobile-product-name {
 	display: none;
 	@include breakpoint(small) {
-		display: inline-block;
+		display: block;
 	}
 }
 

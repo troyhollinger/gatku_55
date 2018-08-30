@@ -12,6 +12,8 @@
                 name: '',
                 order: 0,
                 hidden: 0,
+                desktop_shelf_font_size: 10,
+                mobile_shelf_font_size: 10,
                 name_text_align: 'left',
                 name_font_style: 'normal',
                 name_font_weight: 'normal'

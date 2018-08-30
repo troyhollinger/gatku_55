@@ -44,6 +44,7 @@
                 templateUrl: 'js/app/admin/shelves/modals/AdminEditShelfModal.html',
                 controller: 'AdminEditShelfModalController',
                 controllerAs: '$ctrl',
+                size: 'lg',
                 backdrop: 'static',
                 resolve: {
                     shelf: function() {
