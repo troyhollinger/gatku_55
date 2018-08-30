@@ -5,9 +5,10 @@
 
 <div class="admin-sub-section" ng-cloak>
 
-    <button type="button"
+    <button type="file"
             class="btn btn-success"
             ng-hide="$ctrl.editState"
+            ng-file-drop
             ng-file-select="$ctrl.uploadYouImage($files)">Upload New
     </button>
 
