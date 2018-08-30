@@ -15291,12 +15291,11 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             });
         }
 
-        $ctrl.removeFooterBannerImage = function() {
-
-            var r = confirm('Do you want to remove Footer Banner Image?');
+        $ctrl.removeImage = function(variable) {
+            var r = confirm('Do you want to remove image?');
 
             if (r) {
-                 $ctrl.homeSetting.footer_banner_url = '';
+                 $ctrl.homeSetting[variable] = '';
             }
         };
 
@@ -15578,6 +15577,13 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         $ctrl.products = products;
         $ctrl.newProduct = productObject;
 
+        $ctrl.showNameFormatting = false;
+        $ctrl.showNameExtensionFormatting = false;
+        $ctrl.mobileNameFormatting = false;
+        $ctrl.lengthFormatting = false;
+        $ctrl.addonsHideShow = false;
+        $ctrl.productPerformanceShow = false;
+
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
 
@@ -15651,6 +15657,15 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
                 });
             }
 
+        };
+
+
+        $ctrl.removeImage = function(variable) {
+            var r = confirm('Do you want to remove image?');
+
+            if (r) {
+                $ctrl.newProduct[variable] = '';
+            }
         };
 
         function registerAddons() {

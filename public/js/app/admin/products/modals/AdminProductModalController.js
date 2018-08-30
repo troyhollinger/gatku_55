@@ -25,6 +25,13 @@
         $ctrl.products = products;
         $ctrl.newProduct = productObject;
 
+        $ctrl.showNameFormatting = false;
+        $ctrl.showNameExtensionFormatting = false;
+        $ctrl.mobileNameFormatting = false;
+        $ctrl.lengthFormatting = false;
+        $ctrl.addonsHideShow = false;
+        $ctrl.productPerformanceShow = false;
+
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
 
@@ -98,6 +105,15 @@
                 });
             }
 
+        };
+
+
+        $ctrl.removeImage = function(variable) {
+            var r = confirm('Do you want to remove image?');
+
+            if (r) {
+                $ctrl.newProduct[variable] = '';
+            }
         };
 
         function registerAddons() {

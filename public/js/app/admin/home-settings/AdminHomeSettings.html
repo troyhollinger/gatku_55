@@ -7,9 +7,12 @@
 
     <form name="home-setting" class="home-setting-form">
 
+        <!-- Page Title -->
         <label>Page Title</label>
         <input type="text" ng-model="$ctrl.homeSetting.page_title">
+        <!-- Page Title - end -->
 
+        <!-- Logo -->
         <label>Logo</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.logo + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.logo"></i>
@@ -17,6 +20,16 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'logo')">
         </div>
 
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('logo');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Logo - end -->
+
+        <!-- Top Stripe Background Image -->
         <label>Top Stripe Background Image</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.top_stripe_background_image_url + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.top_stripe_background_image_url"></i>
@@ -24,6 +37,16 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'top_stripe_background_image_url')">
         </div>
 
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('top_stripe_background_image_url');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Top Stripe Background Image - end -->
+
+        <!-- Top Stripe Logo -->
         <label>Top Stripe Logo</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.top_stripe_logo_url + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.top_stripe_logo_url"></i>
@@ -31,16 +54,38 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'top_stripe_logo_url')">
         </div>
 
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('top_stripe_logo_url');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Top Stripe Logo - end -->
+
+        <!-- Button Color -->
         <label>Button Color</label>
         <input style="width: 150px;" placeholder="#000000" type="text" ng-model="$ctrl.homeSetting.button_color">
+        <!-- Button Color - end -->
 
+        <!-- Home Image -->
         <label>Home Image</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.image + ')'}">
-            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.mobile_image"></i>
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.image"></i>
             <input type="text" ng-model="$ctrl.homeSetting.image" class="image-path-storage-input">
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'image')">
-            </div>
+        </div>
 
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('image');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Home Image - end -->
+
+        <!-- Mobile Image -->
         <label>Mobile Image</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.mobile_image + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.mobile_image"></i>
@@ -48,68 +93,116 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'mobile_image')">
         </div>
 
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('mobile_image');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Mobile Image - end -->
+
+        <!-- On Site Live Til -->
         <label>On Site Live Til</label>
         <input type="text" ng-model="$ctrl.homeSetting.image_info">
+        <!-- On Site Live Til - end -->
 
+        <!-- Image Credit -->
         <label>Image Credit</label>
         <input type="text" ng-model="$ctrl.homeSetting.image_credit">
+        <!-- Image Credit - end -->
 
+        <!-- Slide Show Text #1 -->
         <label>Slide Show Text #1</label>
         <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_1">
         <small>* To not display leave blank.</small>
+        <!-- Slide Show Text #1 - end -->
 
+        <!-- Slide Show Text #2 -->
         <label>Slide Show Text #2</label>
         <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_2">
         <small>* To not display leave blank.</small>
+        <!-- Slide Show Text #2 - end -->
 
+        <!-- Slide Show Text #3 -->
         <label>Slide Show Text #3</label>
         <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_3">
         <small>* To not display leave blank.</small>
+        <!-- Slide Show Text #3 - end -->
 
+        <!-- Slide Show Text #4 -->
         <label>Slide Show Text #4</label>
         <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_4">
         <small>* To not display leave blank.</small>
+        <!-- Slide Show Text #4 - end -->
 
+        <!-- Slide Show Text #5 -->
         <label>Slide Show Text #5</label>
         <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_5">
         <small>* To not display leave blank.</small>
+        <!-- Slide Show Text #5 - end -->
 
+        <!-- Slide Show Text Color [CSS] -->
         <label>Slide Show Text Color [CSS]</label>
         <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_color_css">
+        <!-- Slide Show Text Color [CSS] - end -->
 
+        <!-- Slide Show Text Shadow [CSS] -->
         <label>Slide Show Text Shadow [CSS]</label>
         <input type="text" ng-model="$ctrl.homeSetting.slideshow_text_shadow_css">
+        <!-- Slide Show Text Shadow [CSS] - end -->
 
+        <!-- Facebook Url -->
         <label>Facebook Url</label>
         <input type="text" ng-model="$ctrl.homeSetting.facebook_url">
+        <!-- Facebook Url - end -->
 
+        <!-- Twitter Url -->
         <label>Twitter Url</label>
         <input type="text" ng-model="$ctrl.homeSetting.twitter_url">
+        <!-- Twitter Url - end -->
 
+        <!-- Instagram Url -->
         <label>Instagram Url</label>
         <input type="text" ng-model="$ctrl.homeSetting.instagram_url">
+        <!-- Instagram Url - end -->
 
+        <!-- Youtube Url -->
         <label>Youtube Url</label>
         <input type="text" ng-model="$ctrl.homeSetting.youtube_url">
+        <!-- Youtube Url - end -->
 
+        <!-- Address US -->
         <label>Address US</label>
         <input type="text" ng-model="$ctrl.homeSetting.address_us">
+        <!-- Address US - end -->
 
+        <!-- Address Australia -->
         <label>Address Australia</label>
         <input type="text" ng-model="$ctrl.homeSetting.address_au">
+        <!-- Address Australia - end -->
 
+        <!-- Email Html -->
         <label>Email Html</label>
         <input type="text" ng-model="$ctrl.homeSetting.email_html">
+        <!-- Email Html - end -->
 
+        <!-- Phone Html -->
         <label>Phone Html</label>
         <input type="text" ng-model="$ctrl.homeSetting.phone_html">
+        <!-- Phone Html - end -->
 
+        <!-- Desktop Copyright Html -->
         <label>Desktop Copyright Html</label>
         <input type="text" ng-model="$ctrl.homeSetting.desktop_copyright_html">
+        <!-- Desktop Copyright Html - end -->
 
+        <!-- Mobile Copyright Html -->
         <label>Mobile Copyright Html</label>
         <input type="text" ng-model="$ctrl.homeSetting.mobile_copyright_html">
+        <!-- Mobile Copyright Html - end -->
 
+        <!-- Contact Section Image -->
         <label>Contact Section Image</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.contact_image + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.contact_image"></i>
@@ -117,12 +210,26 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_image')">
         </div>
 
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('contact_image');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Contact Section Image - end -->
+
+        <!-- Contact Title -->
         <label>Contact Title</label>
         <input type="text" ng-model="$ctrl.homeSetting.contact_title">
+        <!-- Contact Title - end -->
 
+        <!-- Contact Message -->
         <label>Contact Message</label>
         <input type="text" ng-model="$ctrl.homeSetting.contact_message">
+        <!-- Contact Message - end -->
 
+        <!-- Desktop Contact Logo -->
         <label>Desktop Contact Logo</label>
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.contact_desktop_logo_url + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.contact_desktop_logo_url"></i>
@@ -130,29 +237,45 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_desktop_logo_url')">
         </div>
 
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('contact_desktop_logo_url');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Desktop Contact Logo - end -->
+
+        <!-- Desktop Contact Logo Height -->
         <label>Desktop Contact Logo Height</label>
         <input type="text" ng-model="$ctrl.homeSetting.contact_desktop_logo_height">
+        <!-- Desktop Contact Logo Height - end -->
 
+        <!-- Mobile Contact Logo -->
         <label>Mobile Contact Logo</label>
+
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.contact_mobile_logo_url + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.contact_mobile_logo_url"></i>
             <input type="text" ng-model="$ctrl.homeSetting.contact_mobile_logo_url" class="image-path-storage-input">
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'contact_mobile_logo_url')">
         </div>
 
-        <label>Mobile Contact Logo Height</label>
-        <input type="text" ng-model="$ctrl.homeSetting.contact_mobile_logo_height">
-
-        <label>Footer Banner</label>
+        <br>
 
         <button type="button"
                 class="btn btn-danger"
-                ng-click="$ctrl.removeFooterBannerImage();">
-            Remove Footer Banner Image &nbsp; <i class="fa fa-trash"></i>
+                ng-click="$ctrl.removeImage('contact_mobile_logo_url');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
         </button>
+        <!-- Mobile Contact Logo - end -->
 
-        <br>
-        <br>
+        <!-- Mobile Contact Logo Height -->
+        <label>Mobile Contact Logo Height</label>
+        <input type="text" ng-model="$ctrl.homeSetting.contact_mobile_logo_height">
+        <!-- Mobile Contact Logo - end -->
+
+        <!-- Footer Banner -->
+        <label>Footer Banner</label>
 
         <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.footer_banner_url + ')'}">
             <i class="fa fa-image" ng-hide="$ctrl.homeSetting.footer_banner_url"></i>
@@ -160,14 +283,29 @@
             <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'footer_banner_url')">
         </div>
 
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('footer_banner_url');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Footer Banner - end -->
+
+        <!-- Additional Images Label For Product [displays on product page] -->
         <label>Additional Images Label For Product [displays on product page]</label>
         <input type="text" ng-model="$ctrl.homeSetting.additional_images_label_for_product">
+        <!-- Additional Images Label For Product [displays on product page] - end -->
 
+        <!-- Product Card Head Title Multiply Size [floating point] -->
         <label>Product Card Head Title Multiply Size [floating point]</label>
         <input type="text" ng-model="$ctrl.homeSetting.product_font_multiply_size">
+        <!-- Product Card Head Title Multiply Size [floating point] - end -->
 
+        <!-- Shelves Between Space [px] -->
         <label>Shelves Between Space [px]</label>
         <input type="text" ng-model="$ctrl.homeSetting.shelves_between_space">
+        <!-- Shelves Between Space [px] - end -->
     </form>
 
     <br>

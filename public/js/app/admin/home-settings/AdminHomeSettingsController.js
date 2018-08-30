@@ -46,12 +46,11 @@
             });
         }
 
-        $ctrl.removeFooterBannerImage = function() {
-
-            var r = confirm('Do you want to remove Footer Banner Image?');
+        $ctrl.removeImage = function(variable) {
+            var r = confirm('Do you want to remove image?');
 
             if (r) {
-                 $ctrl.homeSetting.footer_banner_url = '';
+                 $ctrl.homeSetting[variable] = '';
             }
         };
 

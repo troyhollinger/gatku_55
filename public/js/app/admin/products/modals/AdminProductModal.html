@@ -34,46 +34,53 @@
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Name Alignment:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options=" value for value in $ctrl.text_align_options"
-                    ng-model="$ctrl.newProduct.name_text_align">
-            </select>
+    <div ng-if="$ctrl.showNameFormatting">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Alignment:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options=" value for value in $ctrl.text_align_options"
+                        ng-model="$ctrl.newProduct.name_text_align">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.name_font_weight">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.name_font_style">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name_font_size" class="col-sm-3 col-form-label">Name Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="name_font_size"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.name_font_size">
+            </div>
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Name Font Weight:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options="value for value in $ctrl.text_font_weight"
-                    ng-model="$ctrl.newProduct.name_font_weight">
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Name Font Style:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options="value for value in $ctrl.text_font_style"
-                    ng-model="$ctrl.newProduct.name_font_style">
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="name_font_size" class="col-sm-3 col-form-label">Name Font Size [px]:</label>
-        <div class="col-sm-2">
-            <input type="text"
-                   class="form-control"
-                   id="name_font_size"
-                   placeholder=""
-                   ng-model="$ctrl.newProduct.name_font_size">
-        </div>
-    </div>
+    <a href ng-click="$ctrl.showNameFormatting = !$ctrl.showNameFormatting"><small>Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.showNameFormatting"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.showNameFormatting"></i>
+    </a>
 
     <!-- Short Name -->
 
@@ -105,37 +112,44 @@
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Extension Font Weight:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options="value for value in $ctrl.text_font_weight"
-                    ng-model="$ctrl.newProduct.name_extension_font_weight">
-            </select>
+    <div ng-if="$ctrl.showNameExtensionFormatting">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Extension Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.name_extension_font_weight">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Extension Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.name_extension_font_style">
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="name_extension_font_size" class="col-sm-3 col-form-label">Ext. Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="name_extension_font_size"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.name_extension_font_size">
+            </div>
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Extension Font Style:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options="value for value in $ctrl.text_font_style"
-                    ng-model="$ctrl.newProduct.name_extension_font_style">
-            </select>
-        </div>
-    </div>
-
-
-    <div class="form-group row">
-        <label for="name_extension_font_size" class="col-sm-3 col-form-label">Ext. Font Size [px]:</label>
-        <div class="col-sm-2">
-            <input type="text"
-                   class="form-control"
-                   id="name_extension_font_size"
-                   placeholder=""
-                   ng-model="$ctrl.newProduct.name_extension_font_size">
-        </div>
-    </div>
+    <a href ng-click="$ctrl.showNameExtensionFormatting = !$ctrl.showNameExtensionFormatting"><small>Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.showNameExtensionFormatting"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.showNameExtensionFormatting"></i>
+    </a>
 
     <!-- Mobile Name -->
 
@@ -152,46 +166,53 @@
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Mobile Alignment:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options=" value for value in $ctrl.text_align_options"
-                    ng-model="$ctrl.newProduct.mobile_name_text_align">
-            </select>
+    <div ng-if="$ctrl.mobileNameFormatting">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Mobile Alignment:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options=" value for value in $ctrl.text_align_options"
+                        ng-model="$ctrl.newProduct.mobile_name_text_align">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Mobile Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.mobile_name_font_weight">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Mobile Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.mobile_name_font_style">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="mobile_name_font_size" class="col-sm-3 col-form-label">Mobile Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="mobile_name_font_size"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.mobile_name_font_size">
+            </div>
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Mobile Font Weight:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options="value for value in $ctrl.text_font_weight"
-                    ng-model="$ctrl.newProduct.mobile_name_font_weight">
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Mobile Font Style:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options="value for value in $ctrl.text_font_style"
-                    ng-model="$ctrl.newProduct.mobile_name_font_style">
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="mobile_name_font_size" class="col-sm-3 col-form-label">Mobile Font Size [px]:</label>
-        <div class="col-sm-2">
-            <input type="text"
-                   class="form-control"
-                   id="mobile_name_font_size"
-                   placeholder=""
-                   ng-model="$ctrl.newProduct.mobile_name_font_size">
-        </div>
-    </div>
+    <a href ng-click="$ctrl.mobileNameFormatting = !$ctrl.mobileNameFormatting"><small>Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.mobileNameFormatting"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.mobileNameFormatting"></i>
+    </a>
 
     <!-- Shelf -->
 
@@ -302,36 +323,43 @@
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Length Font Weight:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options="value for value in $ctrl.text_font_weight"
-                    ng-model="$ctrl.newProduct.length_font_weight">
-            </select>
+    <div ng-if="$ctrl.lengthFormatting">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Length Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.length_font_weight">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Length Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.length_font_style">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="length_font_size" class="col-sm-3 col-form-label">Length Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="length_font_size"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.length_font_size">
+            </div>
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Length Font Style:</label>
-        <div class="col-sm-9">
-            <select class="custom-select col-sm-4"
-                    ng-options="value for value in $ctrl.text_font_style"
-                    ng-model="$ctrl.newProduct.length_font_style">
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="length_font_size" class="col-sm-3 col-form-label">Length Font Size [px]:</label>
-        <div class="col-sm-2">
-            <input type="text"
-                   class="form-control"
-                   id="length_font_size"
-                   placeholder=""
-                   ng-model="$ctrl.newProduct.length_font_size">
-        </div>
-    </div>
+    <a href ng-click="$ctrl.lengthFormatting = !$ctrl.lengthFormatting"><small>Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.lengthFormatting"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.lengthFormatting"></i>
+    </a>
 
     <!-- Price -->
 
@@ -353,31 +381,39 @@
     <hr>
 
     <label>Addons:</label>
-    <table class="table table-striped table-bordered table-sm">
-        <thead class="thead-dark">
-        <tr>
-            <th style="text-align: center"><b>Addon</b></th>
-            <th style="text-align: center"><b>Included in package</b></th>
-            <th style="text-align: center"><b>Price zero if included in package</b></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="addon in $ctrl.newProduct.addonSelection">
-            <td>
-                <div class="new-product-checkbox-container">
-                    <input type="checkbox" ng-model="addon.isAddon">&nbsp;<span
-                        class="uppercase">{{ addon.name }}</span>
-                </div>
-            </td>
-            <td style="text-align: center">
-                <input type="checkbox" ng-model="addon.include_in_package">
-            </td>
-            <td style="text-align: center">
-                <input type="checkbox" ng-model="addon.price_zero">
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+    <div ng-if="$ctrl.addonsHideShow">
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th style="text-align: center"><b>Addon</b></th>
+                <th style="text-align: center"><b>Included in package</b></th>
+                <th style="text-align: center"><b>Price zero if included in package</b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="addon in $ctrl.newProduct.addonSelection">
+                <td>
+                    <div class="new-product-checkbox-container">
+                        <input type="checkbox" ng-model="addon.isAddon">&nbsp;<span
+                            class="uppercase">{{ addon.name }}</span>
+                    </div>
+                </td>
+                <td style="text-align: center">
+                    <input type="checkbox" ng-model="addon.include_in_package">
+                </td>
+                <td style="text-align: center">
+                    <input type="checkbox" ng-model="addon.price_zero">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href ng-click="$ctrl.addonsHideShow = !$ctrl.addonsHideShow">&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.addonsHideShow"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.addonsHideShow"></i>
+    </a>
 
     <!-- Attached Image -->
 
@@ -393,6 +429,14 @@
                        ng-model="$ctrl.newProduct.attachedImage" class="image-path-storage-input">
                 <input type="file" ng-file-drop ng-file-select="$ctrl.upload($files, 'attachedImage')">
             </div>
+
+            <br>
+
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="$ctrl.removeImage('attachedImage');">
+                Remove Image &nbsp; <i class="fa fa-trash"></i>
+            </button>
         </div>
     </div>
 
@@ -411,6 +455,14 @@
                        class="image-path-storage-input">
                 <input type="file" ng-file-select="$ctrl.upload($files, 'detachedImage')">
             </div>
+
+            <br>
+
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="$ctrl.removeImage('detachedImage');">
+                Remove Image &nbsp; <i class="fa fa-trash"></i>
+            </button>
         </div>
     </div>
 
@@ -429,6 +481,14 @@
                         class="image-path-storage-input">
                 <input type="file" ng-file-select="$ctrl.upload($files, 'thumb')">
             </div>
+
+            <br>
+
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="$ctrl.removeImage('thumb');">
+                Remove Image &nbsp; <i class="fa fa-trash"></i>
+            </button>
         </div>
     </div>
 
@@ -447,6 +507,14 @@
                        class="image-path-storage-input">
                 <input type="file" ng-file-select="$ctrl.upload($files, 'emailImage')">
             </div>
+
+            <br>
+
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="$ctrl.removeImage('emailImage');">
+                Remove Image &nbsp; <i class="fa fa-trash"></i>
+            </button>
         </div>
     </div>
 
@@ -472,158 +540,194 @@
         <label class="col-sm-3 col-form-label">
             <b>Product performance:</b>
         </label>
-    </div>
-
-    <div class="form-group row">
-        <label for="editable_1_label" class="col-sm-3 col-form-label">Editable #1 Label:</label>
         <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="editable_1_label"
-                   placeholder="Label Name..."
-                   ng-model="$ctrl.newProduct.editable_1_label">
+            <a href ng-click="$ctrl.productPerformanceShow = !$ctrl.productPerformanceShow">&nbsp;
+                <i class="fa fa-caret-down" ng-if="!$ctrl.productPerformanceShow"></i>
+                <i class="fa fa-caret-up" ng-if="$ctrl.productPerformanceShow"></i>
+            </a>
         </div>
     </div>
 
-    <!-- Former: maneuverability -->
-    <div class="form-group row">
-        <label for="editable_1" class="col-sm-3 col-form-label">Editable #1:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="editable_1"
-                   ng-model="$ctrl.newProduct.editable_1">
+    <div ng-if="$ctrl.productPerformanceShow">
+        <div class="form-group row">
+            <label for="editable_1_label" class="col-sm-3 col-form-label">Editable #1 Label:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="editable_1_label"
+                       placeholder="Label Name..."
+                       ng-model="$ctrl.newProduct.editable_1_label">
+            </div>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Editable #1 Image:</label>
-        <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_1_image + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_1_image"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.editable_1_image"
-                       class="image-path-storage-input">
-                <input type="file" ng-file-select="$ctrl.upload($files, 'editable_1_image')">
+        <!-- Former: maneuverability -->
+        <div class="form-group row">
+            <label for="editable_1" class="col-sm-3 col-form-label">Editable #1:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="editable_1"
+                       ng-model="$ctrl.newProduct.editable_1">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Editable #1 Image:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_1_image + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_1_image"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.editable_1_image"
+                           class="image-path-storage-input">
+                    <input type="file" ng-file-select="$ctrl.upload($files, 'editable_1_image')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('editable_1_image');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="form-group row">
+            <label for="editable_2_label" class="col-sm-3 col-form-label">Editable #2 Label:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="editable_2_label"
+                       placeholder="Label Name..."
+                       ng-model="$ctrl.newProduct.editable_2_label">
+            </div>
+        </div>
+
+        <!-- Former: trajectory -->
+        <div class="form-group row">
+            <label for="editable_2" class="col-sm-3 col-form-label">Editable #2:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="editable_2"
+                       ng-model="$ctrl.newProduct.editable_2">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Editable #2 Image:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_2_image + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_2_image"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.editable_2_image"
+                           class="image-path-storage-input">
+                    <input type="file" ng-file-select="$ctrl.upload($files, 'editable_2_image')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('editable_2_image');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="editable_3_label" class="col-sm-3 col-form-label">Editable #3 Label:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="editable_3_label"
+                       placeholder="Label Name..."
+                       ng-model="$ctrl.newProduct.editable_3_label">
+            </div>
+        </div>
+
+        <!-- Former: balance -->
+        <div class="form-group row">
+            <label for="editable_3" class="col-sm-3 col-form-label">Editable #3:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="editable_3"
+                       ng-model="$ctrl.newProduct.editable_3">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Editable #3 Image:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_3_image + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_3_image"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.editable_3_image"
+                           class="image-path-storage-input">
+                    <input type="file" ng-file-select="$ctrl.upload($files, 'editable_3_image')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('editable_3_image');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="editable_4_label" class="col-sm-3 col-form-label">Editable #4 Label:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="editable_4_label"
+                       placeholder="Label Name..."
+                       ng-model="$ctrl.newProduct.editable_4_label">
+            </div>
+        </div>
+
+        <!-- Former: stealth -->
+        <div class="form-group row">
+            <label for="editable_4" class="col-sm-3 col-form-label">Editable #4:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="editable_4"
+                       ng-model="$ctrl.newProduct.editable_4">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Editable #4 Image:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_4_image + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_4_image"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.editable_4_image"
+                           class="image-path-storage-input">
+                    <input type="file" ng-file-select="$ctrl.upload($files, 'editable_4_image')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('editable_4_image');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <br>
-
-    <div class="form-group row">
-        <label for="editable_2_label" class="col-sm-3 col-form-label">Editable #2 Label:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="editable_2_label"
-                   placeholder="Label Name..."
-                   ng-model="$ctrl.newProduct.editable_2_label">
-        </div>
-    </div>
-
-    <!-- Former: trajectory -->
-    <div class="form-group row">
-        <label for="editable_2" class="col-sm-3 col-form-label">Editable #2:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="editable_2"
-                   ng-model="$ctrl.newProduct.editable_2">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Editable #2 Image:</label>
-        <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_2_image + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_2_image"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.editable_2_image"
-                       class="image-path-storage-input">
-                <input type="file" ng-file-select="$ctrl.upload($files, 'editable_2_image')">
-            </div>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="form-group row">
-        <label for="editable_3_label" class="col-sm-3 col-form-label">Editable #3 Label:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="editable_3_label"
-                   placeholder="Label Name..."
-                   ng-model="$ctrl.newProduct.editable_3_label">
-        </div>
-    </div>
-
-    <!-- Former: balance -->
-    <div class="form-group row">
-        <label for="editable_3" class="col-sm-3 col-form-label">Editable #3:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="editable_3"
-                   ng-model="$ctrl.newProduct.editable_3">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Editable #3 Image:</label>
-        <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_3_image + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_3_image"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.editable_3_image"
-                       class="image-path-storage-input">
-                <input type="file" ng-file-select="$ctrl.upload($files, 'editable_3_image')">
-            </div>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="form-group row">
-        <label for="editable_4_label" class="col-sm-3 col-form-label">Editable #4 Label:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="editable_4_label"
-                   placeholder="Label Name..."
-                   ng-model="$ctrl.newProduct.editable_4_label">
-        </div>
-    </div>
-
-    <!-- Former: stealth -->
-    <div class="form-group row">
-        <label for="editable_4" class="col-sm-3 col-form-label">Editable #4:</label>
-        <div class="col-sm-9">
-            <input type="text"
-                   class="form-control"
-                   id="editable_4"
-                   ng-model="$ctrl.newProduct.editable_4">
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Editable #4 Image:</label>
-        <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.editable_4_image + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.editable_4_image"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.editable_4_image"
-                       class="image-path-storage-input">
-                <input type="file" ng-file-select="$ctrl.upload($files, 'editable_4_image')">
-            </div>
-        </div>
-    </div>
-    
     <hr>
 
 </div>
