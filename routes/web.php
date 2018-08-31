@@ -1,6 +1,6 @@
 <?php
 
-use Gatku\HomeSetting;
+use Gatku\Model\HomeSetting;
 
 /*
 |--------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB as DB;
-use Gatku\Product;
+use Gatku\Model\Product;
 
 class AddEditableColumnsToTableProducts extends Migration {
 

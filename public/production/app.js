@@ -13602,7 +13602,13 @@ app.config(function($routeProvider) {
             templateUrl : 'js/app/admin/you/AdminImages.html',
             controller: 'AdminImagesController',
             controllerAs: '$ctrl'
-        });
+        })
+        .when('/integration', {
+            templateUrl : 'js/app/admin/integration/AdminIntegration.html',
+            controller: 'AdminIntegrationController',
+            controllerAs: '$ctrl'
+        })
+    ;
 });
 
 (function() {
@@ -15338,6 +15344,20 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         getHomeSettings();
     }
 }());
+
+(function () {
+    app.controller('AdminIntegrationController', AdminIntegrationController);
+
+    function AdminIntegrationController($scope,
+                                        IntegrationAdminResource,
+                                        AlertService,
+                                        $exceptionHandler) {
+
+        var $ctrl = this;
+
+    };
+}());
+
 
 (function () {
     app.controller('AdminOrdersController', AdminOrdersController);

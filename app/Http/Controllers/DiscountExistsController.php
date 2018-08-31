@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Austen\Repositories\DiscountRepository;
+use Gatku\Repositories\DiscountRepository;
 
 class DiscountExistsController extends BaseController {
 

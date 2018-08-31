@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Austen\Repositories\MailchimpRepository;
+use Gatku\Service\MailchimpService;
 
 class HearGoodStuffController extends BaseController {
 
     /**
-     * @var MailchimpRepository
+     * @var MailchimpService
      */
     private $mailchimp;
 
-    public function __construct(MailchimpRepository $mailchimp)
+    public function __construct(MailchimpService $mailchimp)
     {
         $this->mailchimp = $mailchimp;
     }

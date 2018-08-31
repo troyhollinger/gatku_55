@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Austen\Repositories\ShippingTrackRepository;
+use Gatku\Repositories\ShippingTrackRepository;
 
 class ShippingTrackController extends BaseController {
 

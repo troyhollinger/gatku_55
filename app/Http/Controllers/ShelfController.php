@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Austen\Repositories\ShelfRepository;
+use Gatku\Repositories\ShelfRepository;
 
 class ShelfController extends BaseController {
 

@@ -2,11 +2,10 @@
 
 namespace App\Mail;
 
-use Gatku\ShippingRequest;
+use Gatku\Model\ShippingRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class EmailsShippingRequestPaymentNotification extends Mailable
 {

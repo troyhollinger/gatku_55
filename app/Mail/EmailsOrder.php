@@ -2,12 +2,11 @@
 
 namespace App\Mail;
 
-use Gatku\Discount;
-use Gatku\Order;
+use Gatku\Model\Discount;
+use Gatku\Model\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class EmailsOrder extends Mailable
 {

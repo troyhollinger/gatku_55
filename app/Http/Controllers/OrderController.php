@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Gatku\Order;
-use Austen\Repositories\OrderRepository;
-use Austen\Repositories\MailchimpRepository;
+use Gatku\Model\Order;
+use Gatku\Repositories\OrderRepository;
+use Gatku\Service\MailchimpService;
 
 class OrderController extends BaseController {
 
 	protected $order;
 
-	public function __construct(OrderRepository $order,MailchimpRepository $mailchimp) {
+	public function __construct(OrderRepository $order,MailchimpService $mailchimp) {
 		$this->order = $order;
 		$this->mailchimp = $mailchimp;
 

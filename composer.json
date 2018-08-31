@@ -25,8 +25,7 @@
         "classmap": [
             "database/seeds",
             "database/factories",
-            "app/Austen/Repositories",
-            "app/models"
+            "app/Gatku"
         ],
         "psr-4": {
             "App\\": "app/"

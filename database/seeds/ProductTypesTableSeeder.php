@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Gatku\ProductType;
+use Gatku\Model\ProductType;
 
 class ProductTypesTableSeeder extends Seeder {
 

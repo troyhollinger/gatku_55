@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Austen\Repositories\ImageRepository;
-use Gatku\YouImage;
+use Gatku\Repositories\ImageRepository;
+use Gatku\Model\YouImage;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\Log;
 

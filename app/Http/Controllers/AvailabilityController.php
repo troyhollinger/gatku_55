@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Gatku\AvailabilityType;
+use Gatku\Model\AvailabilityType;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\Log;
 

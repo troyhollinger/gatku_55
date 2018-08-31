@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Austen\Repositories\ImageRepository;
-use Gatku\HomeSetting;
+use Gatku\Repositories\ImageRepository;
+use Gatku\Model\HomeSetting;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\Log;
 

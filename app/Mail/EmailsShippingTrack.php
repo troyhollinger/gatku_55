@@ -2,12 +2,11 @@
 
 namespace App\Mail;
 
-use Gatku\Discount;
-use Gatku\ShippingTrack;
+use Gatku\Model\Discount;
+use Gatku\Model\ShippingTrack;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class EmailsShippingTrack extends Mailable
 {

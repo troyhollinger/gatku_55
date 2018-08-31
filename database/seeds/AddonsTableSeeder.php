@@ -4,7 +4,7 @@
 use Faker\Factory as Faker;
 
 use Illuminate\Database\Seeder;
-use Gatku\Addon;
+use Gatku\Model\Addon;
 
 class AddonsTableSeeder extends Seeder {
 

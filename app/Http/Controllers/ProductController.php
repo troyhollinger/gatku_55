@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Austen\Repositories\ProductRepository;
-use Austen\Repositories\ImageRepository;
-use Gatku\HomeSetting;
+use Gatku\Repositories\ProductRepository;
+use Gatku\Repositories\ImageRepository;
+use Gatku\Model\HomeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Gatku\Product;
+use Gatku\Model\Product;
 use Illuminate\Support\Facades\Log;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 

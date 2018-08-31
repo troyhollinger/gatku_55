@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\EmailsInquiry;
-use Austen\Repositories\MailchimpRepository;
-use Gatku\HomeSetting;
+use Gatku\Service\MailchimpService;
+use Gatku\Model\HomeSetting;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -13,7 +13,7 @@ class QuoteController extends BaseController {
 
     protected $mailchimp;
 
-    public function __construct(MailchimpRepository $mailchimp) {
+    public function __construct(MailchimpService $mailchimp) {
         $this->mailchimp = $mailchimp;
 
         parent::__construct();

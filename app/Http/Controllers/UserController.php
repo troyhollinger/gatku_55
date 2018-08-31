@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Austen\Repositories\UserRepository;
+use Gatku\Repositories\UserRepository;
 
 class UserController extends BaseController {
 

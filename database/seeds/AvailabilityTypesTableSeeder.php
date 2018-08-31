@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Gatku\AvailabilityType;
+use Gatku\Model\AvailabilityType;
 
 class AvailabilityTypesTableSeeder extends Seeder {
 

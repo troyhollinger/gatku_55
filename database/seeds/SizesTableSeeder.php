@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Gatku\Size;
+use Gatku\Model\Size;
 
 
 class SizesTableSeeder extends Seeder {
