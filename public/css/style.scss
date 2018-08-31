@@ -1134,11 +1134,11 @@ a:hover {
 .scroll-watermark-like-image-blinking {
 	width: 144px;
 	height: 36px;
-	-webkit-animation: blink 1s ease-in 1.5s forwards;
+	-webkit-animation: blink 2s ease-in 1.5s forwards;
 	-webkit-animation-iteration-count: 3;
-	-moz-animation: blink 1s ease-in 1.5s forwards;
+	-moz-animation: blink 2s ease-in 1.5s forwards;
 	-moz-animation-iteration-count: 3;
-	-o-animation: blink 1s ease-in 1.5s forwards;
+	-o-animation: blink 2s ease-in 1.5s forwards;
 	-o-animation-iteration-count: 3;
 }
 // Blinking image - end
