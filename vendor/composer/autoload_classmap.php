@@ -2585,6 +2585,7 @@ return array(
     'PhpParser\\Unserializer' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Unserializer.php',
     'PhpParser\\Unserializer\\XML' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Unserializer/XML.php',
     'ProductTypesTableSeeder' => $baseDir . '/database/seeds/ProductTypesTableSeeder.php',
+    'ProductTypesTableSeederAddShafts' => $baseDir . '/database/seeds/ProductTypesTableSeederAddShafts.php',
     'ProductsTableSeeder' => $baseDir . '/database/seeds/ProductsTableSeeder.php',
     'Prophecy\\Argument' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument.php',
     'Prophecy\\Argument\\ArgumentsWildcard' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',

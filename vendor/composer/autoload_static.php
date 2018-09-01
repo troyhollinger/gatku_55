@@ -2950,6 +2950,7 @@ class ComposerStaticInit987a49ed413fc1b0ed7ee05b84013a37
         'PhpParser\\Unserializer' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Unserializer.php',
         'PhpParser\\Unserializer\\XML' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Unserializer/XML.php',
         'ProductTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ProductTypesTableSeeder.php',
+        'ProductTypesTableSeederAddShafts' => __DIR__ . '/../..' . '/database/seeds/ProductTypesTableSeederAddShafts.php',
         'ProductsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ProductsTableSeeder.php',
         'Prophecy\\Argument' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument.php',
         'Prophecy\\Argument\\ArgumentsWildcard' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
