@@ -145,7 +145,7 @@ var PoleScroll = {
 		var scroller = $(".scroller");
 		var windowWidth = $(window).width();
 
-		if (layoutType === 'head' || slug === 'bands' || slug === 'cable-w-tip' || slug === 'cable') {
+		if (layoutType === 'head' || slug === 'bands' || slug === 'cable-w-tip' || slug === 'cable' || slug === 'shafts') {
 			if (windowWidth < 1000) {
 				scroller.scrollLeft($(".scroller-image.visible").width() - 600);
 			} else {
