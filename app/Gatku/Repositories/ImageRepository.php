@@ -65,10 +65,10 @@ class ImageRepository
 				$parsedImage = $image;
 			}
 
-			YouImage::make($parsedImage)->save($imagePath);
+			\Image::make($parsedImage)->save($imagePath);
 
 			if ($thumbDirectory !== null) {
-				YouImage::make($parsedImage)->resize('45',null, function($constraint){ $constraint->aspectRatio();})->save($thumbPath);
+				\Image::make($parsedImage)->resize('45',null, function($constraint){ $constraint->aspectRatio();})->save($thumbPath);
 			}
 
 		} catch(Exception $e) {
