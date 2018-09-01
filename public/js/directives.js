@@ -198,56 +198,38 @@ app.directive('hoverCard', [
 }]);
 
 
-app.directive('productBuyers', ['Product', '$uibModal', function(Product, $uibModal) {
+app.directive('productBuyers', function(Product) {
 
     return {
-        restrict : 'E',
-        scope : false,
-        template : '<div>' +
+        restrict: 'E',
+        scope: false,
+        template: '<div>' +
             '<p class="product-buyers-header bold" ng-show="photos.length">{{sectionLabel}}</p>' +
             '<div class="product-buyers-container">' +
-            '<div class="product-buyer placeholder square" ng-hide="photos.length"></div>' + 
-            '<div class="product-buyer square"' +
-                    'ng-repeat="photo in photos | limitTo:3"' +
-                    'ng-style="{\'background-image\':\'url(\' + photo.image + \')\'}" ng-click="openImage(photo.image)">' +
-            '</div>' +
+            '<div class="product-buyer placeholder square" ng-hide="photos.length"></div>' +
+            '<div class="product-buyer square" ng-repeat="photo in photos | limitTo:3" ng-style="{\'background-image\':\'url(\' + photo.image + \')\'}"><a class="grouped_elements" rel="group1" href="{{photo.image}}"><img src="{{photo.image}}" alt="" style="width: 100%;height: 100%;vertical-align: top; opacity:0;"/></a></div>' +
             '<div class="clear"></div>' +
             '</div>' +
             '</div>',
 
-        link : function($scope, element, attrs) {
+        link: function ($scope, element, attrs) {
             $scope.photos = [];
             $scope.sectionLabel = attrs.sectionLabel;
 
             function getImages() {
-                Product.customerPhotos(attrs.productId).then(function(response) {
+                Product.customerPhotos(attrs.productId).then(function (response) {
                     $scope.photos = response.data;
                     Squares.init();
-                }, function(error) {
+                }, function (error) {
                     $exceptionHandler(JSON.stringify(error));
                     console.log("There was a problem getting the product images");
                 });
             }
 
             getImages();
-
-            $scope.openImage = function(imageUrl) {
-                var modalInstance = $uibModal.open({
-                    animation: false,
-                    templateUrl: '/js/app/utils/imageModal/ImageModal.html',
-                    controller: 'ImageModalController',
-                    controllerAs: '$ctrl',
-                    resolve: {
-                        imageUrl: function() {
-                            return imageUrl;
-                        }
-                    }
-                });
-            };
         }
     }
-
-}]);
+});
 
 app.directive('loaded', ['$parse', function($parse) {
 
