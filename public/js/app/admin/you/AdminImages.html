@@ -34,13 +34,19 @@
 </div>
 
 <div class="admin-sub-section">
-
     <div class="grid-container">
-        <div class="grid-square square" ng-repeat="youImage in $ctrl.youImages"
-             ng-style="{'background-image':'url(' + youImage.image + ')'}"></div>
-        <div class="grid-square square"
-             ng-repeat="youImage in $ctrl.youImages"
-             back-img="{{ youImage.image }}"></div>
+        <div class="grid-square " ng-repeat="youImage in $ctrl.youImages" ng-cloak>
+            <div class="square" back-img="{{ youImage.image }}"></div>
+            <span>Product: <b>{{youImage.product.name}}</b></span>
+            <div>
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage(youImage.id)">Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
+            </div>
+            <br>
+            <br>
+        </div>
         <div class="clear"></div>
     </div>
 </div>

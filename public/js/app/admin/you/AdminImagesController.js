@@ -74,6 +74,13 @@
 
         };
 
+        $ctrl.removeImage = function(id) {
+            YouImage.remove(id).then(function(response) {
+                console.log(response);
+                getYouImages();
+            });
+        };
+
         getYouImages();
         getAllProducts();
     }

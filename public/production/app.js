@@ -13336,19 +13336,18 @@ app.factory('HomeSetting', ['$http', function($http) {
 app.factory('YouImage', ['$http', function($http) {
 
     return {
-
         all : function() {
-
             return $http.get('/you-image');
-
         },
 
         save : function(data) {
-
             return $http.post('/you-image', data);
+        },
 
-        }
-
+        //Delete one shelves record with id
+        remove: function(id) {
+            return $http.delete('/you-image/' + id);
+        },
     }
 
 }]);
@@ -15987,6 +15986,13 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $ctrl.editState = false;
             $ctrl.editingNew = true;
 
+        };
+
+        $ctrl.removeImage = function(id) {
+            YouImage.remove(id).then(function(response) {
+                console.log(response);
+                getYouImages();
+            });
         };
 
         getYouImages();

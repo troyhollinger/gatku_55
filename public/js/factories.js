@@ -205,19 +205,18 @@ app.factory('HomeSetting', ['$http', function($http) {
 app.factory('YouImage', ['$http', function($http) {
 
     return {
-
         all : function() {
-
             return $http.get('/you-image');
-
         },
 
         save : function(data) {
-
             return $http.post('/you-image', data);
+        },
 
-        }
-
+        //Delete one shelves record with id
+        remove: function(id) {
+            return $http.delete('/you-image/' + id);
+        },
     }
 
 }]);

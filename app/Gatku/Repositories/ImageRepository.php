@@ -1,7 +1,7 @@
 <?php
 namespace Gatku\Repositories;
 
-use Image;
+use Gatku\Model\YouImage;
 use Illuminate\Support\Facades\Log;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
@@ -65,10 +65,10 @@ class ImageRepository
 				$parsedImage = $image;
 			}
 
-			\Image::make($parsedImage)->save($imagePath);
+			YouImage::make($parsedImage)->save($imagePath);
 
 			if ($thumbDirectory !== null) {
-				\Image::make($parsedImage)->resize('45',null, function($constraint){ $constraint->aspectRatio();})->save($thumbPath);
+				YouImage::make($parsedImage)->resize('45',null, function($constraint){ $constraint->aspectRatio();})->save($thumbPath);
 			}
 
 		} catch(Exception $e) {
@@ -90,4 +90,25 @@ class ImageRepository
 		$photos = glob( public_path() .'img/uploads/*.*');
 		return $photos;
 	}
+
+    /**
+     * Remove the specified resource from storage.
+     * DELETE /youimage/{id}
+     *
+     * @param  int  $id
+     * @return boolean
+     */
+    public function delete(int $id)
+    {
+        try {
+            $discount = YouImage::findOrFail($id);
+            $discount->delete();
+        } catch (\Exception $e) {
+            Bugsnag::notifyException($e);
+            Log::error($e);
+            return false;
+        }
+
+        return true;
+    }
 }

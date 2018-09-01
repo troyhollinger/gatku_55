@@ -217,21 +217,21 @@ class ProductRepository implements ProductRepositoryInterface {
 
         $product->editable_1_label  = (isset($data['editable_1_label'])) ? $data['editable_1_label']  : '' ;
         $product->editable_1        = (isset($data['editable_1'])) ? $data['editable_1'] : '';
-        if (isset($data['editable_1_image']))   $product->editable_1_image  = $data['editable_1_image'];
+        $product->editable_1_image  = (isset($data['editable_1_image'])) ? $data['editable_1_image'] : '';
 
         $product->editable_2_label  = (isset($data['editable_2_label'])) ? $data['editable_2_label'] : '';
         $product->editable_2        = (isset($data['editable_2'])) ? $data['editable_2'] : '';
-        if (isset($data['editable_2_image']))   $product->editable_2_image  = $data['editable_2_image'];
+        $product->editable_2_image  = (isset($data['editable_2_image'])) ? $data['editable_2_image'] : '';
 
         $product->editable_3_label  = (isset($data['editable_3_label'])) ? $data['editable_3_label'] : '';
         $product->editable_3        = (isset($data['editable_3'])) ? $data['editable_3'] : '';
-        if (isset($data['editable_3_image']))   $product->editable_3_image  = $data['editable_3_image'];
+        $product->editable_3_image  = (isset($data['editable_3_image'])) ? $data['editable_3_image'] : '';
 
         $product->editable_4_label  = (isset($data['editable_4_label'])) ? $data['editable_4_label'] : '';
         $product->editable_4        = (isset($data['editable_4'])) ? $data['editable_4'] : '';
-        if (isset($data['editable_4_image']))   $product->editable_4_image  = $data['editable_4_image'];
+        $product->editable_4_image  = (isset($data['editable_4_image'])) ? $data['editable_4_image'] : '';
 
-        if (isset($data['order'])) $product->order = $data['order'];
+        $product->order =  (isset($data['order'])) ? $data['order'] : 0;
 		$product->shipping_description = (isset($data['shipping_description'])) ? $data['shipping_description']  : '';
         $product->mobile_name = (isset($data['mobile_name'])) ? $data['mobile_name'] : '';
         $product->shelf_id = (isset($data['shelf_id'] )) ? $data['shelf_id'] : '';

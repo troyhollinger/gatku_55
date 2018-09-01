@@ -25,7 +25,7 @@ class YouImageController extends BaseController {
 	 */
 	public function index() {
 		try {
-			$images = YouImage::groupBy('image')->get();
+			$images = YouImage::with('product')->groupBy('image')->get();
 		} catch (\Exception $e) {
             Bugsnag::notifyException($e);
 			return \Response::json(['message' => 'Sorry, images could not be retrieved.'], 404);
@@ -66,7 +66,7 @@ class YouImageController extends BaseController {
 		return \Response::json(['message' => 'Image saved!'], 200);
 	}
 
-	
+
 	/**
 	 * Update the specified resource in storage.
 	 * PUT /youimage/{id}
@@ -88,7 +88,12 @@ class YouImageController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+	    $result =  $this->image->delete($id);
+        if ($result === false) {
+            return \Response::json(['message' => 'Sorry, there was a problem removing image.'], 404);
+        }
+
+        return \Response::json(['message' => 'Image with id:' . $id . ' removed.'], 200);
 	}
 
 	public function upload() {
