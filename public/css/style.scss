@@ -682,7 +682,8 @@ a:hover {
 
             &-Package,
             &-Shrinker,
-            &-Extra {
+            &-Extra,
+            &-Shafts {
                 @extend .product-thumb-container;
                 width:25%;
                 img {
@@ -761,7 +762,8 @@ a:hover {
 
 			&-Package,
 			&-Shrinker,
-            &-Extra {
+            &-Extra,
+			&-Shafts {
 				@extend .product-link-container;
               	width:25%;
             }
