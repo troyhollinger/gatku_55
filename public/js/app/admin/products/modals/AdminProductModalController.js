@@ -26,9 +26,15 @@
         $ctrl.newProduct = productObject;
 
         $ctrl.showNameFormatting = false;
+        $ctrl.showNameFormattingForMobile = false;
+        $ctrl.showNameFormattingForShelf = false;
         $ctrl.showNameExtensionFormatting = false;
+        $ctrl.showNameExtensionFormattingForMobile = false;
+        $ctrl.showNameExtensionFormattingForShelf = false;
         $ctrl.mobileNameFormatting = false;
         $ctrl.lengthFormatting = false;
+        $ctrl.lengthFormattingForMobile = false;
+        $ctrl.lengthFormattingForShelf = false;
         $ctrl.addonsHideShow = false;
         $ctrl.productPerformanceShow = false;
 
@@ -38,15 +44,41 @@
             $ctrl.newProduct.name_text_align = 'left';
             $ctrl.newProduct.name_font_weight = 'normal';
             $ctrl.newProduct.name_font_style = 'normal';
-            $ctrl.newProduct.name_font_size = 16;
+            $ctrl.newProduct.name_font_size = 26;
+
+            $ctrl.newProduct.name_text_align_for_mobile = 'left';
+            $ctrl.newProduct.name_font_weight_for_mobile = 'normal';
+            $ctrl.newProduct.name_font_style_for_mobile = 'normal';
+            $ctrl.newProduct.name_font_size_for_mobile = 10;
+
+            $ctrl.newProduct.name_text_align_for_shelf = 'left';
+            $ctrl.newProduct.name_font_weight_for_shelf = 'normal';
+            $ctrl.newProduct.name_font_style_for_shelf = 'normal';
+            $ctrl.newProduct.name_font_size_for_shelf = 16;
 
             $ctrl.newProduct.name_extension_font_weight = 'normal';
             $ctrl.newProduct.name_extension_font_style = 'normal';
-            $ctrl.newProduct.name_extension_font_size = 16;
+            $ctrl.newProduct.name_extension_font_size = 26;
+
+            $ctrl.newProduct.name_extension_font_weight_for_mobile = 'normal';
+            $ctrl.newProduct.name_extension_font_style_for_mobile = 'normal';
+            $ctrl.newProduct.name_extension_font_size_for_mobile = 10;
+
+            $ctrl.newProduct.name_extension_font_weight_for_shelf = 'normal';
+            $ctrl.newProduct.name_extension_font_style_for_shelf = 'normal';
+            $ctrl.newProduct.name_extension_font_size_for_shelf = 16;
 
             $ctrl.newProduct.length_font_weight = 'normal';
             $ctrl.newProduct.length_font_style = 'normal';
-            $ctrl.newProduct.length_font_size = 16;
+            $ctrl.newProduct.length_font_size = 26;
+
+            $ctrl.newProduct.length_font_weight_for_mobile = 'normal';
+            $ctrl.newProduct.length_font_style_for_mobile = 'normal';
+            $ctrl.newProduct.length_font_size_for_mobile = 10;
+
+            $ctrl.newProduct.length_font_weight_for_shelf = 'normal';
+            $ctrl.newProduct.length_font_style_for_shelf = 'normal';
+            $ctrl.newProduct.length_font_size_for_shelf = 16;
 
             $ctrl.newProduct.mobile_name_text_align = 'left';
             $ctrl.newProduct.mobile_name_font_style = 'normal';

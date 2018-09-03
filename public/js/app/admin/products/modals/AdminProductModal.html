@@ -35,6 +35,8 @@
     </div>
 
     <div ng-if="$ctrl.showNameFormatting">
+        <br>
+        <label><b>Product Card Desktop Name Formatting:</b></label>
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Name Alignment:</label>
             <div class="col-sm-9">
@@ -77,9 +79,115 @@
         </div>
     </div>
 
-    <a href ng-click="$ctrl.showNameFormatting = !$ctrl.showNameFormatting"><small>Format:</small>&nbsp;
+    <a href ng-click="$ctrl.showNameFormatting = !$ctrl.showNameFormatting"><small>Desktop Product Name Format:</small>&nbsp;
         <i class="fa fa-caret-down" ng-if="!$ctrl.showNameFormatting"></i>
         <i class="fa fa-caret-up" ng-if="$ctrl.showNameFormatting"></i>
+    </a>
+
+    <!-- showNameFormattingForMobile -->
+
+    <br>
+    <div ng-if="$ctrl.showNameFormattingForMobile">
+        <br>
+        <label><b>Product Card Mobile Name Formatting:</b></label>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Alignment:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options=" value for value in $ctrl.text_align_options"
+                        ng-model="$ctrl.newProduct.name_text_align_for_mobile">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.name_font_weight_for_mobile">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.name_font_style_for_mobile">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name_font_size" class="col-sm-3 col-form-label">Name Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="name_font_size_for_mobile"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.name_font_size_for_mobile">
+            </div>
+        </div>
+    </div>
+
+    <a href ng-click="$ctrl.showNameFormattingForMobile = !$ctrl.showNameFormattingForMobile"><small>Mobile Product Name Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.showNameFormattingForMobile"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.showNameFormattingForMobile"></i>
+    </a>
+
+    <!-- showNameFormattingForShelf -->
+
+    <br>
+    <div ng-if="$ctrl.showNameFormattingForShelf">
+        <br>
+        <label><b>Product Shelf Name Formatting:</b></label>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Alignment:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options=" value for value in $ctrl.text_align_options"
+                        ng-model="$ctrl.newProduct.name_text_align_for_shelf">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.name_font_weight_for_shelf">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.name_font_style_for_shelf">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name_font_size" class="col-sm-3 col-form-label">Name Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="name_font_size_for_shelf"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.name_font_size_for_shelf">
+            </div>
+        </div>
+    </div>
+
+    <a href ng-click="$ctrl.showNameFormattingForShelf = !$ctrl.showNameFormattingForShelf"><small>Shelf Product Name Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.showNameFormattingForShelf"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.showNameFormattingForShelf"></i>
     </a>
 
     <!-- Short Name -->
@@ -112,7 +220,10 @@
         </div>
     </div>
 
+    <!-- showNameExtensionFormatting -->
     <div ng-if="$ctrl.showNameExtensionFormatting">
+        <br>
+        <label><b>Product Card Desktop Extension Formatting:</b></label>
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Extension Font Weight:</label>
             <div class="col-sm-9">
@@ -146,9 +257,96 @@
         </div>
     </div>
 
-    <a href ng-click="$ctrl.showNameExtensionFormatting = !$ctrl.showNameExtensionFormatting"><small>Format:</small>&nbsp;
+    <a href ng-click="$ctrl.showNameExtensionFormatting = !$ctrl.showNameExtensionFormatting"><small>Desktop Product Ext. Format:</small>&nbsp;
         <i class="fa fa-caret-down" ng-if="!$ctrl.showNameExtensionFormatting"></i>
         <i class="fa fa-caret-up" ng-if="$ctrl.showNameExtensionFormatting"></i>
+    </a>
+
+    <br>
+    <!-- showNameExtensionFormattingForMobile -->
+    <div ng-if="$ctrl.showNameExtensionFormattingForMobile">
+        <br>
+        <label><b>Product Card Mobile Extension Formatting:</b></label>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Extension Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.name_extension_font_weight_for_mobile">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Extension Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.name_extension_font_style_for_mobile">
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="name_extension_font_size" class="col-sm-3 col-form-label">Ext. Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="name_extension_font_size_for_mobile"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.name_extension_font_size_for_mobile">
+            </div>
+        </div>
+    </div>
+
+    <a href ng-click="$ctrl.showNameExtensionFormattingForMobile = !$ctrl.showNameExtensionFormattingForMobile"><small>Mobile Product Ext. Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.showNameExtensionFormattingForMobile"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.showNameExtensionFormattingForMobile"></i>
+    </a>
+
+
+    <br>
+    <!-- showNameExtensionFormattingForShelf -->
+    <div ng-if="$ctrl.showNameExtensionFormattingForShelf">
+        <br>
+        <label><b>Product Card Shelf Extension Formatting:</b></label>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Extension Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.name_extension_font_weight_for_shelf">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Extension Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.name_extension_font_style_for_shelf">
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="name_extension_font_size" class="col-sm-3 col-form-label">Ext. Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="name_extension_font_size_for_shelf"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.name_extension_font_size_for_shelf">
+            </div>
+        </div>
+    </div>
+
+    <a href ng-click="$ctrl.showNameExtensionFormattingForShelf = !$ctrl.showNameExtensionFormattingForShelf"><small>Shelf Ext. Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.showNameExtensionFormattingForShelf"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.showNameExtensionFormattingForShelf"></i>
     </a>
 
     <!-- Mobile Name -->
@@ -323,7 +521,10 @@
         </div>
     </div>
 
+    <!-- lengthFormatting -->
     <div ng-if="$ctrl.lengthFormatting">
+        <br>
+        <label><b>Product Card Desktop Length Formatting:</b></label>
         <div class="form-group row">
             <label class="col-sm-3 col-form-label">Length Font Weight:</label>
             <div class="col-sm-9">
@@ -356,9 +557,93 @@
         </div>
     </div>
 
-    <a href ng-click="$ctrl.lengthFormatting = !$ctrl.lengthFormatting"><small>Format:</small>&nbsp;
+    <a href ng-click="$ctrl.lengthFormatting = !$ctrl.lengthFormatting"><small>Desktop Product Length Format:</small>&nbsp;
         <i class="fa fa-caret-down" ng-if="!$ctrl.lengthFormatting"></i>
         <i class="fa fa-caret-up" ng-if="$ctrl.lengthFormatting"></i>
+    </a>
+
+    <!-- lengthFormattingForMobile -->
+    <br>
+    <div ng-if="$ctrl.lengthFormattingForMobile">
+        <br>
+        <label><b>Product Card Mobile Length Formatting:</b></label>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Length Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.length_font_weight_for_mobile">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Length Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.length_font_style_for_mobile">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="length_font_size" class="col-sm-3 col-form-label">Length Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="length_font_size_for_mobile"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.length_font_size_for_mobile">
+            </div>
+        </div>
+    </div>
+
+    <a href ng-click="$ctrl.lengthFormattingForMobile = !$ctrl.lengthFormattingForMobile"><small>Mobile Product Length Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.lengthFormattingForMobile"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.lengthFormattingForMobile"></i>
+    </a>
+
+    <!-- lengthFormattingForShelf -->
+    <br>
+    <div ng-if="$ctrl.lengthFormattingForShelf">
+        <br>
+        <label><b>Product Card Shelf Length Formatting:</b></label>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Length Font Weight:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_weight"
+                        ng-model="$ctrl.newProduct.length_font_weight_for_shelf">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Length Font Style:</label>
+            <div class="col-sm-9">
+                <select class="custom-select col-sm-4"
+                        ng-options="value for value in $ctrl.text_font_style"
+                        ng-model="$ctrl.newProduct.length_font_style_for_shelf">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="length_font_size" class="col-sm-3 col-form-label">Length Font Size [px]:</label>
+            <div class="col-sm-2">
+                <input type="text"
+                       class="form-control"
+                       id="length_font_size_for_shelf"
+                       placeholder=""
+                       ng-model="$ctrl.newProduct.length_font_size_for_shelf">
+            </div>
+        </div>
+    </div>
+
+    <a href ng-click="$ctrl.lengthFormattingForShelf = !$ctrl.lengthFormattingForShelf"><small>Shelf Length Format:</small>&nbsp;
+        <i class="fa fa-caret-down" ng-if="!$ctrl.lengthFormattingForShelf"></i>
+        <i class="fa fa-caret-up" ng-if="$ctrl.lengthFormattingForShelf"></i>
     </a>
 
     <!-- Price -->

@@ -81,7 +81,6 @@ class HomeSettingController extends BaseController {
             $homeSetting->contact_desktop_logo_height = \Request::get('contact_desktop_logo_height') ? \Request::get('contact_desktop_logo_height') : 0;
             $homeSetting->contact_mobile_logo_height = \Request::get('contact_mobile_logo_height') ? \Request::get('contact_mobile_logo_height') : 0;
             $homeSetting->additional_images_label_for_product = \Request::get('additional_images_label_for_product') ? \Request::get('additional_images_label_for_product') : '';
-            $homeSetting->product_font_multiply_size = \Request::get('product_font_multiply_size') ? \Request::get('product_font_multiply_size') : 1; // 1 to avoid disappear label
             $homeSetting->shelves_between_space = \Request::get('shelves_between_space') ? \Request::get('shelves_between_space') : 0;
 
             $homeSetting->save();

@@ -255,6 +255,32 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->mobile_name_font_weight = (isset($data['mobile_name_font_weight'])) ? $data['mobile_name_font_weight'] : '';
         $product->mobile_name_font_size = (isset($data['mobile_name_font_size'])) ? $data['mobile_name_font_size'] : 0;
 
+        $product->name_text_align_for_mobile = (isset($data['name_text_align_for_mobile'])) ? $data['name_text_align_for_mobile'] : '';
+        $product->name_font_weight_for_mobile = (isset($data['name_font_weight_for_mobile'])) ? $data['name_font_weight_for_mobile'] : '';
+        $product->name_font_style_for_mobile = (isset($data['name_font_style_for_mobile'])) ? $data['name_font_style_for_mobile'] : '';
+        $product->name_font_size_for_mobile = (isset($data['name_font_size_for_mobile'])) ? $data['name_font_size_for_mobile'] : 0;
+
+        $product->name_text_align_for_shelf = (isset($data['name_text_align_for_shelf'])) ? $data['name_text_align_for_shelf'] : '';
+        $product->name_font_weight_for_shelf = (isset($data['name_font_weight_for_shelf'])) ? $data['name_font_weight_for_shelf'] : '';
+        $product->name_font_style_for_shelf = (isset($data['name_font_style_for_shelf'])) ? $data['name_font_style_for_shelf'] : '';
+        $product->name_font_size_for_shelf = (isset($data['name_font_size_for_shelf'])) ? $data['name_font_size_for_shelf'] : 0;
+
+        $product->name_extension_font_weight_for_mobile = (isset($data['name_extension_font_weight_for_mobile'])) ? $data['name_extension_font_weight_for_mobile'] : '';
+        $product->name_extension_font_style_for_mobile = (isset($data['name_extension_font_style_for_mobile'])) ? $data['name_extension_font_style_for_mobile'] : '';
+        $product->name_extension_font_size_for_mobile = (isset($data['name_extension_font_size_for_mobile'])) ? $data['name_extension_font_size_for_mobile'] : 0;
+
+        $product->name_extension_font_weight_for_shelf = (isset($data['name_extension_font_weight_for_shelf'])) ? $data['name_extension_font_weight_for_shelf'] : '';
+        $product->name_extension_font_style_for_shelf = (isset($data['name_extension_font_style_for_shelf'])) ? $data['name_extension_font_style_for_shelf'] : '';
+        $product->name_extension_font_size_for_shelf = (isset($data['name_extension_font_size_for_shelf'])) ? $data['name_extension_font_size_for_shelf'] : 0;
+
+        $product->length_font_weight_for_mobile = (isset($data['length_font_weight_for_mobile'])) ? $data['length_font_weight_for_mobile'] : '';
+        $product->length_font_style_for_mobile = (isset($data['length_font_style_for_mobile'])) ? $data['length_font_style_for_mobile'] : '';
+        $product->length_font_size_for_mobile = (isset($data['length_font_size_for_mobile'])) ? $data['length_font_size_for_mobile'] : 0;
+
+        $product->length_font_weight_for_shelf = (isset($data['length_font_weight_for_shelf'])) ? $data['length_font_weight_for_shelf'] : '';
+        $product->length_font_style_for_shelf = (isset($data['length_font_style_for_shelf'])) ? $data['length_font_style_for_shelf'] : '';
+        $product->length_font_size_for_shelf = (isset($data['length_font_size_for_shelf'])) ? $data['length_font_size_for_shelf'] : 0;
+
 		return $product;
 	}
 

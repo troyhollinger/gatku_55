@@ -1663,77 +1663,60 @@ a:hover {
 }
 
 .product-column-right {
-
 	position: relative;
 	float:right;
 	width:36%;
 	height:auto;
 
 	&.apparel-column {
-
 		width:30%;
 
 		@include breakpoint(medium) {
-
 			width:27%;
-
 		}
 
 		@include breakpoint(small) {
-
 			width:100%;
-
 		}
-
 	}
 
 	@include breakpoint(medium) {
-
 		width:38%;
-
 	}
 
 	@include breakpoint(small) {
-
 		float:none;
 		width:100%;
 		box-sizing:border-box;
 		padding-bottom: 50px;
 		padding-top: 20px;
 		border-bottom: 2px solid rgba(0,0,0,.1);
-
 	}
+}
 
+.product-title-nowrap {
+	white-space: nowrap;
 }
 
 .product-title {
-
 	font-size: 4.5rem;
 	white-space: nowrap;
 
 	@include breakpoint(medium) {
-
 		font-size: 3rem;
-
 	}
 
 	@include breakpoint(small) {
-
 		&.shrinker-title {
-
 			font-size: 2rem;
-
 		}
-
 	}
 
 	@include breakpoint(xxsmall) {
-
 		font-size: 2.5rem;
-
 	}
-
 }
+
 .mobile-take-pole{
 	display: none;
 
@@ -1745,84 +1728,60 @@ a:hover {
 
 	}
 }
-.product-description {
 
+.product-description {
 	font-size: 1.7rem;
 
 	&.apparel-description {
-
 		font-size: 1.25rem;
 
 		@include breakpoint(small) {
-
 			font-size: 1.1rem;
-
 		}
-
 	}
 
 	&.glass-description {
-
 		font-size: 1.5rem;
 
 		@include breakpoint(small) {
-
 			font-size: 1.1rem;
-
 		}
-
 	}
 
 	p {
-
 		margin-bottom: 30px;
 
 		@include breakpoint(xxsmall) {
-
 			margin-bottom: 20px;
-
 		}
-
 	}
 
 	@include breakpoint(medium) {
-
 		font-size: 1.5rem;
-
 	}
 
 	@include breakpoint(xxsmall) {
-
 		font-size: 1.1rem;
-
 	}
+
 	iframe {
 		@include breakpoint(medium) {
-
 			width: 100% !important;
-
 		}
 		@include breakpoint(small) {
-
 			width: 100% !important;
-
 		}
 	}
-
 }
 
 .product-performance-header {
-
 	font-size: 1.1rem;
 	color:$gray;
 	margin:40px 0;
 
 	@include breakpoint(small) {
-
 		display: none;
-
 	}
-
 }
 
 product-buyers {

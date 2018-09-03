@@ -70,24 +70,47 @@
 		</div>
 		@endif
 
+		<div class="product-title-nowrap">
+			<!-- This is part responsible for display product name for desktop -->
+			<div class="default-product-name" style="text-align: {{ $product->name_text_align }}">
+				<span style="font-weight: {{ $product->name_font_weight }};
+							 font-style: {{ $product->name_font_style }};
+							 font-size: {{ $product->name_font_size }}px;">
+					{{  ($product->shortName) ? $product->shortName : $product->name }}
+				</span>
+					<span style="font-weight: {{ $product->name_extension_font_weight }};
+								 font-style: {{ $product->name_extension_font_style }};
+								 font-size: {{ $product->name_extension_font_size }}px;">
+					{{  $product->short_name_extension }}
+				</span>
+					<span style="font-weight: {{ $product->length_font_weight }};
+								 font-style: {{ $product->length_font_style }};
+								 font-size: {{ $product->length_font_size }}px;">
+					{{  $product->length }}
+				</span>
+			</div>
 
-		<div class="product-title">
-			<span style="	font-weight: {{ $product->name_font_weight }};
-							font-style: {{ $product->name_font_style}};
-							font-size: {{ $product->name_font_size * $homeSetting['product_font_multiply_size'] }}px;">
-				{{  ($product->shortName) ? $product->shortName : $product->name }}
-            </span>
-			<span style="	font-weight: {{ $product->name_extension_font_weight }};
-							font-style: {{ $product->name_extension_font_style }};
-							font-size: {{ $product->name_extension_font_size * $homeSetting['product_font_multiply_size'] }}px;">
-				{{  $product->short_name_extension }}
-            </span>
-			<span style="	font-weight: {{ $product->length_font_weight }};
-							font-style: {{ $product->length_font_style }};
-							font-size: {{ $product->length_font_size * $homeSetting['product_font_multiply_size'] }}px;">
-				{{  $product->length }}
-            </span>
+			<!-- This is part responsible for display product name for mobile -->
+			<div class="mobile-product-name" style="text-align: {{ $product->name_text_align_for_mobile }}">
+				<span style="font-weight: {{ $product->name_font_weight_for_mobile }};
+							 font-style: {{ $product->name_font_style_for_mobile }};
+							 font-size: {{ $product->name_font_size_for_mobile }}px;">
+					{{  ($product->shortName) ? $product->shortName : $product->name }}
+				</span>
+				<span style="font-weight: {{ $product->name_extension_font_weight_for_mobile }};
+						   	 font-style: {{ $product->name_extension_font_style_for_mobile }};
+							 font-size: {{ $product->name_extension_font_size_for_mobile }}px;">
+					{{  $product->short_name_extension }}
+				</span>
+				<span style="font-weight: {{ $product->length_font_weight_for_mobile }};
+							 font-style: {{ $product->length_font_style_for_mobile }};
+							 font-size: {{ $product->length_font_size_for_mobile }}px;">
+					{{  $product->length }}
+				</span>
+			</div>
+
 		</div>
+
 
 		<div class="product-description {!! $product->type->slug === 'apparel' ? 'apparel-description' : '' !!} {!! $product->type->slug === 'glass' ? 'glass-description' : '' !!}">
 
