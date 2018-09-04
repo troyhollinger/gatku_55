@@ -11,6 +11,7 @@
         productObject,
         products,
         types,
+        $uibModal,
         $uibModalInstance,
         $exceptionHandler
     ) {
@@ -40,6 +41,7 @@
 
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
+            $ctrl.newProduct.sizeable = 0;
 
             $ctrl.newProduct.name_text_align = 'left';
             $ctrl.newProduct.name_font_weight = 'normal';
@@ -191,6 +193,29 @@
             }
         }
 
+        //sizes
+        $ctrl.addSize = function(size) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'js/app/admin/products/modals/AdminProductSizeModal.html',
+                controller: 'AdminProductSizeModalController',
+                controllerAs: '$ctrl',
+                backdrop: 'static',
+                resolve: {
+                    size: function() {
+                        return size;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(result) {
+console.log('result');
+console.log(result);
+                // nanobar.go(100);
+                // AlertService.broadcast('Product saved!', 'success');
+                // getAllProducts();
+            });
+        };
+        //sizes - end
         registerAddons();
     };
 }());

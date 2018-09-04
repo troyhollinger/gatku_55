@@ -1,0 +1,86 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h1 class="modal-title"><b>Add/Edit Size</b></h1>
+
+    <button type="button" class="close" ng-click="$dismiss('close')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Modal Body -->
+<div class="modal-body">
+
+    <!-- Name -->
+    <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">Name:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Size name..."
+                   ng-model="$ctrl.size.name">
+        </div>
+    </div>
+
+    <!-- Short Name -->
+    <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">Short Name:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="shortName"
+                   placeholder="Size short name..."
+                   ng-model="$ctrl.size.shortName">
+        </div>
+    </div>
+
+    <!-- Short Name -->
+    <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">Slug:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="slug"
+                   placeholder="Size slug..."
+                   ng-model="$ctrl.size.slug">
+        </div>
+    </div>
+
+    <!-- Price -->
+    <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">Price:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="price"
+                   placeholder="Price..."
+                   ng-model="$ctrl.size.price">
+        </div>
+    </div>
+
+    <!-- Available -->
+    <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">Available:</label>
+        <div class="col-sm-9">
+            <input type="checkbox"
+                   id="available"
+                   ng-model="$ctrl.newProduct.available"
+                   ng-true-value="1">
+        </div>
+    </div>
+</div>
+
+<!-- Modal Footer -->
+<div class="modal-footer">
+    <button class="btn btn-default"
+            type="button"
+            ng-click="$dismiss('close')">Cancel
+    </button>
+    <button class="btn btn-success"
+            type="button"
+            ng-click="$ctrl.sizeSaveUpdate()">Save
+        &nbsp;<i class="fa fa-save"></i>
+    </button>
+</div>
+
+

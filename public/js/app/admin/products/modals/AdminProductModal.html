@@ -680,8 +680,9 @@
             <tr ng-repeat="addon in $ctrl.newProduct.addonSelection">
                 <td>
                     <div class="new-product-checkbox-container">
-                        <input type="checkbox" ng-model="addon.isAddon">&nbsp;<span
-                            class="uppercase">{{ addon.name }}</span>
+                        <input type="checkbox"
+                               ng-model="addon.isAddon">&nbsp;
+                            <span class="uppercase">{{ addon.name }}</span>
                     </div>
                 </td>
                 <td style="text-align: center">
@@ -812,10 +813,65 @@
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
-                   id="$ctrl.newProduct.order"
+                   id="order"
                    placeholder="Order..."
                    ng-model="$ctrl.newProduct.order">
         </div>
+    </div>
+
+    <!-- Product sizable -->
+
+    <hr>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label">Product sizable:</label>
+        <div class="col-sm-9">
+                <input type="checkbox"
+                       id="sizeable"
+                       ng-model="$ctrl.newProduct.sizeable"
+                       ng-true-value="1">
+        </div>
+    </div>
+
+    <div ng-if="$ctrl.newProduct.sizeable">
+        <table class="table table-striped table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th style="text-align: center"><b>Name</b></th>
+                <th style="text-align: center"><b>Short Name</b></th>
+                <th style="text-align: center"><b>Slug</b></th>
+                <th style="text-align: center"><b>Price</b></th>
+                <th style="text-align: center"><b>Available</b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="size in $ctrl.newProduct.sizes">
+                <td>
+                    <a class="uppercase">{{ size.name }}</a>
+                </td>
+                <td>
+                    <a class="uppercase">{{ size.shortName }}</a>
+                </td>
+                <td>
+                    <a class="uppercase">{{ size.slug }}</a>
+                </td>
+                <td>
+                    <a class="uppercase">{{ size.price }}</a>
+                    <a class="uppercase">{{ size.price }}</a>
+                    <a class="uppercase">{{ size.price }}</a>
+                </td>
+                <td>
+                    <a class="uppercase">{{ size.available }}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button type="button"
+                class="btn btn-success"
+                ng-click="$ctrl.addSize()">Add&nbsp;
+            <i class="fa fa-plus"></i>
+        </button>
     </div>
 
     <!-- Product performance -->

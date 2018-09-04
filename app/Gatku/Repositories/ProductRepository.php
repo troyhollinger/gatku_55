@@ -13,7 +13,7 @@ class ProductRepository implements ProductRepositoryInterface {
 
 	public function all()
     {
-		$products = Product::with('type', 'addons', 'availability')->get();
+		$products = Product::with('type', 'addons', 'availability', 'sizes')->get();
 		Log::info($products);
 		return $products;
 	}
@@ -78,6 +78,7 @@ class ProductRepository implements ProductRepositoryInterface {
 			$result = $this->assignData($product, $input);
 			$result->save();
 			if (isset($input['addonSelection'])) $this->assignAddons($result, $input);
+			if (isset($input['sizes'])) $this->assignSizes($result, $input);
 		} catch (\Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
@@ -99,6 +100,7 @@ class ProductRepository implements ProductRepositoryInterface {
 			$result = $this->assignData($product, $input);
 			$result->save();
 			$this->assignAddons($result, $input);
+            if (isset($input['sizes'])) $this->assignSizes($result, $input);
 		} catch (\Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
@@ -235,6 +237,8 @@ class ProductRepository implements ProductRepositoryInterface {
 		$product->shipping_description = (isset($data['shipping_description'])) ? $data['shipping_description']  : '';
         $product->mobile_name = (isset($data['mobile_name'])) ? $data['mobile_name'] : '';
         $product->shelf_id = (isset($data['shelf_id'] )) ? $data['shelf_id'] : '';
+
+        $product->sizeable =  (isset($data['sizeable'])) ? $data['sizeable'] : 0;
         
         $product->name_text_align = (isset($data['name_text_align'])) ? $data['name_text_align']  : '';
         $product->name_font_style = (isset($data['name_font_style'])) ? $data['name_font_style']  : '';
@@ -289,7 +293,7 @@ class ProductRepository implements ProductRepositoryInterface {
      * @param $product
      * @param $data
      */
-	private function assignAddons($product, $data)
+	private function assignAddons(Product $product, $data)
     {
 		Log::info("Assign Addons is being called");
 
@@ -382,6 +386,13 @@ class ProductRepository implements ProductRepositoryInterface {
 
         Log::info($products);
         return $products;
+    }
+
+    private function assignSizes(Product $product, $input)
+    {
+        $sizes = $input['sizes'];
+
+
     }
 }
 
