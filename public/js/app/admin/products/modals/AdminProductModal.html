@@ -836,40 +836,58 @@
     <div ng-if="$ctrl.newProduct.sizeable">
         <table class="table table-striped table-bordered table-sm">
             <thead class="thead-dark">
-            <tr>
-                <th style="text-align: center"><b>Name</b></th>
-                <th style="text-align: center"><b>Short Name</b></th>
-                <th style="text-align: center"><b>Slug</b></th>
-                <th style="text-align: center"><b>Price</b></th>
-                <th style="text-align: center"><b>Available</b></th>
-            </tr>
+                <tr>
+                    <th style="text-align: center"><b>Name</b></th>
+                    <th style="text-align: center"><b>Short Name</b></th>
+                    <th style="text-align: center"><b>Slug</b></th>
+                    <th style="text-align: center"><b>Price</b></th>
+                    <th style="text-align: center"><b>Available</b></th>
+                    <th style="text-align: center"><b>Delete</b></th>
+                </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="size in $ctrl.newProduct.sizes">
-                <td>
-                    <a class="uppercase">{{ size.name }}</a>
-                </td>
-                <td>
-                    <a class="uppercase">{{ size.shortName }}</a>
-                </td>
-                <td>
-                    <a class="uppercase">{{ size.slug }}</a>
-                </td>
-                <td>
-                    <a class="uppercase">{{ size.price }}</a>
-                    <a class="uppercase">{{ size.price }}</a>
-                    <a class="uppercase">{{ size.price }}</a>
-                </td>
-                <td>
-                    <a class="uppercase">{{ size.available }}</a>
-                </td>
-            </tr>
+                <tr ng-repeat="size in $ctrl.newProduct.sizes">
+                    <td>
+                        <a href ng-click="$ctrl.addEditSize(size)">{{ size.name }}</a>
+                    </td>
+                    <td>
+                        <a href ng-click="$ctrl.addEditSize(size)">{{ size.shortName }}</a>
+                    </td>
+                    <td>
+                        <a href ng-click="$ctrl.addEditSize(size)">{{ size.slug }}</a>
+                    </td>
+                    <td style="text-align: right;">
+                        <a href ng-click="$ctrl.addEditSize(size)">${{ size.price / 100 }}</a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href >
+                            <input type="checkbox"
+                                   disabled="disabled"
+                                   id="available"
+                                   ng-model="size.available"
+                                   value="{{ size.available }}"
+                                   ng-true-value="1"
+                                   ng-false-value="0">
+                        </a>
+                    </td>
+                    <td style="text-align: center;">
+                        <button type="button"
+                                class="btn btn-danger"
+                                ng-click="$ctrl.removeSize($index)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tr>
+                <tr ng-if="$ctrl.newProduct.sizes.length < 1">
+                    <td colspan="6">No sizes defined.</td>
+                </tr>
             </tbody>
         </table>
 
         <button type="button"
                 class="btn btn-success"
-                ng-click="$ctrl.addSize()">Add&nbsp;
+                ng-click="$ctrl.addEditSize()">Add&nbsp;
             <i class="fa fa-plus"></i>
         </button>
     </div>

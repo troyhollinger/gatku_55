@@ -1054,6 +1054,7 @@ class ComposerStaticInit987a49ed413fc1b0ed7ee05b84013a37
         'Gatku\\Repositories\\ShelvesRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/ShelvesRepository.php',
         'Gatku\\Repositories\\ShippingRequestRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/ShippingRequestRepository.php',
         'Gatku\\Repositories\\ShippingTrackRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/ShippingTrackRepository.php',
+        'Gatku\\Repositories\\SizeRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/SizeRepository.php',
         'Gatku\\Repositories\\UserRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/UserRepository.php',
         'Gatku\\Service\\MailchimpService' => __DIR__ . '/../..' . '/app/Gatku/Services/MailchimpService.php',
         'Gatku\\Service\\ProductServiceProvider' => __DIR__ . '/../..' . '/app/Gatku/Services/ProductServiceProvider.php',

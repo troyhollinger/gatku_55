@@ -12,15 +12,18 @@
         var $ctrl = this;
 
         $ctrl.size = size || {
+            id: 0,
             name: '',
             shortName: '',
+            productId: 0,
             slug: '',
             price: '',
             available: 0
         };
 
-        console.log('AdminProductSizeModalController');
-
+        $ctrl.sizeSaveUpdate = function() {
+            $uibModalInstance.close($ctrl.size);
+        };
     };
 }());
 

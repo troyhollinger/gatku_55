@@ -2,7 +2,7 @@
 <div class="modal-header">
     <h1 class="modal-title"><b>Add/Edit Size</b></h1>
 
-    <button type="button" class="close" ng-click="$dismiss('close')">
+    <button type="button" class="close" ng-click="$close()">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -64,8 +64,9 @@
         <div class="col-sm-9">
             <input type="checkbox"
                    id="available"
-                   ng-model="$ctrl.newProduct.available"
-                   ng-true-value="1">
+                   ng-model="$ctrl.size.available"
+                   ng-true-value="1"
+                   ng-false-value="0">
         </div>
     </div>
 </div>
@@ -74,12 +75,13 @@
 <div class="modal-footer">
     <button class="btn btn-default"
             type="button"
-            ng-click="$dismiss('close')">Cancel
+            ng-click="$close()">Cancel
     </button>
     <button class="btn btn-success"
             type="button"
-            ng-click="$ctrl.sizeSaveUpdate()">Save
-        &nbsp;<i class="fa fa-save"></i>
+            ng-click="$ctrl.sizeSaveUpdate()">
+        <span ng-if="$ctrl.size.id == 0">Add</span>
+        <span ng-if="$ctrl.size.id != 0">Update</span>
     </button>
 </div>
 

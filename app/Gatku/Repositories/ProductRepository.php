@@ -390,9 +390,36 @@ class ProductRepository implements ProductRepositoryInterface {
 
     private function assignSizes(Product $product, $input)
     {
+        $sizableRepository = new SizeRepository;
         $sizes = $input['sizes'];
 
+        //Remove deleted sizes
+        foreach($product->sizes as $productSize) {
+            $delete = true;
+            foreach($sizes as $size) {
+                if ($productSize->id == $size['id']) {
+                    $delete = false;
+                }
+            }
 
+            if ($delete) {
+                $sizableRepository->destroy($productSize->id);
+            }
+        }
+
+
+        //Add or update sizes
+        foreach($sizes as $size) {
+            if ($size['productId'] == 0) {
+                $size['productId'] = $product->id;
+            }
+
+            if ($size['id']) {
+                $sizableRepository->update($size['id'], $size);
+            } else {
+                $sizableRepository->store($size);
+            }
+        }
     }
 }
 

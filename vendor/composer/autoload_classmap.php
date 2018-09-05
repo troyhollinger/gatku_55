@@ -689,6 +689,7 @@ return array(
     'Gatku\\Repositories\\ShelvesRepository' => $baseDir . '/app/Gatku/Repositories/ShelvesRepository.php',
     'Gatku\\Repositories\\ShippingRequestRepository' => $baseDir . '/app/Gatku/Repositories/ShippingRequestRepository.php',
     'Gatku\\Repositories\\ShippingTrackRepository' => $baseDir . '/app/Gatku/Repositories/ShippingTrackRepository.php',
+    'Gatku\\Repositories\\SizeRepository' => $baseDir . '/app/Gatku/Repositories/SizeRepository.php',
     'Gatku\\Repositories\\UserRepository' => $baseDir . '/app/Gatku/Repositories/UserRepository.php',
     'Gatku\\Service\\MailchimpService' => $baseDir . '/app/Gatku/Services/MailchimpService.php',
     'Gatku\\Service\\ProductServiceProvider' => $baseDir . '/app/Gatku/Services/ProductServiceProvider.php',

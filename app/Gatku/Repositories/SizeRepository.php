@@ -2,25 +2,25 @@
 
 namespace Gatku\Repositories;
 
-use Gatku\Model\Discount;
+use Gatku\Model\Size;
 use Illuminate\Support\Facades\Log;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
-class DiscountRepository {
+class SizeRepository {
 
     public function all() {
-        $discounts = Discount::all();
-        Log::info($discounts);
-        return $discounts;
+        $sizes = Size::all();
+        Log::info($sizes);
+        return $sizes;
     }
 
     /**
-     * @param $code
+     * @param $id
      * @return bool
      */
-    public function get($code) {
+    public function get($id) {
         try {
-            $discount = Discount::findOrFail($code);
+            $discount = Size::findOrFail($id);
         } catch (\Exception $e) {
             Bugsnag::notifyException($e);
             Log::error($e);
@@ -37,8 +37,8 @@ class DiscountRepository {
     public function store($input) {
 
         try {
-            $discount = new Discount;
-            $result = $this->assignData($discount, $input);
+            $size = new Size;
+            $result = $this->assignData($size, $input);
             $result->save();
         } catch (\Exception $e) {
             Bugsnag::notifyException($e);
@@ -49,14 +49,14 @@ class DiscountRepository {
     }
 
     /**
-     * @param $code
+     * @param $id
      * @param $input
      * @return bool
      */
-    public function update($code, $input) {
+    public function update($id, $input) {
         try {
-            $discount = Discount::findOrFail($code);
-            $result = $this->assignData($discount, $input);
+            $size = Size::findOrFail($id);
+            $result = $this->assignData($size, $input);
             $result->save();
         } catch (\Exception $e) {
             Bugsnag::notifyException($e);
@@ -67,12 +67,12 @@ class DiscountRepository {
     }
 
     /**
-     * @param $code
+     * @param $id
      * @return bool
      */
-    public function destroy($code) {
+    public function destroy($id) {
         try {
-            $discount = Discount::findOrFail($code);
+            $discount = Size::findOrFail($id);
             $discount->delete();
         } catch (\Exception $e) {
             Bugsnag::notifyException($e);
@@ -83,16 +83,22 @@ class DiscountRepository {
     }
 
     /**
-     * Assigns discount data from input
+     * Assigns size data from input
      *
-     * @param Discount $discount
-     * @param $data
-     * @return Discount
+     * @param Size $size
+     * @param $input
+     * @return Size
      */
-    private function assignData($discount, $data) {
-        $discount->code = $data['code'];
-        $discount->discount = $data['discount'];
+    private function assignData(Size $size, $input) {
 
-        return $discount;
+        $size->id = isset($input['id']) ? $input['id'] : '';
+        $size->name = isset($input['name']) ? $input['name'] : '';
+        $size->shortName = isset($input['shortName']) ? $input['shortName'] : '';
+        $size->slug = isset($input['slug']) ? $input['slug'] : '';
+        $size->price = isset($input['price']) ? $input['price'] : 0;
+        $size->available = isset($input['available']) ? $input['available'] : 0;
+        $size->productId = $input['productId'];
+
+        return $size;
     }
 }

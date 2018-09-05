@@ -15663,6 +15663,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
             $ctrl.newProduct.sizeable = 0;
+            $ctrl.newProduct.sizes = [];
 
             $ctrl.newProduct.name_text_align = 'left';
             $ctrl.newProduct.name_font_weight = 'normal';
@@ -15815,7 +15816,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         }
 
         //sizes
-        $ctrl.addSize = function(size) {
+        $ctrl.addEditSize = function(size) {
             var modalInstance = $uibModal.open({
                 templateUrl: 'js/app/admin/products/modals/AdminProductSizeModal.html',
                 controller: 'AdminProductSizeModalController',
@@ -15828,14 +15829,19 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
                 }
             });
 
-            modalInstance.result.then(function(result) {
-console.log('result');
-console.log(result);
-                // nanobar.go(100);
-                // AlertService.broadcast('Product saved!', 'success');
-                // getAllProducts();
+            modalInstance.result.then(function(size) {
+                if (size) {
+                    if (size['id'] === 0) {
+                        $ctrl.newProduct.sizes.push(size);
+                    }
+                }
             });
         };
+
+        $ctrl.removeSize = function(index) {
+            $ctrl.newProduct.sizes.splice(index, 1);
+        };
+
         //sizes - end
         registerAddons();
     };
@@ -15856,15 +15862,18 @@ console.log(result);
         var $ctrl = this;
 
         $ctrl.size = size || {
+            id: 0,
             name: '',
             shortName: '',
+            productId: 0,
             slug: '',
             price: '',
             available: 0
         };
 
-        console.log('AdminProductSizeModalController');
-
+        $ctrl.sizeSaveUpdate = function() {
+            $uibModalInstance.close($ctrl.size);
+        };
     };
 }());
 
