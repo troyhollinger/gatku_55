@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Stripe_CardError;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\App;
+use Gatku\Model\HomeSetting;
 
 /**
  *
@@ -28,9 +29,14 @@ class OrderRepository {
     protected $error_message;
 
     public $blackFriday = false;
+    /**
+     * @var HomeSetting
+     */
+    private $homeSetting;
 
     public function __construct(CustomerRepository $customer) {
         $this->customer = $customer;
+        $this->homeSetting = HomeSetting::orderBy('id', 'desc')->first();
     }
 
     public function all() {
@@ -123,7 +129,7 @@ class OrderRepository {
                     'email' => 'ryan@gatku.com',
                     'name' => 'Ryan Gattoni'
                 ],
-            ])->send(new EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date));
+            ])->send(new EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting));
 
             //Send email to Sellers
             Mail::to([
@@ -135,7 +141,7 @@ class OrderRepository {
                     'email' => 'emailme@troyhollinger.com',
                     'name' => 'Troy Hollinger'
                 ]
-            ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date));
+            ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting));
 
         }
 
@@ -146,7 +152,7 @@ class OrderRepository {
                         'email' => 'past-email-address-here',
                         'name' => 'past-recipient-name-here'
                     ]
-                ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date));
+                ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting));
             }
         }
 

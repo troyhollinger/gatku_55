@@ -121,13 +121,19 @@ Route::put('shelves', ['uses' => 'ShelvesController@update']);
 //    $shipping = 20;
 //    $total = $subtotal + $shipping;
 //    $date = '2018-06-19';
+//    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
 //
 //    Mail::to([
 //        [   'email' => 'marcincyniu@gmail.com',
 //            'name' => 'Marcin Wojcik'
 //        ]
-//    ])->send( new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date) );
-//    //return new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date);
+//    ])->send( new App\Mail\EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date, $homeSetting) );
+
+//    Mail::to([
+//        [   'email' => 'marcincyniu@gmail.com',
+//            'name' => 'Marcin Wojcik'
+//        ]
+//    ])->send( new App\Mail\EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date, $homeSetting) );
 //
 //    return 'Sent';
 //});

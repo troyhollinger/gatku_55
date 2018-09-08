@@ -7,6 +7,7 @@ use Gatku\Model\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Gatku\Model\HomeSetting;
 
 class EmailsOrder extends Mailable
 {
@@ -24,6 +25,10 @@ class EmailsOrder extends Mailable
     public $shipping;
     public $total;
     public $date;
+    /**
+     * @var HomeSetting
+     */
+    private $homeSetting;
 
     /**
      * EmailsOrder constructor.
@@ -33,6 +38,7 @@ class EmailsOrder extends Mailable
      * @param $shipping
      * @param $total
      * @param $date
+     * @param HomeSetting $homeSetting
      */
     public function __construct(
         Order $order,
@@ -40,7 +46,8 @@ class EmailsOrder extends Mailable
         $subtotal,
         $shipping,
         $total,
-        $date
+        $date,
+        $homeSetting
     )
     {
         $this->order = $order;
@@ -49,6 +56,7 @@ class EmailsOrder extends Mailable
         $this->shipping = $shipping;
         $this->total = $total;
         $this->date = $date;
+        $this->homeSetting = $homeSetting;
     }
 
     /**
@@ -58,6 +66,6 @@ class EmailsOrder extends Mailable
      */
     public function build()
     {
-        return $this->subject('GATKU | Order Confirmation')->view('emails.order');
+        return $this->subject($this->homeSetting->customer_order_email_title)->view('emails.order');
     }
 }

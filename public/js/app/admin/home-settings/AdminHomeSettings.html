@@ -301,6 +301,40 @@
         <label>Shelves Between Space [px]</label>
         <input type="text" ng-model="$ctrl.homeSetting.shelves_between_space">
         <!-- Shelves Between Space [px] - end -->
+
+
+        <!-- Order Email Notifications Settings -->
+        <hr>
+
+        <!-- Order Email Logo -->
+        <label>Order Email Logo</label>
+
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.order_email_logo_url + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.order_email_logo_url"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.order_email_logo_url" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'order_email_logo_url')">
+        </div>
+
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('order_email_logo_url');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Order Email Logo - end -->
+
+        <!-- Customer Order Email Title -->
+        <label>Customer Order Email Title</label>
+        <input type="text" ng-model="$ctrl.homeSetting.customer_order_email_title">
+        <!-- Customer Order Email Title - end -->
+
+        <!-- Admin Order Email Title -->
+        <label>Customer Order Email Title</label>
+        <input type="text" ng-model="$ctrl.homeSetting.admin_order_email_title">
+        <!-- Admin Order Email Title - end -->
+
+        <!-- Order Email Notifications Settings -->
     </form>
 
     <br>
