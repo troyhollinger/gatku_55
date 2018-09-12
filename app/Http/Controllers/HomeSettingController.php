@@ -90,8 +90,7 @@ class HomeSettingController extends BaseController {
 		} catch (Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
-
-			return \Response::json(['message' => 'Sorry, there was a problem saving the image'], 404);
+			return \Response::json(['message' => 'Sorry, there was a problem saving the Home Settings'], 404);
 		}
 
 		return \Response::json(['message' => 'Home setting saved!'], 200);

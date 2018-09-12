@@ -1,0 +1,284 @@
+<h1>
+    <i class="fa fa-envelope-o"></i>
+    &nbsp;Email Settings
+</h1>
+
+<div class="admin-sub-section"  ng-cloak>
+
+    <form name="email-setting" class="email-setting-form">
+
+        <!-- Id -->
+        <input type="hidden" ng-model="$ctrl.emailSettings.id">
+        <!-- Id - end -->
+
+        <!-- Main Logo -->
+        <label>Main Logo</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.emailSettings.email_main_logo_url + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.emailSettings.email_main_logo_url"></i>
+            <input type="text" ng-model="$ctrl.emailSettings.email_main_logo_url" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadEmailImage($files, 'email_main_logo_url')">
+        </div>
+
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('email_main_logo_url');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Main Logo - end -->
+
+        <hr>
+
+        <!-- Small Logo -->
+        <label>Main Logo</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.emailSettings.email_small_logo_url + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.emailSettings.email_small_logo_url"></i>
+            <input type="text" ng-model="$ctrl.emailSettings.email_small_logo_url" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadEmailImage($files, 'email_small_logo_url')">
+        </div>
+
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('email_small_logo_url');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- Small Logo - end -->
+
+        <hr>
+
+        <br>
+        <br>
+        <label>Customer Email:</label>
+
+        <hr>
+
+        <!-- Customer Order Email Title -->
+        <label>Customer Order Email Title</label>
+        <input type="text" ng-model="$ctrl.emailSettings.customer_order_email_title">
+        <!-- Customer Order Email Title - end -->
+
+        <hr>
+
+        <!-- Contact Email Address Displayed Inside Email -->
+        <label>Contact Email Address Displayed Inside Email</label>
+        <input type="text" ng-model="$ctrl.emailSettings.contact_email_address_displayed_in_email">
+        <!-- Contact Email Address Displayed Inside Email - end -->
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Customer Order Notify Email 1 -->
+                <label>Customer Order Notify Email 1</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_email_1">
+                <!-- Customer Order Notify Email 1 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Customer Order Notify Name 1 -->
+                <label>Customer Order Notify Name 1</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_name_1">
+                <!-- Customer Order Notify Name 1 - end -->
+
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Customer Order Notify Email 2 -->
+                <label>Customer Order Notify Email 2</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_email_2">
+                <!-- Customer Order Notify Email 2 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Customer Order Notify Name 2 -->
+                <label>Customer Order Notify Name 2</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_name_2">
+                <!-- Customer Order Notify Name 2 - end -->
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Customer Order Notify Email 3 -->
+                <label>Customer Order Notify Email 3</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_email_3">
+                <!-- Customer Order Notify Email 3 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Customer Order Notify Name 3 -->
+                <label>Customer Order Notify Name 3</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_name_3">
+                <!-- Customer Order Notify Name 3 - end -->
+
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Customer Order Notify Email 4 -->
+                <label>Customer Order Notify Email 4</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_email_4">
+                <!-- Customer Order Notify Email 4 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Customer Order Notify Name 4 -->
+                <label>Customer Order Notify Name 4</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_name_4">
+                <!-- Customer Order Notify Name 4 - end -->
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Customer Order Notify Email 5 -->
+                <label>Customer Order Notify Email 5</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_email_5">
+                <!-- Customer Order Notify Email 5 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Customer Order Notify Name 5 -->
+                <label>Customer Order Notify Name 5</label>
+                <input type="text" ng-model="$ctrl.emailSettings.customer_order_notify_name_5">
+                <!-- Customer Order Notify Name 5 - end -->
+            </div>
+        </div>
+
+
+
+        <hr>
+
+        <br>
+        <br>
+        <label>Admin Email:</label>
+
+        <hr>
+
+        <!-- Admin Order Email Title -->
+        <label>Admin Order Email Title</label>
+        <input type="text" ng-model="$ctrl.emailSettings.admin_order_email_title">
+        <!-- Admin Order Email Title - end -->
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Admin Order Notify Email 1 -->
+                <label>Admin Order Notify Email 1</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_email_1">
+                <!-- Admin Order Notify Email 1 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Admin Order Notify Name 1 -->
+                <label>Admin Order Notify Name 1</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_name_1">
+                <!-- Admin Order Notify Name 1 - end -->
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Admin Order Notify Email 2 -->
+                <label>Admin Order Notify Email 2</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_email_2">
+                <!-- Admin Order Notify Email 2 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Admin Order Notify Name 2 -->
+                <label>Admin Order Notify Name 2</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_name_2">
+                <!-- Admin Order Notify Name 2 - end -->
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Admin Order Notify Email 3 -->
+                <label>Admin Order Notify Email 3</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_email_3">
+                <!-- Admin Order Notify Email 3 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Admin Order Notify Name 3 -->
+                <label>Admin Order Notify Name 3</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_name_3">
+                <!-- Admin Order Notify Name 3 - end -->
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Admin Order Notify Email 4 -->
+                <label>Admin Order Notify Email 4</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_email_4">
+                <!-- Admin Order Notify Email 4 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Admin Order Notify Name 4 -->
+                <label>Admin Order Notify Name 4</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_name_4">
+                <!-- Admin Order Notify Name 4 - end -->
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <!-- Admin Order Notify Email 5 -->
+                <label>Admin Order Notify Email 5</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_email_5">
+                <!-- Admin Order Notify Email 5 - end -->
+            </div>
+
+            <div class="col">
+                <!-- Admin Order Notify Name 5 -->
+                <label>Admin Order Notify Name 5</label>
+                <input type="text" ng-model="$ctrl.emailSettings.admin_order_notify_name_5">
+                <!-- Admin Order Notify Name 5 - end -->
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Email Footer Color -->
+        <label>Email Footer Color</label>
+        <input style="width: 150px;" placeholder="#000000" type="text" ng-model="$ctrl.emailSettings.email_footer_color">
+        <!-- Email Footer Color - end -->
+
+
+    </form>
+
+    <br>
+    <br>
+
+    <button type="button"
+            class="btn btn-success"
+            ng-click="$ctrl.saveEmailSetting()">Save
+    </button>
+</div>

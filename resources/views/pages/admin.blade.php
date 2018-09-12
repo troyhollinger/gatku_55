@@ -44,6 +44,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#email-settings">
+                <i class="fa fa-envelope-o"></i>
+                &nbsp;Email Settings
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#integration">
                 <i class="fa fa-link"></i>
                 &nbsp;Integration

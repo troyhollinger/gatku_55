@@ -11,6 +11,11 @@ app.config(function($routeProvider) {
             controller: 'AdminHomeSettingsController',
             controllerAs: '$ctrl'
         })
+        .when('/email-settings', {
+            templateUrl : 'js/app/admin/email-settings/AdminEmailSettings.html',
+            controller: 'AdminEmailSettingsController',
+            controllerAs: '$ctrl'
+        })
         .when('/orders', {
             templateUrl : 'js/app/admin/orders/AdminOrders.html',
             controller: 'AdminOrdersController',

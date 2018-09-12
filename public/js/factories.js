@@ -191,6 +191,7 @@ app.factory('Order', ['$http', function($http) {
     }
 
 }]);
+
 app.factory('HomeSetting', ['$http', function($http) {
     return {
         all : function() {
@@ -201,6 +202,18 @@ app.factory('HomeSetting', ['$http', function($http) {
         }
     }
 }]);
+
+app.factory('EmailSetting', ['$http', function($http) {
+    return {
+        all : function() {
+            return $http.get('/email-setting');
+        },
+        save : function(data) {
+            return $http.post('/email-setting', data);
+        }
+    }
+}]);
+
 
 app.factory('YouImage', ['$http', function($http) {
 
