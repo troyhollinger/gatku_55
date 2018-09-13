@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use Gatku\Model\Discount;
+use Gatku\Model\EmailSettings;
 use Gatku\Model\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -28,7 +29,11 @@ class EmailsOrder extends Mailable
     /**
      * @var HomeSetting
      */
-    private $homeSetting;
+    public $homeSetting;
+    /**
+     * @var EmailSettings
+     */
+    public $emailSettings;
 
     /**
      * EmailsOrder constructor.
@@ -39,6 +44,7 @@ class EmailsOrder extends Mailable
      * @param $total
      * @param $date
      * @param HomeSetting $homeSetting
+     * @param EmailSettings $emailSettings
      */
     public function __construct(
         Order $order,
@@ -47,7 +53,8 @@ class EmailsOrder extends Mailable
         $shipping,
         $total,
         $date,
-        $homeSetting
+        HomeSetting $homeSetting,
+        EmailSettings $emailSettings
     )
     {
         $this->order = $order;
@@ -57,6 +64,7 @@ class EmailsOrder extends Mailable
         $this->total = $total;
         $this->date = $date;
         $this->homeSetting = $homeSetting;
+        $this->emailSettings = $emailSettings;
     }
 
     /**
@@ -66,6 +74,6 @@ class EmailsOrder extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->homeSetting->customer_order_email_title)->view('emails.order');
+        return $this->subject($this->emailSettings->customer_order_email_title)->view('emails.order');
     }
 }

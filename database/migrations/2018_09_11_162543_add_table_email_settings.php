@@ -41,6 +41,7 @@ class AddTableEmailSettings extends Migration {
             $table->string('admin_order_notify_name_5');
             $table->string('email_footer_color');
             $table->string('contact_email_address_displayed_in_email');
+            $table->string('contact_phone_number_displayed_in_email');
             $table->timestamps();
         });
     }

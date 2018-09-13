@@ -3,6 +3,7 @@ namespace Gatku\Repositories;
 
 use App\Mail\EmailsOrder;
 use App\Mail\EmailsOrderAdmin;
+use Gatku\Model\EmailSettings;
 use Gatku\Model\Order;
 use Gatku\Model\OrderItem;
 use Stripe_Charge;
@@ -33,10 +34,20 @@ class OrderRepository {
      * @var HomeSetting
      */
     private $homeSetting;
+    /**
+     * @var EmailSettings
+     */
+    private $emailSettings;
 
-    public function __construct(CustomerRepository $customer) {
+    /**
+     * OrderRepository constructor.
+     * @param CustomerRepository $customer
+     * @param EmailSettingsRepository $emailSettingsRepository
+     */
+    public function __construct(CustomerRepository $customer, EmailSettingsRepository $emailSettingsRepository) {
         $this->customer = $customer;
         $this->homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+        $this->emailSettings = $emailSettingsRepository->getLastRecordFromDatabase();
     }
 
     public function all() {
@@ -129,7 +140,7 @@ class OrderRepository {
                     'email' => 'ryan@gatku.com',
                     'name' => 'Ryan Gattoni'
                 ],
-            ])->send(new EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting));
+            ])->send(new EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting, $this->emailSettings));
 
             //Send email to Sellers
             Mail::to([
@@ -141,7 +152,7 @@ class OrderRepository {
                     'email' => 'emailme@troyhollinger.com',
                     'name' => 'Troy Hollinger'
                 ]
-            ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting));
+            ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting, $this->emailSettings));
 
         }
 

@@ -1,6 +1,3 @@
-<!-- Keep this php code in first line -->
-<?php $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first(); ?>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html xmlns="http://www.3c.org/1999/xhtml">
 	<head>
@@ -82,7 +79,7 @@
 			width:100%;
 			height:35px;
 			/*background-color: red;*/
-                        color:#E24A62;
+            color:{{ $emailSettings['email_footer_color'] }};
 			border-bottom: 1px solid black;
 			font-family: "HelveticaNeue-Light", "Helvetica", Arial, sans-serif;
 			padding:0 0 0 0px !important;
@@ -212,7 +209,7 @@
 		}
 		.multiple {
 			display:block;
-			background-color:#E24A62;
+			background-color: {{ $emailSettings['email_footer_color'] }};
 			width:18px;
 			height:18px;
 			text-align:center;
@@ -240,11 +237,21 @@
 				<th id="header" align="left" valign="top" colspan="2" style="height: 45px;font-family: "Helvetica", Arial, sans-serif;">
 
 					<!-- Gatku image here -->
-					<img src="{{ asset($homeSetting['order_email_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
+					<img src="{{ asset($emailSettings['order_email_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
 				</th>
 			</tr>
 			<tr>
-				<th id="order-info" colspan="2" padding="0" align="left" style="width: 100%;height: 35px;border-bottom: 1px solid black;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px;color:#E24A62"><span id="status" style="font-size: 16px;font-weight: 200;">Order : {{ $order['number'] }} - </span><span id="date" style="font-size: 20px;font-weight: 200;">{{ $date }}</span></th>
+				<th id="order-info"
+					colspan="2"
+					padding="0"
+					align="left"
+					style="	width: 100%;
+							height: 35px;
+							border-bottom: 1px solid black;
+							font-family: 'Helvetica', Arial, sans-serif;
+							padding: 0 0 0 0px;
+							color: {{ $emailSettings['email_footer_color'] }}">
+					<span id="status" style="font-size: 16px;font-weight: 200;">Order : {{ $order['number'] }} - </span><span id="date" style="font-size: 20px;font-weight: 200;">{{ $date }}</span></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -372,7 +379,14 @@
 		<tfoot>
 
 			<tr id="totals" style="font-family: 'Helvetica', Arial, sans-serif;font-size: 12px;color: #D1D1D1;border-top: 1px solid black;height: 50px;">
-				<td colspan="2" align="right" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif; color:#E24A62;">
+				<td colspan="2"
+					align="right"
+					style="	mso-table-lspace: 0pt;
+							mso-table-rspace: 0pt;
+							-ms-text-size-adjust: 100%;
+							-webkit-text-size-adjust: 100%;
+							font-family: Helvetica, Arial, sans-serif;
+							color:{{ $emailSettings['email_footer_color'] }};">
 				Thank you for your purchase. 
 				</td>
 			</tr>
@@ -417,7 +431,7 @@
 						</tr>
 						<tr id="add-inshore-text">
 							<td colspan="2">
-								<p style="font-size:50px;font-weight:bold;letter-spacing:-1px;-webkit-margin-before: 0em;-webkit-margin-after: 0em;color:#E24A62">InshoreShrinker - $49</p>
+								<p style="font-size:50px;font-weight:bold;letter-spacing:-1px;-webkit-margin-before: 0em;-webkit-margin-after: 0em;color: {{ $emailSettings['email_footer_color'] }};">InshoreShrinker - $49</p>
 								<p>Buying an <span style="font-weight:bold">EIGHT</span>&apos;ER, <span style="font-weight:bold">NINE</span>&apos;ER, or <span style="font-weight:bold">TEN</span>&apos;ER? Purchasing an InshoreShrinkerâ¢ will allow 
 									you to shrink your ordered pole nearly two feet on the <span style="font-weight:bold">EIGHT</span>&apos;ER and almost two and a half 
 									feet on the <span style="font-weight:bold">NINE</span>&apos;ER &amp; <span style="font-weight:bold">TEN</span>&apos;ER! It&apos;s like you&apos;re getting 2 poles with your purchase for only $49 more.
@@ -429,11 +443,25 @@
 						@endif --}}
 						
 						<tr id="thefooter" style="border-top:solid black 1px; border-bottom:solid black 1px;">
-							<td style="color:#E24A62;font-size:16px; padding:15px 0;" colspan="1">Customer Service - Email: dustin@gatku.com / Phone: +001 619 507-3860</td>
+							<td style="	color: {{ $emailSettings['email_footer_color'] }};
+										font-size:16px;
+										padding:15px 0;"
+								colspan="1">Customer Service - Email: dustin@gatku.com / Phone: +001 619 507-3860</td>
 
 							<!-- INSERT SOCIAL MEDIA IMAGES -->
-							<td style="text-align:right;" colspan="1"><a href="http://www.facebook.com/gatku"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-facebook.png') }}"></a><a href="http://www.twitter.com/gatku"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-twitter.png') }}"></a><a href="http://www.gatku.com"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/logo.png') }}"></a></td>
-
+							<td style="text-align:right;" colspan="1">
+								<a href="http://www.facebook.com/gatku">
+									<img height="25"
+										 style="margin-left:30px;"
+										 src="{{ asset('img/email-assets/red-facebook.png') }}">
+								</a>
+								<a href="http://www.twitter.com/gatku">
+									<img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-twitter.png') }}">
+								</a>
+								<a href="http://www.gatku.com">
+									<img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/logo.png') }}">
+								</a>
+							</td>
 						</tr>
 					</table>
 				</td>
@@ -449,7 +477,7 @@
 			<tr>
 				<th id="header-address" align="left" valign="top" colspan="2" style="height: 45px;font-family: "Helvetica", Arial, sans-serif;">
 					<!-- Logo image here -->
-					<img src="{{ asset($homeSetting['order_email_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
+					<img src="{{ asset($emailSettings['order_email_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
 				</th>
 			</tr>
 			<tr>

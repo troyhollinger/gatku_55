@@ -11,29 +11,29 @@
 
         $ctrl.submitButton = 'Submit';
 
-        $ctrl.upload = function ($files, model) {
-            var nanobar = new Nanobar({bg: '#fff'});
-            var file = $files[0];
-
-            if (!file) return false;
-
-            var data = {
-                url: '/product/image',
-                file: file
-            };
-
-            nanobar.go(40);
-
-            Image.upload(data).progress(function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            }).then(function (response) {
-                $ctrl.newProduct[model] = response.data;
-                nanobar.go(100);
-            }, function (error) {
-                $exceptionHandler(JSON.stringify(error));
-                nanobar.go(100);
-            });
-        };
+        // $ctrl.upload = function ($files, model) {
+        //     var nanobar = new Nanobar({bg: '#fff'});
+        //     var file = $files[0];
+        //
+        //     if (!file) return false;
+        //
+        //     var data = {
+        //         url: '/product/image',
+        //         file: file
+        //     };
+        //
+        //     nanobar.go(40);
+        //
+        //     Image.upload(data).progress(function (evt) {
+        //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        //     }).then(function (response) {
+        //         $ctrl.newProduct[model] = response.data;
+        //         nanobar.go(100);
+        //     }, function (error) {
+        //         $exceptionHandler(JSON.stringify(error));
+        //         nanobar.go(100);
+        //     });
+        // };
 
         // home settings
         function getHomeSettings() {

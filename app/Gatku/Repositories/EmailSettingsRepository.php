@@ -78,6 +78,7 @@ class EmailSettingsRepository {
         $emailSettings->admin_order_notify_name_5 = isset($input['admin_order_notify_name_5']) ? $input['admin_order_notify_name_5'] : '';
         $emailSettings->email_footer_color = isset($input['email_footer_color']) ? $input['email_footer_color'] : '';
         $emailSettings->contact_email_address_displayed_in_email = isset($input['contact_email_address_displayed_in_email']) ? $input['contact_email_address_displayed_in_email'] : '';
+        $emailSettings->contact_phone_number_displayed_in_email = isset($input['contact_phone_number_displayed_in_email']) ? $input['contact_phone_number_displayed_in_email'] : '';
 
         return $emailSettings;
     }
@@ -85,7 +86,7 @@ class EmailSettingsRepository {
     /**
      * @return mixed
      */
-    private function getLastRecordFromDatabase()
+    public function getLastRecordFromDatabase()
     {
         try {
             $emailSettings = EmailSettings::orderBy('id', 'desc')->first();
