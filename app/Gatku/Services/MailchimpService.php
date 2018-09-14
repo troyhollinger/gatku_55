@@ -1,19 +1,29 @@
 <?php 
 namespace Gatku\Service;
 
+use Gatku\Model\HomeSetting;
+
 class MailchimpService
 {
 	public function addSubscription($fname, $email, $country) 
 	{
 	    if(!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL) === false){
+
+            $homeSettings = HomeSetting::orderBy('id', 'desc')->first();
+
 	        // MailChimp API credentials
 	        $apiKey = 'dbb4a319f336c9f4ceb826cb0c6f102e-us9';
-	        if(strtolower($country) == 'australia'){
-	        	$listID = '451477286e'; // austrelia
-	        }else{
-	        	$listID = '793e0e910d'; // gatku customer
-	        }
-	        
+
+            $listID = '793e0e910d'; // gatku customer
+
+	        if (strstr($homeSettings->hostname, 'gatku')) {
+	            if(strtolower($country) == 'australia') {
+                    $listID = '451477286e'; // austrelia
+                }
+            } elseif (strstr($homeSettings->hostname , 'cristspears')) {
+                $listID = 'dec7c06bb6'; // cristspears
+            }
+
 	        // MailChimp API URL
 	        $memberID = md5(strtolower($email));
 	        $dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
