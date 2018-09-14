@@ -4,6 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=200, initial-scale= 1.0">
     <title>Customer Purchase</title>
+
+    <link rel="stylesheet" href="{{ asset('production/app.css') }}">
+
     <style>
         body, #body-table, #body-cell {
             height: 100% !important;
@@ -518,19 +521,26 @@
                                                 font-size:16px;
                                                 padding:15px 0;"
                                                 colspan="1">Customer
-                                        Service - Email: dustin@gatku.com / Phone: +001 619 507-3860
+                                        Service - Email: {{ $emailSettings['contact_email_address_displayed_in_email'] }} / Phone: {{ $emailSettings['contact_phone_number_displayed_in_email'] }}
                                     </td>
 
                                     <!-- INSERT SOCIAL MEDIA IMAGES -->
-                                    <td style="text-align:right;" colspan="1"><a
-                                                href="http://www.facebook.com/gatku"><img height="25"
-                                                                                          style="margin-left:30px;"
-                                                                                          src="{{ asset('img/email-assets/red-facebook.png') }}"></a><a
-                                                href="http://www.twitter.com/gatku"><img height="25"
-                                                                                         style="margin-left:30px;"
-                                                                                         src="{{ asset('img/email-assets/red-twitter.png') }}"></a><a
-                                                href="http://www.gatku.com"><img height="25" style="margin-left:30px;"
-                                                                                 src="{{ asset('img/email-assets/red-logo.png') }}"></a>
+                                    <td style="text-align:right;"
+                                        colspan="1">
+                                        <a href="{{ $homeSetting['facebook_url'] }}">
+                                            <i class="fa fa-facebook-official"></i>
+                                        </a>
+                                        <a href="{{ $homeSetting['twitter_url'] }}">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                        <a href="{{ $homeSetting['instagram_url'] }}">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                        <a href="{{ $homeSetting['hostname'] }}">
+                                            <img height="25"
+                                                 style="margin-left:30px;"
+                                                 src="{{ $emailSettings['email_small_logo_url'] }}">
+                                        </a>
                                     </td>
 
                                 </tr>

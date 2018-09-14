@@ -3,6 +3,7 @@ namespace Gatku\Repositories;
 
 use App\Mail\EmailsOrder;
 use App\Mail\EmailsOrderAdmin;
+use Gatku\Model\Customer;
 use Gatku\Model\EmailSettings;
 use Gatku\Model\Order;
 use Gatku\Model\OrderItem;
@@ -15,7 +16,6 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Stripe_CardError;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
-use Illuminate\Support\Facades\App;
 use Gatku\Model\HomeSetting;
 
 /**
@@ -128,31 +128,36 @@ class OrderRepository {
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
+        $emailListForEmailsOrderArray = $this->createEmailListForEmailsOrder($customer);
+        $emailListForEmailsOrderAdminArray = $this->createEmailListForEmailsOrderAdmin();
+
         if (App::environment('production')) {
 
-            //Send email to Customer and to Ryan Gattoni
-            Mail::to([
-                [
-                    'email' => $customer->email,
-                    'name' => $customer->fullName
-                ],
-                [
-                    'email' => 'ryan@gatku.com',
-                    'name' => 'Ryan Gattoni'
-                ],
-            ])->send(new EmailsOrder($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting, $this->emailSettings));
+            //Send email to Customer and Notify Seller
+            Mail::to($emailListForEmailsOrderArray)
+                ->send(new EmailsOrder(
+                    $order,
+                    $discount,
+                    $subtotal,
+                    $shipping,
+                    $total,
+                    $date,
+                    $this->homeSetting,
+                    $this->emailSettings)
+                );
 
             //Send email to Sellers
-            Mail::to([
-                [
-                    'email' => 'dustin@gatku.com',
-                    'name' => 'Dustin McIntyre'
-                ],
-                [
-                    'email' => 'emailme@troyhollinger.com',
-                    'name' => 'Troy Hollinger'
-                ]
-            ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting, $this->emailSettings));
+            Mail::to($emailListForEmailsOrderAdminArray)
+                ->send(new EmailsOrderAdmin(
+                    $order,
+                    $discount,
+                    $subtotal,
+                    $shipping,
+                    $total,
+                    $date,
+                    $this->homeSetting,
+                    $this->emailSettings)
+                );
 
         }
 
@@ -163,7 +168,16 @@ class OrderRepository {
                         'email' => 'past-email-address-here',
                         'name' => 'past-recipient-name-here'
                     ]
-                ])->send(new EmailsOrderAdmin($order, $discount, $subtotal, $shipping, $total, $date, $this->homeSetting));
+                ])->send(new EmailsOrderAdmin(
+                    $order,
+                    $discount,
+                    $subtotal,
+                    $shipping,
+                    $total,
+                    $date,
+                    $this->homeSetting,
+                    $this->emailSettings)
+                );
             }
         }
 
@@ -466,4 +480,103 @@ class OrderRepository {
 
         return $collection;
     }
+
+    /**
+     * @param Customer $customer
+     * @return array
+     */
+    private function createEmailListForEmailsOrder(Customer $customer)
+    {
+        $emailList = [];
+
+        if ($customer->email) {
+            $emailList[] = [
+                'email' => $customer->email,
+                'name' => $customer->fullName
+            ];
+        }
+
+        if ($this->emailSettings['customer_order_notify_email_1']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['customer_order_notify_email_1'],
+                'name' => $this->emailSettings['customer_order_notify_name_1']
+            ];
+        }
+
+        if ($this->emailSettings['customer_order_notify_email_2']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['customer_order_notify_email_2'],
+                'name' => $this->emailSettings['customer_order_notify_name_2']
+            ];
+        }
+
+        if ($this->emailSettings['customer_order_notify_email_3']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['customer_order_notify_email_3'],
+                'name' => $this->emailSettings['customer_order_notify_name_3']
+            ];
+        }
+
+        if ($this->emailSettings['customer_order_notify_email_4']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['customer_order_notify_email_4'],
+                'name' => $this->emailSettings['customer_order_notify_name_4']
+            ];
+        }
+
+        if ($this->emailSettings['customer_order_notify_email_5']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['customer_order_notify_email_5'],
+                'name' => $this->emailSettings['customer_order_notify_name_5']
+            ];
+        }
+
+        return $emailList;
+    }
+
+    /**
+     * @return array
+     */
+    private function createEmailListForEmailsOrderAdmin()
+    {
+        $emailList = [];
+
+        if ($this->emailSettings['admin_order_notify_email_1']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['admin_order_notify_email_1'],
+                'name' => $this->emailSettings['admin_order_notify_name_1']
+            ];
+        }
+
+        if ($this->emailSettings['admin_order_notify_email_2']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['admin_order_notify_email_2'],
+                'name' => $this->emailSettings['admin_order_notify_name_2']
+            ];
+        }
+
+        if ($this->emailSettings['admin_order_notify_email_3']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['admin_order_notify_email_3'],
+                'name' => $this->emailSettings['admin_order_notify_name_3']
+            ];
+        }
+
+        if ($this->emailSettings['admin_order_notify_email_4']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['admin_order_notify_email_4'],
+                'name' => $this->emailSettings['admin_order_notify_name_4']
+            ];
+        }
+
+        if ($this->emailSettings['admin_order_notify_email_5']) {
+            $emailList[] = [
+                'email' => $this->emailSettings['admin_order_notify_email_5'],
+                'name' => $this->emailSettings['admin_order_notify_name_5']
+            ];
+        }
+
+        return $emailList;
+    }
+
 }

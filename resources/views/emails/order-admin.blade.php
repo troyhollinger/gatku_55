@@ -4,6 +4,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=200, initial-scale= 1.0">
 		<title>Customer Purchase</title>
+
+		<link rel="stylesheet" href="{{ asset('production/app.css') }}">
+
 		<style>
 		body, #body-table, #body-cell {
 			height:100% !important;
@@ -225,7 +228,7 @@
          }
 
 		</style>
-	</head>	
+	</head>
 	<body style="margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;height: 100%;width: 100%;">
 <center>
 <table id="body-table" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;margin: 0;padding: 0;height: 100%;width: 100%;">
@@ -446,20 +449,24 @@
 							<td style="	color: {{ $emailSettings['email_footer_color'] }};
 										font-size:16px;
 										padding:15px 0;"
-								colspan="1">Customer Service - Email: dustin@gatku.com / Phone: +001 619 507-3860</td>
+								colspan="1">Customer Service - Email: {{ $emailSettings['contact_email_address_displayed_in_email'] }} / Phone: {{ $emailSettings['contact_phone_number_displayed_in_email'] }}</td>
 
 							<!-- INSERT SOCIAL MEDIA IMAGES -->
-							<td style="text-align:right;" colspan="1">
-								<a href="http://www.facebook.com/gatku">
+							<td style="text-align:right;"
+								colspan="1">
+								<a href="{{ $homeSetting['facebook_url'] }}">
+									<i class="fa fa-facebook-official"></i>
+								</a>
+								<a href="{{ $homeSetting['twitter_url'] }}">
+									<i class="fa fa-twitter"></i>
+								</a>
+								<a href="{{ $homeSetting['instagram_url'] }}">
+									<i class="fa fa-instagram"></i>
+								</a>
+								<a href="{{ $homeSetting['hostname'] }}">
 									<img height="25"
 										 style="margin-left:30px;"
-										 src="{{ asset('img/email-assets/red-facebook.png') }}">
-								</a>
-								<a href="http://www.twitter.com/gatku">
-									<img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-twitter.png') }}">
-								</a>
-								<a href="http://www.gatku.com">
-									<img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/logo.png') }}">
+										 src="{{ $emailSettings['email_small_logo_url'] }}">
 								</a>
 							</td>
 						</tr>
@@ -482,8 +489,7 @@
 			</tr>
 			<tr>
 				<th colspan="2" padding="0" align="left" style="width: 100%;height: 35px;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px; font-weight: normal;">
-					 1250 PIONEER WAY SUITE H <br>
-                     EL CAJON, CA 92020 <span style="font-weight: bold;">USA</span>
+					{{ $homeSetting['address_us'] }}
 				</th>
 			</tr>
 		</thead>
