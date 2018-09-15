@@ -4,6 +4,7 @@
 /public/img/uploads/*
 /public/img/you-images/*
 /public/img/home-images/*
+/public/img/email-images/*
 /public/node_modules/*
 /public/.sass-cache
 /storage/*.key
