@@ -110,6 +110,13 @@
                        <button type="button" class="btn btn-success">Track# {{ order.tracking.track_id }}</button>
                     </a>
                 </div>
+
+                <button type="button"
+                        class="btn btn-default"
+                        ng-click="$ctrl.resendOrderEmails(order.id)">Resend order emails
+                    &nbsp;<i class="fa fa-check" style="color: green;" ng-if="$ctrl.orderResent[order.id]"></i>
+                </button>
+
                 <div ng-if="order.tracking" style="margin-right: 5px;float:right;">
                     <shipping-track order="order" tracking="order.tracking"></shipping-track>
                 </div>

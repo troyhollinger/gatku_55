@@ -58,6 +58,24 @@ class OrderRepository {
     }
 
     /**
+     * @param $id
+     * @return bool
+     */
+    public function get($id) {
+        try {
+            $order = Order::findOrFail($id);
+            $order->load('customer', 'items');
+        } catch (\Exception $e) {
+            Bugsnag::notifyException($e);
+            Log::error($e);
+            return false;
+        }
+
+        return $order;
+    }
+
+
+    /**
      * Processes order, payment, and email.
      *
      * @return boolean
@@ -127,60 +145,7 @@ class OrderRepository {
 
         DB::commit();
 
-        $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
-
-        $emailListForEmailsOrderArray = $this->createEmailListForEmailsOrder($customer);
-        $emailListForEmailsOrderAdminArray = $this->createEmailListForEmailsOrderAdmin();
-
-        if (App::environment('production')) {
-
-            //Send email to Customer and Notify Seller
-            Mail::to($emailListForEmailsOrderArray)
-                ->send(new EmailsOrder(
-                    $order,
-                    $discount,
-                    $subtotal,
-                    $shipping,
-                    $total,
-                    $date,
-                    $this->homeSetting,
-                    $this->emailSettings)
-                );
-
-            //Send email to Sellers
-            Mail::to($emailListForEmailsOrderAdminArray)
-                ->send(new EmailsOrderAdmin(
-                    $order,
-                    $discount,
-                    $subtotal,
-                    $shipping,
-                    $total,
-                    $date,
-                    $this->homeSetting,
-                    $this->emailSettings)
-                );
-
-        }
-
-        if (App::environment('dev')) {
-            if (isset($_ENV['test_transaction_email'])) {
-                Mail::to([
-                    [
-                        'email' => 'past-email-address-here',
-                        'name' => 'past-recipient-name-here'
-                    ]
-                ])->send(new EmailsOrderAdmin(
-                    $order,
-                    $discount,
-                    $subtotal,
-                    $shipping,
-                    $total,
-                    $date,
-                    $this->homeSetting,
-                    $this->emailSettings)
-                );
-            }
-        }
+        $this->sendEmailNotifications($customer, $order, $discount, $subtotal, $shipping, $total);
 
         return true;
     }
@@ -578,6 +543,75 @@ class OrderRepository {
         }
 
         return $emailList;
+    }
+
+    /**
+     * @param Customer $customer
+     * @param Order $order
+     * @param Discount $discount
+     * @param $subtotal
+     * @param $shipping
+     * @param $total
+     * @return bool
+     */
+    public function sendEmailNotifications(Customer $customer, Order $order, Discount $discount, $subtotal, $shipping, $total)
+    {
+        $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
+
+        $emailListForEmailsOrderArray = $this->createEmailListForEmailsOrder($customer);
+        $emailListForEmailsOrderAdminArray = $this->createEmailListForEmailsOrderAdmin();
+
+        //if (App::environment('production')) {
+
+            //Send email to Customer and Notify Seller
+            Mail::to($emailListForEmailsOrderArray)
+                ->send(new EmailsOrder(
+                        $order,
+                        $discount,
+                        $subtotal,
+                        $shipping,
+                        $total,
+                        $date,
+                        $this->homeSetting,
+                        $this->emailSettings)
+                );
+
+            //Send email to Sellers
+            Mail::to($emailListForEmailsOrderAdminArray)
+                ->send(new EmailsOrderAdmin(
+                        $order,
+                        $discount,
+                        $subtotal,
+                        $shipping,
+                        $total,
+                        $date,
+                        $this->homeSetting,
+                        $this->emailSettings)
+                );
+
+        //}
+
+//        if (App::environment('dev')) {
+//            if (isset($_ENV['test_transaction_email'])) {
+//                Mail::to([
+//                    [
+//                        'email' => 'past-email-address-here',
+//                        'name' => 'past-recipient-name-here'
+//                    ]
+//                ])->send(new EmailsOrderAdmin(
+//                        $order,
+//                        $discount,
+//                        $subtotal,
+//                        $shipping,
+//                        $total,
+//                        $date,
+//                        $this->homeSetting,
+//                        $this->emailSettings)
+//                );
+//            }
+//        }
+
+        return true;
     }
 
 }

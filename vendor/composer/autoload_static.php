@@ -390,6 +390,7 @@ class ComposerStaticInit987a49ed413fc1b0ed7ee05b84013a37
         'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\QuoteController' => __DIR__ . '/../..' . '/app/Http/Controllers/QuoteController.php',
+        'App\\Http\\Controllers\\ResendOrderEmailsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ResendOrderEmailsController.php',
         'App\\Http\\Controllers\\ShelfController' => __DIR__ . '/../..' . '/app/Http/Controllers/ShelfController.php',
         'App\\Http\\Controllers\\ShelvesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ShelvesController.php',
         'App\\Http\\Controllers\\ShippingRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/ShippingRequestController.php',

@@ -13323,6 +13323,15 @@ app.factory('Order', ['$http', function($http) {
 
 }]);
 
+app.factory('ResendOrderEmails', ['$http', function($http) {
+    return {
+        resend : function(id) {
+            return $http.get('/resend-order-email/' + id );
+
+        }
+    }
+}]);
+
 app.factory('HomeSetting', ['$http', function($http) {
     return {
         all : function() {
@@ -15500,7 +15509,7 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 (function () {
     app.controller('AdminOrdersController', AdminOrdersController);
 
-    function AdminOrdersController($scope, Order, $http, $exceptionHandler) {
+    function AdminOrdersController($scope, Order, ResendOrderEmails, $http, $exceptionHandler) {
 
         var $ctrl = this;
 
@@ -15509,6 +15518,8 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         $ctrl.orders = [];
         $ctrl.pageno = 1;
         $ctrl.itemsPerPage = 15;
+
+        $ctrl.orderResent = [];
 
         $ctrl.getData = function (pageno, start_date, end_date) {
             $ctrl.orders = [];
@@ -15550,6 +15561,12 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $scope.order_start_date = ''
             $scope.order_end_date = '';
             $ctrl.getData(1, $scope.order_start_date, $scope.order_end_date);
+        };
+
+        $ctrl.resendOrderEmails = function(id) {
+            ResendOrderEmails.resend(id).then(function() {
+                $ctrl.orderResent[id] = true;
+            });
         };
 
         function dateToYMD(date) {

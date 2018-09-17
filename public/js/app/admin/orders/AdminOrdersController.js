@@ -1,7 +1,7 @@
 (function () {
     app.controller('AdminOrdersController', AdminOrdersController);
 
-    function AdminOrdersController($scope, Order, $http, $exceptionHandler) {
+    function AdminOrdersController($scope, Order, ResendOrderEmails, $http, $exceptionHandler) {
 
         var $ctrl = this;
 
@@ -10,6 +10,8 @@
         $ctrl.orders = [];
         $ctrl.pageno = 1;
         $ctrl.itemsPerPage = 15;
+
+        $ctrl.orderResent = [];
 
         $ctrl.getData = function (pageno, start_date, end_date) {
             $ctrl.orders = [];
@@ -51,6 +53,12 @@
             $scope.order_start_date = ''
             $scope.order_end_date = '';
             $ctrl.getData(1, $scope.order_start_date, $scope.order_end_date);
+        };
+
+        $ctrl.resendOrderEmails = function(id) {
+            ResendOrderEmails.resend(id).then(function() {
+                $ctrl.orderResent[id] = true;
+            });
         };
 
         function dateToYMD(date) {

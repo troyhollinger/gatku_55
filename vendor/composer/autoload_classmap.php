@@ -25,6 +25,7 @@ return array(
     'App\\Http\\Controllers\\OrderController' => $baseDir . '/app/Http/Controllers/OrderController.php',
     'App\\Http\\Controllers\\ProductController' => $baseDir . '/app/Http/Controllers/ProductController.php',
     'App\\Http\\Controllers\\QuoteController' => $baseDir . '/app/Http/Controllers/QuoteController.php',
+    'App\\Http\\Controllers\\ResendOrderEmailsController' => $baseDir . '/app/Http/Controllers/ResendOrderEmailsController.php',
     'App\\Http\\Controllers\\ShelfController' => $baseDir . '/app/Http/Controllers/ShelfController.php',
     'App\\Http\\Controllers\\ShelvesController' => $baseDir . '/app/Http/Controllers/ShelvesController.php',
     'App\\Http\\Controllers\\ShippingRequestController' => $baseDir . '/app/Http/Controllers/ShippingRequestController.php',

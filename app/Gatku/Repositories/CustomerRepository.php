@@ -27,4 +27,20 @@ class CustomerRepository {
 
 		return $customer;
 	}
+
+    /**
+     * @param $id
+     * @return bool
+     */
+	public function get($id) {
+        try {
+            $customer = Customer::findOrFail($id);
+        } catch (\Exception $e) {
+            Bugsnag::notifyException($e);
+            Log::error($e);
+            return false;
+        }
+
+        return $customer;
+    }
 }
