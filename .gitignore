@@ -16,6 +16,6 @@ npm-debug.log
 yarn-error.log
 .env
 .env.php
-favicon.ico
+/public/favicon.ico
 
 
