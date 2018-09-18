@@ -240,7 +240,7 @@
 				<th id="header" align="left" valign="top" colspan="2" style="height: 45px;font-family: "Helvetica", Arial, sans-serif;">
 
 					<!-- Gatku image here -->
-					<img src="{{ asset($emailSettings['order_email_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
+					<img src="{{ asset($emailSettings['email_main_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
 				</th>
 			</tr>
 			<tr>
@@ -454,14 +454,14 @@
 							<!-- INSERT SOCIAL MEDIA IMAGES -->
 							<td style="text-align:right;"
 								colspan="1">
-								<a href="{{ $homeSetting['facebook_url'] }}">
-									<i class="fa fa-facebook-official"></i>
+								<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['facebook_url'] }}">
+									<i class="fa fa-facebook-official fa-2x"></i>
 								</a>
-								<a href="{{ $homeSetting['twitter_url'] }}">
-									<i class="fa fa-twitter"></i>
+								<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['twitter_url'] }}">
+									<i class="fa fa-twitter fa-2x"></i>
 								</a>
-								<a href="{{ $homeSetting['instagram_url'] }}">
-									<i class="fa fa-instagram"></i>
+								<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['instagram_url'] }}">
+									<i class="fa fa-instagram fa-2x"></i>
 								</a>
 								<a href="{{ $homeSetting['hostname'] }}">
 									<img height="25"
@@ -484,7 +484,7 @@
 			<tr>
 				<th id="header-address" align="left" valign="top" colspan="2" style="height: 45px;font-family: "Helvetica", Arial, sans-serif;">
 					<!-- Logo image here -->
-					<img src="{{ asset($emailSettings['order_email_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
+					<img src="{{ asset($emailSettings['email_main_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
 				</th>
 			</tr>
 			<tr>

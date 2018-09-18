@@ -282,7 +282,7 @@
                             Helvetica
                         ", Arial, sans-serif;">
                         <!-- Logo image here -->
-                        <img src="{{ asset($emailSettings['order_email_logo_url']) }}" height="40px"
+                        <img src="{{ asset($emailSettings['email_main_logo_url']) }}" height="40px"
                              style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
                         </th>
                     </tr>
@@ -293,7 +293,7 @@
                                     border-bottom: 1px solid black;
                                     font-family: 'Helvetica', Arial, sans-serif;
                                     padding: 0 0 0 0px;
-                                    color:{{ $emailSettings['email_footer_color'] }}">
+                                    color: {{ $emailSettings['email_footer_color'] }}">
                             <span id="status" style="font-size: 16px;font-weight: 200;">Order : {{ $order['number'] }}
                                 - </span><span id="date" style="font-size: 20px;font-weight: 200;">{{ $date }}</span>
                         </th>
@@ -527,14 +527,14 @@
                                     <!-- INSERT SOCIAL MEDIA IMAGES -->
                                     <td style="text-align:right;"
                                         colspan="1">
-                                        <a href="{{ $homeSetting['facebook_url'] }}">
-                                            <i class="fa fa-facebook-official"></i>
+                                        <a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['facebook_url'] }}">
+                                            <i class="fa fa-facebook-official fa-2x"></i>
                                         </a>
-                                        <a href="{{ $homeSetting['twitter_url'] }}">
-                                            <i class="fa fa-twitter"></i>
+                                        <a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['twitter_url'] }}">
+                                            <i class="fa fa-twitter fa-2x"></i>
                                         </a>
-                                        <a href="{{ $homeSetting['instagram_url'] }}">
-                                            <i class="fa fa-instagram"></i>
+                                        <a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['instagram_url'] }}">
+                                            <i class="fa fa-instagram fa-2x"></i>
                                         </a>
                                         <a href="{{ $homeSetting['hostname'] }}">
                                             <img height="25"

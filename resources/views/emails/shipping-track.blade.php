@@ -1,5 +1,6 @@
 <!-- Keep this php code in first line -->
 <?php $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first(); ?>
+<?php $emailSettings = \Gatku\Model\EmailSettings::orderBy('id', 'desc')->first(); ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html xmlns="http://www.3c.org/1999/xhtml">
@@ -7,6 +8,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=200, initial-scale= 1.0">
 		<title>Customer Purchase</title>
+
+		<link rel="stylesheet" href="{{ asset('production/app.css') }}">
+
 		<style>
 		body, #body-table, #body-cell {
 			height:100% !important;
@@ -248,7 +252,7 @@
 								<tr>
 									<th id="header" align="left" valign="top" colspan="2" style="height: 45px;font-family: "Helvetica", Arial, sans-serif;">
 										<!-- Logo image here -->
-										<img src="{{ asset($homeSetting['order_email_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
+										<img src="{{ asset($emailSettings['email_main_logo_url']) }}" height="40px" style="margin-left: 0;margin-top: 5px;border: 0;outline: none;text-decoration: ;-ms-interpolation-mode: bicubic;font-family: 'helvetica' ;, arial, sans-serif: ;">
 									</th>
 								</tr>
 								<tr>
@@ -448,10 +452,26 @@
 											@endif --}}
 											
 											<tr id="thefooter" style="border-top:solid black 1px; border-bottom:solid black 1px;">
-												<td style="color:#E24A62;font-size:16px; padding:15px 0;" colspan="1">Customer Service - Email: dustin@gatku.com / Phone: +001 619 507-3860</td>
+												<td style="color:#E24A62;font-size:16px; padding:15px 0;" colspan="1">Customer Service - Email: {{ $emailSettings['contact_email_address_displayed_in_email'] }} / Phone: {{ $emailSettings['contact_phone_number_displayed_in_email'] }}</td>
 
 												<!-- INSERT SOCIAL MEDIA IMAGES -->
-												<td style="text-align:right;" colspan="1"><a href="http://www.facebook.com/gatku"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-facebook.png') }}"></a><a href="http://www.twitter.com/gatku"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-twitter.png') }}"></a><a href="http://www.gatku.com"><img height="25" style="margin-left:30px;" src="{{ asset('img/email-assets/red-logo.png') }}"></a></td>
+												<td style="text-align:right;"
+													colspan="1">
+													<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['facebook_url'] }}">
+														<i class="fa fa-facebook-official fa-2x"></i>
+													</a>
+													<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['twitter_url'] }}">
+														<i class="fa fa-twitter fa-2x"></i>
+													</a>
+													<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['instagram_url'] }}">
+														<i class="fa fa-instagram fa-2x"></i>
+													</a>
+													<a href="{{ $homeSetting['hostname'] }}">
+														<img height="25"
+															 style="margin-left:30px;"
+															 src="{{ $emailSettings['email_small_logo_url'] }}">
+													</a>
+												</td>
 
 											</tr>
 										</table>
