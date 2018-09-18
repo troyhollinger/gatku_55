@@ -452,23 +452,37 @@
 								colspan="1">Customer Service - Email: {{ $emailSettings['contact_email_address_displayed_in_email'] }} / Phone: {{ $emailSettings['contact_phone_number_displayed_in_email'] }}</td>
 
 							<!-- INSERT SOCIAL MEDIA IMAGES -->
-							<td style="text-align:right;"
-								colspan="1">
-								<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['facebook_url'] }}">
-									<i class="fa fa-facebook-official fa-2x"></i>
-								</a>
-								<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['twitter_url'] }}">
-									<i class="fa fa-twitter fa-2x"></i>
-								</a>
-								<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['instagram_url'] }}">
-									<i class="fa fa-instagram fa-2x"></i>
-								</a>
+							<td style="text-align:right;" colspan="1">
+
+								<!-- Facebook -->
+                                @if ($homeSetting['facebook_url'])
+									<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['facebook_url'] }}">
+										<i class="fa fa-facebook-official fa-4x"></i>
+									</a>
+                                @endif
+
+								<!-- Twitter -->
+                                @if ($homeSetting['twitter_url'])
+									<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['twitter_url'] }}">
+										<i class="fa fa-twitter fa-4x"></i>
+									</a>
+                                @endif
+
+								<!-- Instagram -->
+                                @if ($homeSetting['instagram_url'])
+									<a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['instagram_url'] }}">
+										<i class="fa fa-instagram fa-4x"></i>
+									</a>
+								@endif
+
 								<a href="{{ $homeSetting['hostname'] }}">
 									<img height="25"
 										 style="margin-left:30px;"
 										 src="{{ $emailSettings['email_small_logo_url'] }}">
 								</a>
 							</td>
+							<!-- INSERT SOCIAL MEDIA END -->
+
 						</tr>
 					</table>
 				</td>
