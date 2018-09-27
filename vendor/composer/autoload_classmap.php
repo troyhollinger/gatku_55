@@ -19,6 +19,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DiscountController' => $baseDir . '/app/Http/Controllers/DiscountController.php',
     'App\\Http\\Controllers\\DiscountExistsController' => $baseDir . '/app/Http/Controllers/DiscountExistsController.php',
+    'App\\Http\\Controllers\\DisplayOrderNotificationEmailController' => $baseDir . '/app/Http/Controllers/DisplayOrderNotificationEmailController.php',
     'App\\Http\\Controllers\\EmailSettingsController' => $baseDir . '/app/Http/Controllers/EmailSettingsController.php',
     'App\\Http\\Controllers\\HearGoodStuffController' => $baseDir . '/app/Http/Controllers/HearGoodStuffController.php',
     'App\\Http\\Controllers\\HomeSettingController' => $baseDir . '/app/Http/Controllers/HomeSettingController.php',

@@ -116,8 +116,12 @@ Route::resource('shelf', 'ShelfController');
 Route::resource('shelves', 'ShelvesController')->only(['index']);
 Route::put('shelves', ['uses' => 'ShelvesController@update']);
 
-//Resend email notifications to order
+//Resend email notifications for order
 Route::get('/resend-order-email/{orderId}', [ 'uses' => 'ResendOrderEmailsController@resend']);
+
+//Display email notifications for order
+Route::get('/display-order-email/admin/{orderId}', [ 'uses' => 'DisplayOrderNotificationEmailController@admin']);
+Route::get('/display-order-email/customer/{orderId}', [ 'uses' => 'DisplayOrderNotificationEmailController@customer']);
 
 //Below code is to test mailable objects. Uncomment if necessary.
 //Route::get('/mailable', function () {

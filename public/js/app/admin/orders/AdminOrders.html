@@ -117,6 +117,19 @@
                     &nbsp;<i class="fa fa-check" style="color: green;" ng-if="$ctrl.orderResent[order.id]"></i>
                 </button>
 
+                <!-- Display order emails -->
+                <br>
+                <a class="btn btn-primary"
+                   target="_blank"
+                   href="/display-order-email/admin/{{order.id}}">Display Order Admin
+                </a>
+
+                <a class="btn btn-primary"
+                   target="_blank"
+                   href="/display-order-email/customer/{{order.id}}">Display Order Customer
+                </a>
+                <!-- Display order emails - end -->
+
                 <div ng-if="order.tracking" style="margin-right: 5px;float:right;">
                     <shipping-track order="order" tracking="order.tracking"></shipping-track>
                 </div>

@@ -467,7 +467,7 @@
 
                     <tr>
                         <td colspan="2">
-                            <table style="width:inherit;" style="margin-bottom:30px;">
+                            <table style="margin-bottom:30px; width: 100%;">
 
                                 <?php $displayShrinker = false; ?>
 
@@ -527,30 +527,31 @@
                                     <!-- INSERT SOCIAL MEDIA IMAGES -->
                                     <td style="text-align:right;" colspan="1">
 
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+
                                         <!-- Facebook -->
                                         @if ($homeSetting['facebook_url'])
-                                            <a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['facebook_url'] }}">
-                                                <i class="fa fa-facebook-official fa-4x"></i>
+                                            <a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.8em;" href="{{ $homeSetting['facebook_url'] }}">
+                                                <i class="fa fa-facebook-official"></i>
                                             </a>
                                         @endif
 
                                     <!-- Twitter -->
                                         @if ($homeSetting['twitter_url'])
-                                            <a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['twitter_url'] }}">
-                                                <i class="fa fa-twitter fa-4x"></i>
+                                            <a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.8em;" href="{{ $homeSetting['twitter_url'] }}">
+                                                <i class="fa fa-twitter"></i>
                                             </a>
                                         @endif
 
                                     <!-- Instagram -->
                                         @if ($homeSetting['instagram_url'])
-                                            <a style="color: {{ $emailSettings['email_footer_color'] }}" href="{{ $homeSetting['instagram_url'] }}">
-                                                <i class="fa fa-instagram fa-4x"></i>
+                                            <a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.8em;" href="{{ $homeSetting['instagram_url'] }}">
+                                                <i class="fa fa-instagram"></i>
                                             </a>
                                         @endif
 
                                         <a href="{{ $homeSetting['hostname'] }}">
-                                            <img height="25"
-                                                 style="margin-left:30px;"
+                                            <img style="margin-left:0px;"
                                                  src="{{ $emailSettings['email_small_logo_url'] }}">
                                         </a>
                                     </td>
