@@ -225,10 +225,16 @@ class OrderRepository {
             $subtotal += $value;
 
             foreach($item->addons as $addon) {
-                if ($addon->product->sizeable && $addon->sizeId) {
-                    $addonPrice = $addon->size->price;
+
+                //For Addons with price_zero = 1
+                if ($addon->price_zero) {
+                    $addonPrice = 0;
                 } else {
-                    $addonPrice = $addon->product->price;
+                    if ($addon->product->sizeable && $addon->sizeId) {
+                        $addonPrice = $addon->size->price;
+                    } else {
+                        $addonPrice = $addon->product->price;
+                    }
                 }
 
                 //Calc addon value
@@ -429,6 +435,10 @@ class OrderRepository {
                 if($addon['sizeable'] && $addon['sizeId']) {
                     $itemAddon->sizeId = $addon['sizeId'];
                 }
+
+                $itemAddon->include_in_package = ($addon['include_in_package']) ? $addon['include_in_package'] : 0;
+                $itemAddon->price_zero = ($addon['price_zero']) ? $addon['price_zero'] : 0;
+
                 $itemAddon->save();
             }
         }

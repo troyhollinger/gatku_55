@@ -339,17 +339,17 @@
 					<td><span class="bold">{{ $addon['product']['name'] }}</span></td>
 
 					@if($addon['product']['sizeable'])
-					<td>${{ $addon['size']['price'] / 100 }}</td>
+					<td>${{ ($addon['price_zero'] == 0) ? $addon['size']['price'] / 100 : 0}}</td>
 					@else
-					<td>${{ $addon['product']['price'] / 100 }}</td>
+					<td>${{ ($addon['price_zero'] == 0) ? $addon['product']['price'] / 100 : 0}}</td>
 					@endif
 
 					<td><span class="product-quantity @if($addon['quantity'] > 1) multiple @endif">{{ $addon['quantity'] }}</span></td>
 
 					@if($addon['product']['sizeable'])
-					<td><span class="product-final-price">${{ ($addon['size']['price'] * $addon['quantity']) / 100 }}</span></td>
+					<td><span class="product-final-price">${{ ($addon['price_zero'] == 0) ? ($addon['size']['price'] * $addon['quantity']) / 100 : 0}}</span></td>
 					@else
-					<td><span class="product-final-price">${{ ($addon['product']['price'] * $addon['quantity']) / 100 }}</span></td>
+					<td><span class="product-final-price">${{ ($addon['price_zero'] == 0) ? ($addon['product']['price'] * $addon['quantity']) / 100 : 0}}</span></td>
 					@endif
 				</tr>
 
