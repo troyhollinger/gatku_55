@@ -458,21 +458,21 @@
 
 								<!-- Facebook -->
                                 @if ($homeSetting['facebook_url'])
-									<a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.8em;" href="{{ $homeSetting['facebook_url'] }}">
+									<a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.5em; margin-right: 10px;" href="{{ $homeSetting['facebook_url'] }}">
 										<i class="fa fa-facebook-official"></i>
 									</a>
                                 @endif
 
 								<!-- Twitter -->
                                 @if ($homeSetting['twitter_url'])
-									<a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.8em;" href="{{ $homeSetting['twitter_url'] }}">
+									<a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.5em; margin-right: 10px;" href="{{ $homeSetting['twitter_url'] }}">
 										<i class="fa fa-twitter"></i>
 									</a>
                                 @endif
 
 								<!-- Instagram -->
                                 @if ($homeSetting['instagram_url'])
-									<a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.8em;" href="{{ $homeSetting['instagram_url'] }}">
+									<a style="color: {{ $emailSettings['email_footer_color'] }}; font-size: 1.5em; margin-right: 10px;" href="{{ $homeSetting['instagram_url'] }}">
 										<i class="fa fa-instagram"></i>
 									</a>
 								@endif
