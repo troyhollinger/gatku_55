@@ -83,6 +83,7 @@ class HomeSettingController extends BaseController {
             $homeSetting->contact_mobile_logo_height = \Request::get('contact_mobile_logo_height') ? \Request::get('contact_mobile_logo_height') : 0;
             $homeSetting->additional_images_label_for_product = \Request::get('additional_images_label_for_product') ? \Request::get('additional_images_label_for_product') : '';
             $homeSetting->shelves_between_space = \Request::get('shelves_between_space') ? \Request::get('shelves_between_space') : 0;
+            $homeSetting->ga_tracking_id = \Request::get('ga_tracking_id') ? \Request::get('ga_tracking_id') : '';
 
             $homeSetting->save();
 		} catch (Exception $e) {

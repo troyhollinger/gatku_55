@@ -13611,11 +13611,6 @@ app.config(function($routeProvider) {
             controller: 'AdminImagesController',
             controllerAs: '$ctrl'
         })
-        .when('/integration', {
-            templateUrl : 'js/app/admin/integration/AdminIntegration.html',
-            controller: 'AdminIntegrationController',
-            controllerAs: '$ctrl'
-        })
     ;
 });
 
@@ -15409,30 +15404,6 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
         $ctrl.submitButton = 'Submit';
 
-        // $ctrl.upload = function ($files, model) {
-        //     var nanobar = new Nanobar({bg: '#fff'});
-        //     var file = $files[0];
-        //
-        //     if (!file) return false;
-        //
-        //     var data = {
-        //         url: '/product/image',
-        //         file: file
-        //     };
-        //
-        //     nanobar.go(40);
-        //
-        //     Image.upload(data).progress(function (evt) {
-        //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        //     }).then(function (response) {
-        //         $ctrl.newProduct[model] = response.data;
-        //         nanobar.go(100);
-        //     }, function (error) {
-        //         $exceptionHandler(JSON.stringify(error));
-        //         nanobar.go(100);
-        //     });
-        // };
-
         // home settings
         function getHomeSettings() {
             HomeSetting.all().then(function (response) {
@@ -15491,20 +15462,6 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
         getHomeSettings();
     }
 }());
-
-(function () {
-    app.controller('AdminIntegrationController', AdminIntegrationController);
-
-    function AdminIntegrationController($scope,
-                                        IntegrationAdminResource,
-                                        AlertService,
-                                        $exceptionHandler) {
-
-        var $ctrl = this;
-
-    };
-}());
-
 
 (function () {
     app.controller('AdminOrdersController', AdminOrdersController);

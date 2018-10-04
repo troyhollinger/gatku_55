@@ -36,10 +36,5 @@ app.config(function($routeProvider) {
             controller: 'AdminImagesController',
             controllerAs: '$ctrl'
         })
-        .when('/integration', {
-            templateUrl : 'js/app/admin/integration/AdminIntegration.html',
-            controller: 'AdminIntegrationController',
-            controllerAs: '$ctrl'
-        })
     ;
 });
