@@ -51,9 +51,30 @@ class OrderRepository {
         $this->emailSettings = $emailSettingsRepository->getLastRecordFromDatabase();
     }
 
+    /**
+     * @return Order[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection|mixed
+     */
     public function all() {
         $orders = Order::with('items.addons.product', 'items.product', 'customer', 'items.size', 'tracking','shipping')->orderBy('created_at', 'desc')->take(10)->get();
         $orders = $this->assignHumanReadableTimestamps($orders);
+        return $orders;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllRecordsCount()
+    {
+        $totalCount = \DB::table('orders')->count();
+        return $totalCount;
+    }
+
+    /**
+     * @return Order[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllRecords()
+    {
+        $orders = Order::with('items.addons.product', 'items.product', 'customer', 'items.size', 'tracking', 'shipping')->orderBy('created_at', 'desc')->get();
         return $orders;
     }
 
@@ -194,7 +215,7 @@ class OrderRepository {
      * @param $discountObj
      * @return float|int
      */
-    private function calculateSubTotal($order, $discountObj) {
+    public function calculateSubTotal($order, $discountObj) {
 
         $subtotal = 0;
 
@@ -319,8 +340,11 @@ class OrderRepository {
      * There is a similar method in the CartController.js file. These two methods
      * should produce identical results.
      *
+     * @param Order $order
+     * @param Discount $discount
+     * @return float|int
      */
-    private function calculateShipping($order, $discount) {
+    public function calculateShipping(Order $order, Discount $discount) {
 
         $shippingPrice = 0;
         $poles = [];
@@ -394,7 +418,7 @@ class OrderRepository {
      * @param $discount
      * @return float|int
      */
-    private function calculateTotal($order, $discount) {
+    public function calculateTotal(Order $order, Discount $discount) {
 
         $subtotal = $this->calculateSubTotal($order, $discount);
 
