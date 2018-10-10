@@ -18,24 +18,6 @@ class ProductRepository implements ProductRepositoryInterface {
 		return $products;
 	}
 
-	//Commented temporary - remove in future if not used.
-//	public function getProductsForPeriod($startDate, $endDate)
-//    {
-//        if (!$startDate) {
-//            $startDate = date('y-m-d');
-//        }
-//
-//        //Just in case no endDate
-//        if (!$endDate) {
-//            $endDate = date('y-m-d');
-//        }
-//
-//        $products = Product::with(['type', 'addons', 'availability', 'orderitems' => Product::orderItemsWithParams($startDate, $endDate)])->get();
-//
-//        Log::info($products);
-//        return $products;
-//    }
-
 	public function get($id)
     {
 		try {
@@ -284,6 +266,9 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->length_font_weight_for_shelf = (isset($data['length_font_weight_for_shelf'])) ? $data['length_font_weight_for_shelf'] : '';
         $product->length_font_style_for_shelf = (isset($data['length_font_style_for_shelf'])) ? $data['length_font_style_for_shelf'] : '';
         $product->length_font_size_for_shelf = (isset($data['length_font_size_for_shelf'])) ? $data['length_font_size_for_shelf'] : 0;
+
+        $product->short_name_space = (isset($data['short_name_space'])) ? $data['short_name_space'] : 0;
+        $product->length_space = (isset($data['length_space'])) ? $data['length_space'] : 0;
 
 		return $product;
 	}

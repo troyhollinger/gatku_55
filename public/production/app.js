@@ -15733,6 +15733,8 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $ctrl.newProduct.name_font_style = 'normal';
             $ctrl.newProduct.name_font_size = 26;
 
+            $ctrl.short_name_space = 0;
+
             $ctrl.newProduct.name_text_align_for_mobile = 'left';
             $ctrl.newProduct.name_font_weight_for_mobile = 'normal';
             $ctrl.newProduct.name_font_style_for_mobile = 'normal';
@@ -15758,6 +15760,8 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $ctrl.newProduct.length_font_weight = 'normal';
             $ctrl.newProduct.length_font_style = 'normal';
             $ctrl.newProduct.length_font_size = 26;
+
+            $ctrl.length_space = 0;
 
             $ctrl.newProduct.length_font_weight_for_mobile = 'normal';
             $ctrl.newProduct.length_font_style_for_mobile = 'normal';

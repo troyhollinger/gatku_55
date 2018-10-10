@@ -33,9 +33,9 @@
 				                    font-size: {{  product.name_font_size_for_shelf }}px;">
                             <span style="font-weight: {{  product.name_font_weight_for_shelf }};
                                          font-style: {{  product.name_font_style_for_shelf }};
-                                         font-size: {{  product.name_font_size_for_shelf }}px;">{{  (product.shortName) ? product.shortName : product.name }}</span><span style="font-weight: {{  product.name_extension_font_weight_for_shelf }};
+                                         font-size: {{  product.name_font_size_for_shelf }}px;">{{  (product.shortName) ? product.shortName : product.name }}</span><span ng-show="product.short_name_space">&nbsp;</span><span style="font-weight: {{  product.name_extension_font_weight_for_shelf }};
                                          font-style: {{  product.name_extension_font_style_for_shelf }};
-                                         font-size: {{  product.name_extension_font_size_for_shelf }}px;">{{  product.short_name_extension }}</span><span style="font-weight: {{  product.length_font_weight_for_shelf }};
+                                         font-size: {{  product.name_extension_font_size_for_shelf }}px;">{{  product.short_name_extension }}</span><span ng-show="product.length_space">&nbsp;</span><span style="font-weight: {{  product.length_font_weight_for_shelf }};
                                          font-style: {{  product.length_font_style_for_shelf }};
                                          font-size: {{  product.length_font_size_for_shelf }}px;">{{  product.length }}</span>
                         </div>

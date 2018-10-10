@@ -217,6 +217,12 @@
                    id="short_name_extension"
                    placeholder="Product name extension ..."
                    ng-model="$ctrl.newProduct.short_name_extension">
+
+            <input type="checkbox"
+                   ng-true-value="1"
+                   ng-false-value="0"
+                   ng-model="$ctrl.newProduct.short_name_space">
+            <span >Space on front</span>
         </div>
     </div>
 
@@ -518,6 +524,12 @@
                    id="length"
                    placeholder="Length..."
                    ng-model="$ctrl.newProduct.length">
+
+            <input type="checkbox"
+                   ng-true-value="1"
+                   ng-false-value="0"
+                   ng-model="$ctrl.newProduct.length_space">
+            <span >Space on front</span>
         </div>
     </div>
 
