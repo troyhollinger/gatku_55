@@ -75,9 +75,9 @@
 			<div class="default-product-name" style="text-align: {{ $product->name_text_align }}">
 				<span style="font-weight: {{ $product->name_font_weight }};
 							 font-style: {{ $product->name_font_style }};
-							 font-size: {{ $product->name_font_size }}px;">{{  ($product->shortName) ? $product->shortName : $product->name }}</span><span ng-show="{{ $product->short_name_space }}">&nbsp;</span><span style="font-weight: {{ $product->name_extension_font_weight }};
+							 font-size: {{ $product->name_font_size }}px;">{{  ($product->shortName) ? $product->shortName : $product->name }}</span><span ng-show="{{ $product->short_name_space }}">&nbsp;&nbsp;</span><span style="font-weight: {{ $product->name_extension_font_weight }};
 								 font-style: {{ $product->name_extension_font_style }};
-								 font-size: {{ $product->name_extension_font_size }}px;">{{  $product->short_name_extension }}</span><span ng-show="{{ $product->length_space }}">&nbsp;</span><span style="font-weight: {{ $product->length_font_weight }};
+								 font-size: {{ $product->name_extension_font_size }}px;">{{  $product->short_name_extension }}</span><span ng-show="{{ $product->length_space }}">&nbsp;&nbsp;</span><span style="font-weight: {{ $product->length_font_weight }};
 								 font-style: {{ $product->length_font_style }};
 								 font-size: {{ $product->length_font_size }}px;">{{ $product->length }}</span>
 			</div>
@@ -86,9 +86,9 @@
 			<div class="mobile-product-name" style="text-align: {{ $product->name_text_align_for_mobile }}">
 				<span style="font-weight: {{ $product->name_font_weight_for_mobile }};
 							 font-style: {{ $product->name_font_style_for_mobile }};
-							 font-size: {{ $product->name_font_size_for_mobile }}px;">{{  ($product->shortName) ? $product->shortName : $product->name }}</span><span ng-show="{{ $product->short_name_space }}">&nbsp;</span><span style="font-weight: {{ $product->name_extension_font_weight_for_mobile }};
+							 font-size: {{ $product->name_font_size_for_mobile }}px;">{{  ($product->shortName) ? $product->shortName : $product->name }}</span><span ng-show="{{ $product->short_name_space }}">&nbsp;&nbsp;</span><span style="font-weight: {{ $product->name_extension_font_weight_for_mobile }};
 						   	 font-style: {{ $product->name_extension_font_style_for_mobile }};
-							 font-size: {{ $product->name_extension_font_size_for_mobile }}px;">{{  $product->short_name_extension }}</span><span ng-show="{{ $product->length_space }}">&nbsp;</span><span style="font-weight: {{ $product->length_font_weight_for_mobile }};
+							 font-size: {{ $product->name_extension_font_size_for_mobile }}px;">{{  $product->short_name_extension }}</span><span ng-show="{{ $product->length_space }}">&nbsp;&nbsp;</span><span style="font-weight: {{ $product->length_font_weight_for_mobile }};
 							 font-style: {{ $product->length_font_style_for_mobile }};
 							 font-size: {{ $product->length_font_size_for_mobile }}px;">{{  $product->length }}</span>
 			</div>
