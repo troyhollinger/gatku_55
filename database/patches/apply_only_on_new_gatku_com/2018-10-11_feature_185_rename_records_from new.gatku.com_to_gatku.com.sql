@@ -9,7 +9,8 @@ SET target.image = REPLACE(source.image, 'http://new.gatku.com/', 'https://gatku
     target.contact_desktop_logo_url = REPLACE(source.contact_desktop_logo_url, 'http://new.gatku.com/', 'https://gatku.com/'),
     target.contact_mobile_logo_url = REPLACE(source.contact_mobile_logo_url, 'http://new.gatku.com/', 'https://gatku.com/'),
     target.top_stripe_background_image_url = REPLACE(source.top_stripe_background_image_url, 'http://new.gatku.com/', 'https://gatku.com/'),
-    target.top_stripe_logo_url = REPLACE(source.top_stripe_logo_url, 'http://new.gatku.com/', 'https://gatku.com/');
+    target.top_stripe_logo_url = REPLACE(source.top_stripe_logo_url, 'http://new.gatku.com/', 'https://gatku.com/'),
+    target.footer_banner_url = REPLACE(source.footer_banner_url, 'http://new.gatku.com/', 'https://gatku.com/');
 
 
 
@@ -19,7 +20,11 @@ INNER JOIN forge.products source ON target.id = source.id
 SET target.attachedImage = REPLACE(source.attachedImage, 'http://new.gatku.com/', 'https://gatku.com/'),
     target.detachedImage = REPLACE(source.detachedImage, 'http://new.gatku.com/', 'https://gatku.com/'),
     target.thumb = REPLACE(source.thumb, 'http://new.gatku.com/', 'https://gatku.com/'),
-    target.emailImage = REPLACE(source.emailImage, 'http://new.gatku.com/', 'https://gatku.com/');
+    target.emailImage = REPLACE(source.emailImage, 'http://new.gatku.com/', 'https://gatku.com/'),
+    target.editable_1_image = REPLACE(source.editable_1_image, 'http://new.gatku.com/', 'https://gatku.com/'),
+    target.editable_2_image = REPLACE(source.editable_2_image, 'http://new.gatku.com/', 'https://gatku.com/'),
+    target.editable_3_image = REPLACE(source.editable_3_image, 'http://new.gatku.com/', 'https://gatku.com/'),
+    target.editable_4_image = REPLACE(source.editable_4_image, 'http://new.gatku.com/', 'https://gatku.com/');
 
 -- Update urls in table: 'you_images'
 UPDATE forge.you_images target
