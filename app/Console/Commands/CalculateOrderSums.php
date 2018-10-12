@@ -13,7 +13,7 @@ class CalculateOrderSums extends Command
      * The name and signature of the console command.
      *
      * To run this script: $ php artisan calculate:orders
-     * 
+     *
      * @var string
      */
     //protected $signature = 'command:name';
