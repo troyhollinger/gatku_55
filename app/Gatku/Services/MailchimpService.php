@@ -11,8 +11,8 @@ class MailchimpService
 
             $homeSettings = HomeSetting::orderBy('id', 'desc')->first();
 
-	        // MailChimp API credentials
-	        $apiKey = 'dbb4a319f336c9f4ceb826cb0c6f102e-us9';
+	        // MailChimp API credentials. Get from .env files
+	        $apiKey = env('MAILCHIMP_API_KEY', 'no api key');
 
             $listID = '793e0e910d'; // gatku customer
 
@@ -28,7 +28,7 @@ class MailchimpService
 	        $memberID = md5(strtolower($email));
 	        $dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
 	        $url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listID . '/members/' . $memberID;
-	        
+
 	        // member information
 	        $json = json_encode([
 	            'email_address' => $email,
