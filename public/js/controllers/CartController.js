@@ -10,8 +10,8 @@
 |
 */
 app.controller('CartController',
-    ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler',
-    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists, $exceptionHandler) {
+    ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler', '$uibModal',
+    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists, $exceptionHandler, $uibModal) {
 
     $scope.items = [];
     $scope.show = false;
@@ -230,27 +230,51 @@ app.controller('CartController',
         $scope.enabled = false;
         AlertService.broadcast('Processing...', 'info');
 
-        StripeService.createToken(card).then(function(token) {
+        StripeService.createToken(card).then(function (token) {
             var data = {
-                items : $scope.items,
-                form : $scope.form,
+                items: $scope.items,
+                form: $scope.form,
                 discount: $scope.discount,
-                token : token
+                token: token
             }
 
-            Order.store(data).then(function(response) {
+            Order.store(data).then(function (response) {
                 AlertService.broadcast('Success! Redirecting...', 'success');
                 $scope.show = false;
                 $scope.emptyCart();
                 $scope.enabled = true;
-                //window.location.replace("/thankyou");
-            }, function(error) {
+                window.location.replace("/thankyou");
+            }, function (error) {
                 $exceptionHandler(JSON.stringify(error));
-                AlertService.broadcast('Sorry, something went wrong on our end. We are fixing it soon!', 'error');
-                console.log('Something went wrong.');
+                AlertService.broadcast('ERROR!', 'error');
+
+                console.log(error);
+                var errorMessage = "There was error and request can't be processed.";
+
+                if (error.error.message) {
+                    errorMessage = error.error.message;
+                }
+
+                $scope.displayErrorModal(errorMessage);
             });
+        }, function(stripeServiceError) {
+            $scope.displayErrorModal(stripeServiceError);
         });
     }
+
+    $scope.displayErrorModal = function(errorMessage) {
+        $uibModal.open({
+            templateUrl: '/js/app/front/cart/ErrorMessageModal.html',
+            controller: 'ErrorMessageModalController',
+            controllerAs: '$ctrl',
+            resolve: {
+                errorMessage: function () {
+                    return errorMessage;
+                }
+            }
+        });
+    };
+
 
     $scope.hide = function() {
         CartService.hide();
@@ -420,9 +444,8 @@ app.controller('CartController',
     });
 
     $scope.$on('hide', function() {
-
         $scope.show = false;
-
+        location.reload();
     });
 
     $scope.applyDiscountCode = function() {

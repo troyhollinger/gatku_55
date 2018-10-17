@@ -1,0 +1,23 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h1 class="modal-title"><b>Payment Error</b></h1>
+
+    <button type="button" class="close" ng-click="$dismiss('close')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Modal Body -->
+<div class="modal-body">
+    <h4>{{errorMessage}}</h4>
+</div>
+
+<!-- Modal Footer -->
+<div class="modal-footer">
+    <button class="btn btn-default"
+            type="button"
+            ng-click="$dismiss('close')">Close
+    </button>
+</div>
+
+
