@@ -310,9 +310,9 @@
                         <span class="product-name" style="text-transform:uppercase;">
 							<!-- Don't breake following line in separate lines to avoid spaces between words. -->
                             <strong>{{ $item['product']['shortName'] }}</strong>@if($item['product']['type']['slug'] === 'pole')<span>{{ $item['product']['short_name_extension'] }}</span>@endif
-						    @if (strpos($item['product']['slug'], 'paralyzer') !== false || $item['product']['type']['slug'] === 'glass')
-                                <small>/{{ $item['product']['length'] }}</small>
-                            @endif
+							@if ($item['product']['include_length_on_email'])
+								<small>{{ $item['product']['length'] }}</small>
+							@endif
                         </span>
 					</td>
 					@endif
@@ -336,7 +336,12 @@
 				@foreach($item['addons'] as $ii => $addon)
 				<!-- first addon -->
 				<tr class="main-product {{ $ii == 0 ? 'first-opt-set' : '' }}">
-					<td><span class="bold">{{ $addon['product']['name'] }}</span></td>
+					<td>
+						<span class="bold">{{ $addon['product']['name'] }}</span>
+						@if ($item['product']['include_length_on_email'])
+							<small>{{ $item['product']['length'] }}</small>
+						@endif
+					</td>
 
 					@if($addon['product']['sizeable'])
 					<td>${{ ($addon['price_zero'] == 0) ? $addon['size']['price'] / 100 : 0}}</td>

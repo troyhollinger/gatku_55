@@ -15794,7 +15794,9 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $ctrl.newProduct.length_font_style = 'normal';
             $ctrl.newProduct.length_font_size = 26;
 
-            $ctrl.length_space = 0;
+            $ctrl.newProduct.length_space = 0;
+
+            $ctrl.newProduct.include_length_on_email = 0;
 
             $ctrl.newProduct.length_font_weight_for_mobile = 'normal';
             $ctrl.newProduct.length_font_style_for_mobile = 'normal';

@@ -533,6 +533,17 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <label for="length" class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+            <input type="checkbox"
+                   ng-true-value="1"
+                   ng-false-value="0"
+                   ng-model="$ctrl.newProduct.include_length_on_email">
+            <span >Display Length in emails</span>
+        </div>
+    </div>
+
     <!-- lengthFormatting -->
     <div ng-if="$ctrl.lengthFormatting">
         <br>

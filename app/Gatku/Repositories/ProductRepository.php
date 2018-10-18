@@ -270,6 +270,8 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->short_name_space = (isset($data['short_name_space'])) ? $data['short_name_space'] : 0;
         $product->length_space = (isset($data['length_space'])) ? $data['length_space'] : 0;
 
+        $product->include_length_on_email = (isset($data['include_length_on_email'])) ? $data['include_length_on_email'] : 0;
+
 		return $product;
 	}
 
