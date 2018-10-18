@@ -338,8 +338,8 @@
 				<tr class="main-product {{ $ii == 0 ? 'first-opt-set' : '' }}">
 					<td>
 						<span class="bold">{{ $addon['product']['name'] }}</span>
-						@if ($item['product']['include_length_on_email'])
-							<small>{{ $item['product']['length'] }}</small>
+						@if ($addon['product']['include_length_on_email'])
+							<small>{{ $addon['product']['length'] }}</small>
 						@endif
 					</td>
 
