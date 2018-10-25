@@ -1,0 +1,42 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h1 class="modal-title"><b>Pick email addresses:</b></h1>
+
+    <button type="button" class="close" ng-click="$dismiss('close')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Modal Body -->
+<div class="modal-body">
+
+    <b>Admin email notifications:</b>
+
+    <div ng-repeat="record in $ctrl.emails.adminEmailAdresses">
+        <input type="checkbox" ng-model="record.checked"> {{ record.email }}
+    </div>
+
+    <br>
+
+    <b>Customer email notifications:</b>
+
+    <div ng-repeat="record in $ctrl.emails.customerEmailAdresses">
+        <input type="checkbox" ng-model="record.checked"> {{ record.email }}
+    </div>
+
+</div>
+
+<!-- Modal Footer -->
+<div class="modal-footer">
+    <button class="btn btn-default"
+            type="button"
+            ng-click="$dismiss('close')">Cancel
+    </button>
+    <button class="btn btn-success"
+            type="button"
+            ng-click="$ctrl.sendEmails()">Send
+        &nbsp;<i class="fa fa-envelope"></i>
+    </button>
+</div>
+
+

@@ -31,13 +31,25 @@ class ResendOrderEmailsController extends BaseController {
      */
 	public function resend($id) {
 
+	    //This allow to get all data from POST
+        $emails = \Request::all();
+
+        //Get order
+        /** @var Order $order */
         $order = $this->orderRepository->get($id);
-        $customer = $this->customerRepository->get($order->customerId);
 
         //@TODO This is hack just to make it work. In future add relation to Discount and make it work.
         $discount = new Discount;
 
-        $result = $this->orderRepository->sendEmailNotifications($customer, $order, $discount, $order->order_sum, $order->shipping_sum, $order->total_sum);
+        $result = $this->orderRepository->sendEmailNotifications(
+            $order,
+            $discount,
+            $order->order_sum,
+            $order->shipping_sum,
+            $order->total_sum,
+            $emails['emailListForEmailsOrderArray'],
+            $emails['emailListForEmailsOrderAdminArray']
+        );
 
 		if (!$result) {
 			return \Response::json(['message' => 'Sorry, there was an error'], 404);

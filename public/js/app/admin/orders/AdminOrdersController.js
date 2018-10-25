@@ -1,7 +1,8 @@
 (function () {
+
     app.controller('AdminOrdersController', AdminOrdersController);
 
-    function AdminOrdersController($scope, Order, ResendOrderEmails, $http, $exceptionHandler) {
+    function AdminOrdersController($scope, Order, ResendOrderEmails, AlertService, $uibModal, $http, $exceptionHandler) {
 
         var $ctrl = this;
 
@@ -55,9 +56,48 @@
             $ctrl.getData(1, $scope.order_start_date, $scope.order_end_date);
         };
 
-        $ctrl.resendOrderEmails = function(id) {
-            ResendOrderEmails.resend(id).then(function() {
-                $ctrl.orderResent[id] = true;
+        $ctrl.resendOrderEmails = function(order) {
+
+            var modalInstance = $uibModal.open({
+                templateUrl: 'js/app/admin/orders/modals/AdminOrderEmailPickerModal.html',
+                controller: 'AdminOrderEmailPickerModalController',
+                controllerAs: '$ctrl',
+                resolve: {
+                    order: function() {
+                        return order;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(pickedEmails) {
+
+                var emails = {
+                    emailListForEmailsOrderAdminArray: [],
+                    emailListForEmailsOrderArray: []
+                };
+
+                //adminEmailAdresses
+                angular.forEach(pickedEmails.adminEmailAdresses, function (record) {
+                    if (record.checked) {
+                        emails.emailListForEmailsOrderAdminArray.push(record.email);
+                    }
+                });
+
+                //customerEmailAdresses
+                angular.forEach(pickedEmails.customerEmailAdresses, function(record) {
+                    if (record.checked) {
+                        emails.emailListForEmailsOrderArray.push(record.email);
+                    }
+                });
+
+                //Request to send emails
+                ResendOrderEmails.resend(order.id, emails).then(function() {
+                    //Screen notification
+                    var nanobar = new Nanobar({bg: '#fff'});
+                    nanobar.go(100);
+                    AlertService.broadcast('Email(s) sent', 'success');
+                });
+
             });
         };
 

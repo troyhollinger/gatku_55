@@ -194,8 +194,8 @@ app.factory('Order', ['$http', function($http) {
 
 app.factory('ResendOrderEmails', ['$http', function($http) {
     return {
-        resend : function(id) {
-            return $http.get('/resend-order-email/' + id );
+        resend : function(id, emails) {
+            return $http.post('/resend-order-email/' + id, emails );
 
         }
     }

@@ -1,5 +1,7 @@
 <!-- Keep this php code in first line -->
-<?php $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first(); ?>
+<?php
+    $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first();
+?>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -52,8 +54,8 @@
             var CONFIG = {
                 base : '{!! URL::to("/") !!}',
                 environment : '{!! App::environment() !!}'
-            }
-
+            };
+            var homeSetting = {!! $homeSetting !!};
         </script>
 
         <!-- Bugsnag for JavaScript See: https://docs.bugsnag.com/platforms/browsers/js/ -->
@@ -61,6 +63,7 @@
         <script>
             window.bugsnagClient = bugsnag({
                 apiKey: 'a76deca11eb34ca6b18e6010ec00a39d',
+                notifyReleaseStages: ['production', 'qa', 'QA'],
                 releaseStage: CONFIG.environment
             });
         </script>
