@@ -31,14 +31,16 @@ class OrderRepository {
     protected $error_message;
 
     public $blackFriday = false;
-    /**
-     * @var HomeSetting
-     */
-    private $homeSetting;
+
     /**
      * @var EmailSettings
      */
     private $emailSettings;
+
+    /**
+     * @var EmailSettingsRepository
+     */
+    private $emailSettingsRepository;
 
     /**
      * OrderRepository constructor.
@@ -47,8 +49,7 @@ class OrderRepository {
      */
     public function __construct(CustomerRepository $customer, EmailSettingsRepository $emailSettingsRepository) {
         $this->customer = $customer;
-        $this->homeSetting = HomeSetting::orderBy('id', 'desc')->first();
-        $this->emailSettings = $emailSettingsRepository->getLastRecordFromDatabase();
+        $this->emailSettingsRepository = $emailSettingsRepository;
     }
 
     /**
@@ -590,6 +591,10 @@ class OrderRepository {
      */
     public function sendEmailNotifications(Customer $customer, Order $order, Discount $discount, $subtotal, $shipping, $total)
     {
+        //Fetch needed data
+        $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+        $this->emailSettings = $this->emailSettingsRepository->getLastRecordFromDatabase();
+
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
         $emailListForEmailsOrderArray = $this->createEmailListForEmailsOrder($customer);
@@ -606,7 +611,7 @@ class OrderRepository {
                         $shipping,
                         $total,
                         $date,
-                        $this->homeSetting,
+                        $homeSetting,
                         $this->emailSettings)
                 );
 
@@ -619,7 +624,7 @@ class OrderRepository {
                         $shipping,
                         $total,
                         $date,
-                        $this->homeSetting,
+                        $homeSetting,
                         $this->emailSettings)
                 );
 
@@ -639,7 +644,7 @@ class OrderRepository {
                         $shipping,
                         $total,
                         $date,
-                        $this->homeSetting,
+                        $homeSetting,
                         $this->emailSettings)
                 );
             }
