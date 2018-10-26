@@ -198,7 +198,7 @@ app.directive('hoverCard', [
 }]);
 
 
-app.directive('productBuyers', function(Product) {
+app.directive('productBuyers', '$exceptionHandler', function(Product, $exceptionHandler) {
 
     return {
         restrict: 'E',
@@ -438,7 +438,8 @@ app.directive('bodyFreeze', ['CartService', function(CartService) {
 }]);
 
 
-app.directive('smoothLink', ['$window', '$location', 'NavigationService', function($window, $location, NavigationService) {
+app.directive('smoothLink', ['$window', '$location', 'NavigationService', '$exceptionHandler',
+    function($window, $location, NavigationService, $exceptionHandler) {
 
     return {
 
@@ -473,7 +474,8 @@ app.directive('smoothLink', ['$window', '$location', 'NavigationService', functi
 }]);
 
 
-app.directive('shippingRequest', ['$window', '$compile','ShippingRequest', 'AlertService', function($window, $compile, ShippingRequest, AlertService) {
+app.directive('shippingRequest', ['$window', '$compile','ShippingRequest', 'AlertService', '$exceptionHandler',
+    function($window, $compile, ShippingRequest, AlertService, $exceptionHandler) {
 
     return {
 
@@ -540,7 +542,8 @@ app.directive('shippingRequest', ['$window', '$compile','ShippingRequest', 'Aler
 
 }]);
 
-app.directive('shippingTrack', ['$window', '$compile','ShippingTrack', 'AlertService', function($window, $compile, ShippingTrack, AlertService) {
+app.directive('shippingTrack', ['$window', '$compile','ShippingTrack', 'AlertService', '$exceptionHandler',
+    function($window, $compile, ShippingTrack, AlertService, $exceptionHandler) {
     return {
         restrict : 'E',
         template : '<div class="button info-bg" shipping-track ng-click="open = !open">{{ tracking.track_id ? "Edit" : "Set Tracking"}}</div>',
