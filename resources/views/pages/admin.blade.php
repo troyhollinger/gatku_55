@@ -1,5 +1,14 @@
 @extends('layouts.master')
 
+<!-- Keep this php code on the top of this file -->
+<?php
+    $emailSettings = \Gatku\Model\EmailSettings::get()->first();
+?>
+
+<script>
+    var emailSettings = {!! $emailSettings !!};
+</script>
+
 @section('title')
 	Admin
 @stop

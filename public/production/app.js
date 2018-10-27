@@ -13328,8 +13328,8 @@ app.factory('Order', ['$http', function($http) {
 
 app.factory('ResendOrderEmails', ['$http', function($http) {
     return {
-        resend : function(id) {
-            return $http.get('/resend-order-email/' + id );
+        resend : function(id, emails) {
+            return $http.post('/resend-order-email/' + id, emails );
 
         }
     }
@@ -15500,9 +15500,10 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 }());
 
 (function () {
+
     app.controller('AdminOrdersController', AdminOrdersController);
 
-    function AdminOrdersController($scope, Order, ResendOrderEmails, $http, $exceptionHandler) {
+    function AdminOrdersController($scope, Order, ResendOrderEmails, AlertService, $uibModal, $http, $exceptionHandler) {
 
         var $ctrl = this;
 
@@ -15556,9 +15557,48 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $ctrl.getData(1, $scope.order_start_date, $scope.order_end_date);
         };
 
-        $ctrl.resendOrderEmails = function(id) {
-            ResendOrderEmails.resend(id).then(function() {
-                $ctrl.orderResent[id] = true;
+        $ctrl.resendOrderEmails = function(order) {
+
+            var modalInstance = $uibModal.open({
+                templateUrl: 'js/app/admin/orders/modals/AdminOrderEmailPickerModal.html',
+                controller: 'AdminOrderEmailPickerModalController',
+                controllerAs: '$ctrl',
+                resolve: {
+                    order: function() {
+                        return order;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(pickedEmails) {
+
+                var emails = {
+                    emailListForEmailsOrderAdminArray: [],
+                    emailListForEmailsOrderArray: []
+                };
+
+                //adminEmailAdresses
+                angular.forEach(pickedEmails.adminEmailAdresses, function (record) {
+                    if (record.checked) {
+                        emails.emailListForEmailsOrderAdminArray.push(record.email);
+                    }
+                });
+
+                //customerEmailAdresses
+                angular.forEach(pickedEmails.customerEmailAdresses, function(record) {
+                    if (record.checked) {
+                        emails.emailListForEmailsOrderArray.push(record.email);
+                    }
+                });
+
+                //Request to send emails
+                ResendOrderEmails.resend(order.id, emails).then(function() {
+                    //Screen notification
+                    var nanobar = new Nanobar({bg: '#fff'});
+                    nanobar.go(100);
+                    AlertService.broadcast('Email(s) sent', 'success');
+                });
+
             });
         };
 
@@ -15568,6 +15608,63 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             var y = date.getFullYear();
             return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
         }
+    };
+}());
+
+
+(function () {
+    app.controller('AdminOrderEmailPickerModalController', AdminOrderEmailPickerModalController);
+
+    function AdminOrderEmailPickerModalController(
+        $scope,
+        order,
+        $uibModalInstance,
+        $exceptionHandler
+    ) {
+        'use strict';
+
+        var $ctrl = this;
+
+        $ctrl.emails = {
+            adminEmailAdresses: [],
+            customerEmailAdresses: []
+        };
+
+        function createRecord(val) {
+            return {
+                checked: false,
+                email: val
+            };
+        }
+
+        function getEmailLists() {
+            angular.forEach(emailSettings, function(val, idx) {
+
+                //admin
+                if (idx.match(/admin_order_notify_email.+/g) && val) {
+                    var record = createRecord(val);
+                    $ctrl.emails.adminEmailAdresses.push(record);
+                }
+
+                //customer
+                if (idx.match(/customer_order_notify_email.+/g) && val) {
+                    var record = createRecord(val);
+                    $ctrl.emails.customerEmailAdresses.push(record);
+                }
+            });
+
+            //Add email to customer
+            if (order.customer.email) {
+                var record = createRecord(order.customer.email);
+                $ctrl.emails.customerEmailAdresses.push(record);
+            }
+        }
+
+        getEmailLists();
+
+        $ctrl.sendEmails = function() {
+            $uibModalInstance.close($ctrl.emails);
+        };
     };
 }());
 

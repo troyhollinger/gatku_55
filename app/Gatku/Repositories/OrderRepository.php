@@ -167,7 +167,7 @@ class OrderRepository {
 
         DB::commit();
 
-        $this->sendEmailNotifications($customer, $order, $discount, $subtotal, $shipping, $total);
+        $this->prepareEmailAddressesForEmailNotifications($customer, $order, $discount, $subtotal, $shipping, $total);
 
         return true;
     }
@@ -589,7 +589,47 @@ class OrderRepository {
      * @param $total
      * @return bool
      */
-    public function sendEmailNotifications(Customer $customer, Order $order, Discount $discount, $subtotal, $shipping, $total)
+    public function prepareEmailAddressesForEmailNotifications(
+        Customer $customer,
+        Order $order,
+        Discount $discount,
+        $subtotal,
+        $shipping,
+        $total)
+    {
+        $emailListForEmailsOrderArray = $this->createEmailListForEmailsOrder($customer);
+        $emailListForEmailsOrderAdminArray = $this->createEmailListForEmailsOrderAdmin();
+
+        return $this->sendEmailNotifications(
+            $order,
+            $discount,
+            $subtotal,
+            $shipping,
+            $total,
+            $emailListForEmailsOrderArray,
+            $emailListForEmailsOrderAdminArray
+        );
+    }
+
+    /**
+     * @param Order $order
+     * @param Discount $discount
+     * @param $subtotal
+     * @param $shipping
+     * @param $total
+     * @param array|null $emailListForEmailsOrderArray
+     * @param array|null $emailListForEmailsOrderAdminArray
+     * @return bool
+     */
+    public function sendEmailNotifications(
+        Order $order,
+        Discount $discount,
+        $subtotal,
+        $shipping,
+        $total,
+        array $emailListForEmailsOrderArray = null,
+        array $emailListForEmailsOrderAdminArray = null
+    )
     {
         //Fetch needed data
         $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
@@ -597,37 +637,36 @@ class OrderRepository {
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
-        $emailListForEmailsOrderArray = $this->createEmailListForEmailsOrder($customer);
-        $emailListForEmailsOrderAdminArray = $this->createEmailListForEmailsOrderAdmin();
-
         if (App::environment('production')) {
 
             //Send email to Customer and Notify Seller
-            Mail::to($emailListForEmailsOrderArray)
-                ->send(new EmailsOrder(
-                        $order,
-                        $discount,
-                        $subtotal,
-                        $shipping,
-                        $total,
-                        $date,
-                        $homeSetting,
-                        $this->emailSettings)
-                );
+            if ($emailListForEmailsOrderArray && !empty($emailListForEmailsOrderArray)) {
+                Mail::to($emailListForEmailsOrderArray)->send(new EmailsOrder(
+                            $order,
+                            $discount,
+                            $subtotal,
+                            $shipping,
+                            $total,
+                            $date,
+                            $homeSetting,
+                            $this->emailSettings
+                ));
+
+            }
 
             //Send email to Sellers
-            Mail::to($emailListForEmailsOrderAdminArray)
-                ->send(new EmailsOrderAdmin(
-                        $order,
-                        $discount,
-                        $subtotal,
-                        $shipping,
-                        $total,
-                        $date,
-                        $homeSetting,
-                        $this->emailSettings)
-                );
-
+            if ($emailListForEmailsOrderAdminArray && !empty($emailListForEmailsOrderAdminArray)) {
+                Mail::to($emailListForEmailsOrderAdminArray)->send(new EmailsOrderAdmin(
+                            $order,
+                            $discount,
+                            $subtotal,
+                            $shipping,
+                            $total,
+                            $date,
+                            $homeSetting,
+                            $this->emailSettings
+                ));
+            }
         }
 
         if (App::environment('dev')) {

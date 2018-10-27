@@ -1,5 +1,7 @@
 <!-- Keep this php code in first line -->
-<?php $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first(); ?>
+<?php
+    $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first();
+?>
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -52,14 +54,20 @@
             var CONFIG = {
                 base : '{!! URL::to("/") !!}',
                 environment : '{!! App::environment() !!}'
-            }
-
+            };
+            var homeSetting = {!! $homeSetting !!};
         </script>
 
         <!-- Bugsnag for JavaScript See: https://docs.bugsnag.com/platforms/browsers/js/ -->
         <script src="//d2wy8f7a9ursnm.cloudfront.net/v4/bugsnag.min.js"></script>
-        <script>window.bugsnagClient = bugsnag('a76deca11eb34ca6b18e6010ec00a39d')</script>
-
+        <script>
+            window.bugsnagClient = bugsnag({
+                apiKey: 'a76deca11eb34ca6b18e6010ec00a39d',
+                notifyReleaseStages: ['production', 'qa', 'QA'],
+                releaseStage: CONFIG.environment
+            });
+        </script>
+        <!-- Bugsnag configuration - end -->
 
         <link rel="stylesheet" href="{{ asset('production/app.css?v=' . config('app_version.version') ) }}">
         <script src="{{ asset('js/vendor/modernizr-2.6.2.min.js?v=' . config('app_version.version') ) }}"></script>

@@ -117,7 +117,7 @@ Route::resource('shelves', 'ShelvesController')->only(['index']);
 Route::put('shelves', ['uses' => 'ShelvesController@update']);
 
 //Resend email notifications for order
-Route::get('/resend-order-email/{orderId}', [ 'uses' => 'ResendOrderEmailsController@resend']);
+Route::post('/resend-order-email/{orderId}', [ 'uses' => 'ResendOrderEmailsController@resend']);
 
 //Display email notifications for order
 Route::get('/display-order-email/admin/{orderId}', [ 'uses' => 'DisplayOrderNotificationEmailController@admin']);
