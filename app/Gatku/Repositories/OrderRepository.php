@@ -640,7 +640,7 @@ class OrderRepository {
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
-//        if (App::environment('production')) {
+        if (App::environment('production')) {
 
             //Send email to Customer and Notify Seller
             if ($emailListForEmailsOrderArray && !empty($emailListForEmailsOrderArray)) {
@@ -670,27 +670,27 @@ class OrderRepository {
                             $this->emailSettings
                 ));
             }
-//        }
+        }
 
-//        if (App::environment('dev')) {
-//            if (isset($_ENV['test_transaction_email'])) {
-//                Mail::to([
-//                    [
-//                        'email' => 'past-email-address-here',
-//                        'name' => 'past-recipient-name-here'
-//                    ]
-//                ])->send(new EmailsOrderAdmin(
-//                        $order,
-//                        $discount,
-//                        $subtotal,
-//                        $shipping,
-//                        $total,
-//                        $date,
-//                        $homeSetting,
-//                        $this->emailSettings)
-//                );
-//            }
-//        }
+        if (App::environment('dev')) {
+            if (isset($_ENV['test_transaction_email'])) {
+                Mail::to([
+                    [
+                        'email' => 'past-email-address-here',
+                        'name' => 'past-recipient-name-here'
+                    ]
+                ])->send(new EmailsOrderAdmin(
+                        $order,
+                        $discount,
+                        $subtotal,
+                        $shipping,
+                        $total,
+                        $date,
+                        $homeSetting,
+                        $this->emailSettings)
+                );
+            }
+        }
 
         return true;
     }
