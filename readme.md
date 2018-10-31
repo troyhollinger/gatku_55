@@ -29,3 +29,4 @@ When developing, make sure you go to the `/public` directory and run `grunt`, wh
 When writing backend PHP code, try to stick to the Repository pattern (if you are familiar). If you are not familiar thats okay.
 ## Notes
 - all monetary references are stored in cents form (no decimals).
+
