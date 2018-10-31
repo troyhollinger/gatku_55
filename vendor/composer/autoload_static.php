@@ -1052,7 +1052,6 @@ class ComposerStaticInit987a49ed413fc1b0ed7ee05b84013a37
         'Gatku\\Repositories\\DiscountRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/DiscountRepository.php',
         'Gatku\\Repositories\\EmailSettingsRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/EmailSettingsRepository.php',
         'Gatku\\Repositories\\ImageRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/ImageRepository.php',
-        'Gatku\\Repositories\\MailchimpRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/MailchimpRepository.php',
         'Gatku\\Repositories\\OrderRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/OrderRepository.php',
         'Gatku\\Repositories\\ProductRepository' => __DIR__ . '/../..' . '/app/Gatku/Repositories/ProductRepository.php',
         'Gatku\\Repositories\\ProductRepositoryInterface' => __DIR__ . '/../..' . '/app/Gatku/Repositories/ProductRepositoryInterface.php',
