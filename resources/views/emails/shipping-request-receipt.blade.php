@@ -1,5 +1,7 @@
-@extends('layouts.email')
+<!-- Keep this php code in first line -->
+<?php $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first(); ?>
 
+@extends('layouts.email')
 
 @section('content')
 
