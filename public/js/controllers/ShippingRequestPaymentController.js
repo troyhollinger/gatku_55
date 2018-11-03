@@ -23,7 +23,7 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 				token : token
 			};
 		
-			ShippingRequest.pay(data).success(function(response) {
+			ShippingRequest.pay(data).then(function(response) {
 				AlertService.broadcast('Success!', 'success');
 				$scope.success = true;
 			}).error(function(error) {
