@@ -32,12 +32,11 @@
 	</form>
 
 	<div class="shipping-payment-success" ng-if="success" ng-cloak>
-
-		<i class="fa fa-check-circle-o success"></i>
-
 		<h3>Payment successful!</h3>
 		<p>Your order will be on its say soon.</p>
-
+		<br>
+		<br>
+		<uib-progressbar value="progress"></uib-progressbar>
 	</div>
 
 </div>

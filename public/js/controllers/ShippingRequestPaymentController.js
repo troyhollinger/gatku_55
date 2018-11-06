@@ -1,5 +1,5 @@
-app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'StripeService', 'ShippingRequest', '$exceptionHandler',
-	function($scope, AlertService, StripeService, ShippingRequest, $exceptionHandler) {
+app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'StripeService', 'ShippingRequest', '$exceptionHandler', '$interval',
+	function($scope, AlertService, StripeService, ShippingRequest, $exceptionHandler, $interval) {
 
 	$scope.card = {};
 	$scope.success = false;
@@ -9,6 +9,15 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 	} else {
 		$scope.shippingRequestId = null;
 	}
+
+    $scope.delay = 15; //delay in sec.
+    $scope.progress = 0;
+    $scope.iteration = 0;
+
+	function updateProgress() {
+    	$scope.iteration++;
+        $scope.progress = parseInt( (($scope.delay - $scope.iteration) / $scope.delay) * 100 );
+    }
 
 	$scope.pay = function() {
 
@@ -26,6 +35,12 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 			ShippingRequest.pay(data).then(function(response) {
 				AlertService.broadcast('Success!', 'success');
 				$scope.success = true;
+
+                $scope.progress = $interval(updateProgress, 1000, $scope.delay);
+
+				setTimeout(function() {
+                    window.location.replace("/#store");
+				}, $scope.delay * 1000);
 			}).error(function(error) {
                 $exceptionHandler(JSON.stringify(error));
 				AlertService.broadcast('Sorry, something went wrong on our end. We are fixing it soon!', 'error');
