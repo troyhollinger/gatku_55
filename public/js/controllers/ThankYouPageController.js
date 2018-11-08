@@ -1,6 +1,6 @@
 app.controller('ThankYouPageController', function ($scope, $interval, $exceptionHandler) {
 
-    $scope.delay = 15; //delay in sec.
+    $scope.delay = 7; //delay in sec.
     $scope.progress = 0;
     $scope.iteration = 0;
 
