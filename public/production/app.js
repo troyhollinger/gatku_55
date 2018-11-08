@@ -14566,18 +14566,20 @@ app.controller('CartController',
 
         if (index == 3) {
 
-            if (!$scope.card.isBillingSame) {
-                if(!$scope.form.billing_address){
-                    $scope.status = 'Please enter Billing Address or check Billing Address same as Shipping Address';
-                    AlertService.broadcast('Please enter Billing Address or check Billing Address same as Shipping Address', 'error');
+            if (!$scope.card.hasOwnProperty('isBillingSame')) {
+                if (!$scope.card.isBillingSame) {
+                    if(!$scope.form.billing_address){
+                        $scope.status = 'Please enter Billing Address or check Billing Address same as Shipping Address';
+                        AlertService.broadcast('Please enter Billing Address or check Billing Address same as Shipping Address', 'error');
 
-                    return false;
-                }
-                if(!$scope.form.billing_zip){
-                    $scope.status = 'Please enter billing zip or check Billing Address same as Shipping Address';
-                    AlertService.broadcast('Please enter billing zip or check Billing Address same as Shipping Address', 'error');
+                        return false;
+                    }
+                    if(!$scope.form.billing_zip){
+                        $scope.status = 'Please enter billing zip or check Billing Address same as Shipping Address';
+                        AlertService.broadcast('Please enter billing zip or check Billing Address same as Shipping Address', 'error');
 
-                    return false;
+                        return false;
+                    }
                 }
             }
 
