@@ -12072,19 +12072,22 @@ for (key in angularFileUpload) {
 //This function allow to avoid exceptions in some cases
 function checkIfExceptionShouldBeSent(exception) {
 	var notyfy = true;
+
+	//Check if one of below options to avoid send exception to Bugsnag
 	switch(exception) {
 		case 'Possibly unhandled rejection: close':
 			notyfy = false;
 			break;
 	}
+
 	return notyfy;
 }
 
+//Bugsnag javascript setup
 angular
     .module('exceptionOverride', [])
     .factory('$exceptionHandler', function () {
         return function (exception, cause) {
-
         	if (checkIfExceptionShouldBeSent(exception)) {
                 bugsnagClient.notify(exception, {
                     beforeSend: function (report) {
@@ -12092,9 +12095,13 @@ angular
                     }
                 })
 			}
+
+			//This is code responsible for reporting error in console when dev environment
+            if (['production', 'qa', 'QA'].indexOf(CONFIG.environment) === -1) {
+                console.error(exception);
+            }
         }
     });
-
 //Bugsnag configuration end.
 
 var app = angular.module('gatku', [
@@ -12118,6 +12125,7 @@ app.config(function(stripeProvider, $locationProvider) {
 	//This hack works for: $routeProvider
     $locationProvider.hashPrefix('');
 
+    //@TODO this keys should not be hardcoded here. This is bad practice. Refactor code to use .env variable.
 	if (CONFIG.environment === 'production') {
 		stripeProvider.setPublishableKey('pk_live_5MrQVqT1OSrL1lyeYe54NWgs');
 	} else {
@@ -12325,7 +12333,7 @@ app.directive('hoverCard', [
 }]);
 
 
-app.directive('productBuyers', '$exceptionHandler', function(Product, $exceptionHandler) {
+app.directive('productBuyers', function(Product, $exceptionHandler) {
 
     return {
         restrict: 'E',
@@ -14558,18 +14566,20 @@ app.controller('CartController',
 
         if (index == 3) {
 
-            if (!$scope.card.isBillingSame) {
-                if(!$scope.form.billing_address){
-                    $scope.status = 'Please enter Billing Address or check Billing Address same as Shipping Address';
-                    AlertService.broadcast('Please enter Billing Address or check Billing Address same as Shipping Address', 'error');
+            if (!$scope.card.hasOwnProperty('isBillingSame')) {
+                if (!$scope.card.isBillingSame) {
+                    if(!$scope.form.billing_address){
+                        $scope.status = 'Please enter Billing Address or check Billing Address same as Shipping Address';
+                        AlertService.broadcast('Please enter Billing Address or check Billing Address same as Shipping Address', 'error');
 
-                    return false;
-                }
-                if(!$scope.form.billing_zip){
-                    $scope.status = 'Please enter billing zip or check Billing Address same as Shipping Address';
-                    AlertService.broadcast('Please enter billing zip or check Billing Address same as Shipping Address', 'error');
+                        return false;
+                    }
+                    if(!$scope.form.billing_zip){
+                        $scope.status = 'Please enter billing zip or check Billing Address same as Shipping Address';
+                        AlertService.broadcast('Please enter billing zip or check Billing Address same as Shipping Address', 'error');
 
-                    return false;
+                        return false;
+                    }
                 }
             }
 

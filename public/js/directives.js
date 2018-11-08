@@ -198,7 +198,7 @@ app.directive('hoverCard', [
 }]);
 
 
-app.directive('productBuyers', '$exceptionHandler', function(Product, $exceptionHandler) {
+app.directive('productBuyers', function(Product, $exceptionHandler) {
 
     return {
         restrict: 'E',
