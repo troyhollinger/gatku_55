@@ -82,6 +82,7 @@ class HomeSettingController extends BaseController {
             $homeSetting->additional_images_label_for_product = \Request::get('additional_images_label_for_product') ? \Request::get('additional_images_label_for_product') : '';
             $homeSetting->shelves_between_space = \Request::get('shelves_between_space') ? \Request::get('shelves_between_space') : 0;
             $homeSetting->ga_tracking_id = \Request::get('ga_tracking_id') ? \Request::get('ga_tracking_id') : '';
+            $homeSetting->black_friday = \Request::get('black_friday') ? \Request::get('black_friday') : 0;
 
             $homeSetting->save();
 		} catch (Exception $e) {

@@ -43,6 +43,7 @@
         -->
 
         <script>
+            //@TODO Move set this variables somewhere else.
             var currentRoute = '{!! Route::currentRouteName() !!}';
             var layoutType = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->type->slug . "'" : "null;" !!};
             var slug = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->slug . "'" : "null;" !!};

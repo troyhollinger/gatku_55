@@ -14212,7 +14212,7 @@ app.controller('CartController',
     $scope.discountText = '';
     $scope.discountAmount = 0;
     $scope.enabled = true;
-    $scope.blackFriday = false;
+    $scope.blackFriday = homeSetting.black_friday;
     $scope.enteredDiscountCode = '';
     $scope.discount = '';
     $scope.discountsExists = false;

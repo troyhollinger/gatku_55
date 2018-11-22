@@ -61,6 +61,9 @@ class OrderRepository {
         $this->customer = $customer;
         $this->emailSettingsRepository = $emailSettingsRepository;
         $this->homeSetting = $homeSetting;
+
+        //Set Black Friday discount
+        $this->blackFriday = $this->homeSetting->black_friday;
     }
 
     /**

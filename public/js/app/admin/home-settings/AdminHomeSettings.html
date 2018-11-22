@@ -312,6 +312,15 @@
         <input type="text" ng-model="$ctrl.homeSetting.ga_tracking_id">
         <!-- Google Analytics Tracking ID - end -->
 
+        <!-- Black Friday Promotion switch -->
+        <label>Black Friday Promotion Switch</label>
+        <input type="checkbox"
+               ng-true-value="1"
+               ng-false-value="0"
+               ng-model="$ctrl.homeSetting.black_friday">
+        <span>When checked then 20% discount will be applied for all products.</span>
+        <!-- Black Friday Promotion switch - end -->
+
     </form>
 
     <br>
