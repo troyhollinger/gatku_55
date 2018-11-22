@@ -6,6 +6,7 @@ use Gatku\Model\ShippingRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Gatku\Model\HomeSetting;
 
 class EmailsShippingRequestReceipt extends Mailable
 {
@@ -28,12 +29,11 @@ class EmailsShippingRequestReceipt extends Mailable
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * @param HomeSetting $homeSetting
+     * @return EmailsShippingRequestReceipt
      */
-    public function build()
+    public function build(HomeSetting $homeSetting)
     {
-        return $this->subject('GATKU | Shipping Payment Receipt')->view('emails.shipping-request-receipt');
+        return $this->subject('GATKU | Shipping Payment Receipt')->view('emails.shipping-request-receipt')->with('homeSetting', $homeSetting);
     }
 }

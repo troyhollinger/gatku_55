@@ -17,17 +17,15 @@ class HomeSettingController extends BaseController {
         parent::__construct();
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /homesetting
-	 *
-	 * @return Response
-	 */
-	public function index() {
+    /**
+     * @param HomeSetting $homeSettings
+     * @return mixed
+     */
+	public function index(HomeSetting $homeSettings) {
 		
 		try {
-			$homeSettings = HomeSetting::orderBy('id', 'desc')->first();
-			//$homeSettings = HomeSetting::all();
+		    //@TODO Move this to Repository and replace Dependency Injection
+			//$homeSettings = HomeSetting::orderBy('id', 'desc')->first();
 		} catch (Exception $e) {
             Bugsnag::notifyException($e);
 			return \Response::json(['message' => 'Sorry, home setting could not be retrieved.'], 404);

@@ -43,13 +43,24 @@ class OrderRepository {
     private $emailSettingsRepository;
 
     /**
+     * @var HomeSetting
+     */
+    private $homeSetting;
+
+    /**
      * OrderRepository constructor.
      * @param CustomerRepository $customer
      * @param EmailSettingsRepository $emailSettingsRepository
+     * @param HomeSetting $homeSetting
      */
-    public function __construct(CustomerRepository $customer, EmailSettingsRepository $emailSettingsRepository) {
+    public function __construct(
+        CustomerRepository $customer,
+        EmailSettingsRepository $emailSettingsRepository,
+        HomeSetting $homeSetting
+    ) {
         $this->customer = $customer;
         $this->emailSettingsRepository = $emailSettingsRepository;
+        $this->homeSetting = $homeSetting;
     }
 
     /**
@@ -292,7 +303,8 @@ class OrderRepository {
         $glassCheck = 0;
         $glassPrice = 0;
 
-        if($subtotal && $this->blackFriday) {
+
+        if ($subtotal && $this->blackFriday) {
 
             $amount = ($subtotal * 0.2) / 100;
             $amount = ceil($amount) * 100;
@@ -374,6 +386,7 @@ class OrderRepository {
 
         // if black friday is true, only give free shipping to
         // orders that have poles
+
         if ($this->blackFriday && count($poles) > 0) return 0;
 
         if (count($poles) > 0) {
@@ -633,9 +646,6 @@ class OrderRepository {
         array $emailListForEmailsOrderAdminArray = null
     )
     {
-        //Fetch needed data
-        $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
-
         $this->uploadEmailSettingsIfNotSet();
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
@@ -651,7 +661,7 @@ class OrderRepository {
                             $shipping,
                             $total,
                             $date,
-                            $homeSetting,
+                            $this->homeSetting,
                             $this->emailSettings
                 ));
 
@@ -666,7 +676,7 @@ class OrderRepository {
                             $shipping,
                             $total,
                             $date,
-                            $homeSetting,
+                            $this->homeSetting,
                             $this->emailSettings
                 ));
             }
@@ -686,7 +696,7 @@ class OrderRepository {
                         $shipping,
                         $total,
                         $date,
-                        $homeSetting,
+                        $this->homeSetting,
                         $this->emailSettings)
                 );
             }

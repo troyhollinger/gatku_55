@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Gatku\Model\HomeSetting;
 use Gatku\Model\ShippingRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -28,12 +29,11 @@ class EmailsShippingRequestPaymentNotification extends Mailable
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * @param HomeSetting $homeSetting
+     * @return EmailsShippingRequestPaymentNotification
      */
-    public function build()
+    public function build(HomeSetting $homeSetting)
     {
-        return $this->subject('GATKU | Shipping Payment')->view('emails.shipping-request-payment-notification');
+        return $this->subject('GATKU | Shipping Payment')->view('emails.shipping-request-payment-notification')->with('homeSetting', $homeSetting);
     }
 }

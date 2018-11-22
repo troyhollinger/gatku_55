@@ -31,15 +31,23 @@ class DisplayOrderNotificationEmailController extends BaseController {
      */
     private $emailSettings;
 
+    /**
+     * DisplayOrderNotificationEmailController constructor.
+     * @param OrderRepository $order
+     * @param CustomerRepository $customerRepository
+     * @param EmailSettingsRepository $emailSettingsRepository
+     * @param HomeSetting $homeSetting]
+     */
     public function __construct(
         OrderRepository $order,
         CustomerRepository $customerRepository,
-        EmailSettingsRepository $emailSettingsRepository
+        EmailSettingsRepository $emailSettingsRepository,
+        HomeSetting $homeSetting
     ) {
 		$this->orderRepository = $order;
 		$this->customerRepository = $customerRepository;
 
-        $this->homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+        $this->homeSetting = $homeSetting;
         $this->emailSettings = $emailSettingsRepository->getLastRecordFromDatabase();
 
         parent::__construct();
