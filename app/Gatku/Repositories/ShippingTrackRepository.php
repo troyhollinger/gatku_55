@@ -3,6 +3,7 @@
 namespace Gatku\Repositories;
 
 use App\Mail\EmailsShippingTrack;
+use Gatku\Model\HomeSetting;
 use Gatku\Model\ShippingTrack;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
@@ -13,7 +14,16 @@ class ShippingTrackRepository {
 
 	public $blackFriday = false;
 
-	public function store($input)
+    /**
+     * ShippingTrackRepository constructor.
+     * @param HomeSetting $homeSetting
+     */
+	public function __construct(HomeSetting $homeSetting)
+    {
+        $this->blackFriday = $homeSetting->black_friday;
+    }
+
+    public function store($input)
 	{
 
 		try {

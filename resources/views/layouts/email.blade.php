@@ -1,6 +1,3 @@
-<!-- Keep this php code in first line -->
-<?php $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first(); ?>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html xmlns="http://www.3c.org/1999/xhtml">
 	<head>

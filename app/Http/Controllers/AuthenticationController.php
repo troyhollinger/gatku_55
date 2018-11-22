@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
+use Gatku\Model\HomeSetting;
 
 class AuthenticationController extends BaseController {
 
 
-	public function index() {
-		return View::make('pages.login');
+    /**
+     * @param HomeSetting $homeSetting
+     * @return mixed
+     */
+	public function index(HomeSetting $homeSetting) {
+		return View::make('pages.login')->with('homeSetting', $homeSetting);
 	}
 
     /**

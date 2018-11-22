@@ -5,22 +5,34 @@ use Gatku\Model\HomeSetting;
 
 class MailchimpService
 {
-	public function addSubscription($fname, $email, $country) 
+    /**
+     * @var HomeSetting
+     */
+    private $homeSetting;
+
+    /**
+     * MailchimpService constructor.
+     * @param HomeSetting $homeSetting
+     */
+    public function __construct(HomeSetting $homeSetting)
+    {
+        $this->homeSetting = $homeSetting;
+    }
+
+    public function addSubscription($fname, $email, $country)
 	{
 	    if(!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL) === false){
-
-            $homeSettings = HomeSetting::orderBy('id', 'desc')->first();
 
 	        // MailChimp API credentials. Get from .env files
 	        $apiKey = env('MAILCHIMP_API_KEY', 'no api key');
 
             $listID = '793e0e910d'; // gatku customer
 
-	        if (strstr($homeSettings->hostname, 'gatku')) {
+	        if (strstr($this->homeSetting->hostname, 'gatku')) {
 	            if(strtolower($country) == 'australia') {
                     $listID = '451477286e'; // austrelia
                 }
-            } elseif (strstr($homeSettings->hostname , 'cristspears')) {
+            } elseif (strstr($this->homeSetting->hostname , 'cristspears')) {
                 $listID = 'dec7c06bb6'; // cristspears
             }
 

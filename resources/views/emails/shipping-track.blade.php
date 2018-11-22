@@ -1,5 +1,4 @@
 <!-- Keep this php code in first line -->
-<?php $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first(); ?>
 <?php $emailSettings = \Gatku\Model\EmailSettings::orderBy('id', 'desc')->first(); ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">

@@ -17,17 +17,15 @@ class HomeSettingController extends BaseController {
         parent::__construct();
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /homesetting
-	 *
-	 * @return Response
-	 */
-	public function index() {
+    /**
+     * @param HomeSetting $homeSettings
+     * @return mixed
+     */
+	public function index(HomeSetting $homeSettings) {
 		
 		try {
-			$homeSettings = HomeSetting::orderBy('id', 'desc')->first();
-			//$homeSettings = HomeSetting::all();
+		    //@TODO Move this to Repository and replace Dependency Injection
+			//$homeSettings = HomeSetting::orderBy('id', 'desc')->first();
 		} catch (Exception $e) {
             Bugsnag::notifyException($e);
 			return \Response::json(['message' => 'Sorry, home setting could not be retrieved.'], 404);
@@ -84,6 +82,7 @@ class HomeSettingController extends BaseController {
             $homeSetting->additional_images_label_for_product = \Request::get('additional_images_label_for_product') ? \Request::get('additional_images_label_for_product') : '';
             $homeSetting->shelves_between_space = \Request::get('shelves_between_space') ? \Request::get('shelves_between_space') : 0;
             $homeSetting->ga_tracking_id = \Request::get('ga_tracking_id') ? \Request::get('ga_tracking_id') : '';
+            $homeSetting->black_friday = \Request::get('black_friday') ? \Request::get('black_friday') : 0;
 
             $homeSetting->save();
 		} catch (Exception $e) {

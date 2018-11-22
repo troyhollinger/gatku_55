@@ -113,13 +113,11 @@ class ProductController extends BaseController
     }
 
     /**
-     * Display the specified resource.
-     * GET /products/{id}
-     *
-     * @param  string $slug
-     * @return Response
+     * @param $slug
+     * @param HomeSetting $homeSetting
+     * @return mixed
      */
-    public function show($slug)
+    public function show($slug, HomeSetting $homeSetting)
     {
         $product = $this->product->find($slug);
 
@@ -127,7 +125,6 @@ class ProductController extends BaseController
             return \Redirect::route('home');
         }
         Log::info($product);
-        $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
 
         return \View::make('pages.product', ['product' => $product])->with('homeSetting',  $homeSetting);
     }

@@ -1,8 +1,3 @@
-<!-- Keep this php code in first line -->
-<?php
-    $homeSetting = \Gatku\Model\HomeSetting::orderBy('id', 'desc')->first();
-?>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -48,6 +43,7 @@
         -->
 
         <script>
+            //@TODO Move set this variables somewhere else.
             var currentRoute = '{!! Route::currentRouteName() !!}';
             var layoutType = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->type->slug . "'" : "null;" !!};
             var slug = {!! Route::currentRouteName() === 'product.show' ? "'" . $product->slug . "'" : "null;" !!};

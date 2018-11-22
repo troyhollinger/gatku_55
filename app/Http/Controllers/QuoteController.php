@@ -19,8 +19,7 @@ class QuoteController extends BaseController {
         parent::__construct();
     }
 
-	public function index() {
-        $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+	public function index(HomeSetting $homeSetting) {
 		return View::make('pages.quote')->with('homeSetting',  $homeSetting);;
 	}
 

@@ -180,7 +180,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        //Load and create: HomeSetting
+        App\Providers\HomeSettingsServiceProvider::class,
     ],
 
     /*

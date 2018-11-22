@@ -13,13 +13,11 @@ use Gatku\Model\HomeSetting;
 |
 */
 
-Route::get('/', ['as' => 'home', function() {
-    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+Route::get('/', ['as' => 'home', function(HomeSetting $homeSetting) {
     return View::make('pages.home')->with('homeSetting',  $homeSetting);
 }]);
 
-Route::get('au', ['as' => 'australia', function() {
-    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+Route::get('au', ['as' => 'australia', function(HomeSetting $homeSetting) {
     return View::make('pages.australia')->with('homeSetting',  $homeSetting);
 }]);
 
@@ -41,8 +39,7 @@ Route::post('login', ['as' => 'login.authenticate', 'uses' => 'AuthenticationCon
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthenticationController@logout']);
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/', ['as' => 'admin.index', function() {
-        $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+    Route::get('/', ['as' => 'admin.index', function(HomeSetting $homeSetting) {
         return View::make('pages.admin')->with('homeSetting',  $homeSetting);
     }]);
 });
@@ -66,15 +63,12 @@ Route::post('home-image/upload', ['as' => 'home-image.upload', 'uses' => 'HomeSe
 
 Route::post('email-image/upload', ['as' => 'email-image.upload', 'uses' => 'EmailSettingsController@upload']);
 
-Route::get('thankyou', ['as' => 'thankyou', function() {
-    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+Route::get('thankyou', ['as' => 'thankyou', function(HomeSetting $homeSetting) {
     return View::make('pages.thankyou')->with('homeSetting',  $homeSetting);
 }]);
 
-Route::get('thespear', ['as' => 'thespear', function() {
-    $homeSettingThespear = HomeSetting::orderBy('id', 'desc')->first();
-    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
-    return View::make('pages.thespear')->with('thespear',  $homeSettingThespear)->with('homeSetting',  $homeSetting);
+Route::get('thespear', ['as' => 'thespear', function(HomeSetting $homeSetting) {
+    return View::make('pages.thespear')->with('thespear',  $homeSetting)->with('homeSetting',  $homeSetting);
 }]);
 
 Route::get('images', function() {
@@ -95,8 +89,7 @@ Route::get('images', function() {
 Route::get('quote', ['as' => 'quote', 'uses' => 'QuoteController@index']);
 Route::post('quote', ['as' => 'quote.post', 'uses' => 'QuoteController@sendEmail']);
 
-Route::get('media', ['as' => 'media', function() {
-    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+Route::get('media', ['as' => 'media', function(HomeSetting $homeSetting) {
     return View::make('pages.media')->with('homeSetting',  $homeSetting);
 }]);
 
@@ -124,7 +117,7 @@ Route::get('/display-order-email/admin/{orderId}', [ 'uses' => 'DisplayOrderNoti
 Route::get('/display-order-email/customer/{orderId}', [ 'uses' => 'DisplayOrderNotificationEmailController@customer']);
 
 //Below code is to test mailable objects. Uncomment if necessary.
-//Route::get('/mailable', function () {
+//Route::get('/mailable', function (HomeSetting $homeSetting) {
 //
 //    $order = Gatku\Order::find(604);
 //    $discount = new Gatku\Discount;
@@ -132,7 +125,6 @@ Route::get('/display-order-email/customer/{orderId}', [ 'uses' => 'DisplayOrderN
 //    $shipping = 20;
 //    $total = $subtotal + $shipping;
 //    $date = '2018-06-19';
-//    $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
 //
 //    Mail::to([
 //        [   'email' => 'marcincyniu@gmail.com',

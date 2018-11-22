@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Gatku\Model\HomeSetting;
 use Gatku\Repositories\ShippingRequestRepository;
 use Gatku\Model\ShippingRequest;
 use Illuminate\Support\Facades\View;
@@ -10,12 +11,21 @@ class ShippingRequestController extends BaseController {
 
 	protected $request;
 
-	public function __construct(ShippingRequestRepository $request) 
+    /**
+     * @var HomeSetting
+     */
+    protected $homeSetting;
+
+    public function __construct(
+	    ShippingRequestRepository $request,
+        HomeSetting $homeSetting
+    )
 	{
 		$this->request = $request;
+        $this->homeSetting = $homeSetting;
 
         parent::__construct();
-	}
+    }
 
 	/**
 	 * Store a newly created resource in storage.
@@ -36,22 +46,17 @@ class ShippingRequestController extends BaseController {
 
 	}
 
-	/**
-	 * Display the specified resource.
-	 * GET /shipping-request/{token}
-	 *
-	 * @param  string $token
-	 * @return Response
-	 */
+    /**
+     * @param $token
+     * @return mixed
+     */
 	public function show($token)
 	{
-			
 		$request = ShippingRequest::where('token','=', $token)->with('order.customer')->first();
 
 		if ($request->paid) return \Redirect::route('home');
 
-		return View::make('pages.shipping-request', ['request' => $request]);
-
+		return View::make('pages.shipping-request', ['request' => $request])->with('homeSetting',  $this->homeSetting);
 	}
 
 	public function pay() {
