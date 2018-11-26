@@ -390,7 +390,8 @@ class OrderRepository {
         // if black friday is true, only give free shipping to
         // orders that have poles
 
-        if ($this->blackFriday && count($poles) > 0) return 0;
+        //Commented for Troy's request
+        //if ($this->blackFriday && count($poles) > 0) return 0;
 
         if (count($poles) > 0) {
 

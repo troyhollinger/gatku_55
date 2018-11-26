@@ -14287,11 +14287,14 @@ app.controller('CartController',
                 others.push(item);
             }
         };
+
         // if black friday is true, only give free shipping to
         // orders that have poles
-        if ($scope.blackFriday && poles.length > 0) {
-            return 0;
-        }
+
+        //Commented for Troy's request
+        // if ($scope.blackFriday && poles.length > 0) {
+        //     return 0;
+        // }
 
         if (poles.length > 0) {
             var poleShippingPrice = poles[0].type.shippingPrice;
@@ -14375,7 +14378,8 @@ app.controller('CartController',
             return amount;
         }
 
-        if ($scope.blackFriday) return 0;
+        //Commented for Troy's request
+        //if ($scope.blackFriday) return 0;
 
         angular.forEach($scope.items, function(value, key) {
             if($scope.items[key].type.slug === 'glass') {
