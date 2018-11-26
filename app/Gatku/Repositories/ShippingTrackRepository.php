@@ -141,7 +141,8 @@ class ShippingTrackRepository {
 		$items = $order->items;
 
 		if ($this->calculateSubTotal($order) >= 30000) return 0;
-		if ($this->blackFriday) return 0;
+        //Commented for Troy's request
+		//if ($this->blackFriday) return 0;
 
 		foreach($items as $item) {
 			if ($item->product->type->slug === 'pole') {
