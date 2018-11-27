@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use Gatku\Model\Discount;
+use Gatku\Model\HomeSetting;
 use Gatku\Model\ShippingTrack;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -49,12 +50,11 @@ class EmailsShippingTrack extends Mailable
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * @param HomeSetting $homeSetting
+     * @return EmailsShippingTrack
      */
-    public function build()
+    public function build(HomeSetting $homeSetting)
     {
-        return $this->subject('GATKU | Here is your package tracking number!')->view('emails.shipping-track');
+        return $this->subject('GATKU | Here is your package tracking number!')->view('emails.shipping-track')->with('homeSetting', $homeSetting);
     }
 }
