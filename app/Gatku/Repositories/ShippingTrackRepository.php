@@ -12,7 +12,10 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 
 class ShippingTrackRepository {
 
-	public $blackFriday = false;
+    /**
+     * @var HomeSetting
+     */
+    public $homeSetting;
 
     /**
      * ShippingTrackRepository constructor.
@@ -20,7 +23,7 @@ class ShippingTrackRepository {
      */
 	public function __construct(HomeSetting $homeSetting)
     {
-        $this->blackFriday = $homeSetting->black_friday;
+        $this->homeSetting = $homeSetting;
     }
 
     public function store($input)
@@ -95,8 +98,8 @@ class ShippingTrackRepository {
 		$glassCheck = 0;
 		$glassPrice = 0;
 
-		if($subtotal && $this->blackFriday) {
-			$amount = ($subtotal * 0.2) / 100;
+		if($subtotal && $this->homeSetting->global_discount_switch) {
+			$amount = ($subtotal * ( $this->homeSetting->global_discount_percentage / 100 )) / 100;
 			$amount = ceil($amount) * 100;
 
 			return $amount;
@@ -142,7 +145,7 @@ class ShippingTrackRepository {
 
 		if ($this->calculateSubTotal($order) >= 30000) return 0;
         //Commented for Troy's request
-		//if ($this->blackFriday) return 0;
+		//if ($this->homeSetting->global_discount_switch) return 0;
 
 		foreach($items as $item) {
 			if ($item->product->type->slug === 'pole') {

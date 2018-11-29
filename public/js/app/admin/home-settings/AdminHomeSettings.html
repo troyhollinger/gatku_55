@@ -312,14 +312,30 @@
         <input type="text" ng-model="$ctrl.homeSetting.ga_tracking_id">
         <!-- Google Analytics Tracking ID - end -->
 
-        <!-- Black Friday Promotion switch -->
-        <label>Black Friday Promotion Switch</label>
+        <!-- Global Discount -->
+        <hr>
+
+        <!-- Global Discount Switch -->
+        <label>Global Discount Switch</label>
         <input type="checkbox"
                ng-true-value="1"
                ng-false-value="0"
-               ng-model="$ctrl.homeSetting.black_friday">
-        <span>When checked then 20% discount will be applied for all products.</span>
-        <!-- Black Friday Promotion switch - end -->
+               ng-model="$ctrl.homeSetting.global_discount_switch">
+        <span>When checked then discount defined below will be applied for all products.</span>
+        <!-- Global Discount Switch - end -->
+
+        <!-- Global Discount Percentage  -->
+        <label>Global Discount Percentage</label>
+        <input type="text" ng-model="$ctrl.homeSetting.global_discount_percentage">
+        <!-- Global Discount Percentage - end -->
+
+        <!-- Global Discount Percentage  -->
+        <label>Global Discount Name</label>
+        <input type="text" ng-model="$ctrl.homeSetting.global_discount_name">
+        <!-- Global Discount Name - end -->
+
+        <hr>
+        <!-- Global Discount - end -->
 
     </form>
 

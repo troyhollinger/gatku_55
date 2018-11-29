@@ -88,7 +88,7 @@
 		<div class="cart-details">
 
 			<div class="cart-details-row" ng-if="eligibleForDiscount">
-				<span class="cart-item-column">Discounts - <span class="smaller faded bold">@{{ discountText }}</span></span>
+				<span class="cart-item-column">Discounts - <span class="smaller faded">@{{ discountText }}</span></span>
 				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + (discountAmount | money)"></span>
 
 				<div class="clear"></div>
@@ -118,7 +118,7 @@
 			</div>
 
 			<div class="cart-details-row">
-				<span class="cart-item-column">Subtotal <span class="smaller faded bold" ng-if="subtotal() < 30000 && !blackFriday">- get to $300 for free shipping!</span><span class="smaller faded bold" ng-if="subtotal() >= 30000 && !blackFriday">You get free shipping!</span></span>
+				<span class="cart-item-column">Subtotal <span class="smaller faded bold" ng-if="subtotal() < 30000 && !global_discount_switch">- get to $300 for free shipping!</span><span class="smaller faded bold" ng-if="subtotal() >= 30000 && !global_discount_switch">You get free shipping!</span></span>
 				<span class="cart-price-column shipping-column" ng-bind="'$' + (subtotal() | money)"></span>
 
 				<div class="clear"></div>
@@ -126,7 +126,7 @@
 			</div>
 
 			<div class="cart-details-row">
-				<span class="cart-item-column">Shipping <span class="smaller faded bold" ng-if="!blackFriday">Non-U.S.A shipping may vary</span></span>
+				<span class="cart-item-column">Shipping <span class="smaller faded bold" ng-if="!global_discount_switch">Non-U.S.A shipping may vary</span></span>
 				<span class="cart-price-column shipping-column" ng-bind="'$' + (shipping() | money)"></span>
 
 				<div class="clear"></div>
@@ -324,7 +324,7 @@
 		<div class="cart-details">
 
 			<div class="cart-details-row" ng-if="eligibleForDiscount">
-				<span class="cart-item-column">Discounts - <span class="smaller faded bold">@{{ discountText }}</span></span>
+				<span class="cart-item-column">Discounts - <span class="smaller faded">@{{ discountText }}</span></span>
 				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + (discountAmount | money)"></span>
 
 				<div class="clear"></div>

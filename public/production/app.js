@@ -14212,7 +14212,13 @@ app.controller('CartController',
     $scope.discountText = '';
     $scope.discountAmount = 0;
     $scope.enabled = true;
-    $scope.blackFriday = homeSetting.black_friday;
+
+    //Global Discount
+    $scope.global_discount_switch = homeSetting.global_discount_switch;
+    $scope.global_discount_percentage = homeSetting.global_discount_percentage;
+    $scope.global_discount_name = homeSetting.global_discount_name;
+    //Global Discount - end
+
     $scope.enteredDiscountCode = '';
     $scope.discount = '';
     $scope.discountsExists = false;
@@ -14292,7 +14298,7 @@ app.controller('CartController',
         // orders that have poles
 
         //Commented for Troy's request
-        // if ($scope.blackFriday && poles.length > 0) {
+        // if ($scope.global_discount_switch && poles.length > 0) {
         //     return 0;
         // }
 
@@ -14369,9 +14375,10 @@ app.controller('CartController',
         var glassCheck = 0;
         var glassPrice = 0;
 
-        if (subtotal && $scope.blackFriday) {
-            $scope.discountText = 'Black Friday Discount - 20% off';
-            amount = Math.ceil(((subtotal * 0.2) / 100)) * 100;
+        if (subtotal && $scope.global_discount_switch) {
+
+            $scope.discountText = $scope.global_discount_name + ' - ' + $scope.global_discount_percentage + '% off';
+            amount = Math.ceil(((subtotal * ( $scope.global_discount_percentage / 100 )) / 100)) * 100;
             $scope.eligibleForDiscount = true;
             $scope.discountAmount = amount;
 
@@ -14379,7 +14386,7 @@ app.controller('CartController',
         }
 
         //Commented for Troy's request
-        //if ($scope.blackFriday) return 0;
+        //if ($scope.global_discount_switch) return 0;
 
         angular.forEach($scope.items, function(value, key) {
             if($scope.items[key].type.slug === 'glass') {

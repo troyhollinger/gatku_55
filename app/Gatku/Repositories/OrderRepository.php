@@ -30,8 +30,6 @@ class OrderRepository {
     protected $order;
     protected $error_message;
 
-    public $blackFriday = false;
-
     /**
      * @var EmailSettings
      */
@@ -61,9 +59,6 @@ class OrderRepository {
         $this->customer = $customer;
         $this->emailSettingsRepository = $emailSettingsRepository;
         $this->homeSetting = $homeSetting;
-
-        //Set Black Friday discount
-        $this->blackFriday = $this->homeSetting->black_friday;
     }
 
     /**
@@ -307,9 +302,9 @@ class OrderRepository {
         $glassPrice = 0;
 
 
-        if ($subtotal && $this->blackFriday) {
+        if ($subtotal && $this->homeSetting->global_discount_switch) {
 
-            $amount = ($subtotal * 0.2) / 100;
+            $amount = ($subtotal * ( $this->homeSetting->global_discount_percentage / 100 )) / 100;
             $amount = ceil($amount) * 100;
 
             return $amount;
@@ -391,7 +386,7 @@ class OrderRepository {
         // orders that have poles
 
         //Commented for Troy's request
-        //if ($this->blackFriday && count($poles) > 0) return 0;
+        //if ($this->homeSetting->global_discount_switch && count($poles) > 0) return 0;
 
         if (count($poles) > 0) {
 
