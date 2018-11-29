@@ -22,6 +22,7 @@
 
 		</div>
 
+
 		<ul>
 			<li ng-repeat="item in items" class="cart-item" ng-class="{ 'apparel-cart-item' : item.type.slug === 'apparel' }">
 
@@ -59,14 +60,21 @@
 
 					</div>
 
-					<div class="cart-quantity-column">
-						<span>@{{ addon.quantity }} <i class="fa fa-angle-left" ng-click="decreaseAddonQuantity($parent.$parent.$index, $index)"><span ng-if="addon.quantity == 1">Remove</span></i> <i class="fa fa-angle-right" ng-click="increaseAddonQuantity($parent.$parent.$index, $index)"></i></span>
+					<!-- ng-show to prevent quantity change for addons as included in packages -->
+					<div class="cart-quantity-column" ng-show="!addon.include_in_package">
+						<span>@{{ addon.quantity }}
+							<i class="fa fa-angle-left"
+							   ng-click="decreaseAddonQuantity($parent.$parent.$index, $index)">
+								<span ng-if="addon.quantity == 1">Remove</span>
+							</i>
+							<i class="fa fa-angle-right"
+							   ng-click="increaseAddonQuantity($parent.$parent.$index, $index)">
+							</i>
+						</span>
 					</div>
 
 					<div class="cart-price-column">
-
 						<p>$@{{ addon.price * addon.quantity | money }}</p>
-
 					</div>
 
 					<div class="clear"></div>
