@@ -508,14 +508,23 @@
 				</th>
 			</tr>
 			<tr>
-				<th colspan="2" padding="0" align="left" style="width: 100%;height: 35px;font-family: 'Helvetica', Arial, sans-serif;padding: 0 0 0 0px; font-weight: normal;">
+				<th colspan="2"
+					padding="0"
+					align="left"
+					style="	width: 100%;
+							height: 35px;
+							font-family: 'Helvetica', Arial, sans-serif;
+							padding: 0 0 0 0px;
+							font-weight: normal;
+							font-size: 25px;"
+				>
 					{{ $homeSetting['address_us'] }}
 				</th>
 			</tr>
 		</thead>
 	<tbody>
 	<tr>
-		<td><div style="font-size: 20px;padding-top: 40px;padding-left: 175px;padding-bottom: 100px;">
+		<td><div style="font-size: 40px; padding-top: 40px; padding-left: 175px; padding-bottom: 100px;">
 		   <span style="font-weight: bold;"> {{ $order['customer']['fullName'] }}</span><br>
 			<span>
 			{{ $order['address'] }}
