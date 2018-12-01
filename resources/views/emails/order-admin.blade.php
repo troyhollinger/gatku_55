@@ -515,9 +515,7 @@
 							height: 35px;
 							font-family: 'Helvetica', Arial, sans-serif;
 							padding: 0 0 0 0px;
-							font-weight: normal;
-							font-size: 25px;"
-				>
+							font-weight: normal;">
 					{{ $homeSetting['address_us'] }}
 				</th>
 			</tr>
