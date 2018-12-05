@@ -41,6 +41,7 @@ var app = angular.module('gatku', [
 	'ipCookie',
     'ngAnimate',
     'ngRoute',
+    'ngResource',
 	'angular-stripe',
 	'ngTouch',
     'ui.bootstrap',

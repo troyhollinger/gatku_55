@@ -36,5 +36,10 @@ app.config(function($routeProvider) {
             controller: 'AdminImagesController',
             controllerAs: '$ctrl'
         })
+        .when('/quantity-sale-report', {
+            templateUrl : 'js/app/admin/quantity-sale-report/AdminQuantitySaleReport.html',
+            controller: 'AdminQuantitySaleReport',
+            controllerAs: '$ctrl'
+        })
     ;
 });

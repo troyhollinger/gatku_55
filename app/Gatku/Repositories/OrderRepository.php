@@ -649,7 +649,7 @@ class OrderRepository {
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
-//        if (App::environment('production')) {
+        if (App::environment('production')) {
 
             //Send email to Customer and Notify Seller
             if ($emailListForEmailsOrderArray && !empty($emailListForEmailsOrderArray)) {
@@ -679,29 +679,53 @@ class OrderRepository {
                             $this->emailSettings
                 ));
             }
-//        }
-//
-//        if (App::environment('dev')) {
-//            if (isset($_ENV['test_transaction_email'])) {
-//                Mail::to([
-//                    [
-//                        'email' => 'past-email-address-here',
-//                        'name' => 'past-recipient-name-here'
-//                    ]
-//                ])->send(new EmailsOrderAdmin(
-//                        $order,
-//                        $discount,
-//                        $subtotal,
-//                        $shipping,
-//                        $total,
-//                        $date,
-//                        $this->homeSetting,
-//                        $this->emailSettings)
-//                );
-//            }
-//        }
+        }
+
+        if (App::environment('dev')) {
+            if (isset($_ENV['test_transaction_email'])) {
+                Mail::to([
+                    [
+                        'email' => 'past-email-address-here',
+                        'name' => 'past-recipient-name-here'
+                    ]
+                ])->send(new EmailsOrderAdmin(
+                        $order,
+                        $discount,
+                        $subtotal,
+                        $shipping,
+                        $total,
+                        $date,
+                        $this->homeSetting,
+                        $this->emailSettings)
+                );
+            }
+        }
 
         return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function quantityReport()
+    {
+        $sql = "SELECT *, (order_item_quantity + order_item_addons_quantity) AS total_quantity
+                FROM (
+                    SELECT p.id AS product_id,
+                           p.name AS product_name,
+                           IFNULL(sum(oi.quantity), 0) AS order_item_quantity,
+                           IFNULL(sum(oia.quantity), 0) AS order_item_addons_quantity
+                    FROM products p
+                    LEFT JOIN order_items oi ON oi.productId = p.id
+                    LEFT JOIN order_item_addons oia ON oia.productId = p.id
+                    GROUP BY p.name
+                ) t
+                ORDER BY product_name
+        ";
+
+        $products = DB::select($sql);
+
+        return $products;
     }
 
     //Make sure EmailSettings are loaded!!!!

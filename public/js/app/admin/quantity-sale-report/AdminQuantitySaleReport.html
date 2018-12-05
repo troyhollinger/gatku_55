@@ -1,0 +1,29 @@
+<h1>
+    <i class="fa fa-money"></i>
+    &nbsp;Quantity Sale Report
+</h1>
+
+<br>
+
+<div class="order-search" ng-cloak>
+
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th><b>Product Name</b></th>
+                <th><b>Order Item Quantity</b></th>
+                <th><b>Order Item Addons Quantity</b></th>
+                <th><b>Total Quantity</b></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="row in $ctrl.report">
+                <td>{{row.product_name}}</td>
+                <td style="text-align: right;">{{row.order_item_quantity}}</td>
+                <td style="text-align: right;">{{row.order_item_addons_quantity}}</td>
+                <td style="text-align: right;">{{row.total_quantity}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

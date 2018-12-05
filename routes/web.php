@@ -38,11 +38,16 @@ Route::get('login', ['as' => 'login', 'uses' => 'AuthenticationController@index'
 Route::post('login', ['as' => 'login.authenticate', 'uses' => 'AuthenticationController@authenticate']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthenticationController@logout']);
 
+//Admin access limited routes only
 Route::middleware(['auth'])->prefix('admin')->group(function () {
+
     Route::get('/', ['as' => 'admin.index', function(HomeSetting $homeSetting) {
         return View::make('pages.admin')->with('homeSetting',  $homeSetting);
     }]);
+
+    Route::get('quantity-report', 'QuantityReportController@index');
 });
+//Admin access limited routes only - end
 
 Route::resource('order', 'OrderController');
 

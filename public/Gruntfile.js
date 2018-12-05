@@ -14,6 +14,7 @@ module.exports = function(grunt) {
                     'bower_components/nanobar/nanobar.js',
                     'bower_components/bootstrap/dist/js/bootstrap.min.js',
                     'bower_components/angular/angular.min.js',
+                    'bower_components/angular-resource/angular-resource.min.js',
                     'bower_components/angular-cookie/angular-cookie.js',
                     'bower_components/angular-animate/angular-animate.js',
                     'bower_components/angular-stripe/release/angular-stripe.js',
@@ -26,6 +27,7 @@ module.exports = function(grunt) {
                     'bower_components/ng-file-upload/angular-file-upload.js',
                     'bower_components/rollerblade/rollerblade.min.js',
                     'js/config.js',
+                    'js/resources/*.js',
                     'js/directives.js',
                     'js/services/*.js',
                     'js/factories.js',
@@ -77,6 +79,7 @@ module.exports = function(grunt) {
                 files: [
                     'js/*.js',
                     'js/configs/*.js',
+                    'js/resources/*.js',
                     'js/controllers/*.js',
                     'js/services/*.js',
                     'js/app/**/*.js'
