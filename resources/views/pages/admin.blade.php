@@ -59,6 +59,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#quantity-sale-report">
+                <i class="fa fa-money"></i>
+                &nbsp;Quantity Sale Report
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="#" ng-click="adminLogout()">
                 <i class="fa fa-times"></i>
                 &nbsp;Logout

@@ -649,7 +649,7 @@ class OrderRepository {
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
-//        if (App::environment('production')) {
+        if (App::environment('production')) {
 
             //Send email to Customer and Notify Seller
             if ($emailListForEmailsOrderArray && !empty($emailListForEmailsOrderArray)) {
@@ -679,29 +679,88 @@ class OrderRepository {
                             $this->emailSettings
                 ));
             }
-//        }
-//
-//        if (App::environment('dev')) {
-//            if (isset($_ENV['test_transaction_email'])) {
-//                Mail::to([
-//                    [
-//                        'email' => 'past-email-address-here',
-//                        'name' => 'past-recipient-name-here'
-//                    ]
-//                ])->send(new EmailsOrderAdmin(
-//                        $order,
-//                        $discount,
-//                        $subtotal,
-//                        $shipping,
-//                        $total,
-//                        $date,
-//                        $this->homeSetting,
-//                        $this->emailSettings)
-//                );
-//            }
-//        }
+        }
+
+        if (App::environment('dev')) {
+            if (isset($_ENV['test_transaction_email'])) {
+                Mail::to([
+                    [
+                        'email' => 'past-email-address-here',
+                        'name' => 'past-recipient-name-here'
+                    ]
+                ])->send(new EmailsOrderAdmin(
+                        $order,
+                        $discount,
+                        $subtotal,
+                        $shipping,
+                        $total,
+                        $date,
+                        $this->homeSetting,
+                        $this->emailSettings)
+                );
+            }
+        }
 
         return true;
+    }
+
+    /**
+     * @param string $start
+     * @param string $end
+     * @return mixed
+     */
+    public function quantityReport($start, $end)
+    {
+        //Set default value
+        $oiPeriod = "";
+        $oiaPeriod = "";
+
+        //Change if start and end dates passed
+        if ($start && $end) {
+            $oiPeriod = " AND oi.created_at BETWEEN :oi_start_date AND :oi_end_date";
+            $oiaPeriod = " AND oia.created_at BETWEEN :oia_start_date AND :oia_end_date";
+        }
+
+        $sql = "SELECT product_id,
+                       product_name,
+                       SUM(order_item_quantity) AS order_item_quantity,
+                       SUM(order_item_addons_quantity) AS order_item_addons_quantity,
+                       (SUM(order_item_quantity) + SUM(order_item_addons_quantity)) AS total_quantity
+                FROM (
+                    SELECT  p.id AS product_id,
+                            p.name AS product_name,
+                            IFNULL(SUM(oi.quantity), 0) AS order_item_quantity,
+                            0 AS order_item_addons_quantity
+                    FROM products p
+                        LEFT JOIN order_items oi ON oi.productId = p.id $oiPeriod  
+                    GROUP BY p.id
+
+                    UNION ALL
+
+                    SELECT  p.id AS product_id,
+                            p.name AS product_name,
+                            0 AS order_item_quantity,
+                            IFNULL(SUM(oia.quantity), 0) AS  order_item_addons_quantity
+                    FROM products p
+                        LEFT JOIN order_item_addons oia ON oia.productId = p.id $oiaPeriod 
+                    GROUP BY p.id
+                ) t
+                GROUP BY t.product_id, t.product_name
+                ORDER BY t.product_name
+        ";
+
+        //I don't know why byt every single param must be bind separate.
+        //The same neme param can't be used multiple times.
+        $bindings = [
+            ':oi_start_date' => $start,
+            ':oia_start_date' => $start,
+            ':oi_end_date' => $end,
+            ':oia_end_date' => $end
+        ];
+
+        $products = DB::select($sql, $bindings);
+
+        return $products;
     }
 
     //Make sure EmailSettings are loaded!!!!
