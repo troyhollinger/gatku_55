@@ -28,7 +28,10 @@ class QuantityReportController extends BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		return \Response::json($this->orderRepository->quantityReport(), 200);
+        //$someVariable = Input::get("some_variable");
+	    $start = '2018-11-01';
+	    $end = '2018-11-30';
+		return \Response::json($this->orderRepository->quantityReport($start, $end), 200);
 	}
 
 }

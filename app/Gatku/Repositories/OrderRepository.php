@@ -705,25 +705,56 @@ class OrderRepository {
     }
 
     /**
+     * @param string $start
+     * @param string $end
      * @return mixed
      */
-    public function quantityReport()
+    public function quantityReport(string $start = '', string $end = '')
     {
-        $sql = "SELECT *, (order_item_quantity + order_item_addons_quantity) AS total_quantity
+        //Set default value
+        $oiPeriod = "";
+        $oiaPeriod = "";
+
+        //Change if start and end dates passed
+        if ($start && $end) {
+            $oiPeriod = " AND oi.created_at BETWEEN :start AND :end";
+            $oiaPeriod = " AND oia.created_at BETWEEN :start AND :end";
+
+//            $oiPeriod = " AND oi.created_at BETWEEN '2018-11-01' AND '2018-11-30'";
+//            $oiaPeriod = " AND oia.created_at BETWEEN '2018-11-01' AND '2018-11-30'";
+
+        }
+
+        $sql = "SELECT product_id,
+                       product_name,
+                       SUM(order_item_quantity) AS order_item_quantity,
+                       SUM(order_item_addons_quantity) AS order_item_addons_quantity,
+                       (SUM(order_item_quantity) + SUM(order_item_addons_quantity)) AS total_quantity
                 FROM (
-                    SELECT p.id AS product_id,
-                           p.name AS product_name,
-                           IFNULL(sum(oi.quantity), 0) AS order_item_quantity,
-                           IFNULL(sum(oia.quantity), 0) AS order_item_addons_quantity
+                    SELECT  p.id AS product_id,
+                            p.name AS product_name,
+                            IFNULL(SUM(oi.quantity), 0) AS order_item_quantity,
+                            0 AS order_item_addons_quantity
                     FROM products p
-                    LEFT JOIN order_items oi ON oi.productId = p.id
-                    LEFT JOIN order_item_addons oia ON oia.productId = p.id
-                    GROUP BY p.name
+                        LEFT JOIN order_items oi ON oi.productId = p.id
+                    GROUP BY p.id
+
+                    UNION ALL
+
+                    SELECT  p.id AS product_id,
+                            p.name AS product_name,
+                            0 AS order_item_quantity,
+                            IFNULL(SUM(oia.quantity), 0) AS  order_item_addons_quantity
+                    FROM products p
+                        LEFT JOIN order_item_addons oia ON oia.productId = p.id
+                    GROUP BY p.id
                 ) t
-                ORDER BY product_name
+                GROUP BY t.product_id, t.product_name
+                ORDER BY t.product_name
         ";
 
-        $products = DB::select($sql);
+        //$products = DB::select(DB::raw($sql, ['start' => $start, 'end' => $end]));
+        $products = DB::select(DB::raw($sql));
 
         return $products;
     }
