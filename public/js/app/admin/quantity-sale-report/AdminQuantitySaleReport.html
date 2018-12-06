@@ -4,8 +4,37 @@
 </h1>
 
 <br>
+<form class="form-inline">
+    <div class="form-group row">
+        <label for="start" class="col-sm-4 col-form-label">Start date:</label>
+        <div class="col-sm-2">
+            <input type="date"
+                   id="start"
+                   class="form-control"
+                   ng-model="$ctrl.start">
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="form-group row">
+        <label for="end" class="col-sm-4 col-form-label">End date:</label>
+        <div class="col-sm-2">
+            <input type="date"
+                   id="end"
+                   class="form-control"
+                   ng-model="$ctrl.end">
+        </div>
+    </div>
+
+    <div class="col-sm-1"></div>
+    
+    <button class="btn btn-success" ng-click="$ctrl.submitRequest()">Submit</button>
+
+</form>
+
+<br>
 
 <div class="order-search" ng-cloak>
+
 
     <table class="table table-hover table-striped">
         <thead class="thead-dark">

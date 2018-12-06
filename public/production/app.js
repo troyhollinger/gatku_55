@@ -16162,19 +16162,23 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 (function () {
     app.controller('AdminQuantitySaleReport', AdminQuantitySaleReport);
 
-    function AdminQuantitySaleReport($scope, QuantityReportResource, AlertService, $exceptionHandler) {
+    function AdminQuantitySaleReport($scope, QuantityReportResource, $exceptionHandler) {
 
         var $ctrl = this;
 
         $ctrl.start = null;
         $ctrl.end = null;
 
-        QuantityReportResource.query({
-            start: $ctrl.start,
-            end: $ctrl.end
-        }, function(response) {
-            $ctrl.report = response;
-        });
+        $ctrl.submitRequest = function() {
+            QuantityReportResource.query({
+                start: $ctrl.start,
+                end: $ctrl.end
+            }, function(response) {
+                $ctrl.report = response;
+            }, function(error) {
+                $exceptionHandler(JSON.stringify(error));
+            });
+        };
     };
 }());
 
