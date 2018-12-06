@@ -12151,7 +12151,7 @@ app.config(function(stripeProvider, $locationProvider) {
 });
 
 app.factory('QuantityReportResource', function($resource) {
-    return $resource('/admin/quantity-report');
+    return $resource('/admin/quantity-report/');
 });
 app.filter('money', function () { 
 
@@ -16166,7 +16166,13 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
         var $ctrl = this;
 
-        QuantityReportResource.query({}, function(response) {
+        $ctrl.start = null;
+        $ctrl.end = null;
+
+        QuantityReportResource.query({
+            start: $ctrl.start,
+            end: $ctrl.end
+        }, function(response) {
             $ctrl.report = response;
         });
     };

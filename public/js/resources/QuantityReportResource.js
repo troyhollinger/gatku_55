@@ -1,3 +1,3 @@
 app.factory('QuantityReportResource', function($resource) {
-    return $resource('/admin/quantity-report');
+    return $resource('/admin/quantity-report/');
 });

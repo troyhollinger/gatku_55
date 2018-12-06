@@ -24,6 +24,9 @@
                 <td style="text-align: right;">{{row.order_item_addons_quantity}}</td>
                 <td style="text-align: right;">{{row.total_quantity}}</td>
             </tr>
+            <tr ng-show="!$ctrl.report">
+                <td colspan="4">No data for report.</td>
+            </tr>
         </tbody>
     </table>
 </div>

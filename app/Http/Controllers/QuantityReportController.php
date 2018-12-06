@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Gatku\Repositories\OrderRepository;
+use Illuminate\Support\Facades\Input;
 
 
 class QuantityReportController extends BaseController {
@@ -28,10 +29,11 @@ class QuantityReportController extends BaseController {
 	 * @return Response
 	 */
 	public function index() {
-        //$someVariable = Input::get("some_variable");
-	    $start = '2018-11-01';
-	    $end = '2018-11-30';
-		return \Response::json($this->orderRepository->quantityReport($start, $end), 200);
-	}
+	    //Get dates form url path
+        $start = Input::get("start");
+        $end = Input::get("end");
 
+        $report = $this->orderRepository->quantityReport($start, $end);
+		return \Response::json($report, 200);
+	}
 }

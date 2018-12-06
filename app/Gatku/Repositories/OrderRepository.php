@@ -709,7 +709,7 @@ class OrderRepository {
      * @param string $end
      * @return mixed
      */
-    public function quantityReport(string $start = '', string $end = '')
+    public function quantityReport($start, $end)
     {
         //Set default value
         $oiPeriod = "";
@@ -717,12 +717,8 @@ class OrderRepository {
 
         //Change if start and end dates passed
         if ($start && $end) {
-            $oiPeriod = " AND oi.created_at BETWEEN :start AND :end";
-            $oiaPeriod = " AND oia.created_at BETWEEN :start AND :end";
-
-//            $oiPeriod = " AND oi.created_at BETWEEN '2018-11-01' AND '2018-11-30'";
-//            $oiaPeriod = " AND oia.created_at BETWEEN '2018-11-01' AND '2018-11-30'";
-
+            $oiPeriod = " AND oi.created_at BETWEEN :oi_start_date AND :oi_end_date";
+            $oiaPeriod = " AND oia.created_at BETWEEN :oia_start_date AND :oia_end_date";
         }
 
         $sql = "SELECT product_id,
@@ -736,7 +732,7 @@ class OrderRepository {
                             IFNULL(SUM(oi.quantity), 0) AS order_item_quantity,
                             0 AS order_item_addons_quantity
                     FROM products p
-                        LEFT JOIN order_items oi ON oi.productId = p.id
+                        LEFT JOIN order_items oi ON oi.productId = p.id $oiPeriod  
                     GROUP BY p.id
 
                     UNION ALL
@@ -746,15 +742,23 @@ class OrderRepository {
                             0 AS order_item_quantity,
                             IFNULL(SUM(oia.quantity), 0) AS  order_item_addons_quantity
                     FROM products p
-                        LEFT JOIN order_item_addons oia ON oia.productId = p.id
+                        LEFT JOIN order_item_addons oia ON oia.productId = p.id $oiaPeriod 
                     GROUP BY p.id
                 ) t
                 GROUP BY t.product_id, t.product_name
                 ORDER BY t.product_name
         ";
 
-        //$products = DB::select(DB::raw($sql, ['start' => $start, 'end' => $end]));
-        $products = DB::select(DB::raw($sql));
+        //I don't know why byt every single param must be bind separate.
+        //The same neme param can't be used multiple times.
+        $bindings = [
+            ':oi_start_date' => $start,
+            ':oia_start_date' => $start,
+            ':oi_end_date' => $end,
+            ':oia_end_date' => $end
+        ];
+
+        $products = DB::select($sql, $bindings);
 
         return $products;
     }

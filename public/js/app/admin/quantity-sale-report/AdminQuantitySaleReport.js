@@ -5,7 +5,13 @@
 
         var $ctrl = this;
 
-        QuantityReportResource.query({}, function(response) {
+        $ctrl.start = null;
+        $ctrl.end = null;
+
+        QuantityReportResource.query({
+            start: $ctrl.start,
+            end: $ctrl.end
+        }, function(response) {
             $ctrl.report = response;
         });
     };
