@@ -681,11 +681,17 @@ class OrderRepository {
             }
         }
 
+        //Development test code
         if (App::environment('dev')) {
-            if (isset($_ENV['test_transaction_email'])) {
+
+            $email = env('DEV_TEST_EMAIL', false);
+
+            if ($email) {
+
+                //Admin Order Confirmation
                 Mail::to([
                     [
-                        'email' => 'past-email-address-here',
+                        'email' => $email,
                         'name' => 'past-recipient-name-here'
                     ]
                 ])->send(new EmailsOrderAdmin(
@@ -696,8 +702,27 @@ class OrderRepository {
                         $total,
                         $date,
                         $this->homeSetting,
-                        $this->emailSettings)
-                );
+                        $this->emailSettings
+                ));
+
+                //Customer Order Confirmation
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name-here'
+                    ]
+                ]
+
+                )->send(new EmailsOrder(
+                    $order,
+                    $discount,
+                    $subtotal,
+                    $shipping,
+                    $total,
+                    $date,
+                    $this->homeSetting,
+                    $this->emailSettings
+                ));
             }
         }
 

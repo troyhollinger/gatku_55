@@ -295,7 +295,7 @@
 		<td class="product-image-cell">
 			<div class="image-container" style="width:100%;text-align:left;">
 				<!-- Product thumb here -->
-				<img class="product-image" style="width:200px;height:auto;vertical-align: bottom;" src="{{ $item['product']['emailImage'] }}" >
+				<img class="product-image" style="width:200px;height:auto;vertical-align: bottom;" src="{{ asset($item['product']['emailImage']) }}" >
 			</div>
 		</td>
 		<td class="product-data-cell">

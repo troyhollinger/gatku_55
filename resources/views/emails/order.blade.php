@@ -343,7 +343,7 @@
                                                         <!-- Product thumb here -->
                                                         <img class="product-image"
                                                              style="width:200px;height:auto;vertical-align: bottom;"
-                                                             src="{{ $item['product']['emailImage'] }}">
+                                                             src="{{ asset($item['product']['emailImage']) }}">
                                                     </div>
                                                 </td>
                                                 <td class="product-data-cell">
