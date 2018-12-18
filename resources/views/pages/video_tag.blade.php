@@ -27,7 +27,7 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 
 {{--<div class="hero" style="z-index: -99;">--}}
 
-	<video autoplay muted loop id="myVideo">
+	<video autoplay muted loop playsinline controls id="myVideo">
 		<source src="/videos/rain.mp4" type="video/mp4">
 		Your browser does not support HTML5 video.
 	</video>
