@@ -12,42 +12,29 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 
 
 	<style>
-		div #myVideo {
-			/*position: fixed;*/
-			right: 0;
-			bottom: 0;
-			min-width: 100%;
-			min-height: 100%;
-			/*z-index: -99;*/
+		@media only screen and (max-width: 480px) {
+			.gatku-home-banner{
+				position: relative;
+				background-image:url({!! $homeSetting['mobile_image'] !!});
+			}
 		}
+		@media only screen and (min-width: 480px) {
+			.gatku-home-banner{
+				background-image:url({!! $homeSetting['image'] !!});
+			}
+		}
+
 	</style>
 
+<div class="hero gatku-home-banner">
 
+	<div class="video_contain">
+		<video autoplay muted loop playsinline>
+			<source src="/videos/rain.mp4" type="video/mp4">
+		</video>
+	</div>
 
-
-{{--<div class="hero" style="z-index: -99;">--}}
-
-	<video autoplay muted loop playsinline id="myVideo">
-		<source src="/videos/rain.mp4" type="video/mp4">
-		Your browser does not support HTML5 video.
-	</video>
-
-<style>
-	@media only screen and (max-width: 480px) {
-		.gatku-home-banner{
-			position: relative;
-			background-image:url({!! $homeSetting['mobile_image'] !!});
-		}
-	}
-	@media only screen and (min-width: 480px) {
-	.gatku-home-banner{
-			background-image:url({!! $homeSetting['image'] !!});
-		}
-	}
-
-</style>
-
-	<div class="slideshow" style="position:absolute; width: 100%; height: 100%; right: 0px; bottom: -200px; text-align: center; z-index: 999;">
+	<div class="slideshow" style="z-index: 999;">
 		@if ( trim($homeSetting['slideshow_text_1']) )
 			<div>
 				<p class="hero-blurb hero-blurb-editable">{!! $homeSetting['slideshow_text_1'] !!}</p>
@@ -79,14 +66,14 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 		@endif
 	</div>
 
-	{{--<div class="home-image-info">--}}
-		{{--<p class="live-till">{!! $homeSetting['image_info'] !!}</p>--}}
-		{{--<p class="photo-credit">{!! $homeSetting['image_credit'] !!}</p>--}}
-	{{--</div>--}}
+	<div class="home-image-info">
+		<p class="live-till">{!! $homeSetting['image_info'] !!}</p>
+		<p class="photo-credit">{!! $homeSetting['image_credit'] !!}</p>
+	</div>
 
-{{--</div>--}}
+</div>
 
-<div class="store-section home-section" id="store" ng-cloak>
+<div class="store-section home-section" id="store" style="background-color: #FFFFFF;" ng-cloak>
 
 	<div class="home-container">
 
