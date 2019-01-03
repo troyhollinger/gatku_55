@@ -83,6 +83,10 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 
 </div>
 
-@include('partials.contact')
+<div class="home-section" style="background-color: #FFFFFF;" ng-cloak>
+
+	@include('partials.contact')
+
+</div>
 
 @stop
