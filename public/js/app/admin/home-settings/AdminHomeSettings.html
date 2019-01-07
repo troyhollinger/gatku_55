@@ -107,6 +107,23 @@
         </button>
         <!-- Mobile Image - end -->
 
+        <!-- og:image Image -->
+        <label>OG TAG [og:image] Image - (This is image displayed in communicators' when send link to page)</label>
+        <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.homeSetting.ogimage + ')'}">
+            <i class="fa fa-image" ng-hide="$ctrl.homeSetting.ogimage"></i>
+            <input type="text" ng-model="$ctrl.homeSetting.ogimage" class="image-path-storage-input">
+            <input type="file" ng-file-drop ng-file-select="$ctrl.uploadHomeImage($files, 'ogimage')">
+        </div>
+
+        <br>
+
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="$ctrl.removeImage('ogimage');">
+            Remove Image &nbsp; <i class="fa fa-trash"></i>
+        </button>
+        <!-- og:image - end -->
+
         <!-- On Site Live Til -->
         <label>On Site Live Til</label>
         <input type="text" ng-model="$ctrl.homeSetting.image_info">

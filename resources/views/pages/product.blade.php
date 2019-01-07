@@ -1,9 +1,3 @@
-<?php
-//This is hack to display proper thumb image. In this case Product image.
-if (!isset($ogimage) || !$ogimage) {
-	$ogimage = $product->thumb;
-}
-?>
 
 @extends('layouts.master')
 

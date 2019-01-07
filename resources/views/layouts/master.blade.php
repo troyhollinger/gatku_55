@@ -1,10 +1,3 @@
-<?php
-//This is hack to display proper thumb image
-if (!isset($ogimage) || !$ogimage) {
-    $ogimage = $homeSetting['mobile_image'];
-}
-?>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -18,7 +11,7 @@ if (!isset($ogimage) || !$ogimage) {
         <meta property="og:title" content="{!! $homeSetting['page_title'] !!}">
         <meta property="og:type" content="website">
         {{--<meta property="og:url" content="https://gatku.com/">--}}
-        <meta property="og:image" content="{{ asset( $ogimage ) }}" />
+        <meta property="og:image" content="{{ asset( config('ogimage') ) }}" />
         <meta property="og:description" content="@yield('description')">
         <meta property="og:site_name" content="{!! $homeSetting['page_title'] !!}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
