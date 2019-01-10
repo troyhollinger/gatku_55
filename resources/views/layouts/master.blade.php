@@ -108,6 +108,55 @@
             }
         </style>
         <!-- This is css created dynamically based on settings in admin section - end -->
+
+        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+        @if(App::environment('production'))
+
+            @if ( trim($homeSetting['ga_tracking_id']) )
+                <script>
+                    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                    ga('create', '{{ trim($homeSetting['ga_tracking_id']) }}', 'auto');
+                    ga('send', 'pageview');
+                </script>
+            @endif
+
+            <!-- Facebook Pixel Code -->
+                <script>
+                    !function(f,b,e,v,n,t,s)
+                    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                        n.queue=[];t=b.createElement(e);t.async=!0;
+                        t.src=v;s=b.getElementsByTagName(e)[0];
+                        s.parentNode.insertBefore(t,s)}(window,document,'script',
+                        'https://connect.facebook.net/en_US/fbevents.js');
+                    fbq('init', '2476097275737728');
+                    fbq('track', 'PageView');
+                </script>
+                <noscript>
+                    <img height="1" width="1" src="https://www.facebook.com/tr?id=2476097275737728&ev=PageView&noscript=1"/>
+                </noscript>
+            <!-- End Facebook Pixel Code -->
+
+            @if(Route::currentRouteName() !== 'admin.index')
+            <!-- FRESHCHAT WIDGET - loading - start -->
+                <script>
+                    window.fcWidget.init({
+                        token: "967edb4c-f6d8-4209-9700-964f03b1fe1d",
+                        host: "https://wchat.freshchat.com"
+                    });
+                </script>
+                <!-- FRESHCHAT WIDGET - loading - start -->
+            @endif
+
+        @endif
+
+
+
     </head>
     @if(Route::currentRouteName() === 'product.show')
     <body ng-app="gatku" ng-controller="ProductController" body-freeze>
@@ -129,33 +178,6 @@
 
         <alerter></alerter>
 
-        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
-        @if(App::environment('production'))
-
-            @if ( trim($homeSetting['ga_tracking_id']) )
-            <script>
-              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-              ga('create', '{{ trim($homeSetting['ga_tracking_id']) }}', 'auto');
-              ga('send', 'pageview');
-            </script>
-            @endif
-
-            @if(Route::currentRouteName() !== 'admin.index')
-                <!-- FRESHCHAT WIDGET - loading - start -->
-                <script>
-                    window.fcWidget.init({
-                        token: "967edb4c-f6d8-4209-9700-964f03b1fe1d",
-                        host: "https://wchat.freshchat.com"
-                    });
-                </script>
-                <!-- FRESHCHAT WIDGET - loading - start -->
-            @endif
-            
-        @endif
 
 
     </body>
