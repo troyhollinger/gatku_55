@@ -3,7 +3,9 @@
 namespace App\Mail;
 
 use Gatku\Model\Discount;
+use Gatku\Model\EmailSettings;
 use Gatku\Model\HomeSetting;
+use Gatku\Model\Order;
 use Gatku\Model\ShippingTrack;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -22,15 +24,20 @@ class EmailsShippingTrack extends Mailable
     public $shipping;
     public $total;
     public $date;
+    /**
+     * @var EmailSettings
+     */
+    public $emailSettings;
 
     /**
      * EmailsShippingTrack constructor.
      * @param ShippingTrack $request
-     * @param Discount $discount
+     * @param $discount
      * @param $subtotal
      * @param $shipping
      * @param $total
      * @param $date
+     * @param EmailSettings $emailSettings
      */
     public function __construct(
         ShippingTrack $request,
@@ -38,7 +45,8 @@ class EmailsShippingTrack extends Mailable
         $subtotal,
         $shipping,
         $total,
-        $date
+        $date,
+        EmailSettings $emailSettings
     )
     {
         $this->request = $request;
@@ -47,6 +55,7 @@ class EmailsShippingTrack extends Mailable
         $this->shipping = $shipping;
         $this->total = $total;
         $this->date = $date;
+        $this->emailSettings = $emailSettings;
     }
 
     /**
@@ -55,6 +64,12 @@ class EmailsShippingTrack extends Mailable
      */
     public function build(HomeSetting $homeSetting)
     {
-        return $this->subject('GATKU | Here is your package tracking number!')->view('emails.shipping-track')->with('homeSetting', $homeSetting);
+        return $this->subject('GATKU | Here is your package tracking number!')
+            ->view('emails.shipping-track')
+            ->with([
+                'homeSetting' => $homeSetting,
+                'emailSettings' => $this->emailSettings,
+                'order' => $this->request->order
+            ]);
     }
 }

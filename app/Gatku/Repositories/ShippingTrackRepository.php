@@ -3,6 +3,7 @@
 namespace Gatku\Repositories;
 
 use App\Mail\EmailsShippingTrack;
+use Gatku\Model\EmailSettings;
 use Gatku\Model\HomeSetting;
 use Gatku\Model\ShippingTrack;
 use Illuminate\Support\Facades\Mail;
@@ -18,12 +19,24 @@ class ShippingTrackRepository {
     public $homeSetting;
 
     /**
+     * @var EmailSettingsRepository
+     */
+    public $emailSettingsRepository;
+
+    /**
+     * @var EmailSettings
+     */
+    private $emailSettings;
+
+    /**
      * ShippingTrackRepository constructor.
      * @param HomeSetting $homeSetting
+     * @param EmailSettingsRepository $emailSettingsRepository
      */
-	public function __construct(HomeSetting $homeSetting)
+	public function __construct(HomeSetting $homeSetting, EmailSettingsRepository $emailSettingsRepository)
     {
         $this->homeSetting = $homeSetting;
+        $this->emailSettingsRepository = $emailSettingsRepository;
     }
 
     public function store($input)
@@ -188,6 +201,8 @@ class ShippingTrackRepository {
 
 	private function sendEmail($request,$discount, $subtotal, $shipping, $total)
 	{
+	    $this->uploadEmailSettingsIfNotSet();
+
 		$date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
         Mail::to([
@@ -195,6 +210,14 @@ class ShippingTrackRepository {
                 'email' => $request->order->customer->email,
                 'name' => $request->order->customer->fullName
             ]
-        ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $total, $date));
+        ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $total, $date, $this->emailSettings));
 	}
+
+    //Make sure EmailSettings are loaded!!!!
+    private function uploadEmailSettingsIfNotSet()
+    {
+        if (!$this->emailSettings) {
+            $this->emailSettings = $this->emailSettingsRepository->getLastRecordFromDatabase();
+        }
+    }
 }
