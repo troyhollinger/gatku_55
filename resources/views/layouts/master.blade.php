@@ -10,8 +10,8 @@
         <meta name="description" content="@yield('description')">
         <meta property="og:title" content="{!! $homeSetting['page_title'] !!}">
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://gatku.com/">
-        <meta property="og:image" content="{{ asset('img/fbscreenshot.jpg') }}" />
+        {{--<meta property="og:url" content="https://gatku.com/">--}}
+        <meta property="og:image" content="{{ asset( config('ogimage') ) }}" />
         <meta property="og:description" content="@yield('description')">
         <meta property="og:site_name" content="{!! $homeSetting['page_title'] !!}">
         <meta name="viewport" content="width=device-width, initial-scale=1">

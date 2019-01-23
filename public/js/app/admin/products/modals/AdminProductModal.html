@@ -827,6 +827,32 @@
         </div>
     </div>
 
+    <!-- og:image Image -->
+
+    <hr>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">OG TAG [og:image] Image:</label>
+        <div class="col-sm-9">
+            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.ogimage + ')'}">
+                <i class="fa fa-image" ng-hide="$ctrl.newProduct.ogimage"></i>
+                <input class="hide-input-field"
+                       type="text"
+                       ng-model="$ctrl.newProduct.ogimage"
+                       class="image-path-storage-input">
+                <input type="file" ng-file-select="$ctrl.upload($files, 'ogimage')">
+            </div>
+
+            <br>
+
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="$ctrl.removeImage('ogimage');">
+                Remove Image &nbsp; <i class="fa fa-trash"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Product order -->
 
     <hr>

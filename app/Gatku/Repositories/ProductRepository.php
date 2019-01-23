@@ -37,9 +37,20 @@ class ProductRepository implements ProductRepositoryInterface {
      */
 	public function find($slug)
     {
-		try {
+        try {
 			$product = Product::where('slug', '=', $slug)->with('type')->first();
-			Log::info($product);
+
+            //This is code to display proper thumb image in og tag og:image
+            if (!config(['ogimage'])) {
+                config(['ogimage' => $product['ogimage']]);
+
+                //If no $product['ogimage'] then use mobile_image instead
+                if (!$product['ogimage']) {
+                    config(['ogimage' => $product->thumb]);
+                }
+            }
+
+            Log::info($product);
 		} catch (\Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
@@ -271,6 +282,8 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->length_space = (isset($data['length_space'])) ? $data['length_space'] : 0;
 
         $product->include_length_on_email = (isset($data['include_length_on_email'])) ? $data['include_length_on_email'] : 0;
+
+        $product->ogimage = (isset($data['ogimage'])) ? $data['ogimage'] : '';
 
 		return $product;
 	}
