@@ -28,6 +28,17 @@ class HomeSettingsServiceProvider extends ServiceProvider
 
             //@TODO Replace below line by call Repository method to load proper record.
             $homeSetting = HomeSetting::orderBy('id', 'desc')->first();
+
+            //This is code to display proper thumb image in og tag og:image
+            if (!config(['ogimage'])) {
+                config(['ogimage' => $homeSetting['ogimage']]);
+
+                //If no $homeSetting['ogimage'] then use mobile_image instead
+                if (!$homeSetting['ogimage']) {
+                    config(['ogimage' => $homeSetting['mobile_image']]);
+                }
+            }
+
             return $homeSetting;
         });
     }
