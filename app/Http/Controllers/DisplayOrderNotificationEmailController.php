@@ -10,6 +10,7 @@ use Gatku\Repositories\EmailSettingsRepository;
 use Gatku\Repositories\OrderRepository;
 use App\Mail\EmailsOrderAdmin;
 use App\Mail\EmailsOrder;
+use App\Mail\EmailsShippingTrack;
 
 class DisplayOrderNotificationEmailController extends BaseController {
 
