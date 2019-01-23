@@ -142,20 +142,17 @@
                 </noscript>
             <!-- End Facebook Pixel Code -->
 
-            @if(Route::currentRouteName() !== 'admin.index')
-            <!-- FRESHCHAT WIDGET - loading - start -->
+            <!-- Global site tag (gtag.js) - Google Ads: 879212783 -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id=AW-879212783"></script>
                 <script>
-                    window.fcWidget.init({
-                        token: "967edb4c-f6d8-4209-9700-964f03b1fe1d",
-                        host: "https://wchat.freshchat.com"
-                    });
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', 'AW-879212783');
                 </script>
-                <!-- FRESHCHAT WIDGET - loading - start -->
-            @endif
-
+            <!-- Global site tag (gtag.js) - Google Ads: 879212783 - End -->
         @endif
-
-
 
     </head>
     @if(Route::currentRouteName() === 'product.show')
@@ -178,7 +175,16 @@
 
         <alerter></alerter>
 
-
+    @if(App::environment('production') && Route::currentRouteName() !== 'admin.index')
+        <!-- FRESHCHAT WIDGET - loading - start -->
+        <script>
+            window.fcWidget.init({
+                token: "967edb4c-f6d8-4209-9700-964f03b1fe1d",
+                host: "https://wchat.freshchat.com"
+            });
+        </script>
+        <!-- FRESHCHAT WIDGET - loading - start -->
+    @endif
 
     </body>
 </html>
