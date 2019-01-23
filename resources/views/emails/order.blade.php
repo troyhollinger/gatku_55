@@ -272,7 +272,3 @@
 
     @include('emails.order-email-common')
 
-</center>
-</body>
-</html>
-

@@ -77,10 +77,14 @@ class ImageRepository
 			return false;
 		}
 
-		$response['imagePath'] = asset($directory .  $imageName);
+		//Following, commented line give full path with host name
+		//$response['imagePath'] = asset($directory .  $imageName);
+		$response['imagePath'] = '/' . $directory .  $imageName;
 
 		if ($thumbDirectory !== null) {
-			$response['thumbPath'] = asset($thumbDirectory .  $imageName);
+            //Following, commented line give full path with host name
+			//$response['thumbPath'] = asset($thumbDirectory .  $imageName);
+			$response['thumbPath'] = '/' . $thumbDirectory .  $imageName;
 		}
 		return $response;
 	}
