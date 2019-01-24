@@ -40,13 +40,15 @@ class ProductRepository implements ProductRepositoryInterface {
         try {
 			$product = Product::where('slug', '=', $slug)->with('type')->first();
 
-            //This is code to display proper thumb image in og tag og:image
-            if (!config(['ogimage'])) {
-                config(['ogimage' => $product['ogimage']]);
+			if ($product) {
+                //This is code to display proper thumb image in og tag og:image
+                if (!config(['ogimage'])) {
+                    config(['ogimage' => $product['ogimage']]);
 
-                //If no $product['ogimage'] then use mobile_image instead
-                if (!$product['ogimage']) {
-                    config(['ogimage' => $product->thumb]);
+                    //If no $product['ogimage'] then use mobile_image instead
+                    if (!$product['ogimage']) {
+                        config(['ogimage' => $product->thumb]);
+                    }
                 }
             }
 
