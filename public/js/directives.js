@@ -207,7 +207,16 @@ app.directive('productBuyers', function(Product, $exceptionHandler) {
             '<p class="product-buyers-header bold" ng-show="photos.length">{{sectionLabel}}</p>' +
             '<div class="product-buyers-container">' +
             '<div class="product-buyer placeholder square" ng-hide="photos.length"></div>' +
-            '<div class="product-buyer square" ng-repeat="photo in photos | limitTo:3" ng-style="{\'background-image\':\'url(\' + photo.image + \')\'}"><a class="grouped_elements" rel="group1" href="{{photo.image}}"><img src="{{photo.image}}" alt="" style="width: 100%;height: 100%;vertical-align: top; opacity:0;"/></a></div>' +
+            '<div class="product-buyer square"' +
+            '       ng-repeat="photo in photos | limitTo:3"' +
+            '       ng-style="{\'background-image\':\'url(\' + photo.image + \')\'}">' +
+            '       <a class="grouped_elements"' +
+            '           rel="group1"' +
+            '           href="{{photo.image}}">' +
+            '           <img src="{{photo.image}}"' +
+            '           alt="" style="width: 100%;height: 100%;vertical-align: top; opacity:0;"/>' +
+            '       </a>' +
+            '</div>' +
             '<div class="clear"></div>' +
             '</div>' +
             '</div>',
