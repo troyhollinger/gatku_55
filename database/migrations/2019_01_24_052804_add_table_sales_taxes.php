@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTableStateTaxes extends Migration {
+class AddTableSalesTaxes extends Migration {
 
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddTableStateTaxes extends Migration {
     {
         $nowTime = new \DateTime();
 
-        Schema::create('state_taxes', function(Blueprint $table) {
+        Schema::create('sales_taxes', function(Blueprint $table) {
             $table->string('state')->unique();
             $table->float('tax');
             $table->timestamps();
@@ -22,7 +22,7 @@ class AddTableStateTaxes extends Migration {
         });
 
         // Insert default data to table: 'state_taxes'
-        DB::table('state_taxes')->insert(
+        DB::table('sales_taxes')->insert(
             [
                 [
                     'state' => '-- Out of US',
@@ -291,6 +291,6 @@ class AddTableStateTaxes extends Migration {
      */
     public function down()
     {
-        Schema::drop('state_taxes');
+        Schema::drop('sales_taxes');
     }
 }
