@@ -126,7 +126,18 @@ class ProductController extends BaseController
         }
         Log::info($product);
 
-        return \View::make('pages.product', ['product' => $product])->with('homeSetting',  $homeSetting);
+        //Determine what countries get free shipping based on host name
+        $shippingCountries = 'USA';
+
+        $host = $this->request->getHost();
+        if (strpos($host, 'gatku') !== false) {
+            $shippingCountries = 'USA + AU';
+        }
+
+        return \View::make('pages.product', [
+            'product' => $product,
+            'shippingCountries' => $shippingCountries
+        ])->with('homeSetting',  $homeSetting);
     }
 
 
