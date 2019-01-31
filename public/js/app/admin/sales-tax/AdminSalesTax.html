@@ -5,22 +5,13 @@
 
 <br>
 
-<div>
-    <button type="button"
-            class="btn btn-success"
-            ng-click="$ctrl.addStateTax()">Add Tax
-    </button>
-</div>
-
-<br>
-
 <div class="order-search" ng-cloak>
     <table class="table table-hover table-striped">
         <thead class="thead-dark">
             <tr>
                 <th><b>State / Country</b></th>
                 <th><b>Tax %</b></th>
-                <th><b>Action</b></th>
+                <th><b>Actions</b></th>
             </tr>
         </thead>
 
@@ -56,4 +47,11 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<div>
+    <button type="button"
+            class="btn btn-success"
+            ng-click="$ctrl.addStateTax()">Add Tax
+    </button>
 </div>

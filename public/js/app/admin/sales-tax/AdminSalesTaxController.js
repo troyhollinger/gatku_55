@@ -1,7 +1,7 @@
 (function () {
     app.controller('AdminSalesTaxController', AdminSalesTaxController);
 
-    function AdminSalesTaxController($scope, SalesTaxResource, $exceptionHandler) {
+    function AdminSalesTaxController($scope, SalesTaxResource, AlertService, $exceptionHandler) {
 
         var $ctrl = this;
         $ctrl.salesTaxes = [];
@@ -47,14 +47,13 @@
 
             var data = $ctrl.salesTaxes[index];
 
-console.log(data);
             //Check if state is already. If in use then don't allow to store data.
             //State is unique field and primary key.
             if (confirmUnusedState(data)) {
                 alert('This Tax State / Country is already in use. Please change State / Country.');
             } else {
                 if (!data.created_at) {
-                    SalesTaxResource.store(data).then(function () {
+                    SalesTaxResource.save({data: data}).$promise.then(function () {
                         AlertService.broadcast('Tax added!', 'success');
                         uploadSalesTaxes();
                     }, function (error) {
@@ -62,7 +61,7 @@ console.log(data);
                         AlertService.broadcast('There was a problem with adding Tax.');
                     });
                 } else {
-                    SalesTaxResource.update(data.state, data).then(function () {
+                    SalesTaxResource.update({state: data.state, data: data}).$promise.then(function () {
                         AlertService.broadcast('Tax updated!', 'success');
                         uploadSalesTaxes();
                     }, function (error) {
@@ -71,6 +70,26 @@ console.log(data);
                     });
                 }
 
+            }
+        };
+
+        $ctrl.salesTaxRemove = function (index) {
+            var r = confirm('Do you want to remove this Tax?');
+            if (r == true) {
+                var data = $ctrl.salesTaxes[index];
+
+                if (!data.created_at) {
+                    $ctrl.salesTaxes.slice(index);
+                    uploadSalesTaxes();
+                } else {
+                    SalesTaxResource.remove({state: data.state}).$promise.then(function () {
+                        AlertService.broadcast('Tax removed!', 'success');
+                        uploadSalesTaxes();
+                    }, function (error) {
+                        $exceptionHandler(JSON.stringify(error));
+                        AlertService.broadcast('There was a problem with Tax removing.');
+                    });
+                }
             }
         };
 

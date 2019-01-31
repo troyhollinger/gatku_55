@@ -51,18 +51,18 @@ class SalesTaxController extends BaseController {
     public function store()
     {
         $input = \Request::all();
-        $request = $this->repository->store($input);
-        if ($request === false) return \Response::json(['message' => 'Sorry, there was an error with store discount'], 404);
+        $request = $this->repository->store($input['data']);
+        if ($request === false) return \Response::json(['message' => 'Sorry, there was an error with store Tax.'], 404);
         return \Response::json($request, 200);
     }
 
     /**
-     * @param $code
+     * @param $state
      * @return mixed
      */
-    public function destroy($code)
+    public function destroy($state)
     {
-        $response = $this->repository->destroy($code);
+        $response = $this->repository->destroy($state);
         if ($response === false) {
             return \Response::json(['message' => 'Sorry, there was a problem removing this discount.'], 404);
         }
@@ -70,12 +70,12 @@ class SalesTaxController extends BaseController {
     }
 
     /**
-     * @param $code
+     * @param $state
      * @return mixed
      */
-    public function update($code) {
+    public function update($state) {
         $input = \Request::all();
-        $update = $this->repository->update($code, $input);
+        $update = $this->repository->update($state, $input['data']);
         if ($update === false) {
             return \Response::json(['message' => 'Sorry, there was a problem updating this discount.'], 404);
         }
