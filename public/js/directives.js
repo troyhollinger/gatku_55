@@ -470,7 +470,11 @@ app.directive('smoothLink', ['$window', '$location', 'NavigationService', '$exce
                 NavigationService.close();
                 // console.log(target[0].ofsetTop);
                 // body.scrollTop = target[0].offsetTop;
-                $('html,body').animate({ scrollTop: target[0].offsetTop }, 400);
+                if (target) {
+                    $('html,body').animate({
+                        scrollTop: target[0].offsetTop
+                    }, 400);
+                }
 
                 return false;
 
