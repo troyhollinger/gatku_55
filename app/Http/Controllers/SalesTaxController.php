@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Gatku\Repositories\DiscountRepository;
+use Gatku\Repositories\SalesTaxRepository;
 
-class DiscountController extends BaseController {
+class SalesTaxController extends BaseController {
 
     /**
-     * @var DiscountRepository
+     * @var SalesTaxRepository
      */
     protected $repository;
 
     /**
-     * DiscountController constructor.
-     * @param DiscountRepository $request
+     * SalesTaxController constructor.
+     * @param SalesTaxRepository $request
      */
-    public function __construct(DiscountRepository $request)
+    public function __construct(SalesTaxRepository $request)
     {
         $this->repository = $request;
         parent::__construct();

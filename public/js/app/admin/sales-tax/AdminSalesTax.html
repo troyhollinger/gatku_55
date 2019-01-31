@@ -1,60 +1,58 @@
 <h1>
-    <i class="fa fa-money"></i>
-    &nbsp;Quantity Sale Report
+    <i class="fa fa-building-o"></i>
+    &nbsp;Sales Taxes
 </h1>
 
 <br>
-<form class="form-inline">
-    <div class="form-group row">
-        <label for="start" class="col-sm-4 col-form-label">Start date:</label>
-        <div class="col-sm-2">
-            <input type="date"
-                   id="start"
-                   class="form-control"
-                   ng-model="$ctrl.start">
-        </div>
-    </div>
-    <div class="col-sm-1"></div>
-    <div class="form-group row">
-        <label for="end" class="col-sm-4 col-form-label">End date:</label>
-        <div class="col-sm-2">
-            <input type="date"
-                   id="end"
-                   class="form-control"
-                   ng-model="$ctrl.end">
-        </div>
-    </div>
 
-    <div class="col-sm-1"></div>
-    
-    <button class="btn btn-success" ng-click="$ctrl.submitRequest()">Submit</button>
-
-</form>
+<div>
+    <button type="button"
+            class="btn btn-success"
+            ng-click="$ctrl.addStateTax()">Add Tax
+    </button>
+</div>
 
 <br>
 
 <div class="order-search" ng-cloak>
-
-
     <table class="table table-hover table-striped">
         <thead class="thead-dark">
             <tr>
-                <th><b>Product Name</b></th>
-                <th><b>Order Item Quantity</b></th>
-                <th><b>Order Item Addons Quantity</b></th>
-                <th><b>Total Quantity</b></th>
+                <th><b>State / Country</b></th>
+                <th><b>Tax %</b></th>
+                <th><b>Action</b></th>
             </tr>
         </thead>
 
         <tbody>
-            <tr ng-repeat="row in $ctrl.report">
-                <td>{{row.product_name}}</td>
-                <td style="text-align: right;">{{row.order_item_quantity}}</td>
-                <td style="text-align: right;">{{row.order_item_addons_quantity}}</td>
-                <td style="text-align: right;">{{row.total_quantity}}</td>
+            <tr ng-repeat="salesTax in $ctrl.salesTaxes track by $index">
+                <td>
+                    <input type="text"
+                           ng-change="$ctrl.salesTaxRowChanged($index)"
+                           ng-model="salesTax.state"
+                           ng-disabled="salesTax.state && salesTax.created_at">
+                </td>
+                <td style="text-align: right;">
+                    <input type="text"
+                           ng-change="$ctrl.salesTaxRowChanged($index)"
+                           ng-model="salesTax.tax">
+                </td>
+                <td style="text-align: right;">
+                    <button type="button"
+                            class="btn btn-success"
+                            ng-disabled="!salesTax.changed"
+                            ng-click="$ctrl.salesTaxUpdate($index)">
+                        {{ $ctrl.getSaveUpdateButtonCaption(salesTax) }}
+                    </button>
+                    &nbsp;
+                    <button type="button"
+                            class="btn btn-danger"
+                            ng-click="$ctrl.salesTaxRemove($index)">Remove
+                    </button>
+                </td>
             </tr>
-            <tr ng-show="!$ctrl.report">
-                <td colspan="4">No data for report.</td>
+            <tr ng-show="!$ctrl.salesTaxes">
+                <td colspan="4">No data.</td>
             </tr>
         </tbody>
     </table>

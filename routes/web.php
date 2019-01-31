@@ -45,9 +45,17 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         return View::make('pages.admin')->with('homeSetting',  $homeSetting);
     }]);
 
+    //
     Route::get('quantity-report', 'QuantityReportController@index');
+
+    //Admin sales tax access to all methods in controller
+    Route::resource('sales-tax', 'SalesTaxController');
 });
 //Admin access limited routes only - end
+
+//For front end sales tax access only to index method
+Route::resource('sales-tax', 'SalesTaxController', ['only' => ['index']]);
+
 
 Route::resource('order', 'OrderController');
 

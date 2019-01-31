@@ -29,7 +29,7 @@
             <tr ng-repeat="discount in $ctrl.discounts track by $index">
                 <td>
                     <input type="text"
-                           ng-change="discountRowChanged($index)"
+                           ng-change="$ctrl.discountRowChanged($index)"
                            ng-model="discount.code"
                            ng-disabled="discount.code && discount.created_at">
                 </td>
