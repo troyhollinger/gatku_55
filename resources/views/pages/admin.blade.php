@@ -65,6 +65,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#sales-tax">
+                <i class="fa fa-building-o"></i>
+                &nbsp;Sales Tax
+            </a>
+        <li class="nav-item">
             <a class="nav-link" href="#" ng-click="adminLogout()">
                 <i class="fa fa-times"></i>
                 &nbsp;Logout

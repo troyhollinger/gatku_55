@@ -13657,7 +13657,12 @@ app.config(function($routeProvider) {
         })
         .when('/quantity-sale-report', {
             templateUrl : 'js/app/admin/quantity-sale-report/AdminQuantitySaleReport.html',
-            controller: 'AdminQuantitySaleReport',
+            controller: 'AdminQuantitySaleReportController',
+            controllerAs: '$ctrl'
+        })
+        .when('/sales-tax', {
+            templateUrl : 'js/app/admin/sales-tax/AdminSalesTax.html',
+            controller: 'AdminSalesTaxController',
             controllerAs: '$ctrl'
         })
     ;
@@ -16173,9 +16178,9 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
 
 (function () {
-    app.controller('AdminQuantitySaleReport', AdminQuantitySaleReport);
+    app.controller('AdminQuantitySaleReportController', AdminQuantitySaleReportController);
 
-    function AdminQuantitySaleReport($scope, QuantityReportResource, $exceptionHandler) {
+    function AdminQuantitySaleReportController($scope, QuantityReportResource, $exceptionHandler) {
 
         var $ctrl = this;
 
@@ -16192,6 +16197,17 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
                 $exceptionHandler(JSON.stringify(error));
             });
         };
+    };
+}());
+
+
+(function () {
+    app.controller('AdminSalesTaxController', AdminSalesTaxController);
+
+    function AdminSalesTaxController($scope, QuantityReportResource, $exceptionHandler) {
+
+        var $ctrl = this;
+
     };
 }());
 
