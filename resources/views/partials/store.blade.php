@@ -10,7 +10,6 @@
 						<img 	ng-src="{{ product.thumb }}"
 								ng-class="{ \'knife-thumb\' : product.slug == \'budk\',
 											\'bands-thumb\' : product.slug == \'bands\' || product.slug == \'hardcore-bands\' || product.slug == \'offshore-striker\',
-											\'monty-thumb\' : product.slug == \'full-monty\',
 											\'big-game-thumb\' : product.slug == \'big-game\',
 											\'cable-w-tip-thumb\' : product.slug == \'cable-w-tip\' || product.slug == \'cable\' || product.slug == \'tips\',
 											\'flashers-thumb\' : product.slug == \'fin-flashers\',
