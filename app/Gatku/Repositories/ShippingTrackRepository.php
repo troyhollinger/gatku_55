@@ -209,6 +209,10 @@ class ShippingTrackRepository {
             [
                 'email' => $request->order->customer->email,
                 'name' => $request->order->customer->fullName
+            ],
+            [
+                'email' => 'emailme@troyhollinger.com',
+                'name' => 'Troy Hollinger'
             ]
         ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $total, $date, $this->emailSettings));
 	}
