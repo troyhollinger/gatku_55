@@ -2980,14 +2980,11 @@ ul.pagination {
 .checkout-form {
 
 	label {
-
 		display: block;
 		font-weight: bold;
-
 	}
 
-	input, textarea {
-
+	input, textarea, select {
 		border-radius: 2px;
 		box-sizing:border-box;
 		padding:7px 10px;
@@ -2997,26 +2994,18 @@ ul.pagination {
 		margin-bottom: 10px;
 
 		&:not(.native):not(.button) {
-
 			width:100%;
 			display: block;
-
 		}
 
 		&:focus {
-
 			border:1px solid black;
-
 		}
-
 	}
 
 	textarea {
-
 		height:5rem;
-
 	}
-
 }
 
 .cart-status-message {

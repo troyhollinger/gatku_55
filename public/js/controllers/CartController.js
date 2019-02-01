@@ -10,8 +10,17 @@
 |
 */
 app.controller('CartController',
-    ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler', '$uibModal',
-    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists, $exceptionHandler, $uibModal) {
+    function($scope,
+             CartService,
+             StripeService,
+             Order,
+             AlertService,
+             Discount,
+             DiscountExists,
+             $exceptionHandler,
+             SalesTaxResource,
+             $uibModal
+    ) {
 
     $scope.items = [];
     $scope.show = false;
@@ -305,10 +314,17 @@ app.controller('CartController',
         $scope.status = '';
 
         if (index == 1) {
+
+            //Fetch Sales Taxes
+            $scope.taxes = SalesTaxResource.query();
+
             return true;
         }
 
         if (index == 2) {
+
+
+
             if (!$scope.form.firstName) {
                 $scope.status = 'Please enter a first name.';
                 AlertService.broadcast('Please enter a first name', 'error');
@@ -473,5 +489,5 @@ app.controller('CartController',
 
     $scope.getItems();
     $scope.getDiscountFromCookies();
-}]);
+});
 

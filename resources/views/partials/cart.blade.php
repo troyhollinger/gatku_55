@@ -185,8 +185,10 @@
 			<label for="city">City</label>
 			<input type="text" name="city" id="city" ng-model="form.city">
 
+
 			<label for="state">State / Province</label>
-			<input type="text" name="state" id="state" ng-model="form.state">
+
+			<select ng-model="form.state" ng-options="tax.state as tax.state for tax in taxes"></select>
 
 			<label for="zip">Zip Code</label>
 			<input type="text" name="zip" id="zip" ng-model="form.zip">
