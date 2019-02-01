@@ -12774,7 +12774,7 @@ app.directive('shippingTrack', ['$window', '$compile','ShippingTrack', 'AlertSer
                 nanobar.go(60);
 
                 ShippingTrack.send(data).then(function(response) {
-                    $scope.order.tracking = response.data;
+                    $scope.order.tracking = response.data.data;
                     $scope.open = false;
                     shippingTrackPanel.remove();
                     nanobar.go(100);
