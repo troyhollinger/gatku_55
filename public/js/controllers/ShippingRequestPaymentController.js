@@ -32,7 +32,7 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 				token : token
 			};
 		
-			ShippingRequest.pay(data).then(function(response) {
+			ShippingRequest.pay(data).then(function() {
 				AlertService.broadcast('Success!', 'success');
 				$scope.success = true;
 
@@ -41,7 +41,7 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 				setTimeout(function() {
                     window.location.replace("/#store");
 				}, $scope.delay * 1000);
-			}).error(function(error) {
+			}, function(error) {
                 $exceptionHandler(JSON.stringify(error));
 				AlertService.broadcast('Sorry, something went wrong on our end. We are fixing it soon!', 'error');
 			});
