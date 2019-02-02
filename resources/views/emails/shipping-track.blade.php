@@ -241,6 +241,32 @@
 	<body style="margin: 0;padding: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;height: 100%;width: 100%;">
 		<center>
 
+			<table id="body-table" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;margin: 0;padding: 0;height: 100%;width: 100%;">
+				<tr>
+					<td id="body-cell" align="center" valign="top" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;margin: 0;padding: 0;height: 100%;width: 100%;padding-bottom:50px">
+						<table id="container" border="0" cellpadding="0" cellspacing="0" width="1000px" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: 'Helvetica', Arial, sans-serif;max-width: 800px;">
+						<thead>
+							<tr>
+								<th id="track-info"
+									colspan="2"
+									padding="0"
+									align="left"
+									style="width: 100%;
+									height: 35px;
+									font-family: 'Helvetica', Arial, sans-serif;
+									padding: 0 0 0 0px;">
+														<span id="status" style="font-size: 16px;font-weight: 200;">Tracking # :
+															<a href="https://tools.usps.com/go/TrackConfirmAction_input?qtc_tLabels1={{ $request['track_id'] }}">
+																{{ $request['track_id'] }}</a>
+														</span>
+								</th>
+							</tr>
+							</thead>
+						</table>
+					</td>
+				</tr>
+			</table>
+
 			@include('emails.order-email-common')
 
 		</center>
