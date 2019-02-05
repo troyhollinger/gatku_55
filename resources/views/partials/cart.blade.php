@@ -188,7 +188,10 @@
 
 			<label for="state">State / Province</label>
 
-			<select ng-model="form.state" ng-options="tax.state as tax.state for tax in taxes"></select>
+			<select ng-model="form.state"
+					ng-options="tax.state as tax.state for tax in taxes"
+					ng-change="setStateTaxRecord()">
+			</select>
 
 			<label for="zip">Zip Code</label>
 			<input type="text" name="zip" id="zip" ng-model="form.zip">
@@ -216,6 +219,31 @@
 	<div class="cart-stage-3" ng-show="currentStage === 'payment' && items.length">
 
 		<h2>Payment</h2>@{{ status }}
+
+		<div class="checkout-form">
+			<b>
+				<span class="cart-item-column-for-credit-card">Total</span>
+				<span class="cart-price-column-for-credit-card"
+					  ng-bind="'$' + (sumSubtotalAndShipping() | money | number:2 )">
+				</span>
+
+				<span class="cart-item-column-for-credit-card">Sales Tax ( @{{pickedTax.tax}}% )</span>
+				<span class="cart-price-column-for-credit-card"
+					  ng-bind="'$' + ( gatTaxAmount( sumSubtotalAndShipping() ) | money  | number:2 )">
+				</span>
+			</b>
+		</div>
+
+		<div class="checkout-form">
+			<span class="cart-item-column-for-credit-card-you-pay">You pay</span>
+			<span class="cart-price-column-for-credit-card-you-pay"
+				  ng-bind="'$' + (total() | money | number:2)">
+			</span>
+		</div>
+
+		<div class="clear"></div>
+
+		<hr>
 
 		<div class="checkout-form">
 

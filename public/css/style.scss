@@ -2729,21 +2729,31 @@ ul.pagination {
 }
 
 .cart-item-column {
-
 	width:70%;
 	float:left;
 	overflow-y: visible;
 
 	h3 {
-
 		font-weight: bold;
 		text-transform: uppercase;
 		font-size: 1.3rem;
-
 	}
 }
 
+.cart-item-column-for-credit-card {
+	width:50%;
+	float:left;
+	overflow-y: visible;
+}
 
+.cart-item-column-for-credit-card-you-pay {
+	width:50%;
+	float:left;
+	overflow-y: visible;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 1.3rem;
+}
 
 .cart-quantity-column {
 
@@ -2753,41 +2763,30 @@ ul.pagination {
 	font-size: 1.3rem;
 
 	span {
-
 		position: relative;
-
 	}
 
 	i {
-
 		color:lighten(black, 85%);
 		position: absolute;
 		font-size: 1.55rem;
 		cursor: pointer;
 
 		span {
-
 			position: absolute;
 			right:150%;
 			font-size: .7rem;
 			top:.5em;
 			visibility: hidden;
 			color:$brand;
-
 		}
 
 		&:hover {
-
 			color:black;
-
 			span {
-
 				visibility: visible;
-
 			}
-
 		}
-
 	}
 
 	.fa-angle-left {
@@ -2805,18 +2804,29 @@ ul.pagination {
 }
 
 .cart-price-column {
-
 	width:15%;
 	float:right;
 	text-align: right;
 	font-size: 1.3rem;
 
 	&.shipping-column {
-
 		font-size: 1rem;
-
 	}
+}
 
+.cart-price-column-for-credit-card {
+	width:30%;
+	float:right;
+	text-align: right;
+}
+
+.cart-price-column-for-credit-card-you-pay {
+	width:30%;
+	float:right;
+	text-align: right;
+    font-weight: bold;
+	text-transform: uppercase;
+	font-size: 1.3rem;
 }
 
 .cart-item-addon-container {

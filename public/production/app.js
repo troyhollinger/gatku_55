@@ -13805,6 +13805,11 @@ app.controller('CartController',
     $scope.discountText = '';
     $scope.discountAmount = 0;
     $scope.enabled = true;
+    $scope.taxes = [];
+    $scope.pickedTax = {
+        state: '',
+        tax: 0
+    };
 
     //Global Discount
     $scope.global_discount_switch = homeSetting.global_discount_switch;
@@ -14005,13 +14010,41 @@ app.controller('CartController',
         return amount;
     }
 
-    $scope.total = function() {
+    $scope.gatTaxAmount = function(subtotal) {
+        var tax = parseInt(subtotal * ( $scope.pickedTax.tax / 100));
+        return tax;
+    };
+
+    $scope.sumSubtotalAndShipping = function() {
         var subtotal =  $scope.subtotal();
         var shipping = $scope.shipping();
 
         return subtotal + shipping;
+    };
 
-    }
+    $scope.total = function() {
+        var subtotalAndShipping = $scope.sumSubtotalAndShipping();
+        var tax = $scope.gatTaxAmount( subtotalAndShipping );
+
+        return subtotalAndShipping + tax;
+    };
+
+
+
+    $scope.setStateTaxRecord = function() {
+        $scope.pickedTax = {
+            state: '',
+            tax: 0
+        };
+
+        if ($scope.form.state && $scope.taxes.length) {
+            angular.forEach($scope.taxes, function(tax) {
+                if (tax.state == $scope.form.state) {
+                    $scope.pickedTax = tax;
+                }
+            });
+        }
+    };
 
     $scope.submit = function() {
 
