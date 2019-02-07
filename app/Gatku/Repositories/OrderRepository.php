@@ -683,7 +683,7 @@ class OrderRepository {
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
-//        if (App::environment('production')) {
+        if (App::environment('production')) {
 
             //Send email to Customer and Notify Seller
             if ($emailListForEmailsOrderArray && !empty($emailListForEmailsOrderArray)) {
@@ -713,52 +713,52 @@ class OrderRepository {
                             $this->emailSettings
                 ));
             }
-//        }
+        }
 
         //Development test code
-//        if (App::environment('dev')) {
-//
-//            $email = env('DEV_TEST_EMAIL', false);
-//
-//            if ($email) {
-//
-//                //Admin Order Confirmation
-//                Mail::to([
-//                    [
-//                        'email' => $email,
-//                        'name' => 'past-recipient-name-here'
-//                    ]
-//                ])->send(new EmailsOrderAdmin(
-//                        $order,
-//                        $discount,
-//                        $subtotal,
-//                        $shipping,
-//                        $total,
-//                        $date,
-//                        $this->homeSetting,
-//                        $this->emailSettings
-//                ));
-//
-//                //Customer Order Confirmation
-//                Mail::to([
-//                    [
-//                        'email' => $email,
-//                        'name' => 'past-recipient-name-here'
-//                    ]
-//                ]
-//
-//                )->send(new EmailsOrder(
-//                    $order,
-//                    $discount,
-//                    $subtotal,
-//                    $shipping,
-//                    $total,
-//                    $date,
-//                    $this->homeSetting,
-//                    $this->emailSettings
-//                ));
-//            }
-//        }
+        if (App::environment('dev')) {
+
+            $email = env('DEV_TEST_EMAIL', false);
+
+            if ($email) {
+
+                //Admin Order Confirmation
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name-here'
+                    ]
+                ])->send(new EmailsOrderAdmin(
+                        $order,
+                        $discount,
+                        $subtotal,
+                        $shipping,
+                        $total,
+                        $date,
+                        $this->homeSetting,
+                        $this->emailSettings
+                ));
+
+                //Customer Order Confirmation
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name-here'
+                    ]
+                ]
+
+                )->send(new EmailsOrder(
+                    $order,
+                    $discount,
+                    $subtotal,
+                    $shipping,
+                    $total,
+                    $date,
+                    $this->homeSetting,
+                    $this->emailSettings
+                ));
+            }
+        }
 
         return true;
     }
