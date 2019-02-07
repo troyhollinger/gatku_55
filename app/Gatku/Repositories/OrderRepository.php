@@ -189,7 +189,15 @@ class OrderRepository {
 
         DB::commit();
 
-        $this->prepareEmailAddressesForEmailNotifications($customer, $order, $discount, $subtotal, $shipping, $total);
+        $this->prepareEmailAddressesForEmailNotifications(
+            $customer,
+            $order,
+            $discount,
+            $subtotal,
+            $shipping,
+            $taxAmount,
+            $total
+        );
 
         return true;
     }
@@ -641,7 +649,9 @@ class OrderRepository {
         Discount $discount,
         $subtotal,
         $shipping,
-        $total)
+        $taxAmount,
+        $total
+    )
     {
         $this->uploadEmailSettingsIfNotSet();
 
@@ -653,6 +663,7 @@ class OrderRepository {
             $discount,
             $subtotal,
             $shipping,
+            $taxAmount,
             $total,
             $emailListForEmailsOrderArray,
             $emailListForEmailsOrderAdminArray
@@ -664,6 +675,7 @@ class OrderRepository {
      * @param Discount $discount
      * @param $subtotal
      * @param $shipping
+     * @param $taxAmount
      * @param $total
      * @param array|null $emailListForEmailsOrderArray
      * @param array|null $emailListForEmailsOrderAdminArray
@@ -674,6 +686,7 @@ class OrderRepository {
         Discount $discount,
         $subtotal,
         $shipping,
+        $taxAmount,
         $total,
         array $emailListForEmailsOrderArray = null,
         array $emailListForEmailsOrderAdminArray = null
@@ -692,6 +705,7 @@ class OrderRepository {
                             $discount,
                             $subtotal,
                             $shipping,
+                            $taxAmount,
                             $total,
                             $date,
                             $this->homeSetting,
@@ -707,6 +721,7 @@ class OrderRepository {
                             $discount,
                             $subtotal,
                             $shipping,
+                            $taxAmount,
                             $total,
                             $date,
                             $this->homeSetting,
@@ -733,6 +748,7 @@ class OrderRepository {
                         $discount,
                         $subtotal,
                         $shipping,
+                        $taxAmount,
                         $total,
                         $date,
                         $this->homeSetting,
@@ -752,6 +768,7 @@ class OrderRepository {
                     $discount,
                     $subtotal,
                     $shipping,
+                    $taxAmount,
                     $total,
                     $date,
                     $this->homeSetting,

@@ -26,6 +26,7 @@ class EmailsOrderAdmin extends Mailable
     public $shipping;
     public $total;
     public $date;
+    public $taxAmount;
     /**
      * @var HomeSetting
      */
@@ -41,9 +42,10 @@ class EmailsOrderAdmin extends Mailable
      * @param Discount $discount
      * @param $subtotal
      * @param $shipping
+     * @param $taxAmount
      * @param $total
      * @param $date
-     * @param $homeSetting
+     * @param HomeSetting $homeSetting
      * @param EmailSettings $emailSettings
      */
     public function __construct(
@@ -51,6 +53,7 @@ class EmailsOrderAdmin extends Mailable
         Discount $discount,
         $subtotal,
         $shipping,
+        $taxAmount,
         $total,
         $date,
         HomeSetting $homeSetting,
@@ -61,6 +64,7 @@ class EmailsOrderAdmin extends Mailable
         $this->discount = $discount;
         $this->subtotal = $subtotal;
         $this->shipping = $shipping;
+        $this->taxAmount = $taxAmount;
         $this->total = $total;
         $this->date = $date;
         $this->homeSetting = $homeSetting;
