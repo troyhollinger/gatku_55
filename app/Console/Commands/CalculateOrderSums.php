@@ -74,10 +74,10 @@ class CalculateOrderSums extends Command
      */
     private function calculateAndUpdateOrder(Order $order, Discount $discount)
     {
-
         //Make all sum calculations
         $subtotal = $this->orderRepository->calculateSubTotal($order, $discount);
         $shipping = $this->orderRepository->calculateShipping($order, $discount);
+        $taxAmount = $this->orderRepository->calculateTaxAmount($order, $discount);
         $total = $this->orderRepository->calculateTotal($order, $discount);
 
         //Update Order
@@ -85,6 +85,7 @@ class CalculateOrderSums extends Command
         $order->order_sum = $subtotal;
         $order->shipping_cost = $shipping;
         $order->total_sum = $total;
+        $order->tax_amount = $taxAmount;
 
         $order->update();
     }

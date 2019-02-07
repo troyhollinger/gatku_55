@@ -7,6 +7,7 @@ use Gatku\Model\Customer;
 use Gatku\Model\EmailSettings;
 use Gatku\Model\Order;
 use Gatku\Model\OrderItem;
+use Gatku\Model\SalesTax;
 use Stripe_Charge;
 use Gatku\Model\Discount;
 use Illuminate\Support\Facades\Log;
@@ -44,21 +45,28 @@ class OrderRepository {
      * @var HomeSetting
      */
     private $homeSetting;
+    /**
+     * @var SalesTaxRepository
+     */
+    private $salesTaxRepository;
 
     /**
      * OrderRepository constructor.
      * @param CustomerRepository $customer
      * @param EmailSettingsRepository $emailSettingsRepository
      * @param HomeSetting $homeSetting
+     * @param SalesTaxRepository $salesTaxRepository
      */
     public function __construct(
         CustomerRepository $customer,
         EmailSettingsRepository $emailSettingsRepository,
-        HomeSetting $homeSetting
+        HomeSetting $homeSetting,
+        SalesTaxRepository $salesTaxRepository
     ) {
         $this->customer = $customer;
         $this->emailSettingsRepository = $emailSettingsRepository;
         $this->homeSetting = $homeSetting;
+        $this->salesTaxRepository = $salesTaxRepository;
     }
 
     /**
@@ -123,9 +131,13 @@ class OrderRepository {
             //Store customer data
             $customer = $this->customer->store($input['form']);
 
+            //Get tax record form sales_tax table
+            /** @var SalesTax $salesTax */
+            $salesTax = $this->salesTaxRepository->get($customer->state);
+
             //Create and store Order
             $order = new Order;
-            $order = $this->assignFields($order, $customer, $input['form']);
+            $order = $this->assignFields($order, $customer, $input['form'], $salesTax);
             $order->save();
 
             //Assign and store order items
@@ -142,16 +154,17 @@ class OrderRepository {
             //Make all sum calculations
             $subtotal = $this->calculateSubTotal($order, $discount);
             $shipping = $this->calculateShipping($order, $discount);
-            $total = $this->calculateTotal($order, $discount);
+            $taxAmount = $this->calculateTaxAmount($order, $discount);
+            $total = $this->calculateTotal($order, $discount, $customer);
 
             //Update Order
             $order->discount_percentage = ($discount->discount) ? $discount->discount * 100 : 0;
             $order->order_sum = $subtotal;
             $order->shipping_cost = $shipping;
             $order->total_sum = $total;
+            $order->tax_amount = $taxAmount;
 
             $order->update();
-
         } catch(\Exception $e) {
             Bugsnag::notifyException($e);
             Log::error($e);
@@ -182,12 +195,13 @@ class OrderRepository {
     }
 
     /**
-     * Assigns the order destination fields
-     *
-     * @param $order $customer $input
-     * @return Eloquent Object $order
+     * @param $order
+     * @param $customer
+     * @param $input
+     * @param $salesTax
+     * @return mixed
      */
-    private function assignFields($order, $customer, $input) {
+    private function assignFields($order, $customer, $input, $salesTax) {
 
         $order->customerId = $customer->id;
         $order->address = $input['address'];
@@ -201,6 +215,8 @@ class OrderRepository {
         $order->order_sum = (isset($input['order_sum'])) ? $input['order_sum'] * 100 : 0;
         $order->shipping_cost = (isset($input['shipping_cost'])) ? $input['shipping_cost'] * 100 : 0;
         $order->total_sum = (isset($input['total_sum'])) ? $input['total_sum'] * 100 : 0;
+        $order->sales_tax = $salesTax->tax;
+        $order->tax_amount = (isset($input['tax_amount'])) ? $input['tax_amount'] * 100 : 0;
 
         return $order;
     }
@@ -427,8 +443,25 @@ class OrderRepository {
     }
 
     /**
-     * @param $order
-     * @param $discount
+     * @param Order $order
+     * @param Discount $discount
+     * @return int
+     */
+    public function calculateTaxAmount(Order $order, Discount $discount)
+    {
+        //Get needed values
+        $subtotal = $this->calculateSubTotal($order, $discount);
+        $shipping = $this->calculateShipping($order, $discount);
+
+        //Calculate tax amount
+        $taxAmount = intval( ( $subtotal + $shipping ) * ( $order->sales_tax / 100) );
+
+        return $taxAmount;
+    }
+
+    /**
+     * @param Order $order
+     * @param Discount $discount
      * @return float|int
      */
     public function calculateTotal(Order $order, Discount $discount) {
@@ -437,10 +470,11 @@ class OrderRepository {
 
         $shipping = $this->calculateShipping($order, $discount);
 
-        $total = $subtotal + $shipping;
+        $taxAmount = $this->calculateTaxAmount($order, $discount);
+
+        $total = $subtotal + $shipping + $taxAmount;
 
         return $total;
-
     }
 
     /**
@@ -649,7 +683,7 @@ class OrderRepository {
 
         $date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
-        if (App::environment('production')) {
+//        if (App::environment('production')) {
 
             //Send email to Customer and Notify Seller
             if ($emailListForEmailsOrderArray && !empty($emailListForEmailsOrderArray)) {
@@ -679,52 +713,52 @@ class OrderRepository {
                             $this->emailSettings
                 ));
             }
-        }
+//        }
 
         //Development test code
-        if (App::environment('dev')) {
-
-            $email = env('DEV_TEST_EMAIL', false);
-
-            if ($email) {
-
-                //Admin Order Confirmation
-                Mail::to([
-                    [
-                        'email' => $email,
-                        'name' => 'past-recipient-name-here'
-                    ]
-                ])->send(new EmailsOrderAdmin(
-                        $order,
-                        $discount,
-                        $subtotal,
-                        $shipping,
-                        $total,
-                        $date,
-                        $this->homeSetting,
-                        $this->emailSettings
-                ));
-
-                //Customer Order Confirmation
-                Mail::to([
-                    [
-                        'email' => $email,
-                        'name' => 'past-recipient-name-here'
-                    ]
-                ]
-
-                )->send(new EmailsOrder(
-                    $order,
-                    $discount,
-                    $subtotal,
-                    $shipping,
-                    $total,
-                    $date,
-                    $this->homeSetting,
-                    $this->emailSettings
-                ));
-            }
-        }
+//        if (App::environment('dev')) {
+//
+//            $email = env('DEV_TEST_EMAIL', false);
+//
+//            if ($email) {
+//
+//                //Admin Order Confirmation
+//                Mail::to([
+//                    [
+//                        'email' => $email,
+//                        'name' => 'past-recipient-name-here'
+//                    ]
+//                ])->send(new EmailsOrderAdmin(
+//                        $order,
+//                        $discount,
+//                        $subtotal,
+//                        $shipping,
+//                        $total,
+//                        $date,
+//                        $this->homeSetting,
+//                        $this->emailSettings
+//                ));
+//
+//                //Customer Order Confirmation
+//                Mail::to([
+//                    [
+//                        'email' => $email,
+//                        'name' => 'past-recipient-name-here'
+//                    ]
+//                ]
+//
+//                )->send(new EmailsOrder(
+//                    $order,
+//                    $discount,
+//                    $subtotal,
+//                    $shipping,
+//                    $total,
+//                    $date,
+//                    $this->homeSetting,
+//                    $this->emailSettings
+//                ));
+//            }
+//        }
 
         return true;
     }

@@ -15,12 +15,12 @@ class SalesTaxRepository {
     }
 
     /**
-     * @param $code
+     * @param $state
      * @return bool
      */
-    public function get($code) {
+    public function get($state) {
         try {
-            $salesTax = SalesTax::findOrFail($code);
+            $salesTax = SalesTax::findOrFail($state);
         } catch (\Exception $e) {
             Bugsnag::notifyException($e);
             Log::error($e);
