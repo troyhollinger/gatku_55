@@ -32,13 +32,15 @@
 
 				</div>
 
-				<div class="cart-quantity-column">
+
+				<div class="cart-quantity-column" ng-show="item.type.slug != 'package'">
 					<span>@{{ item.quantity }} <i class="fa fa-angle-left" ng-click="decreaseItemQuantity($index)"><span ng-if="item.quantity == 1">Remove</span></i> <i class="fa fa-angle-right" ng-click="increaseItemQuantity($index)"></i></span>
 				</div>
 
-				<div class="cart-price-column">
+				<div class="cart-price-column" ng-show="item.type.slug != 'package'">
 					<p>$@{{ item.price * item.quantity | money }}</p>
 				</div>
+
 
 				<div class="clear"></div>
 
