@@ -1,7 +1,7 @@
 
-app.factory('SalesTaxResource', function($resource) {
+app.factory('SalesTaxAdminResource', function($resource) {
     return $resource(
-        '/sales-tax/:state',
+        '/admin/sales-tax/:state',
         {state: '@state'},
         {
             update: {method: 'PUT'}

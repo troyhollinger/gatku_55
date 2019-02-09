@@ -1,14 +1,14 @@
 (function () {
     app.controller('AdminSalesTaxController', AdminSalesTaxController);
 
-    function AdminSalesTaxController($scope, SalesTaxResource, AlertService, $exceptionHandler) {
+    function AdminSalesTaxController($scope, SalesTaxAdminResource, AlertService, $exceptionHandler) {
 
         var $ctrl = this;
         $ctrl.salesTaxes = [];
 
         //Don't move this method below
         function uploadSalesTaxes() {
-            var promise = SalesTaxResource.query();
+            var promise = SalesTaxAdminResource.query();
             promise.$promise.then(function(response) {
                 $ctrl.salesTaxes = response;
             }, function(error) {
@@ -53,7 +53,7 @@
                 alert('This Tax State / Country is already in use. Please change State / Country.');
             } else {
                 if (!data.created_at) {
-                    SalesTaxResource.save({data: data}).$promise.then(function () {
+                    SalesTaxAdminResource.save({data: data}).$promise.then(function () {
                         AlertService.broadcast('Tax added!', 'success');
                         uploadSalesTaxes();
                     }, function (error) {
@@ -61,7 +61,7 @@
                         AlertService.broadcast('There was a problem with adding Tax.');
                     });
                 } else {
-                    SalesTaxResource.update({state: data.state, data: data}).$promise.then(function () {
+                    SalesTaxAdminResource.update({state: data.state, data: data}).$promise.then(function () {
                         AlertService.broadcast('Tax updated!', 'success');
                         uploadSalesTaxes();
                     }, function (error) {
@@ -82,7 +82,7 @@
                     $ctrl.salesTaxes.slice(index);
                     uploadSalesTaxes();
                 } else {
-                    SalesTaxResource.remove({state: data.state}).$promise.then(function () {
+                    SalesTaxAdminResource.remove({state: data.state}).$promise.then(function () {
                         AlertService.broadcast('Tax removed!', 'success');
                         uploadSalesTaxes();
                     }, function (error) {
