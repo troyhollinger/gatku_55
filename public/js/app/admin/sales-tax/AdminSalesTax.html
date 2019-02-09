@@ -1,0 +1,57 @@
+<h1>
+    <i class="fa fa-building-o"></i>
+    &nbsp;Sales Taxes
+</h1>
+
+<br>
+
+<div class="order-search" ng-cloak>
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th><b>State / Country</b></th>
+                <th><b>Tax %</b></th>
+                <th><b>Actions</b></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="salesTax in $ctrl.salesTaxes track by $index">
+                <td>
+                    <input type="text"
+                           ng-change="$ctrl.salesTaxRowChanged($index)"
+                           ng-model="salesTax.state"
+                           ng-disabled="salesTax.state && salesTax.created_at">
+                </td>
+                <td style="text-align: right;">
+                    <input type="text"
+                           ng-change="$ctrl.salesTaxRowChanged($index)"
+                           ng-model="salesTax.tax">
+                </td>
+                <td style="text-align: right;">
+                    <button type="button"
+                            class="btn btn-success"
+                            ng-disabled="!salesTax.changed"
+                            ng-click="$ctrl.salesTaxUpdate($index)">
+                        {{ $ctrl.getSaveUpdateButtonCaption(salesTax) }}
+                    </button>
+                    &nbsp;
+                    <button type="button"
+                            class="btn btn-danger"
+                            ng-click="$ctrl.salesTaxRemove($index)">Remove
+                    </button>
+                </td>
+            </tr>
+            <tr ng-show="!$ctrl.salesTaxes">
+                <td colspan="4">No data.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <button type="button"
+            class="btn btn-success"
+            ng-click="$ctrl.addStateTax()">Add Tax
+    </button>
+</div>

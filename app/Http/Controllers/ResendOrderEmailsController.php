@@ -46,6 +46,7 @@ class ResendOrderEmailsController extends BaseController {
             $discount,
             $order->order_sum,
             $order->shipping_cost,
+            $order->tax_amount,
             $order->total_sum,
             $emails['emailListForEmailsOrderArray'],
             $emails['emailListForEmailsOrderAdminArray']

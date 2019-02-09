@@ -1,7 +1,7 @@
 (function () {
-    app.controller('AdminQuantitySaleReport', AdminQuantitySaleReport);
+    app.controller('AdminQuantitySaleReportController', AdminQuantitySaleReportController);
 
-    function AdminQuantitySaleReport($scope, QuantityReportResource, $exceptionHandler) {
+    function AdminQuantitySaleReportController($scope, QuantityReportResource, $exceptionHandler) {
 
         var $ctrl = this;
 

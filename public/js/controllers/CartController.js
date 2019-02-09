@@ -10,8 +10,17 @@
 |
 */
 app.controller('CartController',
-    ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler', '$uibModal',
-    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists, $exceptionHandler, $uibModal) {
+    function($scope,
+             CartService,
+             StripeService,
+             Order,
+             AlertService,
+             Discount,
+             DiscountExists,
+             $exceptionHandler,
+             SalesTaxResource,
+             $uibModal
+    ) {
 
     $scope.items = [];
     $scope.show = false;
@@ -24,6 +33,11 @@ app.controller('CartController',
     $scope.discountText = '';
     $scope.discountAmount = 0;
     $scope.enabled = true;
+    $scope.taxes = [];
+    $scope.pickedTax = {
+        state: '',
+        tax: 0
+    };
 
     //Global Discount
     $scope.global_discount_switch = homeSetting.global_discount_switch;
@@ -224,13 +238,41 @@ app.controller('CartController',
         return amount;
     }
 
-    $scope.total = function() {
+    $scope.gatTaxAmount = function(subtotal) {
+        var tax = parseInt(subtotal * ( $scope.pickedTax.tax / 100));
+        return tax;
+    };
+
+    $scope.sumSubtotalAndShipping = function() {
         var subtotal =  $scope.subtotal();
         var shipping = $scope.shipping();
 
         return subtotal + shipping;
+    };
 
-    }
+    $scope.total = function() {
+        var subtotalAndShipping = $scope.sumSubtotalAndShipping();
+        var tax = $scope.gatTaxAmount( subtotalAndShipping );
+
+        return subtotalAndShipping + tax;
+    };
+
+
+
+    $scope.setStateTaxRecord = function() {
+        $scope.pickedTax = {
+            state: '',
+            tax: 0
+        };
+
+        if ($scope.form.state && $scope.taxes.length) {
+            angular.forEach($scope.taxes, function(tax) {
+                if (tax.state == $scope.form.state) {
+                    $scope.pickedTax = tax;
+                }
+            });
+        }
+    };
 
     $scope.submit = function() {
 
@@ -305,10 +347,17 @@ app.controller('CartController',
         $scope.status = '';
 
         if (index == 1) {
+
+            //Fetch Sales Taxes
+            $scope.taxes = SalesTaxResource.query();
+
             return true;
         }
 
         if (index == 2) {
+
+
+
             if (!$scope.form.firstName) {
                 $scope.status = 'Please enter a first name.';
                 AlertService.broadcast('Please enter a first name', 'error');
@@ -473,5 +522,5 @@ app.controller('CartController',
 
     $scope.getItems();
     $scope.getDiscountFromCookies();
-}]);
+});
 

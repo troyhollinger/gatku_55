@@ -38,7 +38,12 @@ app.config(function($routeProvider) {
         })
         .when('/quantity-sale-report', {
             templateUrl : 'js/app/admin/quantity-sale-report/AdminQuantitySaleReport.html',
-            controller: 'AdminQuantitySaleReport',
+            controller: 'AdminQuantitySaleReportController',
+            controllerAs: '$ctrl'
+        })
+        .when('/sales-tax', {
+            templateUrl : 'js/app/admin/sales-tax/AdminSalesTax.html',
+            controller: 'AdminSalesTaxController',
             controllerAs: '$ctrl'
         })
     ;

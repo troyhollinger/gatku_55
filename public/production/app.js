@@ -12153,6 +12153,16 @@ app.config(function(stripeProvider, $locationProvider) {
 app.factory('QuantityReportResource', function($resource) {
     return $resource('/admin/quantity-report/');
 });
+
+app.factory('SalesTaxResource', function($resource) {
+    return $resource(
+        '/admin/sales-tax/:state',
+        {state: '@state'},
+        {
+            update: {method: 'PUT'}
+        }
+    );
+});
 app.filter('money', function () { 
 
     return function (amount) { 
@@ -13657,7 +13667,12 @@ app.config(function($routeProvider) {
         })
         .when('/quantity-sale-report', {
             templateUrl : 'js/app/admin/quantity-sale-report/AdminQuantitySaleReport.html',
-            controller: 'AdminQuantitySaleReport',
+            controller: 'AdminQuantitySaleReportController',
+            controllerAs: '$ctrl'
+        })
+        .when('/sales-tax', {
+            templateUrl : 'js/app/admin/sales-tax/AdminSalesTax.html',
+            controller: 'AdminSalesTaxController',
             controllerAs: '$ctrl'
         })
     ;
@@ -13767,8 +13782,17 @@ app.controller('CartBlinderController', ['$scope', 'CartService', function($scop
 |
 */
 app.controller('CartController',
-    ['$scope', 'CartService', 'StripeService', 'Order', 'AlertService', 'Discount', 'DiscountExists', '$exceptionHandler', '$uibModal',
-    function($scope, CartService, StripeService, Order, AlertService, Discount, DiscountExists, $exceptionHandler, $uibModal) {
+    function($scope,
+             CartService,
+             StripeService,
+             Order,
+             AlertService,
+             Discount,
+             DiscountExists,
+             $exceptionHandler,
+             SalesTaxResource,
+             $uibModal
+    ) {
 
     $scope.items = [];
     $scope.show = false;
@@ -13781,6 +13805,11 @@ app.controller('CartController',
     $scope.discountText = '';
     $scope.discountAmount = 0;
     $scope.enabled = true;
+    $scope.taxes = [];
+    $scope.pickedTax = {
+        state: '',
+        tax: 0
+    };
 
     //Global Discount
     $scope.global_discount_switch = homeSetting.global_discount_switch;
@@ -13981,13 +14010,41 @@ app.controller('CartController',
         return amount;
     }
 
-    $scope.total = function() {
+    $scope.gatTaxAmount = function(subtotal) {
+        var tax = parseInt(subtotal * ( $scope.pickedTax.tax / 100));
+        return tax;
+    };
+
+    $scope.sumSubtotalAndShipping = function() {
         var subtotal =  $scope.subtotal();
         var shipping = $scope.shipping();
 
         return subtotal + shipping;
+    };
 
-    }
+    $scope.total = function() {
+        var subtotalAndShipping = $scope.sumSubtotalAndShipping();
+        var tax = $scope.gatTaxAmount( subtotalAndShipping );
+
+        return subtotalAndShipping + tax;
+    };
+
+
+
+    $scope.setStateTaxRecord = function() {
+        $scope.pickedTax = {
+            state: '',
+            tax: 0
+        };
+
+        if ($scope.form.state && $scope.taxes.length) {
+            angular.forEach($scope.taxes, function(tax) {
+                if (tax.state == $scope.form.state) {
+                    $scope.pickedTax = tax;
+                }
+            });
+        }
+    };
 
     $scope.submit = function() {
 
@@ -14062,10 +14119,17 @@ app.controller('CartController',
         $scope.status = '';
 
         if (index == 1) {
+
+            //Fetch Sales Taxes
+            $scope.taxes = SalesTaxResource.query();
+
             return true;
         }
 
         if (index == 2) {
+
+
+
             if (!$scope.form.firstName) {
                 $scope.status = 'Please enter a first name.';
                 AlertService.broadcast('Please enter a first name', 'error');
@@ -14230,7 +14294,7 @@ app.controller('CartController',
 
     $scope.getItems();
     $scope.getDiscountFromCookies();
-}]);
+});
 
 
 app.controller('CartCountController', ['$scope', 'CartService', function($scope, CartService) {
@@ -15704,9 +15768,9 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
 
 
 (function () {
-    app.controller('AdminQuantitySaleReport', AdminQuantitySaleReport);
+    app.controller('AdminQuantitySaleReportController', AdminQuantitySaleReportController);
 
-    function AdminQuantitySaleReport($scope, QuantityReportResource, $exceptionHandler) {
+    function AdminQuantitySaleReportController($scope, QuantityReportResource, $exceptionHandler) {
 
         var $ctrl = this;
 
@@ -15723,6 +15787,114 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
                 $exceptionHandler(JSON.stringify(error));
             });
         };
+    };
+}());
+
+
+(function () {
+    app.controller('AdminSalesTaxController', AdminSalesTaxController);
+
+    function AdminSalesTaxController($scope, SalesTaxResource, AlertService, $exceptionHandler) {
+
+        var $ctrl = this;
+        $ctrl.salesTaxes = [];
+
+        //Don't move this method below
+        function uploadSalesTaxes() {
+            var promise = SalesTaxResource.query();
+            promise.$promise.then(function(response) {
+                $ctrl.salesTaxes = response;
+            }, function(error) {
+                $exceptionHandler(JSON.stringify(error));
+            });
+        }
+
+        uploadSalesTaxes();
+
+        $ctrl.getSaveUpdateButtonCaption = function (salesTax) {
+            var buttonCaption = 'Update';
+
+            if (!salesTax.created_at) {
+                buttonCaption = 'Save';
+            }
+
+            return buttonCaption;
+        };
+
+        $ctrl.salesTaxRowChanged = function (index) {
+            $ctrl.salesTaxes[index].changed = true;
+        };
+
+        $ctrl.addStateTax = function () {
+            var data = {
+                state: '',
+                tax: 0
+            };
+
+            $ctrl.salesTaxes.push(data);
+        };
+
+        $ctrl.salesTaxUpdate = function (index) {
+
+            $ctrl.salesTaxes[index].changed = false;
+
+            var data = $ctrl.salesTaxes[index];
+
+            //Check if state is already. If in use then don't allow to store data.
+            //State is unique field and primary key.
+            if (confirmUnusedState(data)) {
+                alert('This Tax State / Country is already in use. Please change State / Country.');
+            } else {
+                if (!data.created_at) {
+                    SalesTaxResource.save({data: data}).$promise.then(function () {
+                        AlertService.broadcast('Tax added!', 'success');
+                        uploadSalesTaxes();
+                    }, function (error) {
+                        $exceptionHandler(JSON.stringify(error));
+                        AlertService.broadcast('There was a problem with adding Tax.');
+                    });
+                } else {
+                    SalesTaxResource.update({state: data.state, data: data}).$promise.then(function () {
+                        AlertService.broadcast('Tax updated!', 'success');
+                        uploadSalesTaxes();
+                    }, function (error) {
+                        $exceptionHandler(JSON.stringify(error));
+                        AlertService.broadcast('There was a problem with Tax update.');
+                    });
+                }
+
+            }
+        };
+
+        $ctrl.salesTaxRemove = function (index) {
+            var r = confirm('Do you want to remove this Tax?');
+            if (r == true) {
+                var data = $ctrl.salesTaxes[index];
+
+                if (!data.created_at) {
+                    $ctrl.salesTaxes.slice(index);
+                    uploadSalesTaxes();
+                } else {
+                    SalesTaxResource.remove({state: data.state}).$promise.then(function () {
+                        AlertService.broadcast('Tax removed!', 'success');
+                        uploadSalesTaxes();
+                    }, function (error) {
+                        $exceptionHandler(JSON.stringify(error));
+                        AlertService.broadcast('There was a problem with Tax removing.');
+                    });
+                }
+            }
+        };
+
+        function confirmUnusedState(data) {
+            //Here is condition to more then 1 because one record obviously exists by adding new record.
+            if ($ctrl.salesTaxes.filter(function (row) {
+                return row.state === data.state;
+            }).length > 1) {
+                return true;
+            }
+            return false;
+        }
     };
 }());
 

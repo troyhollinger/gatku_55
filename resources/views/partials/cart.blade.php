@@ -32,13 +32,15 @@
 
 				</div>
 
-				<div class="cart-quantity-column">
+
+				<div class="cart-quantity-column" ng-show="item.type.slug != 'package'">
 					<span>@{{ item.quantity }} <i class="fa fa-angle-left" ng-click="decreaseItemQuantity($index)"><span ng-if="item.quantity == 1">Remove</span></i> <i class="fa fa-angle-right" ng-click="increaseItemQuantity($index)"></i></span>
 				</div>
 
-				<div class="cart-price-column">
+				<div class="cart-price-column" ng-show="item.type.slug != 'package'">
 					<p>$@{{ item.price * item.quantity | money }}</p>
 				</div>
+
 
 				<div class="clear"></div>
 
@@ -185,8 +187,13 @@
 			<label for="city">City</label>
 			<input type="text" name="city" id="city" ng-model="form.city">
 
+
 			<label for="state">State / Province</label>
-			<input type="text" name="state" id="state" ng-model="form.state">
+
+			<select ng-model="form.state"
+					ng-options="tax.state as tax.state for tax in taxes"
+					ng-change="setStateTaxRecord()">
+			</select>
 
 			<label for="zip">Zip Code</label>
 			<input type="text" name="zip" id="zip" ng-model="form.zip">
@@ -214,6 +221,31 @@
 	<div class="cart-stage-3" ng-show="currentStage === 'payment' && items.length">
 
 		<h2>Payment</h2>@{{ status }}
+
+		<div class="checkout-form">
+			<b>
+				<span class="cart-item-column-for-credit-card">Total</span>
+				<span class="cart-price-column-for-credit-card"
+					  ng-bind="'$' + (sumSubtotalAndShipping() | money | number:2 )">
+				</span>
+
+				<span class="cart-item-column-for-credit-card">Sales Tax ( @{{pickedTax.tax}}% )</span>
+				<span class="cart-price-column-for-credit-card"
+					  ng-bind="'$' + ( gatTaxAmount( sumSubtotalAndShipping() ) | money  | number:2 )">
+				</span>
+			</b>
+		</div>
+
+		<div class="checkout-form">
+			<span class="cart-item-column-for-credit-card-you-pay">You pay</span>
+			<span class="cart-price-column-for-credit-card-you-pay"
+				  ng-bind="'$' + (total() | money | number:2)">
+			</span>
+		</div>
+
+		<div class="clear"></div>
+
+		<hr>
 
 		<div class="checkout-form">
 
@@ -333,7 +365,7 @@
 
 			<div class="cart-details-row" ng-if="eligibleForDiscount">
 				<span class="cart-item-column">Discounts - <span class="smaller faded">@{{ discountText }}</span></span>
-				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + (discountAmount | money)"></span>
+				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + (discountAmount | money | number:2 )"></span>
 
 				<div class="clear"></div>
 
@@ -341,7 +373,16 @@
 
 			<div class="cart-details-row">
 				<span class="cart-item-column">Shipping</span>
-				<span class="cart-price-column shipping-column" ng-bind="'$' + (shipping() | money)"></span>
+				<span class="cart-price-column shipping-column" ng-bind="'$' + (shipping() | money | number:2 )"></span>
+
+				<div class="clear"></div>
+
+			</div>
+
+			<div class="cart-details-row">
+				<span class="cart-item-column">Sales Tax ( @{{pickedTax.tax}}% )</span>
+				<span class="cart-price-column shipping-column"
+					  ng-bind="'$' + ( gatTaxAmount( sumSubtotalAndShipping() ) | money  | number:2 )"></span>
 
 				<div class="clear"></div>
 
@@ -349,7 +390,7 @@
 
 			<div class="cart-details-row">
 				<span class="cart-item-column"><h3>Total</h3></span>
-				<span class="cart-price-column" ng-bind="'$' + (total() | money)"></span>
+				<span class="cart-price-column" ng-bind="'$' + (total() | money | number:2 )"></span>
 
 				<div class="clear"></div>
 
