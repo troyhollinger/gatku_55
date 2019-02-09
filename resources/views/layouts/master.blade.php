@@ -58,7 +58,7 @@
         <script src="//d2wy8f7a9ursnm.cloudfront.net/v4/bugsnag.min.js"></script>
         <script>
             window.bugsnagClient = bugsnag({
-                apiKey: 'a76deca11eb34ca6b18e6010ec00a39d',
+                apiKey: 'a55608af6092617c6676e1d81a677a2c',
                 notifyReleaseStages: ['production', 'qa', 'QA'],
                 releaseStage: CONFIG.environment
             });
