@@ -41,6 +41,7 @@ class ProductRepository implements ProductRepositoryInterface {
 			$product = Product::where('slug', '=', $slug)->with('type')->first();
 
 			if ($product) {
+
                 //This is code to display proper thumb image in og tag og:image
                 if (!config(['ogimage'])) {
                     config(['ogimage' => $product['ogimage']]);
@@ -49,6 +50,11 @@ class ProductRepository implements ProductRepositoryInterface {
                     if (!$product['ogimage']) {
                         config(['ogimage' => $product->thumb]);
                     }
+                }
+
+                //Page title from Product
+                if (isset($product['page_title']) && !empty($product['page_title'])) {
+                    config(['page_title' => $product['page_title']]);
                 }
             }
 
@@ -286,6 +292,7 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->include_length_on_email = (isset($data['include_length_on_email'])) ? $data['include_length_on_email'] : 0;
 
         $product->ogimage = (isset($data['ogimage'])) ? $data['ogimage'] : '';
+        $product->page_title = (isset($data['page_title'])) ? $data['page_title'] : '';
 
 		return $product;
 	}
