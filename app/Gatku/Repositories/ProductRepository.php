@@ -286,6 +286,7 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->include_length_on_email = (isset($data['include_length_on_email'])) ? $data['include_length_on_email'] : 0;
 
         $product->ogimage = (isset($data['ogimage'])) ? $data['ogimage'] : '';
+        $product->shipping = (isset($data['shipping'])) ? $data['shipping'] : 0;
 
 		return $product;
 	}
