@@ -5,6 +5,7 @@ namespace Gatku\Repositories;
 use App\Mail\EmailsShippingTrack;
 use Gatku\Model\EmailSettings;
 use Gatku\Model\HomeSetting;
+use Gatku\Model\Order;
 use Gatku\Model\ShippingTrack;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
@@ -60,9 +61,10 @@ class ShippingTrackRepository {
 			$discount = $this->calculateDiscount($request->order);
 			$subtotal = $this->calculateSubTotal($request->order);
 			$shipping = $this->calculateShipping($request->order);
+            $taxAmount = $this->calculateTaxAmount($request->order);
 			$total = $this->calculateTotal($request->order);
 
-			$this->sendEmail($request, $discount, $subtotal, $shipping, $total);
+			$this->sendEmail($request, $discount, $subtotal, $shipping, $taxAmount, $total);
 		} catch (Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
@@ -71,7 +73,23 @@ class ShippingTrackRepository {
 		return $request;
 	}
 
-	private function calculateSubTotal($order)
+    /**
+     * @param Order $order
+     * @return int
+     */
+    public function calculateTaxAmount(Order $order)
+    {
+        //Get needed values
+        $subtotal = $this->calculateSubTotal($order);
+        $shipping = $this->calculateShipping($order);
+
+        //Calculate tax amount
+        $taxAmount = intval( ( $subtotal + $shipping ) * ( $order->sales_tax / 100) );
+
+        return $taxAmount;
+    }
+
+	private function calculateSubTotal(Order $order)
 	{
 		$subtotal = 0;
 		$discount = 0;
@@ -190,16 +208,21 @@ class ShippingTrackRepository {
 		return $shippingPrice;
 	}
 
-	private function calculateTotal($order)
+    /**
+     * @param Order $order
+     * @return float|int
+     */
+	private function calculateTotal(Order $order)
 	{
 		$subtotal = $this->calculateSubTotal($order);
 		$shipping = $this->calculateShipping($order);
-		$total = $subtotal + $shipping;
-		return $total;
+        $taxAmount = $this->calculateTaxAmount($order);
+
+        return $subtotal + $shipping + $taxAmount;
 	}
 
 
-	private function sendEmail($request,$discount, $subtotal, $shipping, $total)
+	private function sendEmail($request,$discount, $subtotal, $shipping, $taxAmount, $total)
 	{
 	    $this->uploadEmailSettingsIfNotSet();
 
@@ -214,7 +237,8 @@ class ShippingTrackRepository {
                 'email' => 'emailme@troyhollinger.com',
                 'name' => 'Troy Hollinger'
             ]
-        ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $total, $date, $this->emailSettings));
+
+        ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $taxAmount, $total, $date, $this->emailSettings));
 	}
 
     //Make sure EmailSettings are loaded!!!!

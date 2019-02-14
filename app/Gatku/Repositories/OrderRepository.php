@@ -640,6 +640,7 @@ class OrderRepository {
      * @param Discount $discount
      * @param $subtotal
      * @param $shipping
+     * @param $taxAmount
      * @param $total
      * @return bool
      */

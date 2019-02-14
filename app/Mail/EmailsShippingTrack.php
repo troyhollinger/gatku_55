@@ -22,6 +22,7 @@ class EmailsShippingTrack extends Mailable
     public $discount;
     public $subtotal;
     public $shipping;
+    public $taxAmount;
     public $total;
     public $date;
     /**
@@ -35,6 +36,7 @@ class EmailsShippingTrack extends Mailable
      * @param $discount
      * @param $subtotal
      * @param $shipping
+     * @param $taxAmount
      * @param $total
      * @param $date
      * @param EmailSettings $emailSettings
@@ -44,6 +46,7 @@ class EmailsShippingTrack extends Mailable
         $discount,
         $subtotal,
         $shipping,
+        $taxAmount,
         $total,
         $date,
         EmailSettings $emailSettings
@@ -53,6 +56,7 @@ class EmailsShippingTrack extends Mailable
         $this->discount = $discount;
         $this->subtotal = $subtotal;
         $this->shipping = $shipping;
+        $this->taxAmount = $taxAmount;
         $this->total = $total;
         $this->date = $date;
         $this->emailSettings = $emailSettings;
