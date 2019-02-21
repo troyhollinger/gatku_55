@@ -34,7 +34,7 @@ class CalculateOrdersService
     }
 
     public function calculateDiscount() {
-
+        return 'calculateDiscount';
     }
 
     public function calculateShipping() {
