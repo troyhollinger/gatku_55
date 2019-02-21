@@ -25,7 +25,7 @@
 			color: #ffffff;
 		}
 	</style>
-		@if (count($homeSetting) === 1)
+		@if ($homeSetting)
 		   
 		   <a href="{{ route('home') }}"><img id="logo-above" src="{{ $homeSetting['logo'] }}"></a>
 

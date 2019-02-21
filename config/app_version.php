@@ -27,26 +27,6 @@ switch ($app_env) {
         $version = loadValueFromFile('default');
 }
 
-function loadValueFromFile(string $environment) {
-
-    $version = 'version_placeholder';
-
-    if (!$environment) {
-        return $version;
-    }
-
-    $fileName = './../.git/refs/heads/' . $environment;
-
-    if (file_exists($fileName)) {
-        $long = file_get_contents( './../.git/refs/heads/' . $environment );
-        if ($long) {
-            $version = substr($long, 0, 7);
-        }
-    }
-
-    return $version;
-}
-
 return [
     'version' => $version
 ];
