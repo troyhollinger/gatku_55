@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Container\Container;
 use Tests\TestCase;
 use Gatku\Service\CalculateOrdersService;
 
