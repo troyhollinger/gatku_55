@@ -39,6 +39,8 @@ class CalculateOrdersServiceTest extends TestCase {
 
     public function testCalculateSubtotal()
     {
+        //$this->setDiscount();
+
         $result = $this->calculateOrdersService->getOrderCalculations($this->order, $this->discount);
 
         $this->assertInternalType('array', $result);
@@ -49,7 +51,29 @@ class CalculateOrdersServiceTest extends TestCase {
 
     private function getOrder()
     {
+        //This is how to get record from database
         $this->order = $this->orderRepository->get(2136);
+
+//        $this->order = new Order();
+//        $this->order->id = '1234';
+//        $this->order->customerId = '4321';
+//        $this->order->address = '1234 Jefferson St.';
+//        $this->order->city = 'Los Angeles';
+//        $this->order->state = 'California';
+//        $this->order->country = 'USA';
+//        $this->order->zip = '93120';
+//        $this->order->number = '1234567890';
+//        $this->order->comments = 'test comment';
+//        $this->order->discount_percentage = 0;
+//        $this->order->order_sum = 0;
+//        $this->order->shipping_cost = 0;
+//        $this->order->total_sum = 0;
+//        $this->order->sales_tax = 0;
+//        $this->order->tax_amount = 0;
+
+        print_r($this->order);
+        //echo json_encode($this->order);
+        die();
     }
 
     private function setNoDiscount()
