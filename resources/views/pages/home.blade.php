@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-{{ $homeSetting['page_title'] }}
+	{{ config('page_title') }}
 @stop
 
 @section('description')

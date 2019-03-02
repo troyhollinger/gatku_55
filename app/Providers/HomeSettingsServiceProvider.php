@@ -39,6 +39,9 @@ class HomeSettingsServiceProvider extends ServiceProvider
                 }
             }
 
+            //Page title from HomeSetting
+            config(['page_title' => $homeSetting['page_title']]);
+
             return $homeSetting;
         });
     }

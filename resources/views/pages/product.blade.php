@@ -2,7 +2,7 @@
 @extends('layouts.master')
 
 @section('title')
-{!! strtoupper($product->name) !!} | {!! $homeSetting['page_title'] !!}
+	{{ config('page_title') }}
 @stop
 
 @section('description')

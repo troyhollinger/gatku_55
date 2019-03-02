@@ -10,6 +10,22 @@
 <!-- Modal Body -->
 <div class="modal-body">
 
+    <!-- Page Title -->
+    <div class="form-group row">
+        <label for="slug" class="col-sm-3 col-form-label">Page title:</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="page_title"
+                   placeholder="Page title..."
+                   ng-model="$ctrl.newProduct.page_title">
+        </div>
+    </div>
+    <small>* If empty then 'Page Title' from Home Settings will be used.</small>
+
+    <!-- Product Type -->
+    <hr>
+
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Product Type:</label>
         <div class="col-sm-9">
