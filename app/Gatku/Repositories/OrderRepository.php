@@ -19,6 +19,7 @@ use Stripe_CardError;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\App;
 use Gatku\Model\HomeSetting;
+use Gatku\Service\CalculateOrdersService;
 
 /**
  *
@@ -49,6 +50,10 @@ class OrderRepository {
      * @var SalesTaxRepository
      */
     private $salesTaxRepository;
+    /**
+     * @var CalculateOrdersService
+     */
+    private $calculateOrdersService;
 
     /**
      * OrderRepository constructor.
@@ -56,17 +61,20 @@ class OrderRepository {
      * @param EmailSettingsRepository $emailSettingsRepository
      * @param HomeSetting $homeSetting
      * @param SalesTaxRepository $salesTaxRepository
+     * @param CalculateOrdersService $calculateOrdersService
      */
     public function __construct(
         CustomerRepository $customer,
         EmailSettingsRepository $emailSettingsRepository,
         HomeSetting $homeSetting,
-        SalesTaxRepository $salesTaxRepository
+        SalesTaxRepository $salesTaxRepository,
+        CalculateOrdersService $calculateOrdersService
     ) {
         $this->customer = $customer;
         $this->emailSettingsRepository = $emailSettingsRepository;
         $this->homeSetting = $homeSetting;
         $this->salesTaxRepository = $salesTaxRepository;
+        $this->calculateOrdersService = $calculateOrdersService;
     }
 
     /**
@@ -152,17 +160,19 @@ class OrderRepository {
             }
 
             //Make all sum calculations
-            $subtotal = $this->calculateSubTotal($order, $discount);
-            $shipping = $this->calculateShipping($order, $discount);
-            $taxAmount = $this->calculateTaxAmount($order, $discount);
-            $total = $this->calculateTotal($order, $discount, $customer);
+            $orderCalculations = $this->calculateOrdersService->getOrderCalculations($order, $discount);
+
+            $subtotal = $orderCalculations['subtotal'];
+            $shipping = $orderCalculations['shipping'];
+            $taxAmount = $orderCalculations['tax'];
+            $total = $orderCalculations['total'];
 
             //Update Order
             $order->discount_percentage = ($discount->discount) ? $discount->discount * 100 : 0;
             $order->order_sum = $subtotal;
             $order->shipping_cost = $shipping;
-            $order->total_sum = $total;
             $order->tax_amount = $taxAmount;
+            $order->total_sum = $total;
 
             $order->update();
         } catch(\Exception $e) {
@@ -242,247 +252,6 @@ class OrderRepository {
         }
 
         return true;
-    }
-
-    /**
-     * @param $order
-     * @param $discountObj
-     * @return float|int
-     */
-    public function calculateSubTotal($order, $discountObj) {
-
-        $subtotal = 0;
-
-        $items = $order->items;
-
-        //$discountReverse - variable name because this calculate actually not a discount but how much should be discounted price?
-        $discountReverse = 1;
-        if ($discountObj) {
-            $discountReverse = (100 - $discountObj->discount) / 100;
-        }
-
-        foreach($items as $item) {
-
-            if ($item->product->sizeable && $item->sizeId) {
-                $price = $item->size->price;
-            } else {
-                //This id done because we don't wand to double price for charging
-                //Then package price is not added. Only elements from package are summed.
-                if ($item->product->type->slug != 'package') {
-                    $price = $item->product->price;
-                } else {
-                    $price = 0;
-                }
-            }
-
-            //Calc item value
-            $value = $this->calculateDiscountValue($price, $item->quantity, $discountReverse);
-            $subtotal += $value;
-
-            foreach($item->addons as $addon) {
-
-                //For Addons with price_zero = 1
-                if ($addon->price_zero) {
-                    $addonPrice = 0;
-                } else {
-                    if ($addon->product->sizeable && $addon->sizeId) {
-                        $addonPrice = $addon->size->price;
-                    } else {
-                        $addonPrice = $addon->product->price;
-                    }
-                }
-
-                //Calc addon value
-                $addonPrice = $this->calculateDiscountValue($addonPrice, $addon->quantity, $discountReverse);
-                $subtotal += $addonPrice;
-            }
-        }
-        //This is hardcoded discount for Black Friday, consider remove this code
-        $discountHardcoded = $this->calculateDiscount($order, $subtotal);
-
-        return $subtotal - $discountHardcoded;
-    }
-
-    /**
-     * @param $price
-     * @param $quantity
-     * @param $discountReverse
-     * @return float|int
-     */
-    private function calculateDiscountValue($price, $quantity, $discountReverse)
-    {
-        return ($price * $quantity) * $discountReverse;
-    }
-
-    /**
-     * @param $order
-     * @param bool $subtotal
-     * @return float|int
-     */
-    private function calculateDiscount($order, $subtotal = false) {
-
-        $amount = 0;
-        $glassCheck = 0;
-        $glassPrice = 0;
-
-
-        if ($subtotal && $this->homeSetting->global_discount_switch) {
-
-            $amount = ($subtotal * ( $this->homeSetting->global_discount_percentage / 100 )) / 100;
-            $amount = ceil($amount) * 100;
-
-            return $amount;
-
-        }
-
-        $items = $order->items;
-
-        foreach($items as $item) {
-
-            if ($item->product->type->slug === 'glass') {
-
-                $glassCheck += $item->quantity;
-                $glassPrice = $item->product->price;
-
-            }
-
-            foreach($item->addons as $addon) {
-
-                if ($addon->product->type->slug === 'glass') {
-
-                    $glassCheck += $addon->quantity;
-
-                }
-
-            }
-
-        }
-
-        if ($glassCheck >= 4) {
-
-            $amount = ($glassPrice * 4) - 4000;
-
-        }
-
-        Log::info($amount);
-
-        return $amount;
-
-    }
-
-    /**
-     * Calculate the shipping.
-     * There is a similar method in the CartController.js file. These two methods
-     * should produce identical results.
-     *
-     * @param Order $order
-     * @param Discount $discount
-     * @return float|int
-     */
-    public function calculateShipping(Order $order, Discount $discount) {
-
-        $shippingPrice = 0;
-        $poles = [];
-        $heads = [];
-        $others = [];
-
-        $items = $order->items;
-
-        if ($this->calculateSubTotal($order, $discount) >= 30000) return 0;
-
-        foreach($items as $item) {
-
-            if ($item->product->type->slug === 'pole') {
-
-                $poles[] = $item;
-
-            } elseif ($item->product->type->slug === 'head') {
-
-                $heads[] = $item;
-
-            } else {
-
-                $others[] = $item;
-            }
-        }
-
-        // if black friday is true, only give free shipping to
-        // orders that have poles
-
-        //Commented for Troy's request
-        //if ($this->homeSetting->global_discount_switch && count($poles) > 0) return 0;
-
-        if (count($poles) > 0) {
-
-            $poleShippingPrice = $poles[0]->product->type->shippingPrice;
-
-            if (count($poles) > 1) {
-
-                $shippingPrice = $poleShippingPrice * count($poles);
-
-            } else {
-
-                $shippingPrice = $poleShippingPrice;
-
-            }
-
-        } elseif (count($heads) > 0) {
-
-            $headShippingPrice = $heads[0]->product->type->shippingPrice;
-
-            if (count($heads) > 1) {
-
-                $shippingPrice = $headShippingPrice * ceil(count($heads) / 2);
-
-            } else {
-
-                $shippingPrice = $headShippingPrice;
-
-            }
-
-        } elseif (count($others) > 0) {
-
-            $shippingPrice = $others[0]->product->type->shippingPrice;
-
-        }
-
-        return $shippingPrice;
-
-    }
-
-    /**
-     * @param Order $order
-     * @param Discount $discount
-     * @return int
-     */
-    public function calculateTaxAmount(Order $order, Discount $discount)
-    {
-        //Get needed values
-        $subtotal = $this->calculateSubTotal($order, $discount);
-        $shipping = $this->calculateShipping($order, $discount);
-
-        //Calculate tax amount
-        $taxAmount = intval( ( $subtotal + $shipping ) * ( $order->sales_tax / 100) );
-
-        return $taxAmount;
-    }
-
-    /**
-     * @param Order $order
-     * @param Discount $discount
-     * @return float|int
-     */
-    public function calculateTotal(Order $order, Discount $discount) {
-
-        $subtotal = $this->calculateSubTotal($order, $discount);
-
-        $shipping = $this->calculateShipping($order, $discount);
-
-        $taxAmount = $this->calculateTaxAmount($order, $discount);
-
-        $total = $subtotal + $shipping + $taxAmount;
-
-        return $total;
     }
 
     /**
