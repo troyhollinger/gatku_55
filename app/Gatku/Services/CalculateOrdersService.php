@@ -105,7 +105,6 @@ class CalculateOrdersService
             }
 
             //Calc item value
-//@TODO should we remove following line?
             $value = $this->calculateDiscountValue($price, $item->quantity, $discountReverse);
             $subtotal += $value;
 
@@ -123,12 +122,12 @@ class CalculateOrdersService
                 }
 
                 //Calc addon value
-//@TODO Should we remove following line
                 $addonPrice = $this->calculateDiscountValue($addonPrice, $addon->quantity, $discountReverse);
                 $subtotal += $addonPrice;
             }
         }
-        //This is hardcoded discount for Black Friday, consider remove this code
+
+//This is hardcoded discount for Black Friday, consider remove this code
 //@todo should we calc here ?? I don't think so
 //$discountHardcoded = $this->calculateDiscount();
 
@@ -176,41 +175,10 @@ class CalculateOrdersService
      */
     private function calculateShipping() {
         $shippingPrice = 0;
-        $poles = [];
-        $heads = [];
-        $others = [];
 
-        $items = $this->order->items;
+        //Orders under '$this->freeShippingAmountTheshold' will be charged one the highest shipping fee.
+        if ($this->subtotal < $this->freeShippingAmountTheshold) {
 
-        if ($this->subtotal >= $this->freeShippingAmountTheshold) return 0;
-
-        foreach($items as $item) {
-            if ($item->product->type->slug === 'pole') {
-                $poles[] = $item;
-            } elseif ($item->product->type->slug === 'head') {
-                $heads[] = $item;
-            } else {
-                $others[] = $item;
-            }
-        }
-
-        if (count($poles) > 0) {
-            $poleShippingPrice = $poles[0]->product->type->shippingPrice;
-
-            if (count($poles) > 1) {
-                $shippingPrice = $poleShippingPrice * count($poles);
-            } else {
-                $shippingPrice = $poleShippingPrice;
-            }
-        } elseif (count($heads) > 0) {
-            $headShippingPrice = $heads[0]->product->type->shippingPrice;
-            if (count($heads) > 1) {
-                $shippingPrice = $headShippingPrice * ceil(count($heads) / 2);
-            } else {
-                $shippingPrice = $headShippingPrice;
-            }
-        } elseif (count($others) > 0) {
-            $shippingPrice = $others[0]->product->type->shippingPrice;
         }
 
         return $shippingPrice;

@@ -45,8 +45,27 @@ class CalculateOrdersServiceTest extends TestCase {
 
         $this->assertInternalType('array', $result);
 
-        $expectedValue = 4900;
+        //subtotal
+        $expectedValue = $this->order->order_sum;
         $this->assertEquals($expectedValue, $result['subtotal']);
+
+        //discount
+        //@TODO We need to add discount amount to Order. There is only: 'discount_percentage'. So discount can't be calculated.
+        //$this->order->discount_percentage
+        //$expectedValue = $this->order->discount;
+        //$this->assertEquals($expectedValue, $result['discount']);
+
+        //shipping cost
+        $expectedValue = $this->order->shipping_cost;
+        $this->assertEquals($expectedValue, $result['shipping']);
+
+        //tax
+        $expectedValue = $this->order->tax_amount;
+        $this->assertEquals($expectedValue, $result['tax']);
+
+        //tax
+        $expectedValue = $this->order->total_sum;
+        $this->assertEquals($expectedValue, $result['total']);
     }
 
     private function getOrder()
@@ -54,6 +73,7 @@ class CalculateOrdersServiceTest extends TestCase {
         //This is how to get record from database
         $this->order = $this->orderRepository->get(2136);
 
+        //Keep this for future use
 //        $this->order = new Order();
 //        $this->order->id = '1234';
 //        $this->order->customerId = '4321';
@@ -73,7 +93,7 @@ class CalculateOrdersServiceTest extends TestCase {
 
         print_r($this->order);
         //echo json_encode($this->order);
-        die();
+        //die();
     }
 
     private function setNoDiscount()
@@ -81,6 +101,7 @@ class CalculateOrdersServiceTest extends TestCase {
         $this->discount = null;
     }
 
+    //Keep this for future use
     private function setDiscount()
     {
         $this->discount = new Discount;
