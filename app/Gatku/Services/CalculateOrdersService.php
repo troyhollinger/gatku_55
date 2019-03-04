@@ -4,6 +4,7 @@ namespace Gatku\Service;
 use Gatku\Model\Discount;
 use Gatku\Model\HomeSetting;
 use Gatku\Model\Order;
+use Gatku\Model\Product;
 
 class CalculateOrdersService
 {
@@ -26,6 +27,10 @@ class CalculateOrdersService
     /**
      * @var int
      */
+    private $shippingHelper = 0;
+    /**
+     * @var int
+     */
     private $total;
     /**
      * @var Order
@@ -40,7 +45,7 @@ class CalculateOrdersService
      */
     private $homeSetting;
 
-    private $freeShippingAmountTheshold = 30000; //This is $300
+    private $freeShippingAmountThreshold = 30000; //This is $300
     /**
      * CalculateOrdersService constructor.
      * @param HomeSetting $homeSetting
@@ -84,13 +89,9 @@ class CalculateOrdersService
 
         $items = $this->order->items;
 
-        //$discountReverse - variable name because this calculate actually not a discount but how much should be discounted price?
-        $discountReverse = 1;
-        if ($this->discount) {
-            $discountReverse = (100 - $this->discount->discount) / 100;
-        }
-
         foreach($items as $item) {
+
+            $this->prepareShippingIfApplied($item->product);
 
             if ($item->product->sizeable && $item->sizeId) {
                 $price = $item->size->price;
@@ -104,11 +105,12 @@ class CalculateOrdersService
                 }
             }
 
-            //Calc item value
-            $value = $this->calculateDiscountValue($price, $item->quantity, $discountReverse);
-            $subtotal += $value;
+            //Calc based on item value
+            $subtotal += intval($price * $item->quantity);
 
             foreach($item->addons as $addon) {
+
+                $this->prepareShippingIfApplied($addon->product);
 
                 //For Addons with price_zero = 1
                 if ($addon->price_zero) {
@@ -121,15 +123,10 @@ class CalculateOrdersService
                     }
                 }
 
-                //Calc addon value
-                $addonPrice = $this->calculateDiscountValue($addonPrice, $addon->quantity, $discountReverse);
-                $subtotal += $addonPrice;
+                //Calc based on addon value
+                $subtotal += intval($addonPrice * $addon->quantity);
             }
         }
-
-//This is hardcoded discount for Black Friday, consider remove this code
-//@todo should we calc here ?? I don't think so
-//$discountHardcoded = $this->calculateDiscount();
 
         return $subtotal;
     }
@@ -138,74 +135,67 @@ class CalculateOrdersService
      * @return float|int
      */
     private function calculateDiscountAmount() {
-        $amount = 0;
-        $glassCheck = 0;
-        $glassPrice = 0;
+        $globalDiscount = 0;
+        $codeDiscount = 0;
 
+        //Discount calculated on global discount percentage
         if ($this->subtotal && $this->homeSetting->global_discount_switch) {
-            $amount = intval($this->subtotal * ( $this->homeSetting->global_discount_percentage / 100 ));
-            return $amount;
+            $globalDiscount = intval($this->subtotal * ( $this->homeSetting->global_discount_percentage / 100 ));
         }
 
-        $items = $this->order->items;
-
-        //Glass discount
-        foreach($items as $item) {
-            if ($item->product->type->slug === 'glass') {
-                $glassCheck += $item->quantity;
-                $glassPrice = $item->product->price;
-            }
-
-            foreach($item->addons as $addon) {
-                if ($addon->product->type->slug === 'glass') {
-                    $glassCheck += $addon->quantity;
-                }
-            }
+        //Discount calculated based on applied code on page
+        if ($this->discount) {
+            $codeDiscount = intval(intval($this->subtotal - $globalDiscount) * ( $this->discount->discount / 100 ));
         }
 
-        if ($glassCheck >= 4) {
-            $amount = ($glassPrice * 4) - 4000;
-        }
-
-        return intval($amount);
-    }
-
-    /**
-     * @return float|int
-     */
-    private function calculateShipping() {
-        $shippingPrice = 0;
-
-        //Orders under '$this->freeShippingAmountTheshold' will be charged one the highest shipping fee.
-        if ($this->subtotal < $this->freeShippingAmountTheshold) {
-
-        }
-
-        return $shippingPrice;
+        return intval($globalDiscount + $codeDiscount);
     }
 
     /**
      * @return int
      */
-    private function calculateTax() {
+    private function calculateShipping()
+    {
+        $shipping = 0;
+
+        //We want free shipping for orders with subtracted discount.
+        $amount = intval($this->subtotal - $this->discount);
+
+        //Orders above '$this->freeShippingAmountThreshold' are not charged shipping fee.
+        if ($amount < $this->freeShippingAmountThreshold) {
+            $shipping = $this->shippingHelper;
+        }
+
+        return $shipping;
+    }
+
+    /**
+     * @param Product $product
+     */
+    private function prepareShippingIfApplied(Product $product)
+    {
+        //Apply highest shipping fee
+        if ($product->shipping > $this->shippingHelper) {
+            $this->shippingHelper = $product->shipping;
+        }
+    }
+
+    /**
+     * @return int
+     */
+    private function calculateTax()
+    {
         $taxAmount = intval( ( $this->subtotal + $this->shipping ) * ( $this->order->sales_tax / 100) );
         return $taxAmount;
     }
 
-    private function calculateTotal() {
-        $total = $this->subtotal + $this->shipping + $this->tax - $this->discountAmount;
-        return $total;
-    }
-
     /**
-     * @param $price
-     * @param $quantity
-     * @param $discountReverse
-     * @return float|int
+     * @return int
      */
-    private function calculateDiscountValue($price, $quantity, $discountReverse)
+    private function calculateTotal()
     {
-        return ($price * $quantity) * $discountReverse;
+        $total = intval($this->subtotal + $this->shipping + $this->tax - $this->discountAmount);
+        return $total;
     }
 }
 
