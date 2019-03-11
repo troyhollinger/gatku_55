@@ -6,7 +6,10 @@ ln -s /gatku/dev_config/gatku55-nginx.conf /etc/nginx/sites-enabled/
 ln -s /gatku/dev_config/gatku55-phpfpm.conf /etc/php/7.2/fpm/pool.d/
 chmod 777 -R /gatku/storage/
 
-echo "Restart PHP 7.2 FPM...";
+echo "Copy xdebug.ini to: /etc/php/7.2/mods-available/"
+cp /gatku/dev_config/xdebug/xdebug.ini /etc/php/7.2/mods-available/
+
+echo "Restart PHP 7.2 FPM..."
 service php7.2-fpm restart
 
 # Start nginx in non demon mode
