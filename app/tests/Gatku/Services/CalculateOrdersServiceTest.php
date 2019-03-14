@@ -39,7 +39,7 @@ class CalculateOrdersServiceTest extends TestCase {
 
     public function testCalculateSubtotal()
     {
-        //$this->setDiscount();
+        $this->setDiscount();
 
         $result = $this->calculateOrdersService->getOrderCalculations($this->order, $this->discount);
 
@@ -91,7 +91,7 @@ class CalculateOrdersServiceTest extends TestCase {
 //        $this->order->sales_tax = 0;
 //        $this->order->tax_amount = 0;
 
-        print_r($this->order);
+        //print_r($this->order);
         //echo json_encode($this->order);
         //die();
     }
@@ -106,6 +106,7 @@ class CalculateOrdersServiceTest extends TestCase {
     {
         $this->discount = new Discount;
         $this->discount->code = 'test_code_10';
-        $this->discount->discount = 10;
+        //$this->discount->discount = 10;
+        $this->discount->discount = 0;
     }
 }

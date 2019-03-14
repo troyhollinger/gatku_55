@@ -159,7 +159,7 @@ class CalculateOrdersService
         $shipping = 0;
 
         //We want free shipping for orders with subtracted discount.
-        $amount = intval($this->subtotal - $this->discount);
+        $amount = intval($this->subtotal - $this->discountAmount);
 
         //Orders above '$this->freeShippingAmountThreshold' are not charged shipping fee.
         if ($amount < $this->freeShippingAmountThreshold) {
