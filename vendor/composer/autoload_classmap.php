@@ -17,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\AuthenticationController' => $baseDir . '/app/Http/Controllers/AuthenticationController.php',
     'App\\Http\\Controllers\\AvailabilityController' => $baseDir . '/app/Http/Controllers/AvailabilityController.php',
     'App\\Http\\Controllers\\BaseController' => $baseDir . '/app/Http/Controllers/BaseController.php',
+    'App\\Http\\Controllers\\CartCalculationsController' => $baseDir . '/app/Http/Controllers/CartCalculationsController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DiscountController' => $baseDir . '/app/Http/Controllers/DiscountController.php',
     'App\\Http\\Controllers\\DiscountExistsController' => $baseDir . '/app/Http/Controllers/DiscountExistsController.php',
