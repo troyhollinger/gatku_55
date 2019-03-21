@@ -34,7 +34,7 @@
 
                         <p style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;">
                             {{ $order['address'] }}<br>
-                            {{ $order['city'] }}, {{ $order['state'] }} {{ $order['zip'] }}<br>
+                            {{ $order['city'] }}, {{ ($order['state'] != '-- Out of US') ? $order['state'] : '' }} {{ $order['zip'] }}<br>
                             {{ $order['country'] }}<br>
                             Phone: {{ $order['customer']['phone'] }}<br>
                             Email: {{ $order['customer']['email'] }}
