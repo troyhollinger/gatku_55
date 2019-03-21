@@ -30,7 +30,7 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 
 	<div class="video_contain">
 		<video autoplay muted loop playsinline>
-			<source src="/videos/rain.mp4" type="video/mp4">
+			<source src="/videos/Crist-final.mp4" type="video/mp4">
 		</video>
 	</div>
 
