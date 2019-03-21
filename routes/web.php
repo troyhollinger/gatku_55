@@ -76,8 +76,6 @@ Route::post('home-image/upload', ['as' => 'home-image.upload', 'uses' => 'HomeSe
 
 Route::post('email-image/upload', ['as' => 'email-image.upload', 'uses' => 'EmailSettingsController@upload']);
 
-Route::post('cart-calculations', ['uses' => 'CartCalculationsController@getCalculationsForCart']);
-
 Route::get('thankyou', ['as' => 'thankyou', function(HomeSetting $homeSetting) {
     return View::make('pages.thankyou')->with('homeSetting',  $homeSetting);
 }]);

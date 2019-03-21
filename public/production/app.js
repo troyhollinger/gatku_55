@@ -12150,9 +12150,6 @@ app.config(function(stripeProvider, $locationProvider) {
 	}
 });
 
-app.factory('CartCalculationsResource', function($resource) {
-    return $resource('/cart-calculations');
-});
 app.factory('QuantityReportResource', function($resource) {
     return $resource('/admin/quantity-report/');
 });
@@ -13804,7 +13801,6 @@ app.controller('CartController',
              DiscountExists,
              $exceptionHandler,
              SalesTaxResource,
-             CartCalculationsResource,
              $uibModal
     ) {
 
@@ -13941,20 +13937,6 @@ app.controller('CartController',
     function calculateDiscountAmountForItem(price, quantity, discount) {
         return (price * quantity) * (discount / 100);
     }
-
-    $scope.getCartCalculations = function() {
-        //$scope.items
-        //$scope.discount
-
-        var promise = CartCalculationsResource.save({
-            items: $scope.items,
-            discount: $scope.discount
-        });
-
-        promise.then(function(response) {
-            console.log(response);
-        });
-    };
 
     $scope.subtotal = function() {
         var subtotal = 0;
