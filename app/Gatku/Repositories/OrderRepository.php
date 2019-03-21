@@ -149,7 +149,7 @@ class OrderRepository {
             $order->save();
 
             //Assign and store order items
-            $this->assignOrderItems($order, $input['items']);
+            $this->assignOrderItems($order, $input['items'], true);
             $order->load('items.addons.product.type','items.addons.size', 'items.product.type', 'customer', 'items.size');
 
             //Discount part
@@ -255,11 +255,14 @@ class OrderRepository {
     }
 
     /**
-     * Converts cart items to order Items,
-     * Addons the same.
-     *
+     * @param $order
+     * @param $items
+     * @param $storeItems
      */
-    private function assignOrderItems($order, $items) {
+    public function assignOrderItems($order, $items, $storeItems = false) {
+
+        $orderItems = [];
+        $orderAddons = [];
 
         foreach($items as $item) {
 
@@ -272,7 +275,11 @@ class OrderRepository {
                 $orderItem->sizeId = $item['sizeId'];
             }
 
-            $orderItem->save();
+            if ($storeItems) {
+                $orderItem->save();
+            }
+
+            $orderItems[] = $orderItem;
 
             foreach($item['addons'] as $addon) {
                 $itemAddon = new OrderItemAddon;
@@ -287,9 +294,18 @@ class OrderRepository {
                 $itemAddon->include_in_package = ($addon['include_in_package']) ? $addon['include_in_package'] : 0;
                 $itemAddon->price_zero = ($addon['price_zero']) ? $addon['price_zero'] : 0;
 
-                $itemAddon->save();
+                if ($storeItems) {
+                    $itemAddon->save();
+                }
+
+                $orderAddons[] = $itemAddon;
             }
         }
+
+        return [
+            'items' => $orderItems,
+            'addons' => $orderAddons
+        ];
     }
 
     /**

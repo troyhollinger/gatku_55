@@ -34,7 +34,7 @@ class CalculateOrdersServiceTest extends TestCase {
         $this->orderRepository = $this->app->make(OrderRepository::class);
 
         $this->getOrder();
-        $this->setNoDiscount();
+        $this->setDiscount();
     }
 
     public function testCalculateSubtotal()
@@ -94,11 +94,6 @@ class CalculateOrdersServiceTest extends TestCase {
         //print_r($this->order);
         //echo json_encode($this->order);
         //die();
-    }
-
-    private function setNoDiscount()
-    {
-        $this->discount = null;
     }
 
     //Keep this for future use
