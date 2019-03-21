@@ -263,7 +263,7 @@
 			<span>
 			{{ $order['address'] }}
 			</span><br>
-			<span>{{ $order['city'] }}, {{ $order['state'] }}</span>
+			<span>{{ $order['city'] }}, {{ ($order['state'] != '-- Out of US') ? $order['state'] : '' }}</span>
 			<span>{{ $order['zip'] }} {{ $order['country'] }}</span>
 		</div></td>
 	</tr>
