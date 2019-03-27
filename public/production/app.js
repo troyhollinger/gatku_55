@@ -12873,16 +12873,134 @@ app.factory('AlertService', ['$rootScope', function($rootScope) {
 	return AlertService;
 
 }]);
-app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', function($rootScope, $http, ipCookie, AlertService) {
+// (function() {
+// 	app.factory('CalculateOrdersService', CalculateOrdersService);
+//
+// 	function CalculateOrdersService() {
+//
+// 		var $service = this;
+//
+// 		$service.subtotal;
+// 		$service.discountAmount;
+// 		$service.tax;
+// 		$service.shipping;
+// 		$service.shippingHelper = 0;
+// 		$service.total;
+// 		$service.items;
+// 		$service.discount;
+// 		$service.homeSetting;
+// 		$service.freeShippingAmountThreshold = 30000; //This is $300
+//
+// 		$service.calculateSubtotal = function() {
+// 			var subtotal = 0;
+//
+// 			angular.forEach($service.items, function(item){
+// 				$this->prepareShippingIfApplied($item->product);
+//
+// 				if ($item->product->sizeable && $item->sizeId) {
+// 					$price = $item->size->price;
+// 				} else {
+// 					//This id done because we don't wand to double price for charging
+// 					//Then package price is not added. Only elements from package are summed.
+// 					if ($item->product->type->slug != 'package') {
+// 						$price = $item->product->price;
+// 					} else {
+// 						$price = 0;
+// 					}
+// 				}
+//
+// 				//Calc based on item value
+// 				$subtotal += intval($price * $item->quantity);
+//
+// 				foreach($item->addons as $addon) {
+//
+// 					$this->prepareShippingIfApplied($addon->product);
+//
+// 					//For Addons with price_zero = 1
+// 					if ($addon->price_zero) {
+// 						$addonPrice = 0;
+// 					} else {
+// 						if ($addon->product->sizeable && $addon->sizeId) {
+// 							$addonPrice = $addon->size->price;
+// 						} else {
+// 							$addonPrice = $addon->product->price;
+// 						}
+// 					}
+//
+// 					//Calc based on addon value
+// 					$subtotal += intval($addonPrice * $addon->quantity);
+// 				}
+// 			});
+//
+// 			return subtotal;
+// 		}
+//
+//
+// 		$service.getOrderCalculations = function(homeSetting, items, discount) {
+//
+// 			$service.homeSetting = homeSetting;
+// 			$service.items = items;
+// 			$service.discount = discount;
+//
+// 			$service.subtotal = $service.calculateSubtotal();
+// 			$service.discountAmount = $service.calculateDiscountAmount();
+// 			$service.shipping = $service.calculateShipping();
+// 			$service.tax = $service.calculateTax();
+// 			$service.total = $service.calculateTotal();
+//
+// 			return {
+// 				subtotal: $service.subtotal,
+// 				discount: $service.discountAmount,
+// 				shipping: $service.shipping,
+// 				tax: $service.tax,
+// 				total: $service.total
+// 			};
+// 		};
+//
+// 		return {
+// 			getOrderCalculations: $service.getOrderCalculations
+// 		};
+// 	}
+// }());
 
-	var CartService = {};
+app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', '$window', function(
+	$rootScope,
+	$http,
+	ipCookie,
+	AlertService,
+	$window
+) {
+	const gatkuCartItemsStorageKey = 'gatkuCartItemsStorageKey';
+
 	var Cookie = ipCookie;
+	var CartService = {};
+	var LocalStorage = $window.localStorage;
 
+	//Discount
+	CartService.getDiscount = function() {
+		return Cookie('discount') || '';
+	};
+
+	CartService.setDiscount = function(discount) {
+		Cookie('discount', discount, { path : '/' });
+	};
+
+	CartService.removeDiscount = function() {
+		Cookie.remove('discount', { path : '/' });
+		CartService.update();
+	};
+	//Discount end
+
+	//Cart Items
 	CartService.getItems = function() {
-		var cookies = Cookie('items') || [];
+		var storedValue = JSON.parse(LocalStorage.getItem(gatkuCartItemsStorageKey)) || [];
+		return storedValue;
+	};
 
-		return cookies;
-	}
+	CartService.setItems = function(cart) {
+		LocalStorage.setItem(gatkuCartItemsStorageKey,  JSON.stringify(cart));
+		CartService.update();
+	};
 
 	/**
 	 * This method defines what pieces of data 
@@ -12933,67 +13051,42 @@ app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', f
 		}
 
 		cart.push(item);
-		console.log("Items added before cookie");
-		Cookie('items', cart, { path : '/' });
-		$rootScope.$broadcast('update');
+		CartService.setItems(cart);
+
+		//Additional broadcast
 		$rootScope.$broadcast('itemAdded');
-		console.log("Items added after cookie");
-	}
+	};
 
 	CartService.removeItem = function(index) {
-
 		var cart = CartService.getItems();
 
 		if (!cart.length) return false;
-
 		cart.splice(index,1);
+		LocalStorage.removeItem(gatkuCartItemsStorageKey);
 
-		Cookie('items', cart, { path : '/' });
-
-		$rootScope.$broadcast('update');
-
-	}
-
-    CartService.getDiscount = function() {
-        return Cookie('discount') || '';
-    };
-
-    CartService.setDiscount = function(discount) {
-        Cookie('discount', discount, { path : '/' });
-    };
-
-    CartService.removeDiscount = function() {
-        Cookie.remove('discount', { path : '/' });
-        $rootScope.$broadcast('update');
+		CartService.update();
 	};
 
     CartService.count = function() {
-
 		var items = CartService.getItems();
 		var count = 0;
 
 		for(var i = 0; i < items.length; i++) {
-
 			//If statement here is to avoid count packages as a number of elements in Cart
 			if (items[i].type.slug != 'package') {
                 count+= (1 * items[i].quantity);
 			}
 
 			for(var ii = 0; ii < items[i].addons.length; ii++) {
-
 				count+= (1 * items[i].addons[ii].quantity);
-
 			}
-
 		}
 
 		return count;
-
-	}
+	};
 
 	CartService.increaseItemQuantity = function(itemIndex) {
-
-		var cart = Cookie('items') || [];
+		var cart = CartService.getItems();
 
 		cart[itemIndex].quantity++;
 
@@ -13004,15 +13097,11 @@ app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', f
 			}
 		});
 
-		Cookie('items', cart, { path : '/' });
-
-		$rootScope.$broadcast('update');
-
-	}
+		CartService.setItems(cart);
+	};
 
 	CartService.decreaseItemQuantity = function(itemIndex) {
-
-		var cart = Cookie('items') || [];
+		var cart = CartService.getItems();
 
 		cart[itemIndex].quantity--;
 
@@ -13024,94 +13113,59 @@ app.factory('CartService', ['$rootScope', '$http', 'ipCookie', 'AlertService', f
         });
 
 		if (cart[itemIndex].quantity == 0) {
-
 			cart.splice(itemIndex, 1);
-
-		} 
-
-		Cookie('items', cart, { path : '/' });
-
-		$rootScope.$broadcast('update');
-
-	}
+		}
+		CartService.setItems(cart);
+	};
 
 	CartService.increaseAddonQuantity = function(itemIndex, addonIndex) {
-
-		var cart = Cookie('items') || [];
-
+		var cart = CartService.getItems();
 		cart[itemIndex].addons[addonIndex].quantity++;
-
-		Cookie('items', cart, { path : '/' });
-
-		$rootScope.$broadcast('update');
-
-	}
+		CartService.setItems(cart);
+	};
 
 	CartService.decreaseAddonQuantity = function(itemIndex, addonIndex) {
-
-		var cart = Cookie('items') || [];
+		var cart = CartService.getItems();
 
 		cart[itemIndex].addons[addonIndex].quantity--;
-
 		if (cart[itemIndex].addons[addonIndex].quantity == 0) {
-
 			cart[itemIndex].addons.splice(addonIndex, 1);
-
 		}
 
-		Cookie('items', cart, { path : '/' });
-
-		$rootScope.$broadcast('update');
-
-	}
+		CartService.setItems(cart);
+	};
 
 	CartService.update = function() {
-
 		$rootScope.$broadcast('update');
-
-	}
+	};
 
 	CartService.empty = function() {
-
-	    Cookie.remove('items', { path : '/' });
-		
-		$rootScope.$broadcast('update');
-
-	}
+	    LocalStorage.removeItem(gatkuCartItemsStorageKey);
+		CartService.update();
+	};
 
 	CartService.show = function() {
-
 		$rootScope.$broadcast('show');
-
-	}
+	};
 
 	CartService.hide = function() {
-
 		$rootScope.$broadcast('hide');
-
-	}
+	};
 
 	CartService.productInCart = function(productId) {
-
-		var cookies = Cookie('items') || [];
+		var cookies = CartService.getItems();
 
 		if (cookies.length) {
-
 			for(var i = 0; i < cookies.length; i++) {
-
 				if (cookies[i].id === productId) return true;
-
 			}
-
 		}
-
-		return false;		
-
-	}
+		return false;
+	};
 	
 	return CartService;
-
 }]);
+
 app.factory('NavigationService', ['$rootScope', function($rootScope) {
 
 	var NavigationService = {};
