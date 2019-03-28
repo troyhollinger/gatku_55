@@ -149,7 +149,7 @@ class OrderRepository {
             $order->save();
 
             //Assign and store order items
-            $this->assignOrderItems($order, $input['items']);
+            $this->assignOrderItems($order, $input['items'], true);
 
             $order->load('items.addons.product.type','items.addons.size', 'items.product.type', 'customer', 'items.size');
 
@@ -258,9 +258,10 @@ class OrderRepository {
     /**
      * @param $order
      * @param $items
+     * @param bool $store
      * @return array
      */
-    public function assignOrderItems($order, $items) {
+    public function assignOrderItems($order, $items, $store = false) {
 
         $orderItems = [];
         $orderAddons = [];
@@ -268,6 +269,12 @@ class OrderRepository {
         foreach($items as $item) {
 
             $orderItem = new OrderItem;
+
+            //This id is used only for front end calculation
+            if (isset($item['id'])) {
+                $orderItem->id = $item['itemId'];
+            }
+
             $orderItem->orderId = $order->id;
             $orderItem->productId = $item['id'];
             $orderItem->quantity = $item['quantity'];
@@ -276,7 +283,9 @@ class OrderRepository {
                 $orderItem->sizeId = $item['sizeId'];
             }
 
-            $orderItem->save();
+            if ($store) {
+                $orderItem->save();
+            }
 
             $orderItems[] = $orderItem;
 
@@ -293,7 +302,9 @@ class OrderRepository {
                 $itemAddon->include_in_package = ($addon['include_in_package']) ? $addon['include_in_package'] : 0;
                 $itemAddon->price_zero = ($addon['price_zero']) ? $addon['price_zero'] : 0;
 
-                $itemAddon->save();
+                if ($store) {
+                    $itemAddon->save();
+                }
 
                 $orderAddons[] = $itemAddon;
             }

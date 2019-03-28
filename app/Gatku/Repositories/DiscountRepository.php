@@ -26,6 +26,7 @@ class DiscountRepository {
             Log::error($e);
             return false;
         }
+
         return $discount;
     }
 

@@ -11,4 +11,10 @@ class Discount extends Model {
     public $incrementing = false;
     protected $keyType = 'string';
     protected $fillable = [];
+
+    //Columns from database
+    protected $attributes = [
+        'code' => null,
+        'discount' => 0
+    ];
 }

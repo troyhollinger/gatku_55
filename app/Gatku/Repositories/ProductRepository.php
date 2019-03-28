@@ -31,6 +31,16 @@ class ProductRepository implements ProductRepositoryInterface {
 		return $product;
 	}
 
+	public function getOnlyProduct($id) {
+        try {
+            $product = Product::findOrFail($id);
+        } catch (\Exception $e) {
+            Bugsnag::notifyException($e);
+            Log::error($e);
+            return false;
+        }
+        return $product;
+    }
     /**
      * @param $slug
      * @return bool
