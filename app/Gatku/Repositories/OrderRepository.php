@@ -271,7 +271,7 @@ class OrderRepository {
             $orderItem = new OrderItem;
 
             //This id is used only for front end calculation
-            if (isset($item['id'])) {
+            if (isset($item['itemId'])) {
                 $orderItem->id = $item['itemId'];
             }
 

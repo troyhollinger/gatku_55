@@ -99,7 +99,7 @@
 
 			<div class="cart-details-row" ng-if="eligibleForDiscount">
 				<span class="cart-item-column">Discounts - <span class="smaller faded">@{{ discountText }}</span></span>
-				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + (discountAmount | money)"></span>
+				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + ( cartCalculations.discount | money | number:2 )"></span>
 
 				<div class="clear"></div>
 
@@ -123,13 +123,17 @@
 					   ng-click="removeDiscount()">[Remove]
 					</a>
 				</span>
-				<span class="cart-price-column shipping-column" ng-bind="'$' + (discountSum | money)"></span>
+				<span class="cart-price-column shipping-column" ng-bind="'$' + ( cartCalculations.discount | money | number:2 )"></span>
 				<div class="clear"></div>
 			</div>
 
 			<div class="cart-details-row">
-				<span class="cart-item-column">Subtotal <span class="smaller faded bold" ng-if="subtotal() < 30000 && !global_discount_switch">- get to $300 for free shipping!</span><span class="smaller faded bold" ng-if="subtotal() >= 30000 && !global_discount_switch">You get free shipping!</span></span>
-				<span class="cart-price-column shipping-column" ng-bind="'$' + (subtotal() | money)"></span>
+				<span class="cart-item-column">Subtotal <span class="smaller faded bold"
+															  ng-if="( cartCalculations.subtotal - cartCalculations.discount ) < 30000 && !global_discount_switch">- get to $300 for free shipping!</span><span class="smaller faded bold" ng-if="( cartCalculations.subtotal - cartCalculations.discount ) >= 30000 && !global_discount_switch">You get free shipping!</span>
+				</span>
+				<span class="cart-price-column shipping-column"
+					  ng-bind="'$' + ( ( cartCalculations.subtotal - cartCalculations.discount ) | money | number:2 )">
+				</span>
 
 				<div class="clear"></div>
 
@@ -137,7 +141,7 @@
 
 			<div class="cart-details-row">
 				<span class="cart-item-column">Shipping <span class="smaller faded bold" ng-if="!global_discount_switch">Non-U.S.A shipping may vary</span></span>
-				<span class="cart-price-column shipping-column" ng-bind="'$' + (shipping() | money)"></span>
+				<span class="cart-price-column shipping-column" ng-bind="'$' + ( cartCalculations.shipping | money )"></span>
 
 				<div class="clear"></div>
 
@@ -145,7 +149,7 @@
 
 			<div class="cart-details-row">
 				<span class="cart-item-column"><h3>Total</h3></span>
-				<span class="cart-price-column" ng-bind="'$' + (total() | money)"></span>
+				<span class="cart-price-column" ng-bind="'$' + ( cartCalculations.total | money | number:2 )"></span>
 
 				<div class="clear"></div>
 
@@ -226,12 +230,12 @@
 			<b>
 				<span class="cart-item-column-for-credit-card">Total</span>
 				<span class="cart-price-column-for-credit-card"
-					  ng-bind="'$' + (sumSubtotalAndShipping() | money | number:2 )">
+					  ng-bind="'$' + ( (cartCalculations.subtotal + cartCalculations.shipping - cartCalculations.discount) | money | number:2 )">
 				</span>
 
 				<span class="cart-item-column-for-credit-card">Sales Tax ( @{{pickedTax.tax}}% )</span>
 				<span class="cart-price-column-for-credit-card"
-					  ng-bind="'$' + ( gatTaxAmount( sumSubtotalAndShipping() ) | money  | number:2 )">
+					  ng-bind="'$' + ( cartCalculations.tax | money  | number:2 )">
 				</span>
 			</b>
 		</div>
@@ -239,7 +243,7 @@
 		<div class="checkout-form">
 			<span class="cart-item-column-for-credit-card-you-pay">You pay</span>
 			<span class="cart-price-column-for-credit-card-you-pay"
-				  ng-bind="'$' + (total() | money | number:2)">
+				  ng-bind="'$' + ( cartCalculations.total | money | number:2)">
 			</span>
 		</div>
 
@@ -363,9 +367,17 @@
 
 		<div class="cart-details">
 
-			<div class="cart-details-row" ng-if="eligibleForDiscount">
-				<span class="cart-item-column">Discounts - <span class="smaller faded">@{{ discountText }}</span></span>
-				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + (discountAmount | money | number:2 )"></span>
+{{--			<div class="cart-details-row" ng-if="eligibleForDiscount">--}}
+{{--				<span class="cart-item-column">Discounts - <span class="smaller faded">@{{ discountText }}</span></span>--}}
+{{--				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + ( cartCalculations.discount | money | number:2 )"></span>--}}
+
+{{--				<div class="clear"></div>--}}
+
+{{--			</div>--}}
+
+			<div class="cart-details-row">
+				<span class="cart-item-column">Subtotal</span>
+				<span class="cart-price-column shipping-column" ng-bind="'$' + (cartCalculations.subtotal - cartCalculations.discount  | money | number:2 )"></span>
 
 				<div class="clear"></div>
 
@@ -373,7 +385,7 @@
 
 			<div class="cart-details-row">
 				<span class="cart-item-column">Shipping</span>
-				<span class="cart-price-column shipping-column" ng-bind="'$' + (shipping() | money | number:2 )"></span>
+				<span class="cart-price-column shipping-column" ng-bind="'$' + (cartCalculations.shipping | money | number:2 )"></span>
 
 				<div class="clear"></div>
 
@@ -382,7 +394,7 @@
 			<div class="cart-details-row">
 				<span class="cart-item-column">Sales Tax ( @{{pickedTax.tax}}% )</span>
 				<span class="cart-price-column shipping-column"
-					  ng-bind="'$' + ( gatTaxAmount( sumSubtotalAndShipping() ) | money  | number:2 )"></span>
+					  ng-bind="'$' + ( cartCalculations.tax | money  | number:2 )"></span>
 
 				<div class="clear"></div>
 
@@ -390,7 +402,7 @@
 
 			<div class="cart-details-row">
 				<span class="cart-item-column"><h3>Total</h3></span>
-				<span class="cart-price-column" ng-bind="'$' + (total() | money | number:2 )"></span>
+				<span class="cart-price-column" ng-bind="'$' + ( cartCalculations.total | money | number:2 )"></span>
 
 				<div class="clear"></div>
 

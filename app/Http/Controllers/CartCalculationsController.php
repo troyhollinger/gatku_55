@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Gatku\Model\Order;
+use Gatku\Model\SalesTax;
 use Gatku\Repositories\DiscountRepository;
 use Gatku\Repositories\OrderRepository;
 use Gatku\Repositories\ProductRepository;
+use Gatku\Repositories\SalesTaxRepository;
 use Gatku\Repositories\SizeRepository;
 use Gatku\Service\CalculateOrdersService;
 use \Request;
@@ -39,6 +41,10 @@ class CartCalculationsController extends BaseController {
      * @var CalculateOrdersService
      */
     private $calculateOrdersService;
+    /**
+     * @var SalesTaxRepository
+     */
+    private $salesTaxRepository;
 
     /**
      * CartCalculationsController constructor.
@@ -48,6 +54,7 @@ class CartCalculationsController extends BaseController {
      * @param ProductRepository $productRepository
      * @param SizeRepository $sizeRepository
      * @param CalculateOrdersService $calculateOrdersService
+     * @param SalesTaxRepository $salesTaxRepository
      */
     public function __construct(
         HomeSetting $homeSetting,
@@ -55,7 +62,8 @@ class CartCalculationsController extends BaseController {
         OrderRepository $orderRepository,
         ProductRepository $productRepository,
         SizeRepository $sizeRepository,
-        CalculateOrdersService $calculateOrdersService
+        CalculateOrdersService $calculateOrdersService,
+        SalesTaxRepository $salesTaxRepository
     )
     {
         parent::__construct();
@@ -66,6 +74,7 @@ class CartCalculationsController extends BaseController {
         $this->productRepository = $productRepository;
         $this->sizeRepository = $sizeRepository;
         $this->calculateOrdersService = $calculateOrdersService;
+        $this->salesTaxRepository = $salesTaxRepository;
     }
 
     /**
@@ -76,7 +85,8 @@ class CartCalculationsController extends BaseController {
         $input = Request::all();
 
         $discount = $this->getDiscount($input['discount']);
-        $order = $this->getOrder($input['items']);
+        $tax = $this->getTax($input['tax']);
+        $order = $this->getOrder($input['items'], $tax);
 
         $orderCalc = $this->calculateOrdersService->getOrderCalculations($order, $discount);
 
@@ -94,16 +104,32 @@ class CartCalculationsController extends BaseController {
             $discount = $this->discountRepository->get($discountArray['code']);
         }
 
-        return  $discount ?: new Discount();
+        return  $discount ?: new Discount;
+    }
+
+    /**
+     * @param array|null $tax
+     * @return SalesTax
+     */
+    private function getTax(?array $tax) :SalesTax
+    {
+        $salesTax = null;
+        if (isset($tax['state'])) {
+            $salesTax = $this->salesTaxRepository->get($tax['state']);
+        }
+
+        return  $salesTax ?: new SalesTax;
     }
 
     /**
      * @param array|null $inputItems
+     * @param SalesTax $salesTax
      * @return Order
      */
-    private function getOrder(?array $inputItems) :Order
+    private function getOrder(?array $inputItems, SalesTax $salesTax) :Order
     {
         $order = new Order;
+        $order->sales_tax = $salesTax->tax;
 
         //Add temp itemId and itemOrderId for items and addons
         if (!empty($inputItems)) {
