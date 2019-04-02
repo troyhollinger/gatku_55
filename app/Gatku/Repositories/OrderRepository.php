@@ -525,9 +525,9 @@ class OrderRepository {
         }
 
         //Development test code
-        if (App::environment('dev')) {
+        if (App::environment('dev') || App::environment('QA') || App::environment('qa')) {
 
-            $email = env('DEV_TEST_EMAIL', false);
+            $email = env('DEV_QA_TEST_EMAIL', false);
 
             if ($email) {
 
