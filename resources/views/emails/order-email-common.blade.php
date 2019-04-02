@@ -139,10 +139,12 @@
                         </div>
 
                         <p id="total" style="-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: Helvetica, Arial, sans-serif;border-top: 1px solid black;padding-top: 10px;font-weight: bold;">
-                            @if($discount['discount'] > 0)
-                                <span style="font-weight:normal">Discount: <span style="color:#2ECC71;">- ${{ number_format($discount['discount'] / 100, 2) }}</span></span><br>
-                            @endif
                             <span style="font-weight:normal">Subtotal: ${{ number_format($subtotal / 100, 2) }}</span><br>
+
+                            @if($order->discount_percentage != 0)
+                                <span style="font-weight:normal">Discount: <span style="color:#2ECC71;">- ${{ number_format(( ($subtotal / 100) * ($order->discount_percentage / 100) ) / 100, 2) }}</span></span><br>
+                            @endif
+
                             <span style="font-weight:normal">Shipping: ${{ number_format($shipping / 100, 2) }}</span><br>
 
                             <span style="font-weight:normal">Sales tax: ${{ number_format($taxAmount / 100, 2) }}</span><br>
