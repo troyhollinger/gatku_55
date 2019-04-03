@@ -522,15 +522,11 @@ class OrderRepository {
                             $this->emailSettings
                 ));
             }
-        }
-
-        //Development test code
-        if (App::environment('dev') || App::environment('QA') || App::environment('qa')) {
+        } else {
 
             $email = env('DEV_QA_TEST_EMAIL', false);
 
             if ($email) {
-
                 //Admin Order Confirmation
                 Mail::to([
                     [
@@ -538,24 +534,24 @@ class OrderRepository {
                         'name' => 'past-recipient-name-here'
                     ]
                 ])->send(new EmailsOrderAdmin(
-                        $order,
-                        $discount,
-                        $subtotal,
-                        $shipping,
-                        $taxAmount,
-                        $total,
-                        $date,
-                        $this->homeSetting,
-                        $this->emailSettings
+                    $order,
+                    $discount,
+                    $subtotal,
+                    $shipping,
+                    $taxAmount,
+                    $total,
+                    $date,
+                    $this->homeSetting,
+                    $this->emailSettings
                 ));
 
                 //Customer Order Confirmation
                 Mail::to([
-                    [
-                        'email' => $email,
-                        'name' => 'past-recipient-name-here'
+                        [
+                            'email' => $email,
+                            'name' => 'past-recipient-name-here'
+                        ]
                     ]
-                ]
 
                 )->send(new EmailsOrder(
                     $order,

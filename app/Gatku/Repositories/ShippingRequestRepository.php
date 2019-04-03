@@ -66,16 +66,36 @@ class ShippingRequestRepository {
 	}
 
 	private function sendEmail($request) {
-        Mail::to([
-            [
-                'email' => $request->order->customer->email,
-                'name' => $request->order->customer->fullName
-            ]
-        ])->send(new EmailsShippingRequest($request));
+        if (App::environment('production')) {
+            Mail::to([
+                [
+                    'email' => $request->order->customer->email,
+                    'name' => $request->order->customer->fullName
+                ]
+            ])->send(new EmailsShippingRequest($request));
+        } else {
+            //for dev and QA
+            $email = env('DEV_QA_TEST_EMAIL', false);
+
+            if ($email) {
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name'
+                    ]
+                ])->send(new EmailsShippingRequest($request));
+            }
+        }
+
 	}
 
+    /**
+     * @param $request
+     */
 	private function sendReceipt($request) {
 		if (App::environment('production')) {
+
+		    //admin
             Mail::to([
                 [
                     'email' => 'dustin@gatku.com',
@@ -83,20 +103,34 @@ class ShippingRequestRepository {
                 ]
             ])->send(new EmailsShippingRequestPaymentNotification($request));
 
-		} else {
+            //customer
             Mail::to([
                 [
-                    'email' => 'past-email-address-here',
-                    'name' => 'past-recipient-name'
+                    'email' => $request->order->customer->email,
+                    'name' => $request->order->customer->fullName
                 ]
-            ])->send(new EmailsShippingRequestPaymentNotification($request));
-		}
+            ])->send(new EmailsShippingRequestReceipt($request));
+		} else {
 
-        Mail::to([
-            [
-                'email' => $request->order->customer->email,
-                'name' => $request->order->customer->fullName
-            ]
-        ])->send(new EmailsShippingRequestReceipt($request));
+		    //for dev and QA
+            $email = env('DEV_QA_TEST_EMAIL', false);
+
+            if ($email) {
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name'
+                    ]
+                ])->send(new EmailsShippingRequestPaymentNotification($request));
+
+                //customer
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name'
+                    ]
+                ])->send(new EmailsShippingRequestReceipt($request));
+            }
+		}
 	}
 }
