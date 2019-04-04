@@ -14,7 +14,7 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 
 	<!-- Background video section -->
 	@if ($homeSetting['display_video'])
-		<div class="video_contain">
+		<div class="video_container">
 			<video autoplay muted loop playsinline>
 				<source src="/videos/default_site_video.mp4" type="video/mp4">
 			</video>

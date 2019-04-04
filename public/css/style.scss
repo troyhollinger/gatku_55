@@ -548,7 +548,7 @@ video {
 
 	@include breakpoint(small) {
 		transform: translateX(calc((100% - 100vw) / 2));
-		position: fixed;
+		position: absolute;
 	}
 }
 
