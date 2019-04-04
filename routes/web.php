@@ -156,11 +156,3 @@ Route::post('cart-calculations', ['uses' => 'CartCalculationsController@getCalcu
 //
 //    return 'Sent';
 //});
-
-
-
-// Feature/205 This is only for test. Remove:
-
-Route::get('/video_tag', ['as' => 'home', function(HomeSetting $homeSetting) {
-    return View::make('pages.video_tag')->with('homeSetting',  $homeSetting);
-}]);
