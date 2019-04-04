@@ -146,6 +146,11 @@ class CalculateOrdersService
         //Discount calculated based on applied code on page
         if ($this->discount) {
             $codeDiscount = intval(intval($this->subtotal - $globalDiscount) * ( $this->discount->discount / 100 ));
+        } else {
+            // This option is in case there was additional fee for shipping and value have to be recalculated.
+            if ($this->order->discount_percentage) {
+                $codeDiscount = intval(intval($this->subtotal - $globalDiscount) * ( $this->order->discount_percentage / 100 ));
+            }
         }
 
         return intval($globalDiscount + $codeDiscount);

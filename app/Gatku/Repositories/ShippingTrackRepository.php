@@ -5,8 +5,8 @@ namespace Gatku\Repositories;
 use App\Mail\EmailsShippingTrack;
 use Gatku\Model\EmailSettings;
 use Gatku\Model\HomeSetting;
-use Gatku\Model\Order;
 use Gatku\Model\ShippingTrack;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -34,7 +34,10 @@ class ShippingTrackRepository {
      * @param HomeSetting $homeSetting
      * @param EmailSettingsRepository $emailSettingsRepository
      */
-	public function __construct(HomeSetting $homeSetting, EmailSettingsRepository $emailSettingsRepository)
+	public function __construct(
+	    HomeSetting $homeSetting,
+        EmailSettingsRepository $emailSettingsRepository
+    )
     {
         $this->homeSetting = $homeSetting;
         $this->emailSettingsRepository = $emailSettingsRepository;
@@ -58,187 +61,54 @@ class ShippingTrackRepository {
 			}
 			$request->load('order.customer');
 
-			$discount = $this->calculateDiscount($request->order);
-			$subtotal = $this->calculateSubTotal($request->order);
-			$shipping = $this->calculateShipping($request->order);
-            $taxAmount = $this->calculateTaxAmount($request->order);
-			$total = $this->calculateTotal($request->order);
+			$this->sendEmail(
+			    $request,
+                0,
+                $request->order->order_sum,
+                $request->order->shipping_cost,
+                $request->order->tax_amount,
+                $request->order->total_sum
+            );
 
-			$this->sendEmail($request, $discount, $subtotal, $shipping, $taxAmount, $total);
 		} catch (Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
 		}
+
 		return $request;
 	}
 
-    /**
-     * @param Order $order
-     * @return int
-     */
-    public function calculateTaxAmount(Order $order)
-    {
-        //Get needed values
-        $subtotal = $this->calculateSubTotal($order);
-        $shipping = $this->calculateShipping($order);
-
-        //Calculate tax amount
-        $taxAmount = intval( ( $subtotal + $shipping ) * ( $order->sales_tax / 100) );
-
-        return $taxAmount;
-    }
-
-	private function calculateSubTotal(Order $order)
-	{
-		$subtotal = 0;
-		$discount = 0;
-
-		$items = $order->items;
-
-		foreach($items as $item) {
-			if ($item->product->sizeable && $item->sizeId) {
-				$price = $item->size->price;
-			} else {
-				$price = $item->product->price;
-			}
-
-			$price = $price * $item->quantity;
-
-			$subtotal += $price;
-
-			foreach($item->addons as $addon) {
-				if ($addon->product->sizeable && $addon->sizeId) {
-					$addonPrice = $addon->size->price;
-				} else {
-					$addonPrice = $addon->product->price;
-				}
-				$addonPrice = $addonPrice * $addon->quantity;
-				$subtotal += $addonPrice;
-			}
-		}
-
-		$discount = $this->calculateDiscount($order, $subtotal);
-
-		return $subtotal - $discount;
-	}
-
-	private function calculateDiscount($order, $subtotal = false)
-	{
-		$amount = 0;
-		$glassCheck = 0;
-		$glassPrice = 0;
-
-		if($subtotal && $this->homeSetting->global_discount_switch) {
-			$amount = ($subtotal * ( $this->homeSetting->global_discount_percentage / 100 )) / 100;
-			$amount = ceil($amount) * 100;
-
-			return $amount;
-		}
-
-		$items = $order->items;
-
-		foreach($items as $item) {
-			if ($item->product->type->slug === 'glass') {
-				$glassCheck += $item->quantity;
-				$glassPrice = $item->product->price;
-			}
-			foreach($item->addons as $addon) {
-				if ($addon->product->type->slug === 'glass') {
-					$glassCheck += $addon->quantity;
-				}
-			}
-		}
-
-		if ($glassCheck >= 4) {
-			$amount = ($glassPrice * 4) - 4000;
-		}
-		Log::info($amount);
-
-		return $amount;
-	}
-
-
-	/**
-	 * Calculate the shipping.
-	 * There is a similar method in the CartController.js file. These two methods
-	 * should produce identical results.
-	 *
-	 */
-	private function calculateShipping($order)
-	{
-		$shippingPrice = 0;
-		$poles = [];
-		$heads = [];
-		$others = [];
-
-		$items = $order->items;
-
-		if ($this->calculateSubTotal($order) >= 30000) return 0;
-        //Commented for Troy's request
-		//if ($this->homeSetting->global_discount_switch) return 0;
-
-		foreach($items as $item) {
-			if ($item->product->type->slug === 'pole') {
-				$poles[] = $item;
-			} elseif ($item->product->type->slug === 'head') {
-				$heads[] = $item;
-			} else {
-				$others[] = $item;
-			}
-		}
-
-		if (count($poles) > 0) {
-			$poleShippingPrice = $poles[0]->product->type->shippingPrice;
-			if (count($poles) > 1) {
-				$shippingPrice = $poleShippingPrice * count($poles);
-			} else {
-				$shippingPrice = $poleShippingPrice;
-			}
-		} elseif (count($heads) > 0) {
-			$headShippingPrice = $heads[0]->product->type->shippingPrice;
-			if (count($heads) > 1) {
-				$shippingPrice = $headShippingPrice * ceil(count($heads) / 2);
-			} else {
-				$shippingPrice = $headShippingPrice;
-			}
-		} elseif (count($others) > 0) {
-			$shippingPrice = $others[0]->product->type->shippingPrice;
-		}
-		return $shippingPrice;
-	}
-
-    /**
-     * @param Order $order
-     * @return float|int
-     */
-	private function calculateTotal(Order $order)
-	{
-		$subtotal = $this->calculateSubTotal($order);
-		$shipping = $this->calculateShipping($order);
-        $taxAmount = $this->calculateTaxAmount($order);
-
-        return $subtotal + $shipping + $taxAmount;
-	}
-
-
-	private function sendEmail($request,$discount, $subtotal, $shipping, $taxAmount, $total)
+	private function sendEmail($request, $discount, $subtotal, $shipping, $taxAmount, $total)
 	{
 	    $this->uploadEmailSettingsIfNotSet();
 
 		$date = Carbon::now()->timezone('America/Los_Angeles')->format('F jS Y | g:i A T');
 
-        Mail::to([
-            [
-                'email' => $request->order->customer->email,
-                'name' => $request->order->customer->fullName
-            ],
-            [
-                'email' => 'emailme@troyhollinger.com',
-                'name' => 'Troy Hollinger'
-            ]
+        if (App::environment('production')) {
+            Mail::to([
+                [
+                    'email' => $request->order->customer->email,
+                    'name' => $request->order->customer->fullName
+                ],
+                [
+                    'email' => 'emailme@troyhollinger.com',
+                    'name' => 'Troy Hollinger'
+                ]
+            ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $taxAmount, $total, $date, $this->emailSettings));
+        } else {
+            //for dev and QA
+            $email = env('DEV_QA_TEST_EMAIL', false);
 
-        ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $taxAmount, $total, $date, $this->emailSettings));
+            if ($email) {
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name-here'
+                    ]
+                ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $taxAmount, $total, $date, $this->emailSettings));
+            }
+        }
 	}
 
     //Make sure EmailSettings are loaded!!!!

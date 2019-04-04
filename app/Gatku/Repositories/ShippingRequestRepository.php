@@ -11,10 +11,9 @@ use Stripe_Charge;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
-
+use Gatku\Model\Order;
 
 class ShippingRequestRepository {
-
 
 	public function store($input) 
 	{	
@@ -57,8 +56,20 @@ class ShippingRequestRepository {
 			return $e;
 		}
 
+		//Update shipping_request table
 		$request->paid = true;
 		$request->save();
+
+		//Update values in Order
+        /** @var Order $order */
+        $order = $request->order;
+
+        //Update shipping cost
+        $order->shipping_cost = $order->shipping_cost + $request->price;
+        $order->total_sum = $order->total_sum + $request->price;
+
+        $order->update();
+        //Update values in Order - end
 
 		$this->sendReceipt($request);
 
