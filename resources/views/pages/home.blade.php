@@ -68,10 +68,12 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 		@endif
 	</div>
 
-	<div class="home-image-info">
-		<p class="live-till">{!! $homeSetting['image_info'] !!}</p>
-		<p class="photo-credit">{!! $homeSetting['image_credit'] !!}</p>
-	</div>
+	@if (!$homeSetting['display_video'])
+		<div class="home-image-info">
+			<p class="live-till">{!! $homeSetting['image_info'] !!}</p>
+			<p class="photo-credit">{!! $homeSetting['image_credit'] !!}</p>
+		</div>
+	@endif
 
 </div>
 
