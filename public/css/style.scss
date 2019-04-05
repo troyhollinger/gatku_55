@@ -528,6 +528,7 @@ a:hover {
 .video_container {
 	display: block;
 	position: absolute;
+	overflow: hidden;
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -560,7 +561,7 @@ video {
 	height:100vh;
 	background-size: cover;
 	background-position: center;
-	background-color: $gray;
+	//background-color: $gray;
 	text-align: center;
 	letter-spacing: -4px;
 
