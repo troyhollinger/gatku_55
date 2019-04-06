@@ -11,20 +11,30 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 @section('content')
 
 <div class="hero gatku-home-banner">
-<style>
-	@media only screen and (max-width: 480px) {
-		.gatku-home-banner{
-			position: relative;
-			background-image:url({!! $homeSetting['mobile_image'] !!});
-		}
-	}
-	@media only screen and (min-width: 480px) {
-	.gatku-home-banner{
-			background-image:url({!! $homeSetting['image'] !!});
-		}
-	}
 
-</style>
+	<!-- Background video section -->
+	@if ($homeSetting['display_video'])
+		<div class="video_container">
+			<video autoplay muted loop playsinline>
+				<source src="/videos/default_site_video.mp4" type="video/mp4">
+			</video>
+		</div>
+	@else
+		<style>
+			@media only screen and (max-width: 480px) {
+				.gatku-home-banner{
+					position: relative;
+					background-image:url({!! $homeSetting['mobile_image'] !!});
+				}
+			}
+			@media only screen and (min-width: 480px) {
+				.gatku-home-banner{
+					background-image:url({!! $homeSetting['image'] !!});
+				}
+			}
+		</style>
+	@endif
+	<!-- Background video section - end -->
 
 	<div class="slideshow">
 		@if ( trim($homeSetting['slideshow_text_1']) )
@@ -58,10 +68,12 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 		@endif
 	</div>
 
-	<div class="home-image-info">
-		<p class="live-till">{!! $homeSetting['image_info'] !!}</p>
-		<p class="photo-credit">{!! $homeSetting['image_credit'] !!}</p>
-	</div>
+	@if (!$homeSetting['display_video'])
+		<div class="home-image-info">
+			<p class="live-till">{!! $homeSetting['image_info'] !!}</p>
+			<p class="photo-credit">{!! $homeSetting['image_credit'] !!}</p>
+		</div>
+	@endif
 
 </div>
 

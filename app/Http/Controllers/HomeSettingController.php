@@ -88,6 +88,7 @@ class HomeSettingController extends BaseController {
             $homeSetting->global_discount_name = \Request::get('global_discount_name') ? \Request::get('global_discount_name') : '';
             //Global discount - end
             $homeSetting->ogimage = \Request::get('ogimage') ? \Request::get('ogimage') : '';
+            $homeSetting->display_video = \Request::get('display_video') ? \Request::get('display_video') : 0;
 
             $homeSetting->save();
 		} catch (Exception $e) {

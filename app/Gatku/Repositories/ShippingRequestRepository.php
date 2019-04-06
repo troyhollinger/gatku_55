@@ -11,10 +11,9 @@ use Stripe_Charge;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
-
+use Gatku\Model\Order;
 
 class ShippingRequestRepository {
-
 
 	public function store($input) 
 	{	
@@ -57,8 +56,20 @@ class ShippingRequestRepository {
 			return $e;
 		}
 
+		//Update shipping_request table
 		$request->paid = true;
 		$request->save();
+
+		//Update values in Order
+        /** @var Order $order */
+        $order = $request->order;
+
+        //Update shipping cost
+        $order->shipping_cost = $order->shipping_cost + $request->price;
+        $order->total_sum = $order->total_sum + $request->price;
+
+        $order->update();
+        //Update values in Order - end
 
 		$this->sendReceipt($request);
 
@@ -66,16 +77,36 @@ class ShippingRequestRepository {
 	}
 
 	private function sendEmail($request) {
-        Mail::to([
-            [
-                'email' => $request->order->customer->email,
-                'name' => $request->order->customer->fullName
-            ]
-        ])->send(new EmailsShippingRequest($request));
+        if (App::environment('production')) {
+            Mail::to([
+                [
+                    'email' => $request->order->customer->email,
+                    'name' => $request->order->customer->fullName
+                ]
+            ])->send(new EmailsShippingRequest($request));
+        } else {
+            //for dev and QA
+            $email = env('DEV_QA_TEST_EMAIL', false);
+
+            if ($email) {
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name'
+                    ]
+                ])->send(new EmailsShippingRequest($request));
+            }
+        }
+
 	}
 
+    /**
+     * @param $request
+     */
 	private function sendReceipt($request) {
 		if (App::environment('production')) {
+
+		    //admin
             Mail::to([
                 [
                     'email' => 'dustin@gatku.com',
@@ -83,20 +114,34 @@ class ShippingRequestRepository {
                 ]
             ])->send(new EmailsShippingRequestPaymentNotification($request));
 
-		} else {
+            //customer
             Mail::to([
                 [
-                    'email' => 'past-email-address-here',
-                    'name' => 'past-recipient-name'
+                    'email' => $request->order->customer->email,
+                    'name' => $request->order->customer->fullName
                 ]
-            ])->send(new EmailsShippingRequestPaymentNotification($request));
-		}
+            ])->send(new EmailsShippingRequestReceipt($request));
+		} else {
 
-        Mail::to([
-            [
-                'email' => $request->order->customer->email,
-                'name' => $request->order->customer->fullName
-            ]
-        ])->send(new EmailsShippingRequestReceipt($request));
+		    //for dev and QA
+            $email = env('DEV_QA_TEST_EMAIL', false);
+
+            if ($email) {
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name'
+                    ]
+                ])->send(new EmailsShippingRequestPaymentNotification($request));
+
+                //customer
+                Mail::to([
+                    [
+                        'email' => $email,
+                        'name' => 'past-recipient-name'
+                    ]
+                ])->send(new EmailsShippingRequestReceipt($request));
+            }
+		}
 	}
 }

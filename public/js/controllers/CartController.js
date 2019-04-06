@@ -19,7 +19,8 @@ app.controller('CartController',
              DiscountExists,
              $exceptionHandler,
              SalesTaxResource,
-             $uibModal
+             $uibModal,
+             CartCalculationsResource
     ) {
 
     $scope.items = [];
@@ -50,6 +51,15 @@ app.controller('CartController',
     $scope.discountsExists = false;
     $scope.discountSum = 0;
 
+
+    $scope.cartCalculations = {
+        discount: 0,
+        shipping: 0,
+        subtotal: 0,
+        tax: 0,
+        total: 0
+    };
+
     //Check is are records in discount table. If no then don't display discount input
     DiscountExists.all().then(function(response) {
         $scope.discountsExists = response.data;
@@ -60,204 +70,66 @@ app.controller('CartController',
 
         if ($scope.validate(index) === false) return false;
 
+        $scope.getCartCalculations();
         $scope.currentStage = $scope.stages[index];
-    }
+    };
 
     $scope.getItems = function() {
         var items = CartService.getItems();
 
         $scope.items = items;
-    }
+    };
 
     $scope.removeItem = function(index) {
         CartService.removeItem(index);
-    }
+        $scope.getCartCalculations();
+    };
 
     $scope.getDiscountFromCookies = function () {
         $scope.discount = CartService.getDiscount();
-    }
+    };
 
     $scope.removeDiscount = function() {
         CartService.removeDiscount();
         $scope.getDiscountFromCookies();
+        $scope.getCartCalculations();
     };
 
     $scope.increaseItemQuantity = function(itemIndex) {
         CartService.increaseItemQuantity(itemIndex);
-    }
+        $scope.getCartCalculations();
+    };
 
     $scope.decreaseItemQuantity = function(itemIndex) {
         CartService.decreaseItemQuantity(itemIndex);
-    }
+        $scope.getCartCalculations();
+    };
 
     $scope.increaseAddonQuantity = function(itemIndex, addonIndex) {
         CartService.increaseAddonQuantity(itemIndex, addonIndex);
-    }
+        $scope.getCartCalculations();
+    };
 
     $scope.decreaseAddonQuantity = function(itemIndex, addonIndex) {
         CartService.decreaseAddonQuantity(itemIndex, addonIndex);
-    }
+        $scope.getCartCalculations();
+    };
 
-    $scope.shipping = function() {
-        var shipping = 0;
-        var poles = [];
-        var heads = [];
-        var others = [];
-
-        if ($scope.subtotal() >= 30000) {
-            return 0;
-        }
-
-        for(var i = 0; i < $scope.items.length; i++) {
-            var item = $scope.items[i];
-
-            if (item.type.slug === 'pole') {
-                poles.push(item);
-            } else if (item.type.slug === 'head') {
-                heads.push(item);
-            } else {
-                others.push(item);
-            }
-        };
-
-        // if black friday is true, only give free shipping to
-        // orders that have poles
-
-        //Commented for Troy's request
-        // if ($scope.global_discount_switch && poles.length > 0) {
-        //     return 0;
-        // }
-
-        if (poles.length > 0) {
-            var poleShippingPrice = poles[0].type.shippingPrice;
-
-            if (poles.length > 1) {
-                shipping = poleShippingPrice * poles.length;
-            } else {
-                shipping = poleShippingPrice;
-            }
-        } else if (heads.length > 0) {
-            var headShippingPrice = heads[0].type.shippingPrice;
-
-            if (heads.length > 1) {
-                shipping = headShippingPrice * (Math.ceil(heads.length / 2));
-            } else {
-                shipping = headShippingPrice;
-            }
-
-        } else if (others.length > 0) {
-            shipping = others[0].type.shippingPrice;
-        }
-
-        return shipping;
-    }
-
-    function calculateDiscountAmountForItem(price, quantity, discount) {
-        return (price * quantity) * (discount / 100);
-    }
-
-    $scope.subtotal = function() {
-        var subtotal = 0;
-        var discountSum = 0;
-
-        angular.forEach($scope.items, function(value, key) {
-
-            if ( $scope.items[key].type.slug != 'package' ) {
-                var price = $scope.items[key].price;
-                var quantity = $scope.items[key].quantity;
-
-                subtotal += price * quantity;
-
-                if ($scope.discount) {
-                    discountSum += calculateDiscountAmountForItem(price, quantity, $scope.discount.discount);
-                }
-            }
-
-            for(var i = 0; i < $scope.items[key].addons.length; i++) {
-                var price = $scope.items[key].addons[i].price;
-                var quantity = $scope.items[key].addons[i].quantity;
-
-                subtotal += price * quantity;
-
-                if ($scope.discount) {
-                    discountSum += calculateDiscountAmountForItem(price, quantity, $scope.discount.discount);
-                }
-            }
+    $scope.getCartCalculations = function() {
+        var promise = CartCalculationsResource.save({
+            items: $scope.items,
+            discount: $scope.discount,
+            tax: $scope.pickedTax
         });
 
-        $scope.discountSum = discountSum;
-
-        return subtotal - $scope.discountSum - $scope.discounts(subtotal);
-    }
-
-    /**
-     * This function will change quite a bit depending
-     * on what current discounts you want plugged into the system
-     *
-     */
-    $scope.discounts = function(subtotal) {
-        var amount = 0;
-        var subtotal = subtotal || false;
-        var glassCheck = 0;
-        var glassPrice = 0;
-
-        if (subtotal && $scope.global_discount_switch) {
-
-            $scope.discountText = $scope.global_discount_name + ' - ' + $scope.global_discount_percentage + '% off';
-            amount = Math.ceil(((subtotal * ( $scope.global_discount_percentage / 100 )) / 100)) * 100;
-            $scope.eligibleForDiscount = true;
-            $scope.discountAmount = amount;
-
-            return amount;
-        }
-
-        //Commented for Troy's request
-        //if ($scope.global_discount_switch) return 0;
-
-        angular.forEach($scope.items, function(value, key) {
-            if($scope.items[key].type.slug === 'glass') {
-                glassCheck += parseInt($scope.items[key].quantity);
-                glassPrice = $scope.items[key].price;
-            }
-
-            for(var i = 0; i < $scope.items[key].addons.length; i++) {
-                if ($scope.items[key].addons[i].type.slug === 'glass') glassCheck += parseInt($scope.items[key].addons[i].quantity);
-            }
+        promise.$promise.then(function(response) {
+            $scope.cartCalculations.discount = response.discount;
+            $scope.cartCalculations.shipping = response.shipping;
+            $scope.cartCalculations.subtotal = response.subtotal;
+            $scope.cartCalculations.tax = response.tax;
+            $scope.cartCalculations.total = response.total;
         });
-
-        if (glassCheck >= 4) {
-            amount = (glassPrice * 4) - 4000;
-            $scope.eligibleForDiscount = true;
-            $scope.discountText = '4 Glasses for $40';
-        } else {
-            $scope.eligibleForDiscount = false;
-            $scope.discountText = '';
-        }
-        $scope.discountAmount = amount;
-
-        return amount;
-    }
-
-    $scope.gatTaxAmount = function(subtotal) {
-        var tax = parseInt(subtotal * ( $scope.pickedTax.tax / 100));
-        return tax;
     };
-
-    $scope.sumSubtotalAndShipping = function() {
-        var subtotal =  $scope.subtotal();
-        var shipping = $scope.shipping();
-
-        return subtotal + shipping;
-    };
-
-    $scope.total = function() {
-        var subtotalAndShipping = $scope.sumSubtotalAndShipping();
-        var tax = $scope.gatTaxAmount( subtotalAndShipping );
-
-        return subtotalAndShipping + tax;
-    };
-
-
 
     $scope.setStateTaxRecord = function() {
         $scope.pickedTax = {
@@ -313,7 +185,7 @@ app.controller('CartController',
         }, function(stripeServiceError) {
             $scope.displayErrorModal(stripeServiceError);
         });
-    }
+    };
 
     $scope.displayErrorModal = function(errorMessage) {
         $uibModal.open({
@@ -331,7 +203,7 @@ app.controller('CartController',
 
     $scope.hide = function() {
         CartService.hide();
-    }
+    };
 
     $scope.emptyCart = function() {
         CartService.removeDiscount();
@@ -340,7 +212,7 @@ app.controller('CartController',
         //Update values
         $scope.getItems();
         $scope.getDiscountFromCookies();
-    }
+    };
 
     $scope.validate = function(index) {
 
@@ -470,12 +342,12 @@ app.controller('CartController',
                 return true;
             }
         }
-    }
+    };
 
     function validateEmail(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
-    }
+    };
 
     function extractCardDetails() {
         var card = {};
@@ -494,15 +366,12 @@ app.controller('CartController',
     }
 
     $scope.$on('update', function() {
-
         $scope.getItems();
-
     });
 
     $scope.$on('show', function() {
-
         $scope.show = true;
-
+        $scope.getCartCalculations();
     });
 
     $scope.$on('hide', function() {
@@ -514,7 +383,7 @@ app.controller('CartController',
         Discount.get($scope.enteredDiscountCode).then(function(discount) {
             $scope.discount = discount.data;
             CartService.setDiscount($scope.discount);
-            $scope.total();
+            $scope.getCartCalculations();
         }, function() {
             alert('Code seams to be not correct. There is no discount for this code.');
         });
@@ -522,5 +391,6 @@ app.controller('CartController',
 
     $scope.getItems();
     $scope.getDiscountFromCookies();
+    $scope.getCartCalculations();
 });
 

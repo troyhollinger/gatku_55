@@ -129,6 +129,9 @@ Route::post('/resend-order-email/{orderId}', [ 'uses' => 'ResendOrderEmailsContr
 Route::get('/display-order-email/admin/{orderId}', [ 'uses' => 'DisplayOrderNotificationEmailController@admin']);
 Route::get('/display-order-email/customer/{orderId}', [ 'uses' => 'DisplayOrderNotificationEmailController@customer']);
 
+//Cart calculations
+Route::post('cart-calculations', ['uses' => 'CartCalculationsController@getCalculations']);
+
 //Below code is to test mailable objects. Uncomment if necessary.
 //Route::get('/mailable', function (HomeSetting $homeSetting) {
 //

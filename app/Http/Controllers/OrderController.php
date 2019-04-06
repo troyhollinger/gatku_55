@@ -67,6 +67,7 @@ class OrderController extends BaseController {
 				return \Response::json(['message' => 'Sorry, something went wrong on our end. We are fixing it.'], 404);
 			}
 		}
+
 		$fname = $allData['form']['firstName'];
 		$email = $allData['form']['email'];
 		$country = $allData['form']['country'];

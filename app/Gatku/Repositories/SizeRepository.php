@@ -20,13 +20,13 @@ class SizeRepository {
      */
     public function get($id) {
         try {
-            $discount = Size::findOrFail($id);
+            $size = Size::findOrFail($id);
         } catch (\Exception $e) {
             Bugsnag::notifyException($e);
             Log::error($e);
             return false;
         }
-        return $discount;
+        return $size;
     }
 
 

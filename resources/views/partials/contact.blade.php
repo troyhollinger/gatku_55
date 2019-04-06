@@ -1,3 +1,4 @@
+
 <div class="contact-section">
 	<div class="contact-top"
 		 style="background-image: url('{!! $homeSetting['contact_image'] !!}');

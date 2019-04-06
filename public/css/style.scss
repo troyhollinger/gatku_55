@@ -372,10 +372,7 @@ a:hover {
 	position: relative;
 
 	@include breakpoint(1350px) {
-
 		width:90%;
-
-
 	}
 
 }
@@ -528,13 +525,43 @@ a:hover {
 }
 
 
+.video_container {
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+
+video {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+
+	@include breakpoint(small) {
+		transform: translateX(calc((100% - 100vw) / 2));
+		position: absolute;
+	}
+}
+
+
+
 .hero {
 	width:100%;
 	height:100%;
 	height:100vh;
 	background-size: cover;
 	background-position: center;
-	background-color: $gray;
+	//background-color: $gray;
 	text-align: center;
 	letter-spacing: -4px;
 
@@ -902,10 +929,19 @@ a:hover {
 }
 
 .contact-section {
+	//position: absolute;
 	width:100%;
 	height:100%;
 	width:100vw;
 	//height:60vh;
+
+	@include breakpoint(small) {
+		width:auto;
+		height: 350px;
+		background-position: center;
+		vertical-align: center;
+		background-color: white;
+	}
 
 	@include breakpoint(xsmall) {
 		height:auto;
@@ -1023,20 +1059,16 @@ a:hover {
 		width: 100%;
 
 		@include breakpoint(small) {
-
 			width:100%;
-
 		}
 
 		@include breakpoint(xsmall) {
-
 			padding: 25px 10px;
 			box-sizing: border-box;
 			position: static;
 			@include transform(translate(0,0));
 			left:0;
 			top:0;
-
 		}
 	}
 
