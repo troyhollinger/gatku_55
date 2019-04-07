@@ -538,6 +538,26 @@ a:hover {
 	bottom: 0;
 	width: 100%;
 	height: 100%;
+
+	//Keep this just in case to manipulate size of video
+	//@include breakpoint(small) {
+	//	//transform: translateX(calc((100% - 100vw) / 2));
+	//	background-position: right center;
+	//	top: -30%;
+	//	left: -180%;
+	//	right: 50%;
+	//	width: 360%;
+	//	height: 150%;
+	//	transform: scale(0.5);
+	//}
+}
+
+.small-screen-video-resize {
+	@include breakpoint(small) {
+		left: -205%;
+		top: -40%;
+		transform: scale(0.4);
+	}
 }
 
 video {
@@ -568,6 +588,29 @@ video {
 	@include breakpoint(small) {
 		background-position: 65% 50%;
 		letter-spacing: -2px;
+	}
+}
+
+.hero-video {
+	width:100%;
+	height:100%;
+	height:100vh;
+	background-size: cover;
+	background-position: center;
+	//background-color: $gray;
+	text-align: center;
+	letter-spacing: -4px;
+
+	@include breakpoint(small) {
+		height:70vh;
+		background-position: 65% 50%;
+		letter-spacing: -2px;
+	}
+}
+
+.slideshow {
+	@include breakpoint(small) {
+		top: 15%;
 	}
 }
 
