@@ -555,7 +555,7 @@ a:hover {
 .small-screen-video-resize {
 	@include breakpoint(small) {
 		left: -205%;
-		top: -60%;
+		top: -40%;
 		transform: scale(0.5);
 	}
 }
@@ -569,7 +569,6 @@ video {
 
 	@include breakpoint(small) {
 		transform: translateX(calc((100% - 100vw) / 2));
-		position: absolute;
 	}
 }
 
