@@ -25,12 +25,16 @@
 			<img class="scroller-image {!! $product->slug === 'budk' ? 'no-attached-state' : '' !!}"
 				 ng-if="attached" src="{!! $product->attachedImage !!}"
 				 ng-class="{'fit' : fullSize === false, 'visible' : attached }"
-				 ng-cloak loaded="poleScrollInit()">
+				 ng-cloak
+				 loaded="poleScrollInit()"
+			>
 		@endif
 		<img class="scroller-image {!! $product->slug === 'inshore-shrinker' ? 'shrinker' : '' !!} "
 			 ng-if="!attached" src="{!! $product->detachedImage !!}"
 			 ng-class="{'fit' : fullSize === false, 'visible' : attached === false }"
-			 ng-cloak loaded="poleScrollInit()">
+			 ng-cloak
+             loaded="poleScrollInit()"
+		>
 	@endif
 
 </div>

@@ -8,6 +8,7 @@
         $scope.productAdded = false;
         $scope.productAddedText = "Add to Cart";
         $scope.product = {};
+        $scope.autoscroll = true;
 
         const wmdc = 'water-mark-display-count';
         const wmhp = 'water-mark-hide-period';
@@ -29,7 +30,7 @@
         $scope.init = function () {
             $scope.getProduct();
             $scope.manageCookiesForScrollWatermark();
-        }
+        };
 
         $scope.getProduct = function () {
             Product.get(productId).then(function (response) {
@@ -40,7 +41,7 @@
                 $exceptionHandler(JSON.stringify(error));
                 AlertService.broadcast('Sorry, there is an error. Your page may have not rendered correctly.', 'error');
             });
-        }
+        };
 
         $scope.addToCart = function () {
             if ($scope.product.sizeable !== "0" && $scope.product.sizeable) {
@@ -68,7 +69,7 @@
             $scope.productAddedTextChange();
 
             reset();
-        }
+        };
 
         $scope.openCart = function () {
             CartService.show();
@@ -83,7 +84,15 @@
         };
 
         $scope.poleScrollInit = function () {
+
             getPoleScrollInit();
+
+            if ($scope.autoscroll) {
+                $scope.autoscroll = false;
+                $timeout(function() {
+                    PoleScroll.scrollAcross(5000)
+                }, 3000); //Call function after 3 sec.
+            }
         };
 
         $scope.goFullSize = function () {
