@@ -22,18 +22,26 @@ class QuantityReportController extends BaseController {
         parent::__construct();
 	}
 
-	/**
-	 * get a listing of the resource.
-	 * GET /order
-	 *
-	 * @return Response
-	 */
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
 	public function index() {
 	    //Get dates form url path
-        $start = Input::get("start");
-        $end = Input::get("end");
+        $startInput = Input::get("start");
+        $endInput = Input::get("end");
 
-        $report = $this->orderRepository->quantityReport($start, $end);
+        if ($startInput) {
+            $start = new \DateTime($startInput);
+            $startInput = $start->format('Y-m-d');
+        }
+
+        if ($startInput) {
+            $end = new \DateTime($endInput);
+            $endInput = $end->format('Y-m-d');
+        }
+
+        $report = $this->orderRepository->quantityReport($startInput, $endInput);
 		return \Response::json($report, 200);
 	}
 }
