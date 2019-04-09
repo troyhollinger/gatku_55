@@ -583,8 +583,8 @@ class OrderRepository {
 
         //Change if start and end dates passed
         if ($start && $end) {
-            $oiPeriod = " AND oi.created_at BETWEEN :oi_start_date AND :oi_end_date";
-            $oiaPeriod = " AND oia.created_at BETWEEN :oia_start_date AND :oia_end_date";
+            $oiPeriod = " AND date(oi.created_at) BETWEEN :oi_start_date AND :oi_end_date";
+            $oiaPeriod = " AND date(oia.created_at) BETWEEN :oia_start_date AND :oia_end_date";
         }
 
         $sql = "SELECT product_id,
