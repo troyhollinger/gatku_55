@@ -611,7 +611,7 @@ video {
 
 .slideshow {
 	@include breakpoint(small) {
-		//top: 15%;
+		top: -10%;
 	}
 }
 
