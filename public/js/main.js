@@ -175,15 +175,17 @@ var PoleScroll = {
 
 	},
 
-	scrollAcross : function() {
+	scrollAcross : function(definedScrollSpeed) {
 		var scroller = $(".scroller");
 		var width = $(".scroller-image").width();
 		var left = scroller.scrollLeft();
+		var defaultScrollSpeed = 2500;
+		var scrollSpeed = definedScrollSpeed || defaultScrollSpeed;
 
 		if (left < width / 2) {
-			scroller.stop().animate({ scrollLeft: width }, 2500);
+			scroller.stop().animate({ scrollLeft: width }, scrollSpeed);
 		} else {
-			scroller.stop().animate({ scrollLeft: 0 }, 2500);
+			scroller.stop().animate({ scrollLeft: 0 }, scrollSpeed);
 		}
 	},
 
