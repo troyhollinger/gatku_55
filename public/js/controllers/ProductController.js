@@ -91,7 +91,7 @@
                 $scope.autoscroll = false;
                 $timeout(function() {
                     PoleScroll.scrollAcross(5000)
-                }, 3000); //Call function after 3 sec.
+                }, 2000); //Call function after 2 sec.
             }
         };
 
