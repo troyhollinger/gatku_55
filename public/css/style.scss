@@ -637,8 +637,12 @@ video {
 	position: relative;
 	padding:50px 0px;
 
+	@include breakpoint(small) {
+		padding:0px 0;
+	}
+
 	@include breakpoint(xsmall) {
-		padding:50px 0;
+		padding:0px 0;
 	}
 }
 
