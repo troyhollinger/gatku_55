@@ -524,7 +524,6 @@ a:hover {
 	}
 }
 
-
 .video_container {
 	display: block;
 	position: absolute;
@@ -534,36 +533,31 @@ a:hover {
 	background-size: cover;
 	top: 0;
 	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
 
-	background-color: cadetblue;
+	@media screen and (max-width: 480px) {
+		width: 100%;
+		height: 75%;
+	}
 
-	//Keep this just in case to manipulate size of video
-	//@include breakpoint(small) {
-	//	//transform: translateX(calc((100% - 100vw) / 2));
-	//	background-position: right center;
-	//	top: -30%;
-	//	left: -180%;
-	//	right: 50%;
-	//	width: 360%;
-	//	height: 150%;
-	//	transform: scale(0.5);
-	//}
-
-	@include breakpoint(small) {
-		height: 80%;
-		height: 80vh;
+	@media screen and (min-width: 480px) {
+		width: 100%;
+		height: 100%;
 	}
 }
 
 .small-screen-video-resize {
-	@include breakpoint(small) {
-		left: -205%;
-		top: -50%;
-		transform: scale(0.55);
+	overflow: hidden;
+
+	@media screen and (max-width: 480px) {
+		right: 0;
+		bottom: 0;
+		height: 100% !important;
+	}
+
+	@media screen and (min-width: 480px) {
+		right: 0;
+		bottom: 0;
+		width: 100% !important;
 	}
 }
 
@@ -578,8 +572,6 @@ video {
 		transform: translateX(calc((100% - 100vw) / 2));
 	}
 }
-
-
 
 .hero {
 	width:100%;
