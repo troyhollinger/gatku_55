@@ -10,31 +10,31 @@ Producing the highest quality polespears, heads, and accessories. Locally built 
 
 @section('content')
 
+<!-- Background video section -->
+@if ($homeSetting['display_video'])
+<div class="hero-video">
+	<div class="video_container">
+		<video autoplay muted loop playsinline class="small-screen-video-resize">
+			<source src="/videos/default_site_video.mp4" type="video/mp4">
+		</video>
+	</div>
+@else
 <div class="hero gatku-home-banner">
-
-	<!-- Background video section -->
-	@if ($homeSetting['display_video'])
-		<div class="video_container">
-			<video autoplay muted loop playsinline>
-				<source src="/videos/default_site_video.mp4" type="video/mp4">
-			</video>
-		</div>
-	@else
-		<style>
-			@media only screen and (max-width: 480px) {
-				.gatku-home-banner{
-					position: relative;
-					background-image:url({!! $homeSetting['mobile_image'] !!});
-				}
+	<style>
+		@media only screen and (max-width: 480px) {
+			.gatku-home-banner{
+				position: relative;
+				background-image:url({!! $homeSetting['mobile_image'] !!});
 			}
-			@media only screen and (min-width: 480px) {
-				.gatku-home-banner{
-					background-image:url({!! $homeSetting['image'] !!});
-				}
+		}
+		@media only screen and (min-width: 480px) {
+			.gatku-home-banner{
+				background-image:url({!! $homeSetting['image'] !!});
 			}
-		</style>
-	@endif
-	<!-- Background video section - end -->
+		}
+	</style>
+@endif
+<!-- Background video section - end -->
 
 	<div class="slideshow">
 		@if ( trim($homeSetting['slideshow_text_1']) )

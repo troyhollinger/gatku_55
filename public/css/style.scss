@@ -524,7 +524,6 @@ a:hover {
 	}
 }
 
-
 .video_container {
 	display: block;
 	position: absolute;
@@ -534,10 +533,33 @@ a:hover {
 	background-size: cover;
 	top: 0;
 	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
+	//background-color: $gray;
+
+	@media screen and (max-width: 480px) {
+		width: 100% !important;
+		height: 75% !important;
+	}
+
+	@media screen and (min-width: 480px) {
+		width: 100% !important;
+		height: 100% !important;
+	}
+}
+
+.small-screen-video-resize {
+	overflow: hidden;
+
+	@media screen and (max-width: 480px) {
+		right: 0;
+		bottom: 0;
+		height: 100% !important;
+	}
+
+	@media screen and (min-width: 480px) {
+		right: 0;
+		bottom: 0;
+		width: 100% !important;
+	}
 }
 
 video {
@@ -549,11 +571,8 @@ video {
 
 	@include breakpoint(small) {
 		transform: translateX(calc((100% - 100vw) / 2));
-		position: absolute;
 	}
 }
-
-
 
 .hero {
 	width:100%;
@@ -568,6 +587,31 @@ video {
 	@include breakpoint(small) {
 		background-position: 65% 50%;
 		letter-spacing: -2px;
+	}
+}
+
+
+.hero-video {
+	width:100%;
+	height:100%;
+	height:100vh;
+	background-size: cover;
+	background-position: center;
+	//background-color: $gray;
+	text-align: center;
+	letter-spacing: -4px;
+
+	@include breakpoint(small) {
+		height: 80%;
+		height: 75vh;
+		background-position: 65% 50%;
+		letter-spacing: -2px;
+	}
+}
+
+.slideshow {
+	@include breakpoint(small) {
+		top: -3%;
 	}
 }
 
@@ -595,8 +639,8 @@ video {
 	position: relative;
 	padding:50px 0px;
 
-	@include breakpoint(xsmall) {
-		padding:50px 0;
+	@include breakpoint(small) {
+		padding:0px 0;
 	}
 }
 

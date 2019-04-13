@@ -2,8 +2,8 @@
 
 # Run this commands on gatku container start:
 echo "Linking nginx and php config files...";
-ln -s /gatku/dev_config/gatku55-nginx.conf /etc/nginx/sites-enabled/
-ln -s /gatku/dev_config/gatku55-phpfpm.conf /etc/php/7.2/fpm/pool.d/
+ln -f -s /gatku/dev_config/gatku55-nginx.conf /etc/nginx/sites-enabled/
+ln -f -s /gatku/dev_config/gatku55-phpfpm.conf /etc/php/7.2/fpm/pool.d/
 chmod 777 -R /gatku/storage/
 
 echo "Copy xdebug.ini to: /etc/php/7.2/mods-available/"
