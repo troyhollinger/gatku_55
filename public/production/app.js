@@ -14265,6 +14265,7 @@ app.controller('MobileNavigationController', ['$scope', 'Product', 'NavigationSe
         $scope.productAdded = false;
         $scope.productAddedText = "Add to Cart";
         $scope.product = {};
+        $scope.autoscroll = true;
 
         const wmdc = 'water-mark-display-count';
         const wmhp = 'water-mark-hide-period';
@@ -14286,7 +14287,7 @@ app.controller('MobileNavigationController', ['$scope', 'Product', 'NavigationSe
         $scope.init = function () {
             $scope.getProduct();
             $scope.manageCookiesForScrollWatermark();
-        }
+        };
 
         $scope.getProduct = function () {
             Product.get(productId).then(function (response) {
@@ -14297,7 +14298,7 @@ app.controller('MobileNavigationController', ['$scope', 'Product', 'NavigationSe
                 $exceptionHandler(JSON.stringify(error));
                 AlertService.broadcast('Sorry, there is an error. Your page may have not rendered correctly.', 'error');
             });
-        }
+        };
 
         $scope.addToCart = function () {
             if ($scope.product.sizeable !== "0" && $scope.product.sizeable) {
@@ -14325,7 +14326,7 @@ app.controller('MobileNavigationController', ['$scope', 'Product', 'NavigationSe
             $scope.productAddedTextChange();
 
             reset();
-        }
+        };
 
         $scope.openCart = function () {
             CartService.show();
@@ -14340,7 +14341,15 @@ app.controller('MobileNavigationController', ['$scope', 'Product', 'NavigationSe
         };
 
         $scope.poleScrollInit = function () {
+
             getPoleScrollInit();
+
+            if ($scope.autoscroll) {
+                $scope.autoscroll = false;
+                $timeout(function() {
+                    PoleScroll.scrollAcross(5000)
+                }, 2000); //Call function after 2 sec.
+            }
         };
 
         $scope.goFullSize = function () {
@@ -16160,15 +16169,17 @@ var PoleScroll = {
 
 	},
 
-	scrollAcross : function() {
+	scrollAcross : function(definedScrollSpeed) {
 		var scroller = $(".scroller");
 		var width = $(".scroller-image").width();
 		var left = scroller.scrollLeft();
+		var defaultScrollSpeed = 2500;
+		var scrollSpeed = definedScrollSpeed || defaultScrollSpeed;
 
 		if (left < width / 2) {
-			scroller.stop().animate({ scrollLeft: width }, 2500);
+			scroller.stop().animate({ scrollLeft: width }, scrollSpeed);
 		} else {
-			scroller.stop().animate({ scrollLeft: 0 }, 2500);
+			scroller.stop().animate({ scrollLeft: 0 }, scrollSpeed);
 		}
 	},
 
