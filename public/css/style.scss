@@ -601,8 +601,8 @@ video {
 	letter-spacing: -4px;
 
 	@include breakpoint(small) {
-		//height: 80%;
-		height: 100vh;
+		height: 80%;
+		height: 75vh;
 		background-position: 65% 50%;
 		letter-spacing: -2px;
 	}
@@ -639,11 +639,7 @@ video {
 	padding:50px 0px;
 
 	@include breakpoint(small) {
-		padding:10px 0;
-	}
-
-	@include breakpoint(xsmall) {
-		padding:10px 0;
+		padding:0px 0;
 	}
 }
 
