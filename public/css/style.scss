@@ -638,11 +638,11 @@ video {
 	padding:50px 0px;
 
 	@include breakpoint(small) {
-		padding:20px 0;
+		padding:40px 0;
 	}
 
 	@include breakpoint(xsmall) {
-		padding:20px 0;
+		padding:40px 0;
 	}
 }
 
