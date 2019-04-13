@@ -539,6 +539,8 @@ a:hover {
 	width: 100%;
 	height: 100%;
 
+	background-color: cadetblue;
+
 	//Keep this just in case to manipulate size of video
 	//@include breakpoint(small) {
 	//	//transform: translateX(calc((100% - 100vw) / 2));
@@ -550,6 +552,11 @@ a:hover {
 	//	height: 150%;
 	//	transform: scale(0.5);
 	//}
+
+	@include breakpoint(small) {
+		height: 80%;
+		height: 80vh;
+	}
 }
 
 .small-screen-video-resize {
@@ -590,13 +597,14 @@ video {
 	}
 }
 
+
 .hero-video {
 	width:100%;
 	height:100%;
 	height:100vh;
 	background-size: cover;
 	background-position: center;
-	//background-color: $gray;
+	background-color: $gray;
 	text-align: center;
 	letter-spacing: -4px;
 
