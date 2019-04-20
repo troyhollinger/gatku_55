@@ -896,7 +896,7 @@ video {
 	line-height: 1;
 
 	@include breakpoint(medium) {
-		//top: 60%;
+		top: 60%;
 		font-size: 4rem;
 		width:75%;
 	}
