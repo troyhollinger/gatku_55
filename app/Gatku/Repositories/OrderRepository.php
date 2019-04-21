@@ -587,32 +587,43 @@ class OrderRepository {
             $oiaPeriod = " AND date(oia.created_at) BETWEEN :oia_start_date AND :oia_end_date";
         }
 
-        $sql = "SELECT product_id,
-                       product_name,
-                       SUM(order_item_quantity) AS order_item_quantity,
-                       SUM(order_item_addons_quantity) AS order_item_addons_quantity,
-                       (SUM(order_item_quantity) + SUM(order_item_addons_quantity)) AS total_quantity
+        $sql = "SELECT tt.product_id,
+                       tt.product_name,
+                       tt.order_item_quantity,
+                       (tt.order_item_quantity * pp.price) AS order_item_dollar_amount,
+                       tt.order_item_addons_quantity,
+                       (tt.order_item_addons_quantity * pp.price) AS order_item_addons_dollar_amount,
+                       tt.total_quantity,
+                       (tt.total_quantity * pp.price) AS total_quentity_dollar_amount
                 FROM (
-                    SELECT  p.id AS product_id,
-                            p.name AS product_name,
-                            IFNULL(SUM(oi.quantity), 0) AS order_item_quantity,
-                            0 AS order_item_addons_quantity
-                    FROM products p
-                        LEFT JOIN order_items oi ON oi.productId = p.id $oiPeriod  
-                    GROUP BY p.id
-
-                    UNION ALL
-
-                    SELECT  p.id AS product_id,
-                            p.name AS product_name,
-                            0 AS order_item_quantity,
-                            IFNULL(SUM(oia.quantity), 0) AS  order_item_addons_quantity
-                    FROM products p
-                        LEFT JOIN order_item_addons oia ON oia.productId = p.id $oiaPeriod 
-                    GROUP BY p.id
-                ) t
-                GROUP BY t.product_id, t.product_name
-                ORDER BY t.product_name
+                    SELECT product_id,
+                           product_name,
+                           SUM(order_item_quantity) AS order_item_quantity,
+                           SUM(order_item_addons_quantity) AS order_item_addons_quantity,
+                           (SUM(order_item_quantity) + SUM(order_item_addons_quantity)) AS total_quantity
+                    FROM (
+                        SELECT  p.id AS product_id,
+                                p.name AS product_name,
+                                IFNULL(SUM(oi.quantity), 0) AS order_item_quantity,
+                                0 AS order_item_addons_quantity
+                        FROM products p
+                            LEFT JOIN order_items oi ON oi.productId = p.id $oiPeriod  
+                        GROUP BY p.id
+    
+                        UNION ALL
+    
+                        SELECT  p.id AS product_id,
+                                p.name AS product_name,
+                                0 AS order_item_quantity,
+                                IFNULL(SUM(oia.quantity), 0) AS  order_item_addons_quantity
+                        FROM products p
+                            LEFT JOIN order_item_addons oia ON oia.productId = p.id $oiaPeriod 
+                        GROUP BY p.id
+                    ) t
+                    GROUP BY t.product_id, t.product_name                
+                ) tt                       
+                INNER JOIN products pp ON pp.id = tt.product_id
+                ORDER BY tt.product_name
         ";
 
         //I don't know why byt every single param must be bind separate.
