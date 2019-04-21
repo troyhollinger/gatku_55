@@ -41,21 +41,40 @@
             <tr>
                 <th><b>Product Name</b></th>
                 <th><b>Order Item Quantity</b></th>
+                <th><b>OIQ in $ [*]</b></th>
                 <th><b>Order Item Addons Quantity</b></th>
+                <th><b>OIAQ in $ [*]</b></th>
                 <th><b>Total Quantity</b></th>
+                <th><b>TQ in $ [*]</b></th>
             </tr>
         </thead>
 
         <tbody>
             <tr ng-repeat="row in $ctrl.report">
-                <td>{{row.product_name}}</td>
-                <td style="text-align: right;">{{row.order_item_quantity}}</td>
-                <td style="text-align: right;">{{row.order_item_addons_quantity}}</td>
-                <td style="text-align: right;">{{row.total_quantity}}</td>
-            </tr>
-            <tr ng-show="!$ctrl.report">
-                <td colspan="4">No data for report.</td>
+                <td>{{ row.product_name }}</td>
+                <td style="text-align: right;">{{ row.order_item_quantity }}</td>
+                <td style="text-align: right;">{{ row.order_item_dollar_amount | money | currency }}</td>
+                <td style="text-align: right;">{{ row.order_item_addons_quantity }}</td>
+                <td style="text-align: right;">{{ row.order_item_addons_dollar_amount | money | currency }}</td>
+                <td style="text-align: right;">{{ row.total_quantity }}</td>
+                <td style="text-align: right;">{{ row.total_quentity_dollar_amount | money | currency }}</td>
             </tr>
         </tbody>
+
+        <tfoot>
+            <tr ng-show="$ctrl.report">
+                <td><b>$ Total:</b></td>
+                <td style="text-align: right;"></td>
+                <td style="text-align: right;"><b>{{ $ctrl.getTotalsFor('order_item_dollar_amount') | money | currency }}</b></td>
+                <td style="text-align: right;"></td>
+                <td style="text-align: right;"><b>{{ $ctrl.getTotalsFor('order_item_addons_dollar_amount') | money | currency }}</b></td>
+                <td style="text-align: right;"></td>
+                <td style="text-align: right;"><b>{{ $ctrl.getTotalsFor('total_quentity_dollar_amount') | money | currency }}</b></td>
+            </tr>
+            <tr ng-show="!$ctrl.report">
+                <td colspan="7">No data for report.</td>
+            </tr>
+        </tfoot>
     </table>
+    <span class="badge badge-info">[*] - $ value in Current Product Prices</span>
 </div>
