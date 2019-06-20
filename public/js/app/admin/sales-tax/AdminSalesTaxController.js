@@ -41,11 +41,21 @@
             $ctrl.salesTaxes.push(data);
         };
 
+        var checkIfValueMatchPattern = function(value) {
+            var result = value.state.match(/^[a-zA-Z0-9\s]*$/g);
+            return result;
+        };
+
         $ctrl.salesTaxUpdate = function (index) {
 
             $ctrl.salesTaxes[index].changed = false;
 
             var data = $ctrl.salesTaxes[index];
+
+            if (!checkIfValueMatchPattern(data)) {
+                alert('State name incorrect. Allowed only: [a-zA-Z0-9 space]. Please fix state name and save again.');
+                return;
+            }
 
             //Check if state is already. If in use then don't allow to store data.
             //State is unique field and primary key.
