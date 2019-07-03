@@ -36,6 +36,19 @@
         </div>
     </div>
 
+    <!-- Product Template -->
+    <hr>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Product Template:</label>
+        <div class="col-sm-9">
+            <select class="form-control col-sm-4"
+                    ng-options="key as value for (key, value) in $ctrl.templates"
+                    ng-model="$ctrl.newProduct.template">
+            </select>
+        </div>
+    </div>
+
     <!-- Name -->
     <hr>
 

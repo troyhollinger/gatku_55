@@ -134,9 +134,6 @@ class ProductController extends BaseController
             $shippingCountries = 'USA + AU';
         }
 
-        //@TODO Assign template for product. In future fetch this value form database.
-        $product->template = 'product_template_1';
-
         return \View::make('pages.product', [
             'product' => $product,
             'shippingCountries' => $shippingCountries

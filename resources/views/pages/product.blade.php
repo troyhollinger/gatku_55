@@ -12,7 +12,7 @@
 
 @section('content')
 
-@include('partials.' . $product->template )
+@include('partials.product_' . $product->template )
 
 <div class="home-container product-store-section" id="store">
 

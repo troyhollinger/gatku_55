@@ -306,6 +306,8 @@ class ProductRepository implements ProductRepositoryInterface {
 
         $product->free_shipping_html = (isset($data['free_shipping_html'])) ? $data['free_shipping_html'] : '';
 
+        $product->template = (isset($data['template'])) ? $data['template'] : 'template_1';
+
 		return $product;
 	}
 
