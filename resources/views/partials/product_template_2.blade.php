@@ -1,33 +1,5 @@
 
-@if($product->type->slug != 'apparel' && $product->type->slug != 'glass')
-
-	@if($product->attachedImage || $product->detachedImage)
-
-		<div ng-cloak  class="scroll-watermark-like invisible" ng-class="{'invisible' : displayScrollWaterMark === false || displayWaterMark === false, 'visible' : displayScrollWaterMark === true && displayWaterMark === true }">
-			<image class="scroll-watermark-like-image-blinking" src="../img/scroll-arrows.png"></image>
-		</div>
-		<div class="scroller {!! $product->slug === 'budk' ? 'knife-scroller no-attached-state' : '' !!} {!! $product->slug === 'bands' ? 'band-scroller' : '' !!} {!! $product->slug === 'g-string' || $product->slug === 'offshore-striker' || $product->slug === 'black g-string' ? 'g-string-scroller' : '' !!}">
-
-		@if($product->attachedImage)
-			<img class="scroller-image {!! $product->slug === 'budk' ? 'no-attached-state' : '' !!}"
-				 ng-if="attached" src="{!! $product->attachedImage !!}"
-				 ng-class="{'fit' : fullSize === false, 'visible' : attached }"
-				 ng-cloak
-				 loaded="poleScrollInit()"
-			>
-		@endif
-		<img class="scroller-image {!! $product->slug === 'inshore-shrinker' ? 'shrinker' : '' !!} "
-			 ng-if="!attached" src="{!! $product->detachedImage !!}"
-			 ng-class="{'fit' : fullSize === false, 'visible' : attached === false }"
-			 ng-cloak
-             loaded="poleScrollInit()"
-		>
-	@endif
-
-</div>
-@endif
-
-<div class="container {!! $product->type->slug === 'apparel' ? 'apparel-height' : ''!!} {!! $product->type->slug === 'glass' ? 'glass-height' : '' !!}">
+<div style="background-color: #0c5460; margin-top: 75px;"  class="container {!! $product->type->slug === 'apparel' ? 'apparel-height' : ''!!} {!! $product->type->slug === 'glass' ? 'glass-height' : '' !!}">
 
 	@if($product->type->slug === 'apparel')
 	<div class="apparel-container">
@@ -43,24 +15,16 @@
 	</div>
 	@endif
 
-	<div class="product-column-left {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
-	@if($product->attachedImage && $product->detachedImage)
-		<div class="mobile-take-pole">
-			<div class="pole-view-actions">
+	<div style="background-color: #0b58a2;" class="product-column-left {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
 
-			<p class="attachment-button faded" ng-click="attached = !attached; scrollAcross();">
-				<span ng-show="attached">@if($product->slug === 'g-string' || $product->slug === 'black g-string') OFF POLE @else TAKE POLE APART @endif</span>
-				<span ng-show="attached === false">@if($product->slug === 'g-string'  || $product->slug === 'black g-string') ON POLE @else PUT POLE TOGETHER @endif</span>
-			</p>
+		<div class="template-2-images-wrapper">
+			<div class="template-2-big-image">
 
+			</div>
+			<div class="template-2-small-image">
 
-			<div class="zoom-out-button zoom-button" ng-class="{'selected' : fullSize === false}" ng-click="fullSize = false; poleScrollInit()"></div>
-			<div class="zoom-in-button zoom-button" ng-class="{'selected' : fullSize === true}" ng-click="fullSize = true; goFullSize();"></div>
-
+			</div>
 		</div>
-		<div class="clear"></div>
-		</div>
-		@endif
 
 		<div class="product-title-nowrap">
 			<!-- This is part responsible for display product name for desktop -->
@@ -132,22 +96,6 @@
 	</div>
 
 	<div class="product-column-right {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
-		<!-- Increase the width of this element to increase margin between children -->
-		@if($product->attachedImage && $product->detachedImage)
-		<div class="pole-view-actions">
-
-			<p class="attachment-button faded" ng-click="attached = !attached; scrollAcross();">
-				<span ng-show="attached">@if($product->slug === 'g-string' || $product->slug === 'black g-string') OFF POLE @else TAKE POLE APART @endif</span>
-				<span ng-show="attached === false">@if($product->slug === 'g-string' || $product->slug === 'black g-string') ON POLE @else PUT POLE TOGETHER @endif</span>
-			</p>
-
-
-			<div class="zoom-out-button zoom-button" ng-class="{'selected' : fullSize === false}" ng-click="fullSize = false; poleScrollInit()"></div>
-			<div class="zoom-in-button zoom-button" ng-class="{'selected' : fullSize === true}" ng-click="fullSize = true; goFullSize();"></div>
-
-		</div>
-		<div class="clear"></div>
-		@endif
 
 		<br>
 
