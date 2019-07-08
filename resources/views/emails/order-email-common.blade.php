@@ -187,15 +187,10 @@
                                 }
 
                                 foreach($item['addons'] as $addon) {
-
                                     if ($addon['product']['slug'] === 'inshore-shrinker') {
-
                                         $displayShrinker = false;
-
                                     }
-
                                 }
-
                             }
 
                             ?>
@@ -255,7 +250,8 @@
 
                                     <a href="{{ $homeSetting['hostname'] }}">
                                         <img style="margin-left:0px;"
-                                             src="{{ $emailSettings['email_small_logo_url'] }}">
+                                             src="{{ asset($emailSettings['email_small_logo_url']) }}">
+
                                     </a>
                                 </td>
                                 <!-- INSERT SOCIAL MEDIA END -->
