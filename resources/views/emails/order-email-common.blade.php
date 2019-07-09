@@ -56,7 +56,7 @@
 
 
                             @foreach($order['items'] as $i => $item)
-                                <div class="product" style="{{ $i == 0 ? 'padding-top:20px;' : 'padding-top:30px; border-top:1px solid black; ' }}padding-bottom:0px;border-bottom:1px solid black;height:290px; overflow:hidden;">
+                                <div class="product" style="{{ $i == 0 ? 'padding-top:20px;' : 'padding-top:30px; border-top:1px solid black; ' }}padding-bottom:0px;border-bottom:1px solid black;">
                                     <table style="width:100%;">
                                         <tr>
                                             <td class="product-image-cell">
