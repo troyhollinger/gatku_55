@@ -143,6 +143,7 @@ class OrderRepository {
             /** @var SalesTax $salesTax */
             $salesTax = $this->salesTaxRepository->get($customer->state);
 
+
             //Create and store Order
             $order = new Order;
             $order = $this->assignFields($order, $customer, $input['form'], $salesTax);
@@ -234,7 +235,8 @@ class OrderRepository {
         $order->order_sum = (isset($input['order_sum'])) ? $input['order_sum'] * 100 : 0;
         $order->shipping_cost = (isset($input['shipping_cost'])) ? $input['shipping_cost'] * 100 : 0;
         $order->total_sum = (isset($input['total_sum'])) ? $input['total_sum'] * 100 : 0;
-        $order->sales_tax = $salesTax->tax;
+        //This is hack for State/Province not related to sales_tax table then $salesTax->tax is null;
+        $order->sales_tax = $salesTax->tax ? $salesTax->tax : 0;
         $order->tax_amount = (isset($input['tax_amount'])) ? $input['tax_amount'] * 100 : 0;
 
         return $order;

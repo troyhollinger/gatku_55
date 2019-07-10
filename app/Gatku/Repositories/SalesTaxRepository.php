@@ -20,12 +20,20 @@ class SalesTaxRepository {
      */
     public function get($state) {
         try {
-            $salesTax = SalesTax::findOrFail($state);
+            //$salesTax = SalesTax::findOrFail($state);
+            $salesTax = SalesTax::find($state);
         } catch (\Exception $e) {
             Bugsnag::notifyException($e);
             Log::error($e);
             return false;
         }
+
+        //This is hack for State/Province not related to sales_tax table
+        if (!$salesTax) {
+            $salesTax = new SalesTax();
+            $salesTax->tax = 0;
+        }
+
         return $salesTax;
     }
 

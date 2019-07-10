@@ -191,13 +191,28 @@
 			<label for="city">City</label>
 			<input type="text" name="city" id="city" ng-model="form.city">
 
+			<br>
 
-			<label for="state">State / Province</label>
+			<input  type="checkbox"
+					style="margin-left: -80px;"
+					class="form-check-input"
+					name="sellOutOfUSA"
+					id="sellOutOfUSA"
+					ng-model="sellOutOfUSA"
+					ng-click="sellOutOfUSA = !sellOutOfUSA">
+			<label for="sellOutOfUSA" class="form-check-label">Sell out of USA:</label>
 
-			<select ng-model="form.state"
+			<br>
+
+     		<label for="state">State / Province</label>
+
+			<select ng-show="!sellOutOfUSA"
+					ng-model="form.state"
 					ng-options="tax.state as tax.state for tax in taxes"
 					ng-change="setStateTaxRecord()">
 			</select>
+
+            <input ng-show="sellOutOfUSA" type="text" name="state" id="state" ng-model="form.state">
 
 			<label for="zip">Zip Code</label>
 			<input type="text" name="zip" id="zip" ng-model="form.zip">
