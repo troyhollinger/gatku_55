@@ -196,6 +196,7 @@
 			<div class="checkout-form">
 				<div class="billing-label">
 					<input  type="checkbox"
+							style="width: 320px;"
 							class="form-check-input"
 							name="sellOutOfUSA"
 							id="sellOutOfUSA"
