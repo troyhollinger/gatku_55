@@ -194,7 +194,6 @@
 			<br>
 
 			<input  type="checkbox"
-					style="margin-left: -80px;"
 					class="form-check-input"
 					name="sellOutOfUSA"
 					id="sellOutOfUSA"
