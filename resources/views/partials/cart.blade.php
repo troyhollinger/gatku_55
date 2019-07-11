@@ -196,13 +196,12 @@
 			<div class="checkout-form">
 				<div class="billing-label">
 					<input  type="checkbox"
-							style="width: 320px;"
-							class="form-check-input"
+							style="width: 5%; float: left;"
 							name="sellOutOfUSA"
 							id="sellOutOfUSA"
 							ng-model="sellOutOfUSA"
 							ng-click="sellOutOfUSA = !sellOutOfUSA">
-					<label for="sellOutOfUSA" class="form-check-label">Sell out of USA:</label>
+					<label for="sellOutOfUSA">&nbsp;Sell out of USA</label>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -292,7 +291,6 @@
 		</div>
 		<div class="checkout-form">
 			<div class="billing-label">
-
 				<input style="width: 5%; float: left;" id="billing-addr" type="checkbox" name="show-billing" ng-model="card.isBillingSame" value="billing-same"><label>Billing Address same as Shipping Address</label>
 			</div>
 			<div class="clear"></div>
