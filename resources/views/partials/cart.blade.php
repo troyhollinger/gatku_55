@@ -193,13 +193,13 @@
 
 			<br>
 
+			<label for="sellOutOfUSA" class="form-check-label">Sell out of USA:</label>
 			<input  type="checkbox"
 					class="form-check-input"
 					name="sellOutOfUSA"
 					id="sellOutOfUSA"
 					ng-model="sellOutOfUSA"
 					ng-click="sellOutOfUSA = !sellOutOfUSA">
-			<label for="sellOutOfUSA" class="form-check-label">Sell out of USA:</label>
 
 			<br>
 
