@@ -4,7 +4,6 @@
 
 </div>
 
-<form>
 <div class="cart slide" ng-controller="CartController" ng-show="show" ng-cloak>
 
 	<h2 ng-hide="items.length">Cart</h2>
@@ -201,7 +200,7 @@
 						id="sellOutOfUSA"
 						ng-model="sellOutOfUSA"
 						ng-click="sellOutOfUSA = !sellOutOfUSA">
-				<label for="sellOutOfUSA" class="form-check-label">Sell out of USA:</label>
+				<label for="sellOutOfUSA" class="form-check-label">Sell out of USA</label>
 			</div>
 
 			<br>
@@ -454,4 +453,3 @@
 
 
 </div>
-</form>
