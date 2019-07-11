@@ -27,7 +27,7 @@
 
 		<br>
 
-		<div class="button success-bg" ng-click="pay()">Pay ${{ $request->price / 100 }} Shipping</div>
+		<button class="btn btn-success" ng-disabled="processing" ng-click="pay()">Pay ${{ $request->price / 100 }} Shipping</button>
 
 	</form>
 
