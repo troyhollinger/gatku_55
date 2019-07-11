@@ -3,6 +3,7 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 
 	$scope.card = {};
 	$scope.success = false;
+	$scope.processing = false;
 
 	if (typeof(shippingRequestId) !== undefined) {
 		$scope.shippingRequestId = shippingRequestId;
@@ -21,6 +22,8 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 
 	$scope.pay = function() {
 
+		$scope.processing = true;
+
 		var card = extractCardDetails();
 
 		AlertService.broadcast('Processing...', 'info');
@@ -31,7 +34,7 @@ app.controller('ShippingRequestPaymentController', ['$scope', 'AlertService', 'S
 				shippingRequestId : $scope.shippingRequestId,
 				token : token
 			};
-		
+
 			ShippingRequest.pay(data).then(function() {
 				AlertService.broadcast('Success!', 'success');
 				$scope.success = true;
