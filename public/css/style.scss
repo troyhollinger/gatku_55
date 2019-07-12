@@ -4750,7 +4750,7 @@ hover-card {
 	    span{
 	    	text-decoration: underline;
 	    }
-	      @include breakpoint(small) {
+	    @include breakpoint(small) {
 	    	 font-size: 18px;
 	    }
 	}
@@ -4779,12 +4779,30 @@ hover-card {
 	width: 100%;
 	height: 700px;
 	padding: 5px;
+
+	@include breakpoint(small) {
+		height: 600px;
+	}
+
+	@include breakpoint(xsmall) {
+		height: 500px;
+	}
 }
 
 .template-2-big-image {
 	width: 480px;
 	height: 480px;
 	margin: 5px;
+
+	@include breakpoint(small) {
+		width: 420px;
+		height: 420px;
+	}
+
+	@include breakpoint(xsmall) {
+		width: 320px;
+		height: 320px;
+	}
 }
 
 .template-2-small-image {
@@ -4792,6 +4810,16 @@ hover-card {
 	height: 153px;
 	margin: 5px;
 	float: left;
+
+	@include breakpoint(small) {
+		width: 133px;
+		height: 133px;
+	}
+
+	@include breakpoint(xsmall) {
+		width: 100px;
+		height: 100px;
+	}
 }
 
 img.template-2-image-100-100 {
