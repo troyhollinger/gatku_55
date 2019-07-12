@@ -1,5 +1,6 @@
 
-<div style="background-color: #0c5460; margin-top: 75px;"  class="container {!! $product->type->slug === 'apparel' ? 'apparel-height' : ''!!} {!! $product->type->slug === 'glass' ? 'glass-height' : '' !!}">
+
+<div style="margin-top: 75px;"  class="container {!! $product->type->slug === 'apparel' ? 'apparel-height' : ''!!} {!! $product->type->slug === 'glass' ? 'glass-height' : '' !!}">
 
 	@if($product->type->slug === 'apparel')
 	<div class="apparel-container">
@@ -15,15 +16,34 @@
 	</div>
 	@endif
 
-	<div style="background-color: #0b58a2;" class="product-column-left {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
+	<div class="product-column-left {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
 
 		<div class="template-2-images-wrapper">
+
+			<!-- Big image -->
 			<div class="template-2-big-image">
-
+				<img class="template-2-image-100-100" src="{!! $product->attachedImage !!}">
 			</div>
+			<!-- Big image - end -->
+
+			<!-- Small image - 1 -->
 			<div class="template-2-small-image">
-
+				<img class="template-2-image-100-100" src="{!! $product->attachedImage !!}">
 			</div>
+			<!-- Small image - 1 - end -->
+
+			<!-- Small image - 2 -->
+			<div class="template-2-small-image">
+				<img class="template-2-image-100-100" src="{!! $product->detachedImage !!}">
+			</div>
+			<!-- Small image - 2 - end -->
+
+			<!-- Small image - 3 -->
+			<div class="template-2-small-image">
+				<img class="template-2-image-100-100" src="{!! $product->image_no_3 !!}">
+			</div>
+			<!-- Small image - 3 - end -->
+
 		</div>
 
 		<div class="product-title-nowrap">
