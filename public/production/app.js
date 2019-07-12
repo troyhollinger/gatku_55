@@ -13793,6 +13793,7 @@ app.controller('CartController',
         state: '',
         tax: 0
     };
+    $scope.sellOutOfUSA = false;
 
     //Global Discount
     $scope.global_discount_switch = homeSetting.global_discount_switch;
