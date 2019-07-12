@@ -201,7 +201,7 @@
 							id="sellOutOfUSA"
 							ng-model="sellOutOfUSA"
 							ng-click="sellOutOfUSA = !sellOutOfUSA">
-					<label for="sellOutOfUSA">&nbsp;Sell out of USA</label>
+					<label for="sellOutOfUSA">&nbsp;Out of USA</label>
 				</div>
 				<div class="clear"></div>
 			</div>
