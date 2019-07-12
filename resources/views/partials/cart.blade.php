@@ -191,13 +191,32 @@
 			<label for="city">City</label>
 			<input type="text" name="city" id="city" ng-model="form.city">
 
+			<br>
 
-			<label for="state">State / Province</label>
+			<div class="checkout-form">
+				<div class="billing-label">
+					<input  type="checkbox"
+							style="width: 5%; float: left;"
+							name="sellOutOfUSA"
+							id="sellOutOfUSA"
+							ng-model="sellOutOfUSA"
+							ng-click="sellOutOfUSA = !sellOutOfUSA">
+					<label for="sellOutOfUSA">&nbsp;Out of USA</label>
+				</div>
+				<div class="clear"></div>
+			</div>
 
-			<select ng-model="form.state"
+			<br>
+
+     		<label for="state">State / Province</label>
+
+			<select ng-show="!sellOutOfUSA"
+					ng-model="form.state"
 					ng-options="tax.state as tax.state for tax in taxes"
 					ng-change="setStateTaxRecord()">
 			</select>
+
+            <input ng-show="sellOutOfUSA" type="text" name="state" id="state" ng-model="form.state">
 
 			<label for="zip">Zip Code</label>
 			<input type="text" name="zip" id="zip" ng-model="form.zip">
@@ -272,7 +291,6 @@
 		</div>
 		<div class="checkout-form">
 			<div class="billing-label">
-
 				<input style="width: 5%; float: left;" id="billing-addr" type="checkbox" name="show-billing" ng-model="card.isBillingSame" value="billing-same"><label>Billing Address same as Shipping Address</label>
 			</div>
 			<div class="clear"></div>
@@ -437,4 +455,3 @@
 
 
 </div>
-
