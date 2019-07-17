@@ -21,26 +21,40 @@
 		<div class="template-2-images-wrapper">
 
 			<!-- Big image -->
-			<div class="template-2-big-image">
-				<img class="template-2-image-100-100" src="{!! $product->attachedImage !!}">
+			<div class="template-2-big-div">
+				<div class="template-2-big-image" id="template-2-big-image-1">
+					<img class="template-2-image-100-100" src="{!! $product->attachedImage !!}">
+				</div>
+				<div class="template-2-big-image" id="template-2-big-image-2">
+					<img class="template-2-image-100-100" src="{!! $product->detachedImage !!}">
+				</div>
+				<div class="template-2-big-image" id="template-2-big-image-3">
+					<img class="template-2-image-100-100" src="{!! $product->image_no_3 !!}">
+				</div>
 			</div>
 			<!-- Big image - end -->
 
 			<!-- Small image - 1 -->
 			<div class="template-2-small-image">
-				<img class="template-2-image-100-100" src="{!! $product->attachedImage !!}">
+				<img class="template-2-image-100-100"
+					 onmouseover="fadeInImageId('template-2-big-image-1')"
+					 src="{!! $product->attachedImage !!}">
 			</div>
 			<!-- Small image - 1 - end -->
 
 			<!-- Small image - 2 -->
 			<div class="template-2-small-image">
-				<img class="template-2-image-100-100" src="{!! $product->detachedImage !!}">
+				<img class="template-2-image-100-100"
+					 onmouseover="fadeInImageId('template-2-big-image-2')"
+					 src="{!! $product->detachedImage !!}">
 			</div>
 			<!-- Small image - 2 - end -->
 
 			<!-- Small image - 3 -->
 			<div class="template-2-small-image">
-				<img class="template-2-image-100-100" src="{!! $product->image_no_3 !!}">
+				<img class="template-2-image-100-100"
+					 onmouseover="fadeInImageId('template-2-big-image-3')"
+					 src="{!! $product->image_no_3 !!}">
 			</div>
 			<!-- Small image - 3 - end -->
 
