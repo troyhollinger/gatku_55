@@ -1,22 +1,8 @@
 
 
-<div style="margin-top: 75px;"  class="container {!! $product->type->slug === 'apparel' ? 'apparel-height' : ''!!} {!! $product->type->slug === 'glass' ? 'glass-height' : '' !!}">
+<div style="margin-top: 75px;"  class="container">
 
-	@if($product->type->slug === 'apparel')
-	<div class="apparel-container">
-		<img class="rollerblade-img" src="{!! $product->attachedImage!!}">
-
-		<span class="drag-indicator"><-- Drag to rotate --></span>
-	</div>
-	@endif
-
-	@if($product->type->slug === 'glass')
-	<div class="apparel-container">
-		<img class="rollerblade-img" src="{!! $product->attachedImage !!}">
-	</div>
-	@endif
-
-	<div class="product-column-left {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
+	<div class="product-column-left">
 
 		<div class="template-2-images-wrapper">
 
@@ -85,7 +71,7 @@
 
 		</div>
 
-		<div class="product-description {!! $product->type->slug === 'apparel' ? 'apparel-description' : '' !!} {!! $product->type->slug === 'glass' ? 'glass-description' : '' !!}">
+		<div class="product-description">
 
 			{!! $product->description !!}
 
@@ -129,7 +115,7 @@
 
 	</div>
 
-	<div class="product-column-right {!! $product->type->slug === 'apparel' || $product->type->slug === 'glass' ? 'apparel-column' : ''!!}">
+	<div class="product-column-right">
 
 		<br>
 
