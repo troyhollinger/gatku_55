@@ -21,7 +21,7 @@ $(document).ready(function() {
 var removeMFadeOut = function(fadeOutId) {
 	setTimeout(function(){
 		$('#'+fadeOutId).removeClass("m-fadeOut");
-	}, 2000);
+	}, 1000); //this have to be the same like in style.css file and definition for .m-fadeOut
 };
 
 var fadeInImageId = function(id){

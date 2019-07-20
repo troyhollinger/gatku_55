@@ -4795,7 +4795,7 @@ hover-card {
 	width: 480px;
 	height: 480px;
 	margin: 5px;
-	border: 1px solid #AAAAAA;
+	border: 1px solid #CCCCCC;
 
 	@include breakpoint(small) {
 		width: 420px;
@@ -4816,14 +4816,16 @@ hover-card {
 	height: 480px;
 	margin: 5px;
 	opacity: 0;
-	border: 1px solid #AAAAAA;
+	border: 1px solid #CCCCCC;
 
 	@include breakpoint(small) {
+		left: 30px;
 		width: 420px;
 		height: 420px;
 	}
 
 	@include breakpoint(xsmall) {
+		left: 22px;
 		width: 320px;
 		height: 320px;
 	}
@@ -4834,7 +4836,7 @@ hover-card {
 	height: 153px;
 	margin: 5px;
 	float: left;
-	border: 1px solid #AAAAAA;
+	border: 1px solid #CCCCCC;
 
 	@include breakpoint(small) {
 		width: 133px;
@@ -4856,12 +4858,12 @@ img.template-2-image-100-100 {
 .m-fadeOut {
 	visibility: hidden;
 	opacity: 0;
-	transition: visibility 0s linear 2000ms, opacity 2000ms;
+	transition: visibility 0s linear 1000ms, opacity 1000ms;
 }
 .m-fadeIn {
 	visibility: visible;
 	opacity: 1;
-	transition: visibility 0s linear 2000ms, opacity 2000ms;
+	transition: visibility 0s linear 1000ms, opacity 1000ms;
 }
 
 // Product Template 2 - css classes - end
