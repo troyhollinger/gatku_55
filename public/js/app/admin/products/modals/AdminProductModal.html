@@ -36,6 +36,19 @@
         </div>
     </div>
 
+    <!-- Product Template -->
+    <hr>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Product Template:</label>
+        <div class="col-sm-9">
+            <select class="form-control col-sm-4"
+                    ng-options="key as value for (key, value) in $ctrl.templates"
+                    ng-model="$ctrl.newProduct.template">
+            </select>
+        </div>
+    </div>
+
     <!-- Name -->
     <hr>
 
@@ -818,6 +831,31 @@
             <button type="button"
                     class="btn btn-danger"
                     ng-click="$ctrl.removeImage('detachedImage');">
+                Remove Image &nbsp; <i class="fa fa-trash"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Attached Image -->
+
+    <hr>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Image No 3:</label>
+        <div class="col-sm-9">
+            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.image_no_3 + ')'}">
+                <i class="fa fa-image" ng-hide="$ctrl.newProduct.image_no_3"></i>
+                <input class="hide-input-field"
+                       type="text"
+                       ng-model="$ctrl.newProduct.image_no_3" class="image-path-storage-input">
+                <input type="file" ng-file-drop ng-file-select="$ctrl.upload($files, 'image_no_3')">
+            </div>
+
+            <br>
+
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="$ctrl.removeImage('image_no_3');">
                 Remove Image &nbsp; <i class="fa fa-trash"></i>
             </button>
         </div>

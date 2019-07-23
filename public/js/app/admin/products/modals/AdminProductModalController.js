@@ -19,6 +19,11 @@
 
         var $ctrl = this;
 
+        $ctrl.templates = {
+            template_1: 'Product Template 1',
+            template_2: 'Product Template 2'
+        };
+
         $ctrl.text_align_options = ['left', 'right', 'center', 'justify', 'initial', 'inherit'];
         $ctrl.text_font_weight = ['normal', 'bold', 'bolder', 'lighter', 'number', 'initial', 'inherit'];
         $ctrl.text_font_style = ['normal', 'italic', 'oblique', 'initial', 'inherit'];
@@ -41,6 +46,7 @@
 
         if (!$ctrl.newProduct.hasOwnProperty('id')) {
             $ctrl.editingNew = true;    //This is needed for function registerAddons
+            $ctrl.newProduct.template = 'template_1';
             $ctrl.newProduct.sizeable = 0;
             $ctrl.newProduct.sizes = [];
 

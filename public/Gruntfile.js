@@ -35,7 +35,8 @@ module.exports = function(grunt) {
                     'js/configs/*.js',
                     'js/controllers/*.js',
                     'js/app/**/*.js',
-                    'js/main.js'
+                    'js/main.js',
+                    'js/product_template_2_image_flipper.js'
                 ],
                 dest: 'production/app.js'
             }
