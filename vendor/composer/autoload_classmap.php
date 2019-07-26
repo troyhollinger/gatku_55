@@ -719,6 +719,7 @@ return array(
     'Gatku\\Service\\CalculateOrdersService' => $baseDir . '/app/Gatku/Services/CalculateOrdersService.php',
     'Gatku\\Service\\MailchimpService' => $baseDir . '/app/Gatku/Services/MailchimpService.php',
     'Gatku\\Service\\ProductServiceProvider' => $baseDir . '/app/Gatku/Services/ProductServiceProvider.php',
+    'Gatku\\Service\\XpsshipperCommunicationService' => $baseDir . '/app/Gatku/Services/XpsshipperCommunicationService.php',
     'GuzzleHttp\\Client' => $vendorDir . '/guzzlehttp/guzzle/src/Client.php',
     'GuzzleHttp\\ClientInterface' => $vendorDir . '/guzzlehttp/guzzle/src/ClientInterface.php',
     'GuzzleHttp\\Cookie\\CookieJar' => $vendorDir . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
