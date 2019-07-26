@@ -36,6 +36,7 @@ return array(
     'App\\Http\\Controllers\\ShippingRequestController' => $baseDir . '/app/Http/Controllers/ShippingRequestController.php',
     'App\\Http\\Controllers\\ShippingTrackController' => $baseDir . '/app/Http/Controllers/ShippingTrackController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
+    'App\\Http\\Controllers\\XpsshipperController' => $baseDir . '/app/Http/Controllers/XpsshipperController.php',
     'App\\Http\\Controllers\\YouImageController' => $baseDir . '/app/Http/Controllers/YouImageController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\CheckDatabaseConnection' => $baseDir . '/app/Http/Middleware/CheckDatabaseConnection.php',

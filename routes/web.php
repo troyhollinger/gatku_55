@@ -130,7 +130,11 @@ Route::get('/display-order-email/admin/{orderId}', [ 'uses' => 'DisplayOrderNoti
 Route::get('/display-order-email/customer/{orderId}', [ 'uses' => 'DisplayOrderNotificationEmailController@customer']);
 
 //Cart calculations
-Route::post('cart-calculations', ['uses' => 'CartCalculationsController@getCalculations']);
+Route::post('/cart-calculations', ['uses' => 'CartCalculationsController@getCalculations']);
+
+//Xpsshipper - Routes
+Route::get('/xpsshipper-services-list', ['uses' => 'XpsshipperController@getServicesList']);
+//Xpsshipper - Routes - end
 
 //Below code is to test mailable objects. Uncomment if necessary.
 //Route::get('/mailable', function (HomeSetting $homeSetting) {
