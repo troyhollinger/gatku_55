@@ -31,6 +31,6 @@ class XpsshipperController extends BaseController {
     public function getServicesList()
     {
         $orderCalc = $this->xpsshipperCommunicationService->getServicesList();
-        return Response::json($orderCalc, 200);
+        return Response::make($orderCalc);
     }
 }

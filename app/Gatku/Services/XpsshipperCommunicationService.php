@@ -12,10 +12,12 @@ use \GuzzleHttp\Client;
 class XpsshipperCommunicationService
 {
     //constants
-    const API_HOST  = "XPSSHIPPER_API_HOST";
-    const API_KEY   = "XPSSHIPPER_API_KEY";
-    const CUST_ID   = "XPSSHIPPER_CUSTOMER_ID";
-    const INTEGR_ID = "XPSSHIPPER_INTEGRATION_ID";
+    const API_HOST     = "XPSSHIPPER_API_HOST";
+    const API_KEY      = "XPSSHIPPER_API_KEY";
+    const CUST_ID      = "XPSSHIPPER_CUSTOMER_ID";
+    const INTEGR_ID    = "XPSSHIPPER_INTEGRATION_ID";
+    const REQUEST_GET  = 'GET';
+    const REQUEST_POST = 'POST';
     //constants - end
 
     /**
@@ -54,50 +56,74 @@ class XpsshipperCommunicationService
 
     public function getServicesList()
     {
-        $servicesList = '';
-        
         $url = $this->xpsshipper_api_host . '/restapi/v1/customers/' . $this->xpsshipper_customer_id . '/services';
+        $response = $this->sendRequest(self::REQUEST_GET, $url);
+        return $response;
+    }
 
-        $response = $this->client->request('GET', $url, [
-            'headers' => [
-                'Authorization' => ' RSIS ' . $this->xpsshipper_api_key
-            ]
-        ]);
+    /**
+     * @param string $requestMethod
+     * @param string $url
+     * @param array|null $headers
+     * @param array|null $params
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function sendRequest(string $requestMethod, string $url, ?array $headers = null, ?array $params = null): string
+    {
+        $options = array_merge($this->getHeaders($headers), $this->getRequestParams($params));
 
-        $statusCode = $response->getStatusCode();
-
-        if ($statusCode == 200) {
-            $servicesList = $response->getBody()->getContents();
-        } else {
-            throw new \Exception("Request returned status: " . $statusCode );
+        try {
+            $response = $this->client->request($requestMethod, $url, $options);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
         }
 
-        //Process json to be array because Response::json need array to avoid double escaping.
-        return json_decode($servicesList);
-    }
-    
-    private function setHeaders(array $headers)
-    {
-//        $response = $this->client->request('GET', $url, [
-//            'headers' => [
-//                'Authorization' => ' RSIS ' . $this->xpsshipper_api_key
-//            ]
-//        ]);
-    }
-    
-    private function setRequestParams(array $params)
-    {
-//        $client->request('POST', '/post', [
-//            'form_params' => [
-//                'foo' => 'bar',
-//                'baz' => ['hi', 'there!']
-//            ]
+        return $response->getBody()->getContents();
     }
 
-    private function buildUrl()
-    {}
+    /**
+     * @param array $additionalHeaders
+     * @return array
+     */
+    private function getHeaders(?array $additionalHeaders = null):array
+    {
+        $headers = $this->getAuthorizationHeader();
 
-    private function buildRequest(string $requestType, string $endpoint, array $options)
-    {}
+        if ($additionalHeaders) {
+            $headers = array_merge($headers, $additionalHeaders);
+        }
+
+        return [
+            'headers' => $headers
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getAuthorizationHeader():array
+    {
+        return [
+            'Authorization' => ' RSIS ' . $this->xpsshipper_api_key
+        ];
+    }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    private function getRequestParams(?array $params = null):array
+    {
+        $paramsArray = [];
+
+        if (!empty($params)) {
+            $paramsArray = [
+                'form_params' => $params
+            ];
+        }
+
+        return $paramsArray;
+    }
 }
 
