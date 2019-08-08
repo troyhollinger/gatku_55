@@ -81,7 +81,34 @@ class XpsshipperController extends BaseController {
      */
     public function retrieveShipment()
     {
-        $quote = $this->xpsshipperCommunicationService->retrieveShipment();
+        $bookNumber = 15655343; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
+
+        $quote = $this->xpsshipperCommunicationService->retrieveShipment($bookNumber);
+        return Response::make($quote);
+    }
+
+    /**
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function retrieveShipments()
+    {
+        $bookNumber = 15655343; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
+        $limit = 100;
+
+        $quote = $this->xpsshipperCommunicationService->retrieveShipments($bookNumber, $limit);
+        return Response::make($quote);
+    }
+
+    /**
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function searchShipments()
+    {
+        $keyword = '15655343'; //Any value you are searching
+
+        $quote = $this->xpsshipperCommunicationService->searchShipments($keyword);
         return Response::make($quote);
     }
 
@@ -91,7 +118,9 @@ class XpsshipperController extends BaseController {
      */
     public function retrieveShipmentLabel()
     {
-        $quote = $this->xpsshipperCommunicationService->retrieveShipmentLabel();
+        $bookNumber = 15655343; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
+
+        $quote = $this->xpsshipperCommunicationService->retrieveShipmentLabel($bookNumber);
         //This should return PDF then we need to add PDF header to Response
         return Response::make($quote)->header('Content-Type', 'application/pdf');
     }

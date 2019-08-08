@@ -62,7 +62,11 @@ class XpsshipperCommunicationService
      */
     public function getServicesList()
     {
-        $url = $this->xpsshipper_api_host . '/restapi/v1/customers/' . $this->xpsshipper_customer_id . '/services';
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
+               . '/services';
+
         $response = $this->sendRequest(self::REQUEST_GET, $url);
         return $response;
     }
@@ -73,8 +77,11 @@ class XpsshipperCommunicationService
      */
     public function getIntegratedQuotingOptions()
     {
-        $url = $this->xpsshipper_api_host . '/restapi/v1/customers/' . $this->xpsshipper_customer_id
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
                . '/integratedQuotingOptions';
+
         $response = $this->sendRequest(self::REQUEST_GET, $url);
         return $response;
     }
@@ -124,7 +131,11 @@ class XpsshipperCommunicationService
 
         $additionalHeaders = ['Content-Type' => 'application/json'];
 
-        $url = $this->xpsshipper_api_host . '/restapi/v1/customers/' . $this->xpsshipper_customer_id . '/quote';
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
+               . '/quote';
+
         $response = $this->sendRequest(self::REQUEST_POST, $url, $additionalHeaders, $json);
         return $response;
     }
@@ -137,8 +148,14 @@ class XpsshipperCommunicationService
     {
         $orderId = 1234;
 
-        $url = $this->xpsshipper_api_host . '/restapi/v1/customers/' . $this->xpsshipper_customer_id
-               . '/integrations/' . $this->xpsshipper_integration_id . '/orders/' . $orderId;
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
+               . '/integrations/'
+               . $this->xpsshipper_integration_id
+               . '/orders/'
+               . $orderId;
+
         $response = $this->sendRequest(self::REQUEST_DELETE, $url);
         return $response;
     }
@@ -186,48 +203,122 @@ class XpsshipperCommunicationService
     "country": "US",
     "phone": "6196652143",
     "email": "marcincyniu@gmail.com"
-  }
+  },
+  "items": [
+    {
+      "productId": "856673",
+      "sku": "ade3-fe21-bb9a",
+      "title": "Socks",
+      "price": "3.99",
+      "quantity": 2,
+      "weight": "0.5",
+      "imgUrl": "http://sockstore.egg/img/856673",
+      "htsNumber": "555555",
+      "countryOfOrigin": "US",
+      "lineId": "1"
+    }
+  ],
+  "packages": [
+    {
+      "weight": "0.5",
+      "length": "6",
+      "width": "5",
+      "height": "2.5",
+      "insuranceAmount": null,
+      "declaredValue": null
+    }
+  ]
 }';
 
         $additionalHeaders = ['Content-Type' => 'application/json'];
 
-        $url = $this->xpsshipper_api_host . '/restapi/v1/customers/' . $this->xpsshipper_customer_id
-               . '/integrations/' . $this->xpsshipper_integration_id . '/orders/' . $orderId;
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
+               . '/integrations/'
+               . $this->xpsshipper_integration_id
+               . '/orders/'
+               . $orderId;
+
         $response = $this->sendRequest(self::REQUEST_PUT, $url, $additionalHeaders, $json);
         return $response;
     }
 
     /**
+     * @param string $bookNumber
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function retrieveShipment()
+    public function retrieveShipment(string $bookNumber)
     {
-        $bookNumber = 15655343; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
-
-        $url = $this->xpsshipper_api_host . '/restapi/v1/customers/' . $this->xpsshipper_customer_id
-               . '/shipments/' . $bookNumber;
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
+               . '/shipments/'
+               . $bookNumber;
         $response = $this->sendRequest(self::REQUEST_GET, $url);
+        return $response;
+    }
+
+    /**
+     * @param string $bookNumber
+     * @param string $limit
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function retrieveShipments(string $bookNumber, string $limit = '100')
+    {
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
+               . '/shipments?minBookNumber=' . $bookNumber
+               . '&limit=' . $limit;
+        $response = $this->sendRequest(self::REQUEST_GET, $url);
+        return $response;
+    }
+
+    /**
+     * @param string $keyword
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function searchShipments(string $keyword)
+    {
+        $json = '{ "keyword": "' . $keyword . '"}';
+
+        $additionalHeaders = ['Content-Type' => 'application/json'];
+
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
+               . '/searchShipments';
+
+        $response = $this->sendRequest(self::REQUEST_POST, $url, $additionalHeaders, $json);
         return $response;
     }
 
 
     /**
+     * @param string $bookNumber
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function retrieveShipmentLabel()
+    public function retrieveShipmentLabel(string $bookNumber)
     {
-        $bookNumber = 15655343; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
-
         //We pull PDF labels right now
-        $url = $this->xpsshipper_api_host . '/restapi/v1/customers/' . $this->xpsshipper_customer_id
-               . '/shipments/' . $bookNumber . '/label/PDF';
+        $url = $this->xpsshipper_api_host
+               . '/restapi/v1/customers/'
+               . $this->xpsshipper_customer_id
+               . '/shipments/'
+               . $bookNumber
+               . '/label/PDF';
+
         $response = $this->sendRequest(self::REQUEST_GET, $url);
         return $response;
     }
 
-    // Private
+
+    // Private methods
 
     /**
      * @param array $additionalHeaders
