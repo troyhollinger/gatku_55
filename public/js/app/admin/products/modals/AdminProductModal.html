@@ -749,7 +749,17 @@
 
     <hr>
 
-    <label>Addons:</label>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">
+            <b>Addons:</b>
+        </label>
+        <div class="col-sm-9">
+            <a href ng-click="$ctrl.addonsHideShow = !$ctrl.addonsHideShow">&nbsp;
+                <i class="fa fa-caret-down" ng-if="!$ctrl.addonsHideShow"></i>
+                <i class="fa fa-caret-up" ng-if="$ctrl.addonsHideShow"></i>
+            </a>
+        </div>
+    </div>
 
     <div ng-if="$ctrl.addonsHideShow">
         <table class="table table-striped table-bordered table-sm">
@@ -780,171 +790,251 @@
         </table>
     </div>
 
-    <a href ng-click="$ctrl.addonsHideShow = !$ctrl.addonsHideShow">&nbsp;
-        <i class="fa fa-caret-down" ng-if="!$ctrl.addonsHideShow"></i>
-        <i class="fa fa-caret-up" ng-if="$ctrl.addonsHideShow"></i>
-    </a>
-
-    <!-- Attached Image -->
+    <!-- Product Dimensions And Weight -->
 
     <hr>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Attached Image:</label>
+        <label class="col-sm-3 col-form-label">
+            <b>Product dimensions and weight:</b>
+        </label>
         <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.attachedImage + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.attachedImage"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.attachedImage" class="image-path-storage-input">
-                <input type="file" ng-file-drop ng-file-select="$ctrl.upload($files, 'attachedImage')">
-            </div>
-
-            <br>
-
-            <button type="button"
-                    class="btn btn-danger"
-                    ng-click="$ctrl.removeImage('attachedImage');">
-                Remove Image &nbsp; <i class="fa fa-trash"></i>
-            </button>
+            <a href ng-click="$ctrl.productDimensionsAndWeightHideShow = !$ctrl.productDimensionsAndWeightHideShow">&nbsp;
+                <i class="fa fa-caret-down" ng-if="!$ctrl.productDimensionsAndWeightHideShow"></i>
+                <i class="fa fa-caret-up" ng-if="$ctrl.productDimensionsAndWeightHideShow"></i>
+            </a>
         </div>
     </div>
 
-    <!-- Detached Image -->
+    <div ng-if="$ctrl.productDimensionsAndWeightHideShow">
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Length [in]:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="prod_length"
+                       placeholder="Product length..."
+                       ng-model="$ctrl.newProduct.prod_length">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Width [in]:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="prod_width"
+                       placeholder="Product width..."
+                       ng-model="$ctrl.newProduct.prod_width">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Height [in]:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="prod_height"
+                       placeholder="Product height..."
+                       ng-model="$ctrl.newProduct.prod_height">
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Weight [lb]:</label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control"
+                       id="prod_weight"
+                       placeholder="Product height..."
+                       ng-model="$ctrl.newProduct.prod_weight">
+            </div>
+        </div>
+
+    </div>
+    <!-- Product Dimensions And Weight -->
+
+    <!-- Images -->
 
     <hr>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Detached Image:</label>
+        <label class="col-sm-3 col-form-label">
+            <b>Images:</b>
+        </label>
         <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.detachedImage + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.detachedImage"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.detachedImage"
-                       class="image-path-storage-input">
-                <input type="file" ng-file-select="$ctrl.upload($files, 'detachedImage')">
-            </div>
-
-            <br>
-
-            <button type="button"
-                    class="btn btn-danger"
-                    ng-click="$ctrl.removeImage('detachedImage');">
-                Remove Image &nbsp; <i class="fa fa-trash"></i>
-            </button>
+            <a href ng-click="$ctrl.imagesHideShow = !$ctrl.imagesHideShow">&nbsp;
+                <i class="fa fa-caret-down" ng-if="!$ctrl.imagesHideShow"></i>
+                <i class="fa fa-caret-up" ng-if="$ctrl.imagesHideShow"></i>
+            </a>
         </div>
     </div>
 
-    <!-- Attached Image -->
+    <div ng-if="$ctrl.imagesHideShow">
 
-    <hr>
+        <!-- Attached Image -->
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Image No 3:</label>
-        <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.image_no_3 + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.image_no_3"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.image_no_3" class="image-path-storage-input">
-                <input type="file" ng-file-drop ng-file-select="$ctrl.upload($files, 'image_no_3')">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Attached Image:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.attachedImage + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.attachedImage"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.attachedImage" class="image-path-storage-input">
+                    <input type="file" ng-file-drop ng-file-select="$ctrl.upload($files, 'attachedImage')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('attachedImage');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
             </div>
-
-            <br>
-
-            <button type="button"
-                    class="btn btn-danger"
-                    ng-click="$ctrl.removeImage('image_no_3');">
-                Remove Image &nbsp; <i class="fa fa-trash"></i>
-            </button>
         </div>
-    </div>
 
-    <!-- Thumb -->
+        <!-- Detached Image -->
 
-    <hr>
+        <hr>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Thumb:</label>
-        <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.thumb + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.thumb"></i>
-                <input  class="hide-input-field"
-                        type="text"
-                        ng-model="$ctrl.newProduct.thumb"
-                        class="image-path-storage-input">
-                <input type="file" ng-file-select="$ctrl.upload($files, 'thumb')">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Detached Image:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.detachedImage + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.detachedImage"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.detachedImage"
+                           class="image-path-storage-input">
+                    <input type="file" ng-file-select="$ctrl.upload($files, 'detachedImage')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('detachedImage');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
             </div>
-
-            <br>
-
-            <button type="button"
-                    class="btn btn-danger"
-                    ng-click="$ctrl.removeImage('thumb');">
-                Remove Image &nbsp; <i class="fa fa-trash"></i>
-            </button>
         </div>
-    </div>
 
-    <!-- Email Image -->
+        <!-- Attached Image -->
 
-    <hr>
+        <hr>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Email Image:</label>
-        <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.emailImage + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.emailImage"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.emailImage"
-                       class="image-path-storage-input">
-                <input type="file" ng-file-select="$ctrl.upload($files, 'emailImage')">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Image No 3:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.image_no_3 + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.image_no_3"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.image_no_3" class="image-path-storage-input">
+                    <input type="file" ng-file-drop ng-file-select="$ctrl.upload($files, 'image_no_3')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('image_no_3');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
             </div>
-
-            <br>
-
-            <button type="button"
-                    class="btn btn-danger"
-                    ng-click="$ctrl.removeImage('emailImage');">
-                Remove Image &nbsp; <i class="fa fa-trash"></i>
-            </button>
         </div>
-    </div>
 
-    <!-- og:image Image -->
+        <!-- Thumb -->
 
-    <hr>
+        <hr>
 
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">OG TAG [og:image] Image:</label>
-        <div class="col-sm-9">
-            <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.ogimage + ')'}">
-                <i class="fa fa-image" ng-hide="$ctrl.newProduct.ogimage"></i>
-                <input class="hide-input-field"
-                       type="text"
-                       ng-model="$ctrl.newProduct.ogimage"
-                       class="image-path-storage-input">
-                <input type="file" ng-file-select="$ctrl.upload($files, 'ogimage')">
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Thumb:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.thumb + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.thumb"></i>
+                    <input  class="hide-input-field"
+                            type="text"
+                            ng-model="$ctrl.newProduct.thumb"
+                            class="image-path-storage-input">
+                    <input type="file" ng-file-select="$ctrl.upload($files, 'thumb')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('thumb');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
             </div>
-
-            <br>
-
-            <button type="button"
-                    class="btn btn-danger"
-                    ng-click="$ctrl.removeImage('ogimage');">
-                Remove Image &nbsp; <i class="fa fa-trash"></i>
-            </button>
         </div>
+
+        <!-- Email Image -->
+
+        <hr>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Email Image:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.emailImage + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.emailImage"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.emailImage"
+                           class="image-path-storage-input">
+                    <input type="file" ng-file-select="$ctrl.upload($files, 'emailImage')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('emailImage');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- og:image Image -->
+
+        <hr>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">OG TAG [og:image] Image:</label>
+            <div class="col-sm-9">
+                <div class="upload-field" ng-style="{'background-image':'url(' + $ctrl.newProduct.ogimage + ')'}">
+                    <i class="fa fa-image" ng-hide="$ctrl.newProduct.ogimage"></i>
+                    <input class="hide-input-field"
+                           type="text"
+                           ng-model="$ctrl.newProduct.ogimage"
+                           class="image-path-storage-input">
+                    <input type="file" ng-file-select="$ctrl.upload($files, 'ogimage')">
+                </div>
+
+                <br>
+
+                <button type="button"
+                        class="btn btn-danger"
+                        ng-click="$ctrl.removeImage('ogimage');">
+                    Remove Image &nbsp; <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+
     </div>
+    <!-- Images - end -->
 
     <!-- Product order -->
 
     <hr>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Product order:</label>
+        <label for="order" class="col-sm-3 col-form-label">Product order:</label>
         <div class="col-sm-9">
             <input type="text"
                    class="form-control"
@@ -959,7 +1049,7 @@
     <hr>
 
     <div class="form-group row">
-        <label for="name" class="col-sm-3 col-form-label">Product sizable:</label>
+        <label class="col-sm-3 col-form-label">Product sizable:</label>
         <div class="col-sm-9">
                 <input type="checkbox"
                        id="sizeable"

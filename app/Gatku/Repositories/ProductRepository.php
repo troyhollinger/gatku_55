@@ -309,7 +309,13 @@ class ProductRepository implements ProductRepositoryInterface {
 
         $product->template = (isset($data['template'])) ? $data['template'] : 'template_1';
 
-		return $product;
+        //Product dimensions
+        $product->prod_length = (isset($data['prod_length'])) ? $data['prod_length'] : 0;
+        $product->prod_width  = (isset($data['prod_width']))  ? $data['prod_width']  : 0;
+        $product->prod_height = (isset($data['prod_height'])) ? $data['prod_height'] : 0;
+        $product->prod_weight = (isset($data['prod_weight'])) ? $data['prod_weight'] : 0;
+
+        return $product;
 	}
 
 

@@ -146,7 +146,7 @@ class XpsshipperCommunicationService
      */
     public function deleteOrder()
     {
-        $orderId = 1234;
+        $orderId = 3;
 
         $url = $this->xpsshipper_api_host
                . '/restapi/v1/customers/'
@@ -166,7 +166,7 @@ class XpsshipperCommunicationService
      */
     public function putOrder()
     {
-        $orderId = 1234;
+        $orderId = 3;
 
         $json = '
         {
@@ -174,7 +174,7 @@ class XpsshipperCommunicationService
   "orderDate": "2019-08-07",
   "orderNumber": "'. $orderId.'",
   "fulfillmentStatus": "pending",
-  "shippingService": "Standard",
+  "shippingService": "ups_next_day_air",
   "shippingTotal": "1.24",
   "weightUnit": "lb",
   "dimUnit": "in",

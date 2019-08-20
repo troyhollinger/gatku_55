@@ -81,7 +81,7 @@ class XpsshipperController extends BaseController {
      */
     public function retrieveShipment()
     {
-        $bookNumber = 15655343; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
+        $bookNumber = 15754555; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
 
         $quote = $this->xpsshipperCommunicationService->retrieveShipment($bookNumber);
         return Response::make($quote);
@@ -93,7 +93,7 @@ class XpsshipperController extends BaseController {
      */
     public function retrieveShipments()
     {
-        $bookNumber = 15655343; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
+        $bookNumber = 15754555; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
         $limit = 100;
 
         $quote = $this->xpsshipperCommunicationService->retrieveShipments($bookNumber, $limit);
@@ -118,7 +118,7 @@ class XpsshipperController extends BaseController {
      */
     public function retrieveShipmentLabel()
     {
-        $bookNumber = 15655343; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
+        $bookNumber = 15754555; //This is example i got from https://xpsshipper.com/ec/#/history then pick one product
 
         $quote = $this->xpsshipperCommunicationService->retrieveShipmentLabel($bookNumber);
         //This should return PDF then we need to add PDF header to Response

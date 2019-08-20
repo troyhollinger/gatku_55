@@ -37,6 +37,8 @@
         $ctrl.showNameExtensionFormatting = false;
         $ctrl.showNameExtensionFormattingForMobile = false;
         $ctrl.showNameExtensionFormattingForShelf = false;
+        $ctrl.productDimensionsAndWeightHideShow = false;
+        $ctrl.imagesHideShow = false;
         $ctrl.mobileNameFormatting = false;
         $ctrl.lengthFormatting = false;
         $ctrl.lengthFormattingForMobile = false;
@@ -99,6 +101,11 @@
             $ctrl.newProduct.mobile_name_font_style = 'normal';
             $ctrl.newProduct.mobile_name_font_weight = 'normal';
             $ctrl.newProduct.mobile_name_font_size = 16;
+
+            $ctrl.newProduct.prod_length = 0;
+            $ctrl.newProduct.prod_width  = 0;
+            $ctrl.newProduct.prod_height = 0;
+            $ctrl.newProduct.prod_weight = 0;
         } else {
             $ctrl.editingNew = false;   //This is needed for function registerAddons
         }
