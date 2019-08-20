@@ -40,6 +40,7 @@ app.controller('CartController',
         tax: 0
     };
     $scope.sellOutOfUSA = false;
+    $scope.isoCountries = isoCountries;
 
     //Global Discount
     $scope.global_discount_switch = homeSetting.global_discount_switch;

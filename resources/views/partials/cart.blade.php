@@ -222,7 +222,10 @@
 			<input type="text" name="zip" id="zip" ng-model="form.zip">
 
 			<label for="country">Country <span class="faded bold"></span></label>
-			<input type="text" name="country" id="country" ng-model="form.country">
+
+			<select ng-model="form.country"
+					ng-options="key as value for (key , value) in isoCountries">
+			</select>
 
 			<label>Note to International Orders -</label>
 			<p class="cart-note">When shipping outside the USA rates vary. We have found it best to apply rates order specific. Go ahead and place your order now and we will PayPal request the difference in shipping paid on order placed with the actual shipping cost. Thank you.</p>
