@@ -146,7 +146,7 @@ class XpsshipperCommunicationService
      */
     public function deleteOrder()
     {
-        $orderId = 3;
+        $orderId = 12;
 
         $url = $this->xpsshipper_api_host
                . '/restapi/v1/customers/'
@@ -166,43 +166,43 @@ class XpsshipperCommunicationService
      */
     public function putOrder()
     {
-        $orderId = 3;
+        $orderId = 12;
 
         $json = '
         {
-  "orderId": "'. $orderId.'",
-  "orderDate": "2019-08-07",
-  "orderNumber": "'. $orderId.'",
+  "orderId": "' . $orderId . '",
+  "orderDate": "2019-07-27",
+  "orderNumber": "' . $orderId . '",
   "fulfillmentStatus": "pending",
   "shippingService": "ups_next_day_air",
-  "shippingTotal": "1.24",
+  "shippingTotal": "8.24",
   "weightUnit": "lb",
   "dimUnit": "in",
-  "dueByDate": "2019-07-10",
+  "dueByDate": "2019-07-30",
   "orderGroup": "Workstation 1",
   "sender": {
-    "name": "Troy Hollinger",
-    "company": "Gatku",
-    "address1": "1250 Pioneer Way Ste H",
-    "address2": "",
-    "city": "El Cajon",
-    "state": "CA",
-    "zip": "92020",
+    "name": "Albert Jones",
+    "company": "Jones Co.",
+    "address1": "123 Some Street",
+    "address2": "#54",
+    "city": "Holladay",
+    "state": "UT",
+    "zip": "84117",
     "country": "US",
-    "phone": "6192521850",
-    "email": "troy@gatku.com"
+    "phone": "8015042351",
+    "email": "albert@jones.egg"
   },
   "receiver": {
-    "name": "Marcin Wojcik",
+    "name": "Alice Janson",
     "company": "",
-    "address1": "12646 Springbrook Dr. E",
+    "address1": "54 Green St.",
     "address2": "",
-    "city": "San Diego",
-    "state": "CA",
-    "zip": "92128",
+    "city": "Salt Lake City",
+    "state": "UT",
+    "zip": "84106",
     "country": "US",
-    "phone": "6196652143",
-    "email": "marcincyniu@gmail.com"
+    "phone": "8013920046",
+    "email": "alice@jensen.egg"
   },
   "items": [
     {
