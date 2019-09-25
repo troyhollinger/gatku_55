@@ -130,7 +130,19 @@ Route::get('/display-order-email/admin/{orderId}', [ 'uses' => 'DisplayOrderNoti
 Route::get('/display-order-email/customer/{orderId}', [ 'uses' => 'DisplayOrderNotificationEmailController@customer']);
 
 //Cart calculations
-Route::post('cart-calculations', ['uses' => 'CartCalculationsController@getCalculations']);
+Route::post('/cart-calculations', ['uses' => 'CartCalculationsController@getCalculations']);
+
+//Xpsshipper - Routes
+//Route::get('/xpsshipper-services-list',                 ['uses' => 'XpsshipperController@getServicesList']);
+//Route::get('/xpsshipper-integrated-quoting-options',    ['uses' => 'XpsshipperController@getIntegratedQuotingOptions']);
+//Route::get('/xpsshipper-quote',                         ['uses' => 'XpsshipperController@getQuote']);
+//Route::get('/xpsshipper-delete-order',                  ['uses' => 'XpsshipperController@deleteOrder']);
+//Route::get('/xpsshipper-put-order',                     ['uses' => 'XpsshipperController@putOrder']);
+//Route::get('/xpsshipper-retrieve-shipment',             ['uses' => 'XpsshipperController@retrieveShipment']);
+//Route::get('/xpsshipper-retrieve-shipments',            ['uses' => 'XpsshipperController@retrieveShipments']);
+//Route::get('/xpsshipper-search-shipments',              ['uses' => 'XpsshipperController@searchShipments']);
+//Route::get('/xpsshipper-retrieve-shipment-label',       ['uses' => 'XpsshipperController@retrieveShipmentLabel']);
+//Xpsshipper - Routes - end
 
 //Below code is to test mailable objects. Uncomment if necessary.
 //Route::get('/mailable', function (HomeSetting $homeSetting) {

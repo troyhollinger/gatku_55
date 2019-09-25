@@ -26,6 +26,7 @@ app.controller('CartController',
     $scope.items = [];
     $scope.show = false;
     $scope.form = {};
+    $scope.form.countryCode = 'US';
     $scope.form.useBillingForShipping = true;
     $scope.status = '';
     $scope.stages = ['cart', 'checkout', 'payment', 'confirmation'];
@@ -39,7 +40,8 @@ app.controller('CartController',
         state: '',
         tax: 0
     };
-    $scope.sellOutOfUSA = false;
+
+    $scope.isoCountries = isoCountries;
 
     //Global Discount
     $scope.global_discount_switch = homeSetting.global_discount_switch;
@@ -52,7 +54,6 @@ app.controller('CartController',
     $scope.discountsExists = false;
     $scope.discountSum = 0;
 
-
     $scope.cartCalculations = {
         discount: 0,
         shipping: 0,
@@ -60,6 +61,11 @@ app.controller('CartController',
         tax: 0,
         total: 0
     };
+
+    $scope.updateCountryBasedOnCountryCode = function() {
+        $scope.form.country = $scope.isoCountries[$scope.form.countryCode];
+    };
+    $scope.updateCountryBasedOnCountryCode();
 
     //Check is are records in discount table. If no then don't display discount input
     DiscountExists.all().then(function(response) {

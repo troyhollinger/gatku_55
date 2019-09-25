@@ -185,44 +185,39 @@
 			<label for="phone">Phone</label>
 			<input type="text" name="phone" id="phone" ng-model="form.phone">
 
+			<label for="country">Country <span class="faded bold"></span></label>
+
+			<select ng-model="form.countryCode"
+					ng-change="updateCountryBasedOnCountryCode()"
+					ng-options="key as value for (key , value) in isoCountries">
+			</select>
+
+			<input type="hidden" name="country" ng-model="form.country">
+
 			<label for="address">Shipping Address</label>
 			<input type="text" name="address" id="address" ng-model="form.address">
 
 			<label for="city">City</label>
 			<input type="text" name="city" id="city" ng-model="form.city">
 
-			<br>
-
-			<div class="checkout-form">
-				<div class="billing-label">
-					<input  type="checkbox"
-							style="width: 5%; float: left;"
-							name="sellOutOfUSA"
-							id="sellOutOfUSA"
-							ng-model="sellOutOfUSA"
-							ng-click="sellOutOfUSA = !sellOutOfUSA">
-					<label for="sellOutOfUSA">&nbsp;Out of USA</label>
-				</div>
-				<div class="clear"></div>
-			</div>
-
-			<br>
+			<label for="zip">Zip Code</label>
+			<input type="text" name="zip" id="zip" ng-model="form.zip">
 
      		<label for="state">State / Province</label>
 
-			<select ng-show="!sellOutOfUSA"
+			<select ng-show="form.countryCode == 'US'"
 					ng-model="form.state"
 					ng-options="tax.state as tax.state for tax in taxes"
 					ng-change="setStateTaxRecord()">
 			</select>
 
-            <input ng-show="sellOutOfUSA" type="text" name="state" id="state" ng-model="form.state">
+            <input ng-show="form.countryCode != 'US'"
+				   type="text"
+				   name="state"
+				   id="state"
+				   ng-model="form.state">
 
-			<label for="zip">Zip Code</label>
-			<input type="text" name="zip" id="zip" ng-model="form.zip">
-
-			<label for="country">Country <span class="faded bold"></span></label>
-			<input type="text" name="country" id="country" ng-model="form.country">
+			<br>
 
 			<label>Note to International Orders -</label>
 			<p class="cart-note">When shipping outside the USA rates vary. We have found it best to apply rates order specific. Go ahead and place your order now and we will PayPal request the difference in shipping paid on order placed with the actual shipping cost. Thank you.</p>

@@ -214,6 +214,13 @@ class ProductRepository implements ProductRepositoryInterface {
 		$product->attachedImage = (isset($data['attachedImage'])) ? $data['attachedImage'] : '';
 		$product->detachedImage = (isset($data['detachedImage'])) ? $data['detachedImage'] : '';
         $product->image_no_3 = (isset($data['image_no_3'])) ? $data['image_no_3'] : '';
+        $product->image_no_4 = (isset($data['image_no_4'])) ? $data['image_no_4'] : '';
+        $product->image_no_5 = (isset($data['image_no_5'])) ? $data['image_no_5'] : '';
+        $product->image_no_6 = (isset($data['image_no_6'])) ? $data['image_no_6'] : '';
+        $product->image_no_7 = (isset($data['image_no_7'])) ? $data['image_no_7'] : '';
+        $product->image_no_8 = (isset($data['image_no_8'])) ? $data['image_no_8'] : '';
+        $product->image_no_9 = (isset($data['image_no_9'])) ? $data['image_no_9'] : '';
+
 		$product->emailImage = (isset($data['emailImage'])) ? $data['emailImage'] : '';
 		$product->thumb = (isset($data['thumb'])) ? $data['thumb'] : '';
 		if (isset($data['availabilityTypeId'])) $product->availabilityTypeId = $data['availabilityTypeId'];
@@ -309,7 +316,13 @@ class ProductRepository implements ProductRepositoryInterface {
 
         $product->template = (isset($data['template'])) ? $data['template'] : 'template_1';
 
-		return $product;
+        //Product dimensions
+        $product->prod_length = (isset($data['prod_length'])) ? $data['prod_length'] : 0;
+        $product->prod_width  = (isset($data['prod_width']))  ? $data['prod_width']  : 0;
+        $product->prod_height = (isset($data['prod_height'])) ? $data['prod_height'] : 0;
+        $product->prod_weight = (isset($data['prod_weight'])) ? $data['prod_weight'] : 0;
+
+        return $product;
 	}
 
 
