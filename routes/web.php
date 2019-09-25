@@ -133,15 +133,15 @@ Route::get('/display-order-email/customer/{orderId}', [ 'uses' => 'DisplayOrderN
 Route::post('/cart-calculations', ['uses' => 'CartCalculationsController@getCalculations']);
 
 //Xpsshipper - Routes
-Route::get('/xpsshipper-services-list', ['uses' => 'XpsshipperController@getServicesList']); //Works
-Route::get('/xpsshipper-integrated-quoting-options', ['uses' => 'XpsshipperController@getIntegratedQuotingOptions']); //Works
-Route::get('/xpsshipper-quote', ['uses' => 'XpsshipperController@getQuote']); //Works
-Route::get('/xpsshipper-delete-order', ['uses' => 'XpsshipperController@deleteOrder']); //Works
-Route::get('/xpsshipper-put-order', ['uses' => 'XpsshipperController@putOrder']); //Works
-Route::get('/xpsshipper-retrieve-shipment', ['uses' => 'XpsshipperController@retrieveShipment']); //Works
-Route::get('/xpsshipper-retrieve-shipments', ['uses' => 'XpsshipperController@retrieveShipments']); //Works
-Route::get('/xpsshipper-search-shipments', ['uses' => 'XpsshipperController@searchShipments']); //Works
-Route::get('/xpsshipper-retrieve-shipment-label', ['uses' => 'XpsshipperController@retrieveShipmentLabel']); //Works
+//Route::get('/xpsshipper-services-list',                 ['uses' => 'XpsshipperController@getServicesList']);
+//Route::get('/xpsshipper-integrated-quoting-options',    ['uses' => 'XpsshipperController@getIntegratedQuotingOptions']);
+//Route::get('/xpsshipper-quote',                         ['uses' => 'XpsshipperController@getQuote']);
+//Route::get('/xpsshipper-delete-order',                  ['uses' => 'XpsshipperController@deleteOrder']);
+//Route::get('/xpsshipper-put-order',                     ['uses' => 'XpsshipperController@putOrder']);
+//Route::get('/xpsshipper-retrieve-shipment',             ['uses' => 'XpsshipperController@retrieveShipment']);
+//Route::get('/xpsshipper-retrieve-shipments',            ['uses' => 'XpsshipperController@retrieveShipments']);
+//Route::get('/xpsshipper-search-shipments',              ['uses' => 'XpsshipperController@searchShipments']);
+//Route::get('/xpsshipper-retrieve-shipment-label',       ['uses' => 'XpsshipperController@retrieveShipmentLabel']);
 //Xpsshipper - Routes - end
 
 //Below code is to test mailable objects. Uncomment if necessary.
