@@ -53,61 +53,61 @@
             $ctrl.newProduct.sizes = [];
 
             $ctrl.newProduct.name_text_align = 'left';
-            $ctrl.newProduct.name_font_weight = 'normal';
+            $ctrl.newProduct.name_font_weight = 'bold';
             $ctrl.newProduct.name_font_style = 'normal';
-            $ctrl.newProduct.name_font_size = 26;
+            $ctrl.newProduct.name_font_size = 70;
 
             $ctrl.short_name_space = 0;
 
             $ctrl.newProduct.name_text_align_for_mobile = 'left';
-            $ctrl.newProduct.name_font_weight_for_mobile = 'normal';
+            $ctrl.newProduct.name_font_weight_for_mobile = 'bold';
             $ctrl.newProduct.name_font_style_for_mobile = 'normal';
-            $ctrl.newProduct.name_font_size_for_mobile = 10;
+            $ctrl.newProduct.name_font_size_for_mobile = 40;
 
             $ctrl.newProduct.name_text_align_for_shelf = 'left';
-            $ctrl.newProduct.name_font_weight_for_shelf = 'normal';
+            $ctrl.newProduct.name_font_weight_for_shelf = 'bold';
             $ctrl.newProduct.name_font_style_for_shelf = 'normal';
-            $ctrl.newProduct.name_font_size_for_shelf = 16;
+            $ctrl.newProduct.name_font_size_for_shelf = 20;
 
             $ctrl.newProduct.name_extension_font_weight = 'normal';
             $ctrl.newProduct.name_extension_font_style = 'normal';
-            $ctrl.newProduct.name_extension_font_size = 26;
+            $ctrl.newProduct.name_extension_font_size = 70;
 
             $ctrl.newProduct.name_extension_font_weight_for_mobile = 'normal';
             $ctrl.newProduct.name_extension_font_style_for_mobile = 'normal';
-            $ctrl.newProduct.name_extension_font_size_for_mobile = 10;
+            $ctrl.newProduct.name_extension_font_size_for_mobile = 40;
 
             $ctrl.newProduct.name_extension_font_weight_for_shelf = 'normal';
             $ctrl.newProduct.name_extension_font_style_for_shelf = 'normal';
-            $ctrl.newProduct.name_extension_font_size_for_shelf = 16;
+            $ctrl.newProduct.name_extension_font_size_for_shelf = 20;
 
             $ctrl.newProduct.length_font_weight = 'normal';
             $ctrl.newProduct.length_font_style = 'normal';
-            $ctrl.newProduct.length_font_size = 26;
+            $ctrl.newProduct.length_font_size = 40;
 
-            $ctrl.newProduct.length_space = 0;
+            $ctrl.newProduct.length_space = 1;
 
             $ctrl.newProduct.include_length_on_email = 0;
 
             $ctrl.newProduct.length_font_weight_for_mobile = 'normal';
             $ctrl.newProduct.length_font_style_for_mobile = 'normal';
-            $ctrl.newProduct.length_font_size_for_mobile = 10;
+            $ctrl.newProduct.length_font_size_for_mobile = 15;
 
             $ctrl.newProduct.length_font_weight_for_shelf = 'normal';
             $ctrl.newProduct.length_font_style_for_shelf = 'normal';
-            $ctrl.newProduct.length_font_size_for_shelf = 16;
+            $ctrl.newProduct.length_font_size_for_shelf = 17;
 
             $ctrl.newProduct.mobile_name_text_align = 'left';
             $ctrl.newProduct.mobile_name_font_style = 'normal';
-            $ctrl.newProduct.mobile_name_font_weight = 'normal';
-            $ctrl.newProduct.mobile_name_font_size = 16;
+            $ctrl.newProduct.mobile_name_font_weight = 'bold';
+            $ctrl.newProduct.mobile_name_font_size = 13;
 
             $ctrl.newProduct.prod_length = 0;
             $ctrl.newProduct.prod_width  = 0;
             $ctrl.newProduct.prod_height = 0;
             $ctrl.newProduct.prod_weight = 0;
         } else {
-            $ctrl.editingNew = false;   //This is needed for function registerAddons
+            $ctrl.editingNew = false;   //This is needed for function register Addons
         }
 
         $ctrl.shelves = shelves;
