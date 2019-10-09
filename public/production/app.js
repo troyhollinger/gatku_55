@@ -16708,6 +16708,7 @@ var isoCountries = {
 var currentImageId = 'template-2-big-image-1';
 var intervalTime = 60000; // 60s
 var myInterval;
+var index = 0;
 
 $(document).ready(function() {
 	var path = window.location.pathname;
@@ -16715,10 +16716,36 @@ $(document).ready(function() {
 
 	//Only if path has /product/
 	if (path.match(regex)) {
-		flipImages();
-		intervalImageFlipping();
+		if (images.length) {
+			displayImages();
+
+			flipImages();
+			intervalImageFlipping();
+		}
 	}
 });
+
+var displayImages = function() {
+	$.each(images, function(idx, val) {
+
+		//Big images
+		var imageElement = '<div class="template-2-big-image" id="' + val.id + '">\n' +
+			'<img class="template-2-image-100-100" src="' + val.url + '">\n' +
+			'</div>\n';
+		$('.template-2-big-div').append(imageElement);
+
+		//Thumb images
+		var thumbImageId = getThumbImageId(val.key);
+		var imageThumb = '<div id="' + thumbImageId + '" class="template-2-small-image">\n' +
+			'<img class="template-2-image-100-100"\n' +
+			'   onmouseover="fadeInImageId(\'' + val.id + '\')"\n' +
+			'   src="' + val.url + '">\n';
+
+		$('.tamplate-2-small-images-wrapper').append(imageThumb);
+	});
+
+	displayHideThumbImage();
+};
 
 var removeMFadeOut = function(fadeOutId) {
 	setTimeout(function(){
@@ -16744,23 +16771,54 @@ var fadeInImageId = function(id){
 };
 
 var flipImages = function() {
-	fadeInImageId('template-2-big-image-1');
-	setTimeout(function () {
-			fadeInImageId('template-2-big-image-2');
-		},
-		5000);
-	setTimeout(function () {
-		fadeInImageId('template-2-big-image-3');
-	}, 10000);
-	setTimeout(function () {
-		fadeInImageId('template-2-big-image-1');
-	}, 15000);
+	$.each(images, function(idx, value) {
+		var timeInSec = value.key * 5000;
+		setTimeout(function () {
+				fadeInImageId(value.id);
+			},
+			timeInSec);
+	});
 };
 
 var intervalImageFlipping = function() {
 	myInterval = setInterval(function() {
 		flipImages();
 	}, intervalTime);
+};
+
+var displayHideThumbImage = function() {
+	$.each(images, function(idx, val) {
+		var thumbImageId =  getThumbImageId(val.key);
+		if (val.key >= index && val.key <= (index + 2)) {
+			$('#' + thumbImageId).show();
+		} else {
+			$('#' + thumbImageId).hide();
+		}
+	});
+};
+
+var moveLeft = function() {
+	if (index > 0) {
+		index--;
+	}
+
+	if (images[index]) {
+		displayHideThumbImage()
+	}
+};
+
+var moveRight = function() {
+	if (index < (images.length - 3)) {
+		index++;
+	}
+
+	if (images[index]) {
+		displayHideThumbImage()
+	}
+};
+
+var getThumbImageId = function(key) {
+	return 'thumb-image-' + key;
 };
 
 //  Product Template 2 to flip images - end
