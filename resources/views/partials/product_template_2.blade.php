@@ -1,4 +1,54 @@
 
+<script tyle="javascript">
+	var images = [];
+	var key = 0;
+
+	@if ($product->attachedImage)
+		addElementToArray('{!! $product->attachedImage !!}');
+	@endif
+
+	@if ($product->detachedImage)
+		addElementToArray('{!! $product->detachedImage !!}');
+	@endif
+
+	@if ($product->image_no_3)
+		addElementToArray('{!! $product->image_no_3 !!}');
+	@endif
+
+	@if ($product->image_no_4)
+		addElementToArray('{!! $product->image_no_4 !!}');
+	@endif
+
+	@if ($product->image_no_5)
+		addElementToArray('{!! $product->image_no_5 !!}');
+	@endif
+
+	@if ($product->image_no_6)
+		addElementToArray('{!! $product->image_no_6 !!}');
+	@endif
+
+	@if ($product->image_no_7)
+		addElementToArray('{!! $product->image_no_7 !!}');
+	@endif
+
+	@if ($product->image_no_8)
+		addElementToArray('{!! $product->image_no_8 !!}');
+	@endif
+
+	@if ($product->image_no_9)
+		addElementToArray('{!! $product->image_no_9 !!}');
+	@endif
+
+	function addElementToArray(url) {
+		var imageInfo = {
+			pos: key,
+			url: url,
+			id: 'template-2-big-image-' + key
+		};
+
+		key = images.push(imageInfo);
+	}
+</script>
 
 <div style="margin-top: 75px;"  class="container">
 
@@ -8,41 +58,13 @@
 
 			<!-- Big image -->
 			<div class="template-2-big-div">
-				<div class="template-2-big-image" id="template-2-big-image-1">
-					<img class="template-2-image-100-100" src="{!! $product->attachedImage !!}">
-				</div>
-				<div class="template-2-big-image" id="template-2-big-image-2">
-					<img class="template-2-image-100-100" src="{!! $product->detachedImage !!}">
-				</div>
-				<div class="template-2-big-image" id="template-2-big-image-3">
-					<img class="template-2-image-100-100" src="{!! $product->image_no_3 !!}">
-				</div>
+				<!-- Here goes images form js, from images array -->
 			</div>
 			<!-- Big image - end -->
 
-			<!-- Small image - 1 -->
-			<div class="template-2-small-image">
-				<img class="template-2-image-100-100"
-					 onmouseover="fadeInImageId('template-2-big-image-1')"
-					 src="{!! $product->attachedImage !!}">
+			<div class="tamplate-2-small-images-wrapper">
+				<!-- Here goes thumbs form js, from images array -->
 			</div>
-			<!-- Small image - 1 - end -->
-
-			<!-- Small image - 2 -->
-			<div class="template-2-small-image">
-				<img class="template-2-image-100-100"
-					 onmouseover="fadeInImageId('template-2-big-image-2')"
-					 src="{!! $product->detachedImage !!}">
-			</div>
-			<!-- Small image - 2 - end -->
-
-			<!-- Small image - 3 -->
-			<div class="template-2-small-image">
-				<img class="template-2-image-100-100"
-					 onmouseover="fadeInImageId('template-2-big-image-3')"
-					 src="{!! $product->image_no_3 !!}">
-			</div>
-			<!-- Small image - 3 - end -->
 
 		</div>
 

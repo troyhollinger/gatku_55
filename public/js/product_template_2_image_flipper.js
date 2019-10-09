@@ -13,10 +13,29 @@ $(document).ready(function() {
 
 	//Only if path has /product/
 	if (path.match(regex)) {
+		if (images.length) {
+			displayImages();
+		}
+
 		flipImages();
 		intervalImageFlipping();
 	}
 });
+
+var displayImages = function() {
+	$.each(images, function(idx, val) {
+		var imageElement = '<div class="template-2-big-image" id="' + val.id + '">\n' +
+			'<img class="template-2-image-100-100" src="' + val.url + '">\n' +
+			'</div>\n';
+		var imageThumb = '<div class="template-2-small-image">\n' +
+			'<img class="template-2-image-100-100"\n' +
+			'   onmouseover="fadeInImageId(\'' + val.id + '\')"\n' +
+			'   src="' + val.url + '">\n';
+
+		$('.template-2-big-div').append(imageElement);
+		$('.tamplate-2-small-images-wrapper').append(imageThumb);
+	});
+};
 
 var removeMFadeOut = function(fadeOutId) {
 	setTimeout(function(){

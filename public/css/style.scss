@@ -4776,9 +4776,11 @@ hover-card {
 }
 
 .template-2-images-wrapper {
+	display: inline-block;
 	width: 100%;
 	height: 700px;
 	padding: 5px;
+	overflow: hidden;
 
 	@include breakpoint(small) {
 		height: 600px;
@@ -4790,6 +4792,12 @@ hover-card {
 }
 
 // Product Template 2 - css classes
+
+.tamplate-2-small-images-wrapper {
+	display: inline-flex;
+	height: 120px;
+	overflow: hidden;
+}
 
 .template-2-big-div {
 	width: 480px;
