@@ -16709,6 +16709,8 @@ var currentImageId = 'template-2-big-image-1';
 var intervalTime = 60000; // 60s
 var myInterval;
 
+var index = 0;
+
 $(document).ready(function() {
 	var path = window.location.pathname;
 	var regex = /\/product\//;
@@ -16717,25 +16719,32 @@ $(document).ready(function() {
 	if (path.match(regex)) {
 		if (images.length) {
 			displayImages();
-		}
 
-		flipImages();
-		intervalImageFlipping();
+			flipImages();
+			intervalImageFlipping();
+		}
 	}
 });
 
 var displayImages = function() {
 	$.each(images, function(idx, val) {
+
+		//Big images
 		var imageElement = '<div class="template-2-big-image" id="' + val.id + '">\n' +
 			'<img class="template-2-image-100-100" src="' + val.url + '">\n' +
 			'</div>\n';
-		var imageThumb = '<div class="template-2-small-image">\n' +
+		$('.template-2-big-div').append(imageElement);
+
+		//Thumb images
+		var thumbImageId = 'thumb-image-' + val.key;
+		var imageThumb = '<div id="' + thumbImageId + '" class="template-2-small-image">\n' +
 			'<img class="template-2-image-100-100"\n' +
 			'   onmouseover="fadeInImageId(\'' + val.id + '\')"\n' +
 			'   src="' + val.url + '">\n';
 
-		$('.template-2-big-div').append(imageElement);
 		$('.tamplate-2-small-images-wrapper').append(imageThumb);
+
+		displayHideThumbImage(thumbImageId, val.key);
 	});
 };
 
@@ -16763,17 +16772,13 @@ var fadeInImageId = function(id){
 };
 
 var flipImages = function() {
-	fadeInImageId('template-2-big-image-1');
-	setTimeout(function () {
-			fadeInImageId('template-2-big-image-2');
-		},
-		5000);
-	setTimeout(function () {
-		fadeInImageId('template-2-big-image-3');
-	}, 10000);
-	setTimeout(function () {
-		fadeInImageId('template-2-big-image-1');
-	}, 15000);
+	$.each(images, function(idx, value) {
+		var timeInSec = value.key * 5000;
+		setTimeout(function () {
+				fadeInImageId(value.id);
+			},
+			timeInSec);
+	});
 };
 
 var intervalImageFlipping = function() {
@@ -16782,5 +16787,15 @@ var intervalImageFlipping = function() {
 	}, intervalTime);
 };
 
+var displayHideThumbImage = function(thumbImageId, key) {
+console.log(thumbImageId);
+console.log(key);
+	if (key >= index && key <= (index + 2)) {
+		$('#' + thumbImageId).show();
+	} else {
+		$('#' + thumbImageId).hide();
+	}
+
+};
 //  Product Template 2 to flip images - end
 

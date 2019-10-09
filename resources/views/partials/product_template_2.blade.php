@@ -41,7 +41,7 @@
 
 	function addElementToArray(url) {
 		var imageInfo = {
-			pos: key,
+			key: key,
 			url: url,
 			id: 'template-2-big-image-' + key
 		};
