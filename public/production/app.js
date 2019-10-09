@@ -16708,7 +16708,6 @@ var isoCountries = {
 var currentImageId = 'template-2-big-image-1';
 var intervalTime = 60000; // 60s
 var myInterval;
-
 var index = 0;
 
 $(document).ready(function() {
@@ -16736,16 +16735,16 @@ var displayImages = function() {
 		$('.template-2-big-div').append(imageElement);
 
 		//Thumb images
-		var thumbImageId = 'thumb-image-' + val.key;
+		var thumbImageId = getThumbImageId(val.key);
 		var imageThumb = '<div id="' + thumbImageId + '" class="template-2-small-image">\n' +
 			'<img class="template-2-image-100-100"\n' +
 			'   onmouseover="fadeInImageId(\'' + val.id + '\')"\n' +
 			'   src="' + val.url + '">\n';
 
 		$('.tamplate-2-small-images-wrapper').append(imageThumb);
-
-		displayHideThumbImage(thumbImageId, val.key);
 	});
+
+	displayHideThumbImage();
 };
 
 var removeMFadeOut = function(fadeOutId) {
@@ -16787,15 +16786,40 @@ var intervalImageFlipping = function() {
 	}, intervalTime);
 };
 
-var displayHideThumbImage = function(thumbImageId, key) {
-console.log(thumbImageId);
-console.log(key);
-	if (key >= index && key <= (index + 2)) {
-		$('#' + thumbImageId).show();
-	} else {
-		$('#' + thumbImageId).hide();
+var displayHideThumbImage = function() {
+	$.each(images, function(idx, val) {
+		var thumbImageId =  getThumbImageId(val.key);
+		if (val.key >= index && val.key <= (index + 2)) {
+			$('#' + thumbImageId).show();
+		} else {
+			$('#' + thumbImageId).hide();
+		}
+	});
+};
+
+var moveLeft = function() {
+	if (index > 0) {
+		index--;
 	}
 
+	if (images[index]) {
+		displayHideThumbImage()
+	}
 };
+
+var moveRight = function() {
+	if (index < (images.length - 3)) {
+		index++;
+	}
+
+	if (images[index]) {
+		displayHideThumbImage()
+	}
+};
+
+var getThumbImageId = function(key) {
+	return 'thumb-image-' + key;
+};
+
 //  Product Template 2 to flip images - end
 
