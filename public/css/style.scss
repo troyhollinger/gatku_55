@@ -4847,14 +4847,19 @@ hover-card {
 	float: left;
 	border: 1px solid #CCCCCC;
 
+	@include breakpoint(medium) {
+		width: 100px;
+		height: 100px;
+	}
+
 	@include breakpoint(small) {
-		width: 133px;
-		height: 133px;
+		width: 80px;
+		height: 80px;
 	}
 
 	@include breakpoint(xsmall) {
-		width: 100px;
-		height: 100px;
+		width: 80px;
+		height: 80px;
 	}
 }
 
@@ -4882,6 +4887,18 @@ img.template-2-image-100-100 {
 	float: left;
 	margin-top: 30px;
 	cursor:pointer;
+
+	@include breakpoint(small) {
+		height: 80px;
+		width: 30px;
+		margin-top: 20px;
+	}
+
+	@include breakpoint(xsmall) {
+		height: 80px;
+		width: 30px;
+		margin-top: 20px;
+	}
 }
 
 .right-thumb-button {
@@ -4892,5 +4909,17 @@ img.template-2-image-100-100 {
 	float: left;
 	margin-top: 30px;
 	cursor:pointer;
+
+	@include breakpoint(small) {
+		height: 80px;
+		width: 30px;
+		margin-top: 20px;
+	}
+
+	@include breakpoint(xsmall) {
+		height: 80px;
+		width: 30px;
+		margin-top: 20px;
+	}
 }
 // Product Template 2 - css classes - end
