@@ -62,16 +62,19 @@
 			</div>
 			<!-- Big image - end -->
 
-			<div class="left-thumb-button" onclick="moveLeft()"></div>
+			<div class="left-thumb-button"
+				 onclick="moveLeft()">
+			</div>
+
 			<div class="tamplate-2-small-images-wrapper">
 				<!-- Here goes thumbs form js, from images array -->
 			</div>
-			<div class="right-thumb-button" onclick="moveRight()"></div>
+
+			<div class="right-thumb-button"
+				 onclick="moveRight()">
+			</div>
 
 		</div>
-
-
-
 
 		<div class="product-title-nowrap">
 			<!-- This is part responsible for display product name for desktop -->
