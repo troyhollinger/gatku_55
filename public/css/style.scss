@@ -4840,8 +4840,8 @@ hover-card {
 }
 
 .template-2-small-image {
-	width: 132px;
-	height: 132px;
+	width: 153px;
+	height: 153px;
 	margin: 5px;
 	float: left;
 	border: 1px solid #CCCCCC;
@@ -4879,13 +4879,15 @@ img.template-2-image-100-100 {
 	transition: visibility 0s linear 1000ms, opacity 1000ms;
 }
 .left-thumb-button {
+	position: absolute;
 	background-image: url('../img/Website_Gatku-Arrows-Left.svg');
 	height: 90px;
 	width: 30px;
 	background-repeat: no-repeat;
 	float: left;
-	margin-top: 30px;
+	margin-top: 50px;
 	cursor:pointer;
+	left: 28px;
 
 	@include breakpoint(small) {
 		height: 80px;
@@ -4901,13 +4903,15 @@ img.template-2-image-100-100 {
 }
 
 .right-thumb-button {
+	position: absolute;
 	background-image: url('../img/Website_Gatku-Arrows-Right.svg');
 	height: 90px;
 	width: 30px;
 	background-repeat: no-repeat;
-	float: left;
-	margin-top: 30px;
+	float: right;
+	margin-top: 50px;
 	cursor:pointer;
+	left: 470px;
 
 	@include breakpoint(small) {
 		height: 80px;

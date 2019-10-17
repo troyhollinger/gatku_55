@@ -16706,8 +16706,6 @@ var isoCountries = {
  * This is code for Product Template 2 to flip images
  */
 var currentImageId = 'template-2-big-image-1';
-var intervalTime = 60000; // 60s
-var myInterval;
 var index = 0;
 
 $(document).ready(function() {
@@ -16718,9 +16716,7 @@ $(document).ready(function() {
 	if (path.match(regex)) {
 		if (images.length) {
 			displayImages();
-
-			flipImages();
-			intervalImageFlipping();
+			switchThumbsAndImages();
 		}
 	}
 });
@@ -16738,7 +16734,6 @@ var displayImages = function() {
 		var thumbImageId = getThumbImageId(val.key);
 		var imageThumb = '<div id="' + thumbImageId + '" class="template-2-small-image">\n' +
 			'<img class="template-2-image-100-100"\n' +
-			'   onmouseover="fadeInImageId(\'' + val.id + '\')"\n' +
 			'   src="' + val.url + '">\n';
 
 		$('.tamplate-2-small-images-wrapper').append(imageThumb);
@@ -16754,10 +16749,6 @@ var removeMFadeOut = function(fadeOutId) {
 };
 
 var fadeInImageId = function(id){
-	//set interval flipping
-	clearInterval(myInterval);
-	intervalImageFlipping();
-
 	//add and remove class to fadeIn and fadeOut
 	$('#'+currentImageId).addClass("m-fadeOut");
 	$('#'+currentImageId).removeClass("m-fadeIn");
@@ -16768,22 +16759,6 @@ var fadeInImageId = function(id){
 	removeMFadeOut(currentImageId);
 	//assign current image id to global variable
 	currentImageId = id;
-};
-
-var flipImages = function() {
-	$.each(images, function(idx, value) {
-		var timeInSec = value.key * 5000;
-		setTimeout(function () {
-				fadeInImageId(value.id);
-			},
-			timeInSec);
-	});
-};
-
-var intervalImageFlipping = function() {
-	myInterval = setInterval(function() {
-		flipImages();
-	}, intervalTime);
 };
 
 var displayHideThumbImage = function() {
@@ -16801,19 +16776,21 @@ var moveLeft = function() {
 	if (index > 0) {
 		index--;
 	}
-
-	if (images[index]) {
-		displayHideThumbImage()
-	}
+	switchThumbsAndImages();
 };
 
 var moveRight = function() {
-	if (index < (images.length - 3)) {
+	if (index < (images.length -1)) {
 		index++;
 	}
+	switchThumbsAndImages();
+};
 
+var switchThumbsAndImages = function()
+{
 	if (images[index]) {
 		displayHideThumbImage()
+		fadeInImageId(images[index].id);
 	}
 };
 
