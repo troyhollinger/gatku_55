@@ -2,9 +2,10 @@
   "name": "vantage-project",
   "version": "1.0.0",
   "devDependencies": {
-    "grunt": "^1.0.3",
+    "grunt": "^1.0.4",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-jshint": "^2.1.0",
     "grunt-contrib-sass": "^0.7.4",
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.1.0",
