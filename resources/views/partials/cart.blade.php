@@ -127,6 +127,13 @@
 				<div class="clear"></div>
 			</div>
 
+            <div class="cart-details-row" ng-if="global_discount_switch">
+                <span class="cart-item-column">Discount ( @{{ global_discount_percentage }}% )</span>
+                <span class="cart-price-column shipping-column" ng-bind="'$' + ( cartCalculations.discount | money | number:2 )"></span>
+
+                <div class="clear"></div>
+            </div>
+
 			<div class="cart-details-row">
 				<span class="cart-item-column">Subtotal <span class="smaller faded bold"
 															  ng-if="( cartCalculations.subtotal - cartCalculations.discount ) < 30000 && !global_discount_switch">- get to $300 for free shipping!</span><span class="smaller faded bold" ng-if="( cartCalculations.subtotal - cartCalculations.discount ) >= 30000 && !global_discount_switch">You get free shipping!</span>
@@ -380,13 +387,20 @@
 
 		<div class="cart-details">
 
-{{--			<div class="cart-details-row" ng-if="eligibleForDiscount">--}}
-{{--				<span class="cart-item-column">Discounts - <span class="smaller faded">@{{ discountText }}</span></span>--}}
-{{--				<span class="cart-price-column shipping-column success bold" ng-bind="'- $' + ( cartCalculations.discount | money | number:2 )"></span>--}}
+			<div class="cart-details-row" ng-show="discount">
+				<span class="cart-item-column">
+					Applied Discount: <b>@{{  discount.discount }}%</b>
+				</span>
+				<span class="cart-price-column shipping-column" ng-bind="'$' + ( cartCalculations.discount | money | number:2 )"></span>
+				<div class="clear"></div>
+			</div>
 
-{{--				<div class="clear"></div>--}}
+			<div class="cart-details-row" ng-if="global_discount_switch">
+				<span class="cart-item-column">Discount ( @{{ global_discount_percentage }}% )</span>
+				<span class="cart-price-column shipping-column" ng-bind="'$' + ( cartCalculations.discount | money | number:2 )"></span>
 
-{{--			</div>--}}
+				<div class="clear"></div>
+			</div>
 
 			<div class="cart-details-row">
 				<span class="cart-item-column">Subtotal</span>
