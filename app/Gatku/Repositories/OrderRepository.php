@@ -297,8 +297,8 @@ class OrderRepository {
                 $itemAddon->productId = $addon['id'];
                 $itemAddon->quantity = $addon['quantity'];
 
-                if($addon['sizeable'] && $addon['sizeId']) {
-                    $itemAddon->sizeId = $addon['sizeId'];
+                if($addon['sizeable'] && $addon['id']) {
+                    $itemAddon->sizeId = $addon['id'];
                 }
 
                 $itemAddon->include_in_package = ($addon['include_in_package']) ? $addon['include_in_package'] : 0;
