@@ -1,0 +1,40 @@
+version: '3'
+
+# Services definitions
+services:
+  develop-mysql:
+    image: mysql:5.7.25
+    container_name: mysql-5.7.25
+    #restart: always    # uncomment if you want to auto start
+    environment:
+      MYSQL_DATABASE: forge
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: developer
+      MYSQL_ROOT_PASSWORD: developer
+    volumes:
+      - data:/var/lib/mysql  # See below volumes definition
+    networks:
+      default:  # See below networks definition
+        ipv4_address: 172.18.0.20
+
+  gatku:
+    image: marcincyniu/ubuntu_18.04:20190725
+    command: ./gatku/dev_config/docker/start_container
+    container_name: gatku
+    volumes:
+      - ~/code/gatku/gatku_55:/gatku
+    networks:
+      default: # See below networks definition
+        ipv4_address: 172.18.0.10
+
+# Volumes definitions
+volumes:
+  data:
+    external:
+      name: develop-mysql-5.7.25
+
+# Networks definitions
+networks:
+  default:
+    external:
+      name: dev-net

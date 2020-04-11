@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# -x to verbose
+set +x
+
+containerName=$1
+stage=$2
+
+function checkContainerName {
+    exit 1
+}
+
+#function addDockerDevNetwork {
+#    docker network create --driver=bridge --ip-range/home/developer 172.18.0.0/16 --subnet 172.18.0.0/16 dev-net
+#}
+
+function develop-mysql {
+    docker  run --rm  --tty --interactive \
+        --name mysql-5.7.25 \
+        --mount type=volume,source=docker_develop-mysql-5.7.25,target=/var/lib/mysql \
+        --net dev-net \
+        --ip 172.18.0.20 \
+        mysql:5.7.25
+}
+
+function gatku {
+    docker run --rm  --tty --interactive \
+    --name gatku \
+    --volume ~/code/gatku/gatku_55:/gatku \
+    --net dev-net \
+    --ip 172.18.0.10 \
+    marcincyniu/ubuntu_18.04:20190725 ./gatku/dev_config/docker/start_container
+}
+
+function checkStage {
+    # if empty then assign dev
+    if [ -z "${stage}" ]; then
+        stage='dev'
+    fi
+
+    # check if stage is allowed
+    local allowedStages="dev prod qa"
+
+    if [ -z "${allowedStages##*$stage*}" ]; then
+        echo "Allowed stage:" ${stage}
+    else
+        echo "Stage " ${stage} "not allowed."
+        exit 1
+    fi
+}
+
+checkStage
+
+echo 'Starting container:' ${containerName}
+echo 'Container stage:' ${stage}
+
+${containerName}
