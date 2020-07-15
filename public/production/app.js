@@ -16714,10 +16714,12 @@ $(document).ready(function() {
 
 	//Only if path has /product/
 	if (path.match(regex)) {
-		if (images.length) {
-			displayImages();
-			switchThumbsAndImages();
-		}
+		// if (images) {
+		// 	if (images.length) {
+		// 		displayImages();
+		// 		switchThumbsAndImages();
+		// 	}
+		// }
 	}
 });
 
