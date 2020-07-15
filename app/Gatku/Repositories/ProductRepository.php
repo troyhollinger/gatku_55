@@ -419,7 +419,23 @@ class ProductRepository implements ProductRepositoryInterface {
      */
     public function getAllAvailable()
     {
+        //This is correct query for sizable products:
         $products = Product::with('type')->where('available', 1)->orderBy('shelf_id')->orderBy('order')->get();
+
+        Log::info($products);
+        return $products;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllExemptUnavailable()
+    {
+        $products = Product::with('type')
+            ->whereNotIn('availabilityTypeId', [4])  //for product availability status
+            ->where('available', 1)                         //for sizable availability status
+            ->orderBy('shelf_id')
+            ->orderBy('order')->get();
 
         Log::info($products);
         return $products;

@@ -227,7 +227,8 @@ class ProductController extends BaseController
      */
     public function getAllAvailable()
     {
-        $products = $this->product->getAllAvailable();
+        //$products = $this->product->getAllAvailable(); //This method doesn't pull correct product set based on availability
+        $products = $this->product->getAllExemptUnavailable();
 
         if ($products === false) {
             return \Response::json(['message' => 'Sorry, could not get All Available Products.'], 404);
