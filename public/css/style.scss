@@ -745,7 +745,17 @@ video {
                 }
             }
 
-            &-Package,
+            &-Package {
+				@extend .product-thumb-container;
+                width:20%;
+                img {
+                  width:40%;
+                  &:hover {
+                    @include transform(rotate(20deg) translate(0, -20px));
+                  }
+                }
+			}
+
             &-Shrinker,
             &-Extra,
             &-Shafts {
@@ -825,7 +835,11 @@ video {
                 width:20%;
             }
 
-			&-Package,
+			&-Package {
+				@extend .product-link-container;
+              	width:20%;
+            }
+
 			&-Shrinker,
             &-Extra,
 			&-Shafts {
