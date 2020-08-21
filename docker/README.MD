@@ -56,3 +56,9 @@ $ docker  run --rm  --tty --interactive \
 --ip 172.18.0.10 \
 marcincyniu/ubuntu_18.04:20190725
 ``` 
+
+### Docker Compose Start
+- go to directory, in this project case: ~/code/gatku/gatku55/docker and run command:
+```
+$ docker-compose up
+```
