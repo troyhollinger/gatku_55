@@ -70,7 +70,7 @@ class ShippingTrackRepository {
                 $request->order->total_sum
             );
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
 			return false;
@@ -91,10 +91,10 @@ class ShippingTrackRepository {
                     'email' => $request->order->customer->email,
                     'name' => $request->order->customer->fullName
                 ],
-                [
-                    'email' => 'emailme@troyhollinger.com',
-                    'name' => 'Troy Hollinger'
-                ]
+                // [
+                //     'email' => 'emailme@troyhollinger.com',
+                //     'name' => 'Troy Hollinger'
+                // ]
             ])->send(new EmailsShippingTrack($request, $discount, $subtotal, $shipping, $taxAmount, $total, $date, $this->emailSettings));
         } else {
             //for dev and QA

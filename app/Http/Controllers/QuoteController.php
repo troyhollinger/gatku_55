@@ -8,6 +8,7 @@ use Gatku\Model\HomeSetting;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Request;
 
 class QuoteController extends BaseController {
 
@@ -25,23 +26,23 @@ class QuoteController extends BaseController {
 
 	public function sendEmail() {
 
-		$form = \Request::all();
-		$name = \Request::get('name');
+		$form = Request::all();
+		$name = Request::get('name');
 
 		if (App::environment('production')) {
             Mail::to([
                 [
                     'email' => 'dustin@gatku.com',
                     'name' => 'Dustin McIntyre'
-                ],
-                [
-                    'email' => 'emailme@troyhollinger.com',
-                    'name' => 'Troy Hollinger'
-                ]
+                ] // ,
+                // [
+                //     'email' => 'emailme@troyhollinger.com',
+                //     'name' => 'Troy Hollinger'
+                // ]
             ])->send(new EmailsInquiry($form, $name));
 		}
 
-        $this->mailchimp->addSubscription(\Request::get('name'), \Request::get('email'), \Request::get('country'));
+        $this->mailchimp->addSubscription(Request::get('name'), Request::get('email'), Request::get('country'));
 	} 
 
 }
