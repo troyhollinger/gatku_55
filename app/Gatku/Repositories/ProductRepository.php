@@ -322,6 +322,9 @@ class ProductRepository implements ProductRepositoryInterface {
         $product->prod_height = (isset($data['prod_height'])) ? $data['prod_height'] : 0;
         $product->prod_weight = (isset($data['prod_weight'])) ? $data['prod_weight'] : 0;
 
+        $product->editable_field_1 = (isset($data['editable_field_1'])) ? $data['editable_field_1'] : '';
+        $product->editable_field_2 = (isset($data['editable_field_2'])) ? $data['editable_field_2'] : '';
+
         return $product;
 	}
 

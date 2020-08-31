@@ -15481,6 +15481,9 @@ app.controller('VideoController', ['$scope', '$sce', function($scope, $sce) {
             $ctrl.newProduct.prod_width  = 0;
             $ctrl.newProduct.prod_height = 0;
             $ctrl.newProduct.prod_weight = 0;
+
+            $ctrl.newProduct.editable_field_1 = null;
+            $ctrl.newProduct.editable_field_2 = null;
         } else {
             $ctrl.editingNew = false;   //This is needed for function register Addons
         }
