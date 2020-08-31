@@ -156,11 +156,18 @@
 		@if($product->availability->slug === 'available')
 
 			@if($product->type->slug == 'package')
-				<p class="addon-title right"><span style="background-color: #000; color: #FFF;">Included in Package</span> + Optional Add Ons</p>
+				@if($product->editable_field_1)
+					<span>{!! $product->editable_field_1 !!}</span> 
+				@else
+					<p class="addon-title right"><span style="background-color: #000; color: #FFF;">Included in Package</span> + Optional Add Ons</p>
+				@endif
 			@else
-				<p class="addon-title right">Click to add to order</p>
+				@if($product->editable_field_2)
+					<span>{!! $product->editable_field_2 !!}</span> 
+				@else
+					<p class="addon-title right">Click to add to order</p>
+				@endif
 			@endif
-
 
 			<div class="clear"></div>
 
