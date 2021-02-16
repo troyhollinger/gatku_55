@@ -16717,7 +16717,7 @@ $(document).ready(function() {
 
 	//Only if path has /product/
 	if (path.match(regex)) {
-		if (images !== undefined ) {
+		if (typeof images !== 'undefined' ) {
 			if (images.length) {
 				displayImages();
 				switchThumbsAndImages();
