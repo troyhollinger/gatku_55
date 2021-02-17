@@ -727,6 +727,7 @@ video {
 				@extend .product-thumb-container;
 				width:20%;
 				img {
+					transform: rotate(20deg) translate(0, 5%);
 					width:30%;
 					&:hover {
 						@include transform(rotate(20deg) translate(0, 0px));  // Original: translate(0, -20px)
@@ -736,8 +737,9 @@ video {
 
             &-Pole {
                 @extend .product-thumb-container;
-                width:20%;
+				width:20%;
                 img {
+					transform: rotate(20deg) translate(0, 5%);
                     width:40%;
                     &:hover {
                         @include transform(rotate(20deg) translate(0, 0px));  // Original: translate(0, -20px)
@@ -749,10 +751,11 @@ video {
 				@extend .product-thumb-container;
                 width:20%;
                 img {
-                  width:40%;
-                  &:hover {
-                    @include transform(rotate(20deg) translate(0, 0px));  // Original: translate(0, -20px)
-                  }
+					transform: rotate(20deg) translate(0, 5%);
+					width:40%;
+					&:hover {
+						@include transform(rotate(20deg) translate(0, 0px));  // Original: translate(0, -20px)
+					}
                 }
 			}
 
@@ -762,10 +765,11 @@ video {
                 @extend .product-thumb-container;
                 width:25%;
                 img {
-                  width:30%;
-                  &:hover {
-                    @include transform(rotate(20deg) translate(0, 0px));  // Original: translate(0, -20px)
-                  }
+					transform: rotate(20deg) translate(0, 5%);
+					width:30%;
+					&:hover {
+						@include transform(rotate(20deg) translate(0, 0px));  // Original: translate(0, -20px)
+					}
                 }
                 .knife-thumb {
                     width:57%;
@@ -799,6 +803,7 @@ video {
 				width:33.3333%;
 				width:calc(100% / 3);
 				img {
+					transform: rotate(20deg) translate(0, 5%);
 					width:88%;
 					//@include transform(rotate(0deg));   //This makes image vertical
 					&:hover {
