@@ -751,7 +751,7 @@ video {
 				@extend .product-thumb-container;
                 width:20%;
                 img {
-					//transform: rotate(20deg) translate(0, 15%);
+					transform: rotate(20deg) translate(0, 15%);
 					width:40%;
 					&:hover {
 						@include transform(rotate(20deg) translate(0, -20px));  // Original: translate(0, -20px)
