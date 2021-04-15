@@ -17,9 +17,13 @@ Route::get('/', ['as' => 'home', function(HomeSetting $homeSetting) {
     return View::make('pages.home')->with('homeSetting',  $homeSetting);
 }]);
 
-Route::get('au', ['as' => 'australia', function(HomeSetting $homeSetting) {
-    return View::make('pages.australia')->with('homeSetting',  $homeSetting);
+Route::get('au', ['as' => 'home', function(HomeSetting $homeSetting) {
+    return redirect('/');
 }]);
+
+// Route::get('au', ['as' => 'australia', function(HomeSetting $homeSetting) {
+//     return View::make('pages.australia')->with('homeSetting',  $homeSetting);
+// }]);
 
 Route::post('product/image', ['as' => 'product.image', 'uses' => 'ProductController@upload']);
 Route::get('product/types', ['as' => 'product.types', 'uses' => 'ProductController@types']);
