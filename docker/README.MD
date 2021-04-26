@@ -40,7 +40,7 @@ mysql:5.7.25
 ### Import data to MySQL
 - After run Daily Use Run please upload data to database if necessary:
 ```
-$ mysql -hmysql-5.7.25 -udeveloper -pdeveloper forge < {path and file name} 
+$ mysql -hmysql-5.7.25 -udeveloper -pdeveloper --ssl-mode=DISABLED forge < {path and file name} 
 ```
 
 ## GATKU docker container
