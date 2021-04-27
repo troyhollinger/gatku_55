@@ -17,6 +17,12 @@
     "phantomjs": "^1.9.17"
   },
   "dependencies": {
-    "angular-route": "^1.7.2"
+    "angular-route": "^1.7.2",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-css": "^0.1.0",
+    "gulp-sass": "^4.1.0"
   }
 }
