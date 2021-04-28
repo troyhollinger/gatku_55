@@ -47,7 +47,7 @@ const config = {
         dest: 'app.js'
     },
     sass: {
-        src: 'css/style.scss',
+        src:  'css/style.scss',
         dest: 'style.css'
     },
     css: {
@@ -60,8 +60,7 @@ const config = {
                 'bower_components/skippr/css/jquery.skippr.css',
                 'bower_components/rollerblade/rollerblade.css',
                 'bower_components/fancybox-plus/css/jquery.fancybox-plus.css',
-                'bower_components/jquery-ui/themes/base/jquery-ui.min.css',
-                'css/style.css'
+                'bower_components/jquery-ui/themes/base/jquery-ui.min.css'
         ],
         dest: 'app.css'
     }
@@ -77,7 +76,7 @@ gulp.task('js', function() {
 gulp.task('sass', function () {
     return gulp.src(config.sass.src)
       //.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
-      .pipe(sass.sync().on('error', sass.logError))
+      .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest(targetDir + sassToCss));
 });
 
@@ -96,6 +95,8 @@ gulp.task('clean', function() {
 });
 
 gulp.task('all', gulp.series('clean', 'js', 'sass', 'css'));
+
+//gulp.task('all', gulp.series('clean'));
 
 //gulp.parallel('js', function(done) { done(); })
 
