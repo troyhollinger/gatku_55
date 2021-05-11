@@ -52,15 +52,15 @@ const config = {
     },
     css: {
         src: [
-                'production' + sassToCss + '/style.css',
-                'bower_components/bootstrap/dist/css/bootstrap.min.css',
+                // 'bower_components/bootstrap/dist/css/bootstrap.min.css',
                 'css/font-awesome.min.css',
                 'css/reset.css',
                 'css/MyFontsWebfontsKit.css',
                 'bower_components/skippr/css/jquery.skippr.css',
                 'bower_components/rollerblade/rollerblade.css',
                 'bower_components/fancybox-plus/css/jquery.fancybox-plus.css',
-                'bower_components/jquery-ui/themes/base/jquery-ui.min.css'
+                'bower_components/jquery-ui/themes/base/jquery-ui.min.css',
+                'production' + sassToCss + '/style.css',
         ],
         dest: 'app.css'
     }

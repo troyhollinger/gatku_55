@@ -1,3 +1,5 @@
+@import '../bower_components/bootstrap/scss/bootstrap.scss';
+
 @import 'bourbon/_bourbon.scss';
 
 // Variables
@@ -389,41 +391,6 @@ a:hover {
 		width:90%;
 	}
 
-}
-
-.skippr {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.skippr-nav-container {
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translate(-50%,0);
-    transform: translate(-50%,0);
-    -moz-transform: translate(-50%,0);
-    -ms-transform: translate(-50%,0);
-    bottom: 25px;
-    overflow: auto;
-    z-index: 6;
-}
-
-.skippr-nav-container {
-
-	bottom: 20px;
-	z-index: 6;
-	//@include breakpoint(small) {
-	//	bottom:85px;
-	//}
-}
-
-.skippr-arrow {
-	display: none; //Featue/232 slideshow arrows are hidden.
-	@include breakpoint(small) {
-		display: none;
-	}
 }
 
 .mast {
@@ -5007,16 +4974,15 @@ img.template-2-image-100-100 {
 }
 // Product Template 2 - css classes - end
 
-a, div, p, span {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
-    margin: 0;
-    padding: 0;
-}
 
 ul {
     list-style: none;
+}
+
+table a {
+	color: #000000;
+}
+
+.admin-container-new a {
+	color: #000000;
 }
