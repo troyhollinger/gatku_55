@@ -66,24 +66,30 @@ const config = {
     }
 };
 
-gulp.task('js', function() {
+gulp.task('js', function(done) {
     return gulp.src(config.js.src)
         .pipe(concat(config.js.dest))
         //.pipe(gulpIf(shouldUglify, uglify()))
         .pipe(gulp.dest(targetDir));
+
+        done();
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', function (done) {
     return gulp.src(config.sass.src)
       //.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
       .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest(targetDir + sassToCss));
+
+      done();
 });
 
-gulp.task('css', function () {
+gulp.task('css', function (done) {
     return gulp.src(config.css.src)
       .pipe(concatCss(config.css.dest))
       .pipe(gulp.dest(targetDir));
+
+      done();
 });
 
 
@@ -94,9 +100,18 @@ gulp.task('clean', function() {
     return del([targetDir]);
 });
 
-gulp.task('all', gulp.series('clean', 'js', 'sass', 'css'));
+gulp.task('all', function(done) {
+     gulp.series('clean', 'js', 'sass', 'css');
 
-//gulp.task('all', gulp.series('clean'));
+     done();
+});
 
-//gulp.parallel('js', function(done) { done(); })
 
+gulp.task('watch', function(done) {
+    for (let taskName in config) {
+        let task = config[taskName];
+        gulp.watch(task.src, gulp.parallel(taskName));
+    }
+    
+    done();
+});
