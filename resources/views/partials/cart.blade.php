@@ -136,7 +136,7 @@
 
 			<div class="cart-details-row">
 				<span class="cart-item-column">Subtotal <span class="smaller faded bold"
-															  ng-if="( cartCalculations.subtotal - cartCalculations.discount ) < 30000 && !global_discount_switch">- get to $300 for free shipping!</span><span class="smaller faded bold" ng-if="( cartCalculations.subtotal - cartCalculations.discount ) >= 30000 && !global_discount_switch">You get free shipping!</span>
+															  ng-if="( cartCalculations.subtotal - cartCalculations.discount ) < 40000 && !global_discount_switch">- get to $400 for free shipping!</span><span class="smaller faded bold" ng-if="( cartCalculations.subtotal - cartCalculations.discount ) >= 40000 && !global_discount_switch">You get free shipping!</span>
 				</span>
 				<span class="cart-price-column shipping-column"
 					  ng-bind="'$' + ( ( cartCalculations.subtotal - cartCalculations.discount ) | money | number:2 )">

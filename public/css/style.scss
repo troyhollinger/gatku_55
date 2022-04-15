@@ -1,3 +1,5 @@
+@import '../bower_components/bootstrap/scss/bootstrap.scss';
+
 @import 'bourbon/_bourbon.scss';
 
 // Variables
@@ -12,6 +14,20 @@ $light : #ECF0F1;
 $brand : #ea6271;
 $dark : #444444;
 
+
+body {
+	font-family: "Helvetica Neue", HelveticaNeue, Helvetica-Neue, Helvetica, Helvetica, Arial, sans-serif !important;
+}
+
+.store-container a {
+    color: #000000;
+    text-decoration: none
+}
+
+.store-container a:hover {
+    color: #000000;
+    text-decoration: none
+}
 
 //Mixins
 @mixin center {
@@ -377,22 +393,6 @@ a:hover {
 
 }
 
-.skippr-nav-container {
-
-	bottom: 20px;
-	z-index: 6;
-	//@include breakpoint(small) {
-	//	bottom:85px;
-	//}
-}
-
-.skippr-arrow {
-	display: none; //Featue/232 slideshow arrows are hidden.
-	@include breakpoint(small) {
-		display: none;
-	}
-}
-
 .mast {
 	position: fixed;
 	top:0 !important;
@@ -417,26 +417,23 @@ a:hover {
 		#logo-below {
 			display: inline;
 		}
+
+		a {
+			color: #ffffff;
+		}
 	}
 
 	li:hover {
-
 		text-decoration: underline;
-
 	}
 
 	a {
-
 		color:white;
-
 	}
 
 	@include breakpoint(small) {
-
 		display: none;
-
 	}
-
 }
 
 .container {
@@ -4976,3 +4973,17 @@ img.template-2-image-100-100 {
 	}
 }
 // Product Template 2 - css classes - end
+
+
+ul {
+    list-style: none;
+}
+
+table a {
+	color: #000000;
+}
+
+.admin-container-new a {
+	color: #000000;
+}
+

@@ -45,7 +45,7 @@ class CalculateOrdersService
      */
     private $homeSetting;
 
-    private $freeShippingAmountThreshold = 30000; //This is $300
+    private $freeShippingAmountThreshold = 40000; //This is $400
     /**
      * CalculateOrdersService constructor.
      * @param HomeSetting $homeSetting

@@ -7,10 +7,10 @@
 	<div class="container navigation-container">
 	@if (Route::currentRouteName() === 'thespear')
 	<style>
-		.mast ul.navigation li, .mast ul.navigation li a{
+		.mast ul .navigation li, .mast ul .navigation li a{
 			color: {{$thespear['button_color']}};
 		}
-		.mast.below-fold ul.navigation li, .mast.below-fold ul.navigation li a{
+		.mast .below-fold ul .navigation li, .mast .below-fold ul .navigation li a{
 			color: #ffffff;
 		}
 	</style>

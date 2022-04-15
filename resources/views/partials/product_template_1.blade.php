@@ -223,7 +223,7 @@
 
 			<p class="special-message">
 				{!! $product->free_shipping_html !!}
-{{--				<span class="bold">Free Shipping</span> on orders over <span class="bold">$300</span> <span class="detail bold">{{ $shippingCountries }} ONLY</span>--}}
+{{--				<span class="bold">Free Shipping</span> on orders over <span class="bold">$400</span> <span class="detail bold">{{ $shippingCountries }} ONLY</span>--}}
 			</p>
 
 		@endif
