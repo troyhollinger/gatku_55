@@ -16302,7 +16302,7 @@ video {
 
 .contact-bottom .home-container {
   position: absolute;
-  background-image: url("../production/img/Site_GATKU_Footer-PoleLogo.jpg");
+  background-image: url("../img/Site_GATKU_Footer-PoleLogo.jpg");
   background-repeat: no-repeat;
   background-position-x: right;
   background-position-y: 100%;
@@ -20075,7 +20075,7 @@ img.template-2-image-100-100 {
 
 .left-thumb-button {
   position: absolute;
-  background-image: url("../production/img/Website_Gatku-Arrows-Left.svg");
+  background-image: url("../img/Website_Gatku-Arrows-Left.svg");
   height: 90px;
   width: 30px;
   background-repeat: no-repeat;
@@ -20111,7 +20111,7 @@ img.template-2-image-100-100 {
 
 .right-thumb-button {
   position: absolute;
-  background-image: url("../production/img/Website_Gatku-Arrows-Right.svg");
+  background-image: url("../img/Website_Gatku-Arrows-Right.svg");
   height: 90px;
   width: 30px;
   background-repeat: no-repeat;
