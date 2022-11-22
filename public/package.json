@@ -10,7 +10,7 @@
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.1.0",
     "jasmine-core": "^2.3.4",
-    "karma": "^2.0.4",
+    "karma": "^6.4.1",
     "karma-chrome-launcher": "^0.1.12",
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^1.0.4",
