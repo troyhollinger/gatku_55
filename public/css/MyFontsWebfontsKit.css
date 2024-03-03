@@ -19,11 +19,6 @@
  * © 2016 MyFonts Inc
 */
 
-
-/* @import must be at top of file, otherwise CSS will not work */
-/* @import url("//hello.myfonts.net/count/32bdca"); */
-
-
 @font-face {
     font-family: 'HelveticaLTPro-Black';
     src: url('webfonts/32BDCA_0_0.eot');
