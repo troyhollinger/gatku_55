@@ -1,3 +1,15 @@
+{{-- Google Tag Manager --}}
+@php
+$gtmTag = '';
+$host = $_SERVER['HTTP_HOST'];
+if ($host === 'gatku.com') {
+    $gtmTag = 'GTM-WZ29ZPSS';
+} else if ($host === 'cristspears.com') {
+    $gtmTag = 'GTM-P8KXVVBH';
+}
+@endphp
+{{-- Google Tag Manager - end --}}
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -152,23 +164,13 @@
                 </script>
             <!-- Global site tag (gtag.js) - Google Ads: 879212783 - End -->
 
-            // Google Tag Manager
-            $gtmTag = '';
-            $host = $_SERVER['HTTP_HOST'];
-            if ($host === 'gatku.com') {
-                $gtmTag = 'GTM-WZ29ZPSS';
-            } else if ($host === 'cristspears.com') {
-                $gtmTag = 'GTM-P8KXVVBH';
-            }
-
             <!-- Google Tag Manager -->
                 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','$gtmTag');</script>
+                })(window,document,'script','dataLayer','{{ $gtmTag }}');</script>
             <!-- End Google Tag Manager -->
-            // Google Tag Manager - End
         @endif
 
     </head>
@@ -202,12 +204,10 @@
         </script>
         <!-- FRESHCHAT WIDGET - loading - start -->
 
-        // Google Tag Manager
         <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=$gtmTag"
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ $gtmTag }}"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
-        // Google Tag Manager - End
     @endif
 
     </body>
