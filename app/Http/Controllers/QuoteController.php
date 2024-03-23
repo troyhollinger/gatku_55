@@ -34,11 +34,15 @@ class QuoteController extends BaseController {
                 [
                     'email' => 'dustin@gatku.com',
                     'name' => 'Dustin McIntyre'
-                ] // ,
-                // [
-                //     'email' => 'emailme@troyhollinger.com',
-                //     'name' => 'Troy Hollinger'
-                // ]
+                ],
+                [
+                    'email' => 'nathan@gatku.com',
+                    'name' => 'Nathan'
+                ],
+                [
+                    'email' => 'troy@gatku.com',
+                    'name' => 'Troy Hollinger'
+                ],
             ])->send(new EmailsInquiry($form, $name));
 		}
 

@@ -8,10 +8,12 @@ use App\Mail\EmailsShippingRequestReceipt;
 use Gatku\Model\ShippingRequest;
 use Illuminate\Support\Facades\Log;
 use Stripe_Charge;
+use Stripe_CardError;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Gatku\Model\Order;
+use Exception;
 
 class ShippingRequestRepository {
 
@@ -50,7 +52,7 @@ class ShippingRequestRepository {
 				'currency' => 'usd',
 				'description' => 'Shipping for Order : ' . $request->order->number
 			]);
-		} catch (Stripe_CardError $e) {
+		 } catch (Stripe_CardError $e) {
             Bugsnag::notifyException($e);
 			Log::error($e);
 			return $e;
@@ -111,7 +113,15 @@ class ShippingRequestRepository {
                 [
                     'email' => 'dustin@gatku.com',
                     'name' => 'Dustin McIntyre'
-                ]
+                ],
+                [
+                    'email' => 'nathan@gatku.com',
+                    'name' => 'Nathan'
+                ],
+                [
+                    'email' => 'troy@gatku.com',
+                    'name' => 'Troy Hollinger'
+                ],
             ])->send(new EmailsShippingRequestPaymentNotification($request));
 
             //customer

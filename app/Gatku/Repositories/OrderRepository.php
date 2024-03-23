@@ -20,6 +20,7 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Support\Facades\App;
 use Gatku\Model\HomeSetting;
 use Gatku\Service\CalculateOrdersService;
+use Exception;
 
 /**
  *
@@ -91,7 +92,7 @@ class OrderRepository {
      */
     public function getAllRecordsCount()
     {
-        $totalCount = \DB::table('orders')->count();
+        $totalCount = DB::table('orders')->count();
         return $totalCount;
     }
 
@@ -112,7 +113,7 @@ class OrderRepository {
         try {
             $order = Order::findOrFail($id);
             $order->load('customer', 'items');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Bugsnag::notifyException($e);
             Log::error($e);
             return false;
