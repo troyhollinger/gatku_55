@@ -5,7 +5,6 @@ namespace Gatku\Repositories;
 use Gatku\Model\EmailSettings;
 use Illuminate\Support\Facades\Log;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
-use Illuminate\Http\Response;
 use Exception;
 
 class EmailSettingsRepository {
@@ -18,7 +17,7 @@ class EmailSettingsRepository {
      */
     public function index() {
         $emailSettings = $this->getLastRecordFromDatabase();
-        return Response::json($emailSettings, 200);
+        return \Response::json($emailSettings, 200);
     }
 
 
@@ -41,10 +40,10 @@ class EmailSettingsRepository {
         } catch (Exception $e) {
             Bugsnag::notifyException($e);
             Log::error($e);
-            return Response::json(['message' => 'Sorry, there was a problem saving the EmailSettings'], 404);
+            return \Response::json(['message' => 'Sorry, there was a problem saving the EmailSettings'], 404);
         }
 
-        return Response::json(['message' => 'Email Settings saved!'], 200);
+        return \Response::json(['message' => 'Email Settings saved!'], 200);
     }
 
     /**
@@ -94,7 +93,7 @@ class EmailSettingsRepository {
             $emailSettings = EmailSettings::orderBy('id', 'desc')->first();
         } catch (Exception $e) {
             Bugsnag::notifyException($e);
-            return Response::json(['message' => 'Sorry, EmailSettings could not be retrieved.'], 404);
+            return \Response::json(['message' => 'Sorry, EmailSettings could not be retrieved.'], 404);
         }
 
         return $emailSettings;

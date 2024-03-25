@@ -6,7 +6,6 @@ use Gatku\Model\Order;
 use Gatku\Repositories\OrderRepository;
 use Gatku\Service\MailchimpService;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Response;
 
 class OrderController extends BaseController {
 
@@ -29,10 +28,10 @@ class OrderController extends BaseController {
 		$orders = $this->order->all();
 
 		if (!$orders) {
-			return Response::json(['message' => 'Sorry, there was an error'], 404);
+			return \Response::json(['message' => 'Sorry, there was an error'], 404);
 		}
 		$totalCount = DB::table('orders')->count();
-		return Response::json(['orders' => $orders, 'total_count' => $totalCount], 200);
+		return \Response::json(['orders' => $orders, 'total_count' => $totalCount], 200);
 	}
 
 
@@ -49,7 +48,7 @@ class OrderController extends BaseController {
 		}
 		$orders = $this->assignHumanReadableTimestamps($orders);
 		
-		return Response::json(['orders' => $orders, 'total_count' => $totalCount], 200);
+		return \Response::json(['orders' => $orders, 'total_count' => $totalCount], 200);
 	}
 	
 	/**
@@ -59,14 +58,14 @@ class OrderController extends BaseController {
 	 * @return Response
 	 */
 	public function store() {
-		$allData = Request::all();
-		$order = $this->order->process(Request::all());
+		$allData = \Request::all();
+		$order = $this->order->process(\Request::all());
 
 		if ($order !== true) {
 			if ($order !== false) {
-				return Response::json(['message' => $order], 404);
+				return \Response::json(['message' => $order], 404);
 			} else {
-				return Response::json(['message' => 'Sorry, something went wrong on our end. We are fixing it.'], 404);
+				return \Response::json(['message' => 'Sorry, something went wrong on our end. We are fixing it.'], 404);
 			}
 		}
 
@@ -75,7 +74,7 @@ class OrderController extends BaseController {
 		$country = $allData['form']['country'];
 		$this->mailchimp->addSubscription($fname, $email, $country);
    
-		return Response::json(['message' => 'Thank you for the order!'], 200);
+		return \Response::json(['message' => 'Thank you for the order!'], 200);
 	}
 
 	/**
